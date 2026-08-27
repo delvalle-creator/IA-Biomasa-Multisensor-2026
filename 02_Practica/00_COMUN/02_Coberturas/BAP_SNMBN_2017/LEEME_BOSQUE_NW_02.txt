@@ -1,0 +1,47 @@
+RECORTE DE COBERTURAS BAP CHUBUT — BOSQUE_NW_02
+
+Contenido
+- BAP_BOSQUE_NW_02_recorte.shp: polígonos BAP recortados al AOI, con atributos originales, identificación de AOI, leyenda y métricas por fragmento.
+- BAP_BOSQUE_NW_02_resumen_N3.shp: coberturas disueltas por LEYENDA_N3, con superficie, perímetro, porcentaje del AOI y cantidad de polígonos.
+- BOSQUE_NW_02_AOI.shp: límite del KML con superficie y perímetro calculados.
+- BAP_BOSQUE_NW_02_resumen_N3.csv: tabla resumen en UTF-8.
+- QA_BOSQUE_NW_02.json: controles geométricos y de cobertura.
+- Los archivos .qml contienen la simbología categorizada suministrada con la capa BAP.
+
+Sistema de coordenadas de salida
+- WGS 84 / UTM zona 19S — EPSG:32719.
+- Unidades geométricas: metros.
+
+Campos métricos
+- AREA_M2: superficie en m².
+- AREA_HA: superficie en hectáreas.
+- AREA_KM2: superficie en km².
+- PERIM_M: perímetro en metros.
+- PERIM_KM: perímetro en km.
+- PCT_AOI: porcentaje de la superficie total del AOI.
+- N_POLIG: número de polígonos fuente distintos incluidos en cada cobertura resumida.
+- N_FRAG: número de fragmentos resultantes del recorte.
+
+Control general
+- Área AOI: 225.000000 km².
+- Cobertura espacial del AOI por BAP: 100.000000 %.
+- Polígonos fuente intersectados: 1780.
+- Fragmentos de salida: 1833.
+- Clases LEYENDA_N3 presentes: 18.
+- Geometrías inválidas en salida: detalle=0; resumen=0.
+
+Diez coberturas principales por superficie
+       LEYENDA_N3  AREA_KM2   PCT_AOI
+        Ñire Bajo 78.385659 34.838070
+            Lenga 74.292179 33.018746
+             Ñire 26.022848 11.565710
+           Cipres 11.035190  4.904529
+           Estepa  8.286318  3.682808
+       Lenga Baja  7.089483  3.150881
+  Arbustal Nativo  6.530159  2.902293
+Lenga Achaparrada  5.186638  2.305173
+           Mallin  2.717143  1.207619
+   Matorral Mixto  2.233378  0.992612
+
+Nota
+Se corrigió en la salida el problema de codificación observado en nombres con “Ñire”.

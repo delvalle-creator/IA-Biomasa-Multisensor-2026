@@ -1,0 +1,7 @@
+aoi,disparos_totales,aceptados,descartados,porcentaje_aceptado,motivo,cantidad
+BOSQUE_NW_02,6288,1025,5263,16.3,calidad: forma de onda no interpretable,3466
+BOSQUE_NW_02,6288,1025,5263,16.3,degradado: punteria u orbita anomalas,1641
+BOSQUE_NW_02,6288,1025,5263,16.3,sensibilidad baja: el laser no llego al suelo,156
+ESTEPA_NW_02,11222,4041,7181,36.0,calidad: forma de onda no interpretable,4602
+ESTEPA_NW_02,11222,4041,7181,36.0,degradado: punteria u orbita anomalas,1672
+ESTEPA_NW_02,11222,4041,7181,36.0,sensibilidad baja: el laser no llego al suelo,907

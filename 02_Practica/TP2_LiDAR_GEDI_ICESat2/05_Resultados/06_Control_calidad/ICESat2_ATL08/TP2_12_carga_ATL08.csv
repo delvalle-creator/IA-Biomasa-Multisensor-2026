@@ -1,0 +1,5 @@
+recinto,nivel,segmentos,fuera_del_aoi,peor_fuera_m,sin_h_canopy,extremos_3iqr,umbral_3iqr_m,mediana_h_canopy_m,granulos,fecha_min,fecha_max
+BOSQUE_NW_02,operacional,1949,1,2.9,0,4,57.50,16.28,20,2018-11-24,2026-02-09
+BOSQUE_NW_02,conservador,905,0,0.0,0,0,44.71,10.98,17,2018-11-24,2025-12-09
+ESTEPA_NW_02,operacional,1923,2,1.6,0,11,30.65,10.45,26,2019-01-21,2026-04-08
+ESTEPA_NW_02,conservador,1482,1,0.8,0,0,29.91,9.76,24,2019-01-21,2026-04-08

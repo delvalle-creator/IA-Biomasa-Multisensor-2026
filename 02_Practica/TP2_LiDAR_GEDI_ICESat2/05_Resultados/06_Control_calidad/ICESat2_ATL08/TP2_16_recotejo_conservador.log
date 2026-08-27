@@ -1,0 +1,38 @@
+RE-COTEJO GEDI (rh98) CONTRA ATL08 (h_canopy) TRAS EL CONTROL DE TERRENO
+mismos parametros que el paso 13: celda 500 m, minimos 3 y 3
+nivel ATL08: conservador, solo segmentos control_terreno = PASA
+
+BOSQUE_NW_02 | todo
+   celdas con ambas misiones: 84, comparables: 10
+   huellas GEDI 690, segmentos ATL08 (controlados) 861
+   nivel por celda: GEDI 4.94 m, ATL08 8.65 m  (razon 1.75 x)
+   diferencia mediana pareada (ATL08 - GEDI): 3.09 m  [p25 2.54, p75 7.15]
+   Spearman entre medianas de celda: 0.321
+
+BOSQUE_NW_02 | ventana_gedi_2024-11-06_a_2025-03-30
+   celdas con ambas misiones: 1, comparables: 0
+   huellas GEDI 690, segmentos ATL08 (controlados) 21
+   sin celdas comparables
+
+ESTEPA_NW_02 | todo
+   celdas con ambas misiones: 257, comparables: 91
+   huellas GEDI 3083, segmentos ATL08 (controlados) 1454
+   nivel por celda: GEDI 2.93 m, ATL08 9.30 m  (razon 3.18 x)
+   diferencia mediana pareada (ATL08 - GEDI): 6.36 m  [p25 2.61, p75 8.09]
+   Spearman entre medianas de celda: 0.011
+
+ESTEPA_NW_02 | ventana_gedi_2024-10-22_a_2025-03-30
+   celdas con ambas misiones: 43, comparables: 7
+   huellas GEDI 3083, segmentos ATL08 (controlados) 141
+   nivel por celda: GEDI 2.83 m, ATL08 9.12 m  (razon 3.22 x)
+   diferencia mediana pareada (ATL08 - GEDI): 6.46 m  [p25 2.77, p75 6.63]
+   Spearman entre medianas de celda: 0.126
+
+COMO SE LEE ESTO
+   Compare cada cifra con la del paso 13 (mismo nombre de archivo sin
+   el sufijo _terreno). Lo que bajo era terreno mal detectado; lo que
+   no bajo es la parte del desacuerdo que el terreno no explica. En
+   este AOI: el bosque baja de 2,70x hacia ~1,9x, la estepa casi no
+   se mueve. La estepa no tiene arreglo por filtrado: es el limite de
+   clasificar fotones de copa donde el dosel mide menos que el ruido
+   del terreno. Declararlo tambien es un resultado.

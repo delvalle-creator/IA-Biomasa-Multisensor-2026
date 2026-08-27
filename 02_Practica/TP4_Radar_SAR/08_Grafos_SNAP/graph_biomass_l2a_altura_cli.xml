@@ -1,0 +1,107 @@
+<!--
+ VARIANTE DE LINEA DE ORDENES. NO ABRIR EN EL GRAPH BUILDER.
+ ==========================================================
+ Gemelo de graph_biomass_l2a_altura.xml, identico salvo en una cosa: las rutas,
+ el recorte y los dos nombres de banda van escritos como marcadores ${...}, que
+ es lo que la herramienta gpt sustituye con sus opciones -P. En el Graph Builder
+ esos marcadores se leen como texto literal y la lista de bandas sale vacia; por
+ eso existe la otra variante, y por eso conviene no mezclarlas.
+
+ Marcadores que espera este grafo:
+     entrada    carpeta o archivo del producto FP_FH__L2A
+     salida     GeoTIFF de salida
+     geowkt     poligono del recinto, con margen, en WGS 84
+     altura     nombre real de la banda de altura de dosel
+     calidad    nombre real de la capa de calidad
+
+ LOS DOS ULTIMOS NO SE ADIVINAN: se obtienen corriendo antes
+     python TP4_11_inspeccionar_biomass_L2A.py <carpeta del producto>
+ que ademas imprime la orden de gpt completa, con los cinco valores puestos.
+
+ QUE SE EDITA AQUI: nada. Los valores los pone quien invoca a gpt.
+ QUE SE EDITA EN EL OTRO ARCHIVO: las rutas y los nombres, a mano.
+ Los dos comparten el resto de los parametros: si se cambia uno hay que cambiar
+ el otro, y conviene comprobarlo con una comparacion de archivos.
+-->
+<graph id="BIOMASS_L2A_altura_a_recinto_cli">
+
+  <node id="Read">
+    <operator>Read</operator>
+    <sources/>
+    <parameters>
+      <!-- Carpeta o archivo del producto FP_FH__L2A ya descomprimido. -->
+      <file>${entrada}</file>
+    </parameters>
+  </node>
+
+  <node id="Subset">
+    <operator>Subset</operator>
+    <sources><sourceProduct refid="Read"/></sources>
+    <parameters>
+      <!-- BOSQUE_NW_02 con 0,02 grados de margen, el mismo criterio que los
+           grafos del SAOCOM. Para ESTEPA_NW_02:
+           POLYGON((-71.2338 -42.6884,-71.0058 -42.6884,-71.0058 -42.8668,-71.2338 -42.8668,-71.2338 -42.6884)) -->
+      <geoRegion>${geowkt}</geoRegion>
+      <copyMetadata>true</copyMetadata>
+      <sourceBands/>
+      <region>0,0,0,0</region>
+      <subSamplingX>1</subSamplingX>
+      <subSamplingY>1</subSamplingY>
+      <fullSwath>false</fullSwath>
+      <tiePointGridNames/>
+    </parameters>
+  </node>
+
+  <node id="BandMaths">
+    <operator>BandMaths</operator>
+    <sources><sourceProduct refid="Subset"/></sources>
+    <parameters>
+      <targetBands>
+        <targetBand>
+          <name>altura_dosel_P</name>
+          <type>float32</type>
+          <!-- LOS DOS NOMBRES A VERIFICAR ESTAN EN ESTA LINEA.
+               La regla es: si la capa de calidad no marca el pixel como bueno,
+               el pixel sale como "sin dato" y no como cero. Un cero se
+               promedia; un "sin dato" no. Ajustar el umbral segun lo que
+               informe el script de inspeccion: en algunos productos la capa de
+               calidad es 1 = bueno y en otros es 0 = bueno. -->
+          <expression>${calidad} &gt; 0 ? ${altura} : NaN</expression>
+          <noDataValue>NaN</noDataValue>
+          <unit>m</unit>
+          <description>Altura de dosel de banda P, enmascarada por su capa de calidad</description>
+        </targetBand>
+      </targetBands>
+      <variables/>
+    </parameters>
+  </node>
+
+  <node id="Reproject">
+    <operator>Reproject</operator>
+    <sources><sourceProduct refid="BandMaths"/></sources>
+    <parameters>
+      <crs>EPSG:32719</crs>
+      <resampling>Nearest</resampling>
+      <!-- 50 m: el pixel nativo. Ver la nota del encabezado. -->
+      <pixelSizeX>50.0</pixelSizeX>
+      <pixelSizeY>50.0</pixelSizeY>
+      <orthorectify>false</orthorectify>
+      <noDataValue>NaN</noDataValue>
+      <includeTiePointGrids>false</includeTiePointGrids>
+      <addDeltaBands>false</addDeltaBands>
+    </parameters>
+  </node>
+
+  <node id="Write">
+    <operator>Write</operator>
+    <sources><sourceProduct refid="Reproject"/></sources>
+    <parameters>
+      <file>${salida}</file>
+      <!-- GeoTIFF y no BEAM-DIMAP: este producto ya viene geocodificado y no se
+           va a seguir procesando en SNAP; el destino es QGIS y la comparacion
+           contra el mapa del TP5. -->
+      <formatName>GeoTIFF</formatName>
+    </parameters>
+  </node>
+
+</graph>

@@ -1,0 +1,50 @@
+COTEJO GEDI (rh98) CONTRA ICESat-2 ATL08 (h_canopy)
+celda de 500 m, minimo 3 huellas GEDI y 3 segmentos ATL08 por celda
+nivel ATL08: operacional
+
+BOSQUE_NW_02 | todo
+   celdas con ambas misiones: 119, comparables: 30
+   huellas GEDI 690, segmentos ATL08 1949
+   nivel por celda: GEDI 6.23 m, ATL08 16.81 m  (razon 2.70 x)
+   diferencia mediana pareada (ATL08 - GEDI): 3.82 m  [p25 0.76, p75 8.22]
+   Spearman entre medianas de celda: 0.617
+
+BOSQUE_NW_02 | ventana_gedi_2024-11-06_a_2025-03-30
+   celdas con ambas misiones: 1, comparables: 0
+   huellas GEDI 690, segmentos ATL08 37
+   sin celdas comparables
+
+ESTEPA_NW_02 | todo
+   celdas con ambas misiones: 305, comparables: 120
+   huellas GEDI 3083, segmentos ATL08 1923
+   nivel por celda: GEDI 3.14 m, ATL08 10.30 m  (razon 3.28 x)
+   diferencia mediana pareada (ATL08 - GEDI): 6.68 m  [p25 4.15, p75 9.28]
+   Spearman entre medianas de celda: 0.310
+
+ESTEPA_NW_02 | ventana_gedi_2024-10-22_a_2025-03-30
+   celdas con ambas misiones: 57, comparables: 14
+   huellas GEDI 3083, segmentos ATL08 209
+   nivel por celda: GEDI 2.85 m, ATL08 9.46 m  (razon 3.31 x)
+   diferencia mediana pareada (ATL08 - GEDI): 6.71 m  [p25 4.86, p75 8.05]
+   Spearman entre medianas de celda: 0.455
+
+AVISOS
+   BOSQUE_NW_02: 4 segmentos ATL08 marcados como extremos 3 IQR entraron al cotejo; la mediana por celda los absorbe.
+   ESTEPA_NW_02: 11 segmentos ATL08 marcados como extremos 3 IQR entraron al cotejo; la mediana por celda los absorbe.
+
+COMO SE LEE ESTO
+   Lea la diferencia junto al nivel, nunca sola. Una diferencia de 4 m
+   sobre un dosel de 6 m no es lo mismo que sobre uno de 25 m: la razon
+   dice cuanto pesa en proporcion, y es la cifra que hay que informar.
+
+   La diferencia mediana NO es el error de GEDI: es la discrepancia
+   entre dos estimaciones satelitales, ninguna verificada en el suelo.
+   Sirve como cota inferior de la incertidumbre de la referencia, y
+   como aviso: donde las dos misiones no coinciden, cualquier modelo
+   calibrado contra una sola hereda esa discrepancia sin declararla.
+
+   Si la discrepancia resulta mayor en la estepa que en el bosque,
+   antes de explicarla por el terreno conviene mirar los errores
+   conocidos de ATL08 (06_Bibliografia/04_Enlaces): la clasificacion
+   de fotones de copa y de terreno es mas dificil donde la vegetacion
+   es baja y rala, que es justamente la estepa.

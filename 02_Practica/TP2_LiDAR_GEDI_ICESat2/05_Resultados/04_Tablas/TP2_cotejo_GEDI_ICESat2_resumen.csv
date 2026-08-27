@@ -1,0 +1,5 @@
+recinto,ventana,celdas_con_ambos,celdas_comparables,huellas_gedi,segmentos_atl08,mediana_gedi_rh98_m,mediana_atl08_hcanopy_m,razon_atl08_sobre_gedi,mediana_diferencia_m,p25_diferencia_m,p75_diferencia_m,mad_diferencia_m,min_diferencia_m,max_diferencia_m,spearman_rho
+BOSQUE_NW_02,todo,119,30,690,1949,6.23,16.81,2.70,3.82,0.76,8.22,3.61,-11.40,16.70,0.617
+BOSQUE_NW_02,ventana_gedi_2024-11-06_a_2025-03-30,1,0,690,37,,,,,,,,,,
+ESTEPA_NW_02,todo,305,120,3083,1923,3.14,10.30,3.28,6.68,4.15,9.28,2.62,-3.04,19.72,0.310
+ESTEPA_NW_02,ventana_gedi_2024-10-22_a_2025-03-30,57,14,3083,209,2.85,9.46,3.31,6.71,4.86,8.05,1.84,1.68,12.91,0.455

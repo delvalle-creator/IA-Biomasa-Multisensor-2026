@@ -1,0 +1,119 @@
+Warning 1: Layer 'gedi_aceptados_bosque' has been declared with non-Z geometry type Point, but it does contain geometries with Z. Setting the Z=2 hint into gpkg_geometry_columns. If using ogr2ogr, specify the -nlt option to avoid ambiguity.
+Warning 1: Layer 'gedi_descartados_bosque' has been declared with non-Z geometry type Point, but it does contain geometries with Z. Setting the Z=2 hint into gpkg_geometry_columns. If using ogr2ogr, specify the -nlt option to avoid ambiguity.
+Warning 1: Layer 'gedi_descartados_pendiente_bosque' has been declared with non-Z geometry type Point, but it does contain geometries with Z. Setting the Z=2 hint into gpkg_geometry_columns. If using ogr2ogr, specify the -nlt option to avoid ambiguity.
+Warning 1: Layer 'gedi_aceptados_estepa' has been declared with non-Z geometry type Point, but it does contain geometries with Z. Setting the Z=2 hint into gpkg_geometry_columns. If using ogr2ogr, specify the -nlt option to avoid ambiguity.
+Warning 1: Layer 'gedi_descartados_estepa' has been declared with non-Z geometry type Point, but it does contain geometries with Z. Setting the Z=2 hint into gpkg_geometry_columns. If using ogr2ogr, specify the -nlt option to avoid ambiguity.
+Warning 1: Layer 'gedi_descartados_pendiente_estepa' has been declared with non-Z geometry type Point, but it does contain geometries with Z. Setting the Z=2 hint into gpkg_geometry_columns. If using ogr2ogr, specify the -nlt option to avoid ambiguity.
+Warning 1: Layer 'aoi_recintos' has been declared with non-Z geometry type Polygon, but it does contain geometries with Z. Setting the Z=2 hint into gpkg_geometry_columns. If using ogr2ogr, specify the -nlt option to avoid ambiguity.
+
+TP2_08_exportar_para_gis.py   ---> OCTAVO y ultimo script del TP2.
+
+QUE HACE
+--------
+Convierte las huellas GEDI de CSV a un GeoPackage con estilos, para que usted
+pueda ABRIRLAS EN QGIS, verlas sobre el terreno y comprobar con sus propios ojos
+lo que los scripts anteriores le dijeron con numeros.
+
+POR QUE ESTE SCRIPT EXISTE, Y POR QUE SE AGREGO DESPUES
+------------------------------------------------------
+Este practico tenia un defecto grave, y conviene decirlo con todas las letras
+porque la leccion vale mas que el script.
+
+Los siete scripts anteriores calculaban bien: filtraban por calidad, por
+pendiente, cruzaban con el DEM, y le informaban el resultado en tablas y en
+graficos. Pero el unico que podia LEER esos resultados era el propio script. Los
+footprints quedaban en un CSV: usted no podia verlos sobre un mapa, ni cliquear
+uno para ver su altura, ni superponerlos al relieve para comprobar que los
+descartados por pendiente estan efectivamente en las laderas.
+
+Es decir: el script le pedia que le creyera. Y eso contradice exactamente lo que
+este curso ense�a, que es no creerle a nadie sin verificar. Una herramienta que
+produce evidencia que solo ella puede leer no es una herramienta: es un oraculo.
+
+Un dato geografico se audita en un SIG. Por eso este script existe.
+
+QUE PRODUCE
+-----------
+Un GeoPackage (.gpkg) con cinco capas y tres estilos (.qml):
+
+   gedi_aceptados_bosque      1025 puntos    los que sobrevivieron los filtros
+   gedi_descartados_bosque   5263 puntos    con el MOTIVO de cada rechazo
+   gedi_aceptados_estepa     4041 puntos
+   gedi_descartados_estepa   7181 puntos
+   aoi_recintos                 2 poligonos los recuadros de 15 x 15 km
+
+Se eligio GeoPackage y no shapefile por tres razones: guarda varias capas en un
+solo archivo, no trunca los nombres de campo a diez caracteres, y no tiene el
+limite de 2 GB. El shapefile es un formato de 1998; conviene dejarlo.
+
+QUE TIENE QUE MIRAR EN QGIS (ESTO ES PARTE DEL PRACTICO)
+--------------------------------------------------------
+1. Cargue gedi_aceptados_* con su estilo: los puntos salen coloreados por altura
+   del dosel. Va a ver de un vistazo que el bosque tiene huellas altas y la
+   estepa no. Eso es el control del proyecto, hecho mapa.
+
+2. Cargue gedi_descartados_* y agregue encima el DEM
+   (00_COMUN/03_Topografia/DEM/). Los descartados por pendiente tienen que caer
+   en las laderas. Si no caen, algo esta mal en el filtro. Compruebelo: no
+   alcanza con que el script diga que filtro bien.
+
+3. Mire la densidad espacial. GEDI no cubre el terreno: son lineas de disparos a
+   lo largo de la orbita, con huecos enormes entre ellas. En el mapa eso es
+   evidente y en una tabla no. Esa es la limitacion de muestreo que usted tiene
+   que declarar en su informe, y ahora la puede mostrar en vez de contarla.
+
+4. Cliquee una huella con la herramienta de informacion. Va a ver todos sus
+   atributos: rh95, rh98, sensitivity, calidad. Ese es el dato crudo detras de
+   cada punto de las figuras del practico.
+
+5. Cuando llegue al TP3, superponga estas huellas al dNBR. Va a ver cuales
+   quedaron dentro del area quemada. Ese cruce es el que hace el TP3_05, y ahora
+   lo puede verificar visualmente antes de creerle.
+
+SOBRE EL TAMANO DE LA HUELLA
+----------------------------
+Se exportan como PUNTOS, que es el centro del disparo. La huella real es un
+circulo de unos 25 m de diametro. Si quiere verla a escala, en QGIS use
+Simbologia -> tamano 25 -> unidades "Metros a escala". Es un detalle que importa
+cuando compare con pixeles de 10 m: una huella GEDI cubre unos 6 pixeles de
+Sentinel-2, no uno.
+
+ENTRADA   05_Resultados/04_Tablas/*.csv
+          05_Resultados/04_Tablas/*.csv
+SALIDA    05_Resultados/03_Vectores/TP2_GEDI.gpkg
+          05_Resultados/03_Vectores/*.qml   (estilos: cargarlos con Estilo -> Cargar estilo)
+
+USO (entorno conda 'aoi'):   python TP2_08_exportar_para_gis.py
+
+========================================================================
+capa                              entidades
+========================================================================
+gedi_aceptados_bosque                   690
+gedi_descartados_bosque                5263
+gedi_descartados_pendiente_bosque        335
+gedi_aceptados_estepa                  3083
+gedi_descartados_estepa                7181
+gedi_descartados_pendiente_estepa        957
+aoi_recintos                              2
+
+Listo. -> 05_Resultados/03_Vectores/TP2_GEDI.gpkg
+Estilos: gedi_aceptados.qml, gedi_descartados.qml, aoi_recintos.qml
+
+MOTIVOS DE DESCARTE ENCONTRADOS EN EL DATO (asi se coloreo el estilo):
+   calidad: forma de onda no interpretable
+   degradado: punteria u orbita anomalas
+   fuera del DEM
+   pendiente fuerte: la altura del dosel se sobrestima
+   sensibilidad baja: el laser no llego al suelo
+
+COMO ABRIRLO EN QGIS
+  1. Arrastre TP2_GEDI.gpkg a QGIS y elija las capas.
+  2. Por cada capa: Propiedades -> Simbologia -> Estilo -> Cargar estilo
+     y elija el .qml del mismo nombre.
+  3. Agregue el DEM de 00_COMUN/03_Topografia/DEM/ debajo de los
+     descartados y compruebe que los rechazados por pendiente caen en
+     las laderas. No le crea al script: mirelo.
+
+Nota: las cantidades de esta salida se actualizaron el 3 de agosto de 2026
+contra los CSV de 05_Resultados/04_Tablas, porque el texto del guion conservaba
+las de una versión anterior del filtro.

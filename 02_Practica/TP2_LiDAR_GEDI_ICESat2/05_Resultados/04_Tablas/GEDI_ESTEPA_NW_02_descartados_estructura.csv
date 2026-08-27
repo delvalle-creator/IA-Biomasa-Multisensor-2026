@@ -1,0 +1,2 @@
+archivo,beam,shot_number,lat,lon,este_utm19s,norte_utm19s,elev_lowestmode,l2a_quality_flag_rel3,degrade_flag,sensitivity,rh25,rh50,rh75,rh95,rh98,pendiente_grados,motivo,detalle
+GEDI02_A_2025089042733_O35660_04_T01966_02_004_02_V003.h5,BEAM1011,356601100400192753,-42.825585,-71.034283,333718.0,5256546.3,776.9018,1,0,0.9733088,-1.23,-0.18,0.74,1.98,2.5,1.17,calidad L2B insuficiente,l2b_quality_flag_rel3 = 0

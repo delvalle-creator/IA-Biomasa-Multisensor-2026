@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document id="root_doc">
+    <Schema id="candidatos_noroeste" name="candidatos_noroeste">
+      <SimpleField name="Name" type="string"/>
+      <SimpleField name="tipo" type="string"/>
+      <SimpleField name="ranking" type="string"/>
+      <SimpleField name="pureza" type="string"/>
+      <SimpleField name="geometry" type="string"/>
+    </Schema>
+    <Schema id="candidatos_noroeste.schema">
+      <SimpleField name="tipo" type="string"/>
+      <SimpleField name="ranking" type="string"/>
+      <SimpleField name="pureza" type="string"/>
+      <SimpleField name="geometry" type="string"/>
+    </Schema>
+    <Document id="candidatos_noroeste">
+      <name>candidatos_noroeste</name>
+      <Placemark id="ESTEPA_NW_02">
+        <ExtendedData>
+          <SchemaData schemaUrl="#candidatos_noroeste.schema">
+            <SimpleData name="tipo">estepa_ecotono</SimpleData>
+            <SimpleData name="ranking">2</SimpleData>
+            <SimpleData name="pureza">0.847200</SimpleData>
+            <SimpleData name="geometry">POLYGON ((319100 5254200, 334100 5254200, 334100 5269200, 319100 5269200, 319100 5254200))</SimpleData>
+          </SchemaData>
+        </ExtendedData>
+        <Polygon>
+          <outerBoundaryIs>
+            <LinearRing>
+              <coordinates>
+                -71.213747707939,-42.8433829252958,0
+                -71.0303041263641,-42.8467841986212,0
+                -71.0258965499005,-42.7117873934216,0
+                -71.2089426523429,-42.7084020505346,0
+                -71.213747707939,-42.8433829252958,0
+              </coordinates>
+            </LinearRing>
+          </outerBoundaryIs>
+        </Polygon>
+      </Placemark>
+    </Document>
+  </Document>
+</kml>

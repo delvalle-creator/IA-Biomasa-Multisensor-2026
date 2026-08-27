@@ -1,0 +1,9 @@
+{
+"type": "FeatureCollection",
+"name": "aoi_grillas_utm19s",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::32719" } },
+"features": [
+{ "type": "Feature", "properties": { "Name": "BOSQUE_NW_02", "tipo": "bosque", "epsg": 32719, "xmin": 287200, "ymin": 5270200, "xmax": 302200, "ymax": 5285200 }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 287200, 5270200 ], [ 302200, 5270200 ], [ 302200, 5285200 ], [ 287200, 5285200 ], [ 287200, 5270200 ] ] ] } },
+{ "type": "Feature", "properties": { "Name": "ESTEPA_NW_02", "tipo": "estepa_ecotono", "epsg": 32719, "xmin": 319100, "ymin": 5254200, "xmax": 334100, "ymax": 5269200 }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 319100, 5254200 ], [ 334100, 5254200 ], [ 334100, 5269200 ], [ 319100, 5269200 ], [ 319100, 5254200 ] ] ] } }
+]
+}

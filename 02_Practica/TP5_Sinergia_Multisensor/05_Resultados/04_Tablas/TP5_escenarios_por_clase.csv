@@ -1,0 +1,64 @@
+AOI,ESCENARIO,COBERTURA_N3,N,AGBD_MEDIA,AGBD_MEDIANA,PCT_AOI
+BOSQUE_NW_02,A. solo hoja presente,Ñire Bajo,135,11.81,3.27,34.83807
+BOSQUE_NW_02,A. solo hoja presente,Ñire,68,28.57,20.59,11.56571
+BOSQUE_NW_02,A. solo hoja presente,Lenga,33,91.33,90.07,33.018746
+BOSQUE_NW_02,A. solo hoja presente,Cipres,11,44.19,49.4,4.904529
+BOSQUE_NW_02,A. solo hoja presente,Lenga Baja,8,89.0,94.62,3.150881
+BOSQUE_NW_02,A. solo hoja presente,Estepa,7,2.54,2.16,3.682808
+BOSQUE_NW_02,A. solo hoja presente,Lenga Achaparrada,4,26.48,23.6,2.305173
+BOSQUE_NW_02,A. solo hoja presente,Arbustal Nativo,3,28.54,15.0,2.902293
+BOSQUE_NW_02,A. solo hoja presente,Matorral Mixto,2,27.99,27.99,0.992612
+BOSQUE_NW_02,"B. + hoja caida, AGBD de la NASA",Ñire Bajo,225,9.94,2.38,34.83807
+BOSQUE_NW_02,"B. + hoja caida, AGBD de la NASA",Lenga,126,94.64,89.88,33.018746
+BOSQUE_NW_02,"B. + hoja caida, AGBD de la NASA",Ñire,84,24.33,19.85,11.56571
+BOSQUE_NW_02,"B. + hoja caida, AGBD de la NASA",Estepa,17,5.21,0.0,3.682808
+BOSQUE_NW_02,"B. + hoja caida, AGBD de la NASA",Lenga Baja,15,57.71,38.95,3.150881
+BOSQUE_NW_02,"B. + hoja caida, AGBD de la NASA",Cipres,11,44.19,49.4,4.904529
+BOSQUE_NW_02,"B. + hoja caida, AGBD de la NASA",Lenga Achaparrada,9,15.3,0.14,2.305173
+BOSQUE_NW_02,"B. + hoja caida, AGBD de la NASA",Arbustal Nativo,5,30.88,15.0,2.902293
+BOSQUE_NW_02,"B. + hoja caida, AGBD de la NASA",Matorral Mixto,2,27.99,27.99,0.992612
+BOSQUE_NW_02,"B. + hoja caida, AGBD de la NASA",Mallin,1,37.62,37.62,1.207619
+BOSQUE_NW_02,C. B + Nothofagus solo DBT_SA,Ñire Bajo,151,6.62,0.26,34.83807
+BOSQUE_NW_02,C. B + Nothofagus solo DBT_SA,Lenga,125,95.26,89.91,33.018746
+BOSQUE_NW_02,C. B + Nothofagus solo DBT_SA,Ñire,27,7.07,3.41,11.56571
+BOSQUE_NW_02,C. B + Nothofagus solo DBT_SA,Estepa,17,5.21,0.0,3.682808
+BOSQUE_NW_02,C. B + Nothofagus solo DBT_SA,Cipres,11,44.19,49.4,4.904529
+BOSQUE_NW_02,C. B + Nothofagus solo DBT_SA,Lenga Baja,10,37.79,3.54,3.150881
+BOSQUE_NW_02,C. B + Nothofagus solo DBT_SA,Lenga Achaparrada,9,15.3,0.14,2.305173
+BOSQUE_NW_02,C. B + Nothofagus solo DBT_SA,Arbustal Nativo,5,30.88,15.0,2.902293
+BOSQUE_NW_02,C. B + Nothofagus solo DBT_SA,Matorral Mixto,2,27.99,27.99,0.992612
+BOSQUE_NW_02,C. B + Nothofagus solo DBT_SA,Mallin,1,37.62,37.62,1.207619
+ESTEPA_NW_02,A. solo hoja presente,Estepa,874,5.51,2.84,84.642399
+ESTEPA_NW_02,A. solo hoja presente,Mallin,80,3.08,1.94,2.350797
+ESTEPA_NW_02,A. solo hoja presente,Lenga,63,45.44,21.78,2.044939
+ESTEPA_NW_02,A. solo hoja presente,Ñire Bajo,35,10.54,6.78,2.387919
+ESTEPA_NW_02,A. solo hoja presente,Ñire,30,14.26,11.48,1.112617
+ESTEPA_NW_02,A. solo hoja presente,Forestacion,13,38.62,25.77,1.12144
+ESTEPA_NW_02,A. solo hoja presente,Erial,8,4.9,3.02,2.720414
+ESTEPA_NW_02,A. solo hoja presente,Arbustal Nativo,7,16.33,12.11,0.505111
+ESTEPA_NW_02,A. solo hoja presente,Ñire-Lenga,6,8.48,6.8,0.091091
+ESTEPA_NW_02,A. solo hoja presente,Lenga Achaparrada,4,21.57,21.07,0.608975
+ESTEPA_NW_02,A. solo hoja presente,Lenga Marginal,3,39.98,49.74,0.112688
+ESTEPA_NW_02,A. solo hoja presente,Matorral Mixto,2,1.69,1.69,0.061671
+ESTEPA_NW_02,A. solo hoja presente,Lenga-Ñire,2,7.99,7.99,0.167589
+ESTEPA_NW_02,A. solo hoja presente,Lenga Baja,2,23.45,23.45,1.293461
+ESTEPA_NW_02,"B. + hoja caida, AGBD de la NASA",Estepa,874,5.51,2.84,84.642399
+ESTEPA_NW_02,"B. + hoja caida, AGBD de la NASA",Mallin,80,3.08,1.94,2.350797
+ESTEPA_NW_02,"B. + hoja caida, AGBD de la NASA",Lenga,63,45.44,21.78,2.044939
+ESTEPA_NW_02,"B. + hoja caida, AGBD de la NASA",Ñire Bajo,35,10.54,6.78,2.387919
+ESTEPA_NW_02,"B. + hoja caida, AGBD de la NASA",Ñire,30,14.26,11.48,1.112617
+ESTEPA_NW_02,"B. + hoja caida, AGBD de la NASA",Forestacion,13,38.62,25.77,1.12144
+ESTEPA_NW_02,"B. + hoja caida, AGBD de la NASA",Erial,8,4.9,3.02,2.720414
+ESTEPA_NW_02,"B. + hoja caida, AGBD de la NASA",Arbustal Nativo,7,16.33,12.11,0.505111
+ESTEPA_NW_02,"B. + hoja caida, AGBD de la NASA",Ñire-Lenga,6,8.48,6.8,0.091091
+ESTEPA_NW_02,"B. + hoja caida, AGBD de la NASA",Lenga Achaparrada,4,21.57,21.07,0.608975
+ESTEPA_NW_02,"B. + hoja caida, AGBD de la NASA",Lenga Marginal,3,39.98,49.74,0.112688
+ESTEPA_NW_02,"B. + hoja caida, AGBD de la NASA",Matorral Mixto,2,1.69,1.69,0.061671
+ESTEPA_NW_02,"B. + hoja caida, AGBD de la NASA",Lenga-Ñire,2,7.99,7.99,0.167589
+ESTEPA_NW_02,"B. + hoja caida, AGBD de la NASA",Lenga Baja,2,23.45,23.45,1.293461
+ESTEPA_NW_02,C. B + Nothofagus solo DBT_SA,Estepa,874,5.51,2.84,84.642399
+ESTEPA_NW_02,C. B + Nothofagus solo DBT_SA,Mallin,80,3.08,1.94,2.350797
+ESTEPA_NW_02,C. B + Nothofagus solo DBT_SA,Forestacion,13,38.62,25.77,1.12144
+ESTEPA_NW_02,C. B + Nothofagus solo DBT_SA,Erial,8,4.9,3.02,2.720414
+ESTEPA_NW_02,C. B + Nothofagus solo DBT_SA,Arbustal Nativo,7,16.33,12.11,0.505111
+ESTEPA_NW_02,C. B + Nothofagus solo DBT_SA,Matorral Mixto,2,1.69,1.69,0.061671

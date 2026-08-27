@@ -1,0 +1,4 @@
+grupo,n,R2,RMSE_m,sesgo_m
+los dos juntos,695,0.4366,2.432,0.046
+bosque,115,0.3928,4.712,0.569
+estepa,580,0.1064,1.639,-0.057

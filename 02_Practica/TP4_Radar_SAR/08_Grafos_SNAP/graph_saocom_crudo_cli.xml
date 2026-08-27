@@ -1,0 +1,75 @@
+<!--
+ VARIANTE DE LINEA DE ORDENES. NO ABRIR EN EL GRAPH BUILDER.
+ ==========================================================
+ Gemelo de graph_saocom_crudo.xml, identico salvo en una cosa: las rutas
+ y el recorte van escritos como marcadores ${...}, que es lo que la herramienta
+ gpt sustituye con sus opciones -P. En el Graph Builder de la interfaz grafica
+ esos marcadores se leen como texto literal y la lista de bandas sale vacia; por
+ eso existe la otra variante, y por eso conviene no mezclarlas.
+
+ POR QUE HAY DOS ARCHIVOS (31/07/2026). El 27/07/2026 se les quitaron los
+ marcadores a los grafos para que abrieran limpio en la interfaz. La decision era
+ buena para el aula, pero dejo sin efecto a los lanzadores
+ TP4_01_procesar_sar.py y TP4_02_recortar_crudo.py, que siguen pasando -Pentrada,
+ -Psalida y -Pgeowkt: gpt solo sustituye donde encuentra el token, y sin token el
+ nodo Read se queda sin archivo. Los productos de 02_Subsets_SNAP_QGIS llevan fecha del 13
+ y 14 de julio, o sea anteriores al cambio, que es la prueba de que hasta
+ entonces la cadena corria. Separar los dos usos en dos archivos deja funcionando
+ a los dos.
+
+ QUE SE EDITA AQUI: nada. Los valores los pone el lanzador de Python.
+ QUE SE EDITA EN EL OTRO ARCHIVO: las rutas, a mano, para una corrida suelta.
+ Los dos comparten el resto de los parametros: si se cambia uno hay que cambiar
+ el otro, y conviene comprobarlo con una comparacion de archivos.
+
+ Marcadores que espera este grafo: entrada, salida, geowkt
+-->
+<graph id="SAOCOM_L1A_recorte_crudo">
+  <!-- RECORTE CRUDO de SAOCOM L1A (banda L, dual-pol HH/HV).
+       Conserva la geometria original y la informacion compleja. Solo se recorta
+       la region que cubre el AOI (con margen), sin calibrar ni geocodificar.
+       Si el operador Subset no lograra reducir el producto -porque la
+       geocodificacion aproximada del L1A no lo permita-, el script lo advierte
+       y el original de 04_descargas sigue siendo la fuente valida. -->
+  <version>1.0</version>
+  <node id="Read">
+    <operator>Read</operator>
+    <sources/>
+    <parameters><file>${entrada}</file></parameters>
+  </node>
+  <node id="Subset">
+    <operator>Subset</operator>
+    <sources><sourceProduct refid="Read"/></sources>
+    <parameters>
+      <geoRegion>${geowkt}</geoRegion>
+      <copyMetadata>true</copyMetadata>
+    
+      <sourceBands/>
+      <region>0,0,0,0</region>
+      <subSamplingX>1</subSamplingX>
+      <subSamplingY>1</subSamplingY>
+      <fullSwath>false</fullSwath>
+      <tiePointGridNames/>
+    </parameters>
+  </node>
+  <node id="Write">
+    <operator>Write</operator>
+    <sources><sourceProduct refid="Subset"/></sources>
+    <parameters>
+      <file>${salida}</file>
+      <formatName>BEAM-DIMAP</formatName>
+    </parameters>
+  </node>
+  <applicationData id="Presentation">
+    <Description/>
+    <node id="Read">
+      <displayPosition x="15.0" y="20.0"/>
+    </node>
+    <node id="Subset">
+      <displayPosition x="220.0" y="20.0"/>
+    </node>
+    <node id="Write">
+      <displayPosition x="425.0" y="20.0"/>
+    </node>
+  </applicationData>
+</graph>

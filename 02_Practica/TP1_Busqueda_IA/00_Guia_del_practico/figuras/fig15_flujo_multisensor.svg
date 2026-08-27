@@ -1,0 +1,540 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1161.36pt" height="601.92pt" viewBox="0 0 1161.36 601.92" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-08-24T10:51:50.267825</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.9, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 601.92 
+L 1161.36 601.92 
+L 1161.36 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 11.52 10.08 
+L 1149.84 10.08 
+Q 1155.6 10.08 1155.6 15.84 
+L 1155.6 44.64 
+Q 1155.6 50.4 1149.84 50.4 
+L 11.52 50.4 
+Q 5.76 50.4 5.76 44.64 
+L 5.76 15.84 
+Q 5.76 10.08 11.52 10.08 
+z
+" clip-path="url(#p5718d79663)" style="fill: #1f4e79"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 11.52 66.24 
+L 370.8 66.24 
+Q 376.56 66.24 376.56 72 
+L 376.56 92.16 
+Q 376.56 97.92 370.8 97.92 
+L 11.52 97.92 
+Q 5.76 97.92 5.76 92.16 
+L 5.76 72 
+Q 5.76 66.24 11.52 66.24 
+z
+" clip-path="url(#p5718d79663)" style="fill: #2e7d32"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 402.48 66.24 
+L 763.2 66.24 
+Q 768.96 66.24 768.96 72 
+L 768.96 92.16 
+Q 768.96 97.92 763.2 97.92 
+L 402.48 97.92 
+Q 396.72 97.92 396.72 92.16 
+L 396.72 72 
+Q 396.72 66.24 402.48 66.24 
+z
+" clip-path="url(#p5718d79663)" style="fill: #8c24a8"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 800.64 66.24 
+L 1149.84 66.24 
+Q 1155.6 66.24 1155.6 72 
+L 1155.6 92.16 
+Q 1155.6 97.92 1149.84 97.92 
+L 800.64 97.92 
+Q 794.88 97.92 794.88 92.16 
+L 794.88 72 
+Q 794.88 66.24 800.64 66.24 
+z
+" clip-path="url(#p5718d79663)" style="fill: #c62828"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 20.88 108 
+L 361.44 108 
+Q 366.48 108 366.48 113.04 
+L 366.48 131.76 
+Q 366.48 136.8 361.44 136.8 
+L 20.88 136.8 
+Q 15.84 136.8 15.84 131.76 
+L 15.84 113.04 
+Q 15.84 108 20.88 108 
+z
+" clip-path="url(#p5718d79663)" style="fill: #5b9bd5"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 20.88 146.88 
+L 361.44 146.88 
+Q 366.48 146.88 366.48 151.92 
+L 366.48 170.64 
+Q 366.48 175.68 361.44 175.68 
+L 20.88 175.68 
+Q 15.84 175.68 15.84 170.64 
+L 15.84 151.92 
+Q 15.84 146.88 20.88 146.88 
+z
+" clip-path="url(#p5718d79663)" style="fill: #5b9bd5"/>
+   </g>
+   <g id="patch_8">
+    <path d="M 411.84 108 
+L 753.84 108 
+Q 758.88 108 758.88 113.04 
+L 758.88 131.76 
+Q 758.88 136.8 753.84 136.8 
+L 411.84 136.8 
+Q 406.8 136.8 406.8 131.76 
+L 406.8 113.04 
+Q 406.8 108 411.84 108 
+z
+" clip-path="url(#p5718d79663)" style="fill: #7c4792"/>
+   </g>
+   <g id="patch_9">
+    <path d="M 411.84 146.88 
+L 753.84 146.88 
+Q 758.88 146.88 758.88 151.92 
+L 758.88 170.64 
+Q 758.88 175.68 753.84 175.68 
+L 411.84 175.68 
+Q 406.8 175.68 406.8 170.64 
+L 406.8 151.92 
+Q 406.8 146.88 411.84 146.88 
+z
+" clip-path="url(#p5718d79663)" style="fill: #7c4792"/>
+   </g>
+   <g id="patch_10">
+    <path d="M 411.84 185.76 
+L 753.84 185.76 
+Q 758.88 185.76 758.88 190.8 
+L 758.88 209.52 
+Q 758.88 214.56 753.84 214.56 
+L 411.84 214.56 
+Q 406.8 214.56 406.8 209.52 
+L 406.8 190.8 
+Q 406.8 185.76 411.84 185.76 
+z
+" clip-path="url(#p5718d79663)" style="fill: #7c4792"/>
+   </g>
+   <g id="patch_11">
+    <path d="M 411.84 224.64 
+L 753.84 224.64 
+Q 758.88 224.64 758.88 229.68 
+L 758.88 248.4 
+Q 758.88 253.44 753.84 253.44 
+L 411.84 253.44 
+Q 406.8 253.44 406.8 248.4 
+L 406.8 229.68 
+Q 406.8 224.64 411.84 224.64 
+z
+" clip-path="url(#p5718d79663)" style="fill: #7c4792"/>
+   </g>
+   <g id="patch_12">
+    <path d="M 411.84 263.52 
+L 753.84 263.52 
+Q 758.88 263.52 758.88 268.56 
+L 758.88 287.28 
+Q 758.88 292.32 753.84 292.32 
+L 411.84 292.32 
+Q 406.8 292.32 406.8 287.28 
+L 406.8 268.56 
+Q 406.8 263.52 411.84 263.52 
+z
+" clip-path="url(#p5718d79663)" style="fill: #7c4792"/>
+   </g>
+   <g id="patch_13">
+    <path d="M 810 108 
+L 1140.48 108 
+Q 1145.52 108 1145.52 113.04 
+L 1145.52 131.76 
+Q 1145.52 136.8 1140.48 136.8 
+L 810 136.8 
+Q 804.96 136.8 804.96 131.76 
+L 804.96 113.04 
+Q 804.96 108 810 108 
+z
+" clip-path="url(#p5718d79663)" style="fill: #e57373"/>
+   </g>
+   <g id="patch_14">
+    <path d="M 810 146.88 
+L 1140.48 146.88 
+Q 1145.52 146.88 1145.52 151.92 
+L 1145.52 170.64 
+Q 1145.52 175.68 1140.48 175.68 
+L 810 175.68 
+Q 804.96 175.68 804.96 170.64 
+L 804.96 151.92 
+Q 804.96 146.88 810 146.88 
+z
+" clip-path="url(#p5718d79663)" style="fill: #e57373"/>
+   </g>
+   <g id="patch_15">
+    <path d="M 810 185.76 
+L 1140.48 185.76 
+Q 1145.52 185.76 1145.52 190.8 
+L 1145.52 209.52 
+Q 1145.52 214.56 1140.48 214.56 
+L 810 214.56 
+Q 804.96 214.56 804.96 209.52 
+L 804.96 190.8 
+Q 804.96 185.76 810 185.76 
+z
+" clip-path="url(#p5718d79663)" style="fill: #e57373"/>
+   </g>
+   <g id="patch_16">
+    <path d="M 11.52 306 
+L 370.8 306 
+Q 376.56 306 376.56 311.76 
+L 376.56 359.28 
+Q 376.56 365.04 370.8 365.04 
+L 11.52 365.04 
+Q 5.76 365.04 5.76 359.28 
+L 5.76 311.76 
+Q 5.76 306 11.52 306 
+z
+" clip-path="url(#p5718d79663)" style="fill: #2f4254"/>
+   </g>
+   <g id="patch_17">
+    <path d="M 402.48 306 
+L 763.2 306 
+Q 768.96 306 768.96 311.76 
+L 768.96 359.28 
+Q 768.96 365.04 763.2 365.04 
+L 402.48 365.04 
+Q 396.72 365.04 396.72 359.28 
+L 396.72 311.76 
+Q 396.72 306 402.48 306 
+z
+" clip-path="url(#p5718d79663)" style="fill: #2f4254"/>
+   </g>
+   <g id="patch_18">
+    <path d="M 800.64 306 
+L 1149.84 306 
+Q 1155.6 306 1155.6 311.76 
+L 1155.6 359.28 
+Q 1155.6 365.04 1149.84 365.04 
+L 800.64 365.04 
+Q 794.88 365.04 794.88 359.28 
+L 794.88 311.76 
+Q 794.88 306 800.64 306 
+z
+" clip-path="url(#p5718d79663)" style="fill: #2f4254"/>
+   </g>
+   <g id="patch_19">
+    <path d="M 11.52 392.4 
+L 370.8 392.4 
+Q 376.56 392.4 376.56 398.16 
+L 376.56 486 
+Q 376.56 491.76 370.8 491.76 
+L 11.52 491.76 
+Q 5.76 491.76 5.76 486 
+L 5.76 398.16 
+Q 5.76 392.4 11.52 392.4 
+z
+" clip-path="url(#p5718d79663)" style="fill: #2f4254"/>
+   </g>
+   <g id="patch_20">
+    <path d="M 402.48 392.4 
+L 763.2 392.4 
+Q 768.96 392.4 768.96 398.16 
+L 768.96 486 
+Q 768.96 491.76 763.2 491.76 
+L 402.48 491.76 
+Q 396.72 491.76 396.72 486 
+L 396.72 398.16 
+Q 396.72 392.4 402.48 392.4 
+z
+" clip-path="url(#p5718d79663)" style="fill: #2f4254"/>
+   </g>
+   <g id="patch_21">
+    <path d="M 800.64 392.4 
+L 1149.84 392.4 
+Q 1155.6 392.4 1155.6 398.16 
+L 1155.6 486 
+Q 1155.6 491.76 1149.84 491.76 
+L 800.64 491.76 
+Q 794.88 491.76 794.88 486 
+L 794.88 398.16 
+Q 794.88 392.4 800.64 392.4 
+z
+" clip-path="url(#p5718d79663)" style="fill: #2f4254"/>
+   </g>
+   <g id="patch_22">
+    <path d="M 11.52 519.12 
+L 1149.84 519.12 
+Q 1155.6 519.12 1155.6 524.88 
+L 1155.6 585.36 
+Q 1155.6 591.12 1149.84 591.12 
+L 11.52 591.12 
+Q 5.76 591.12 5.76 585.36 
+L 5.76 524.88 
+Q 5.76 519.12 11.52 519.12 
+z
+" clip-path="url(#p5718d79663)" style="fill: #37474f"/>
+   </g>
+   <g id="text_1">
+    <text style="font-weight: 700; font-size: 17px; font-family: 'Liberation Serif'; text-anchor: middle; fill: #ffffff" x="580.68" y="34.347891" transform="rotate(-0 580.68 34.347891)">ENTRADA:   2 archivos KML  →  aoi_config.py   (grilla común EPSG:32719 · UTM 19S · 10 m · 1500 × 1500)</text>
+   </g>
+   <g id="text_2">
+    <text style="font-weight: 700; font-size: 18px; font-family: 'Liberation Serif'; text-anchor: middle; fill: #ffffff" x="191.16" y="86.408437" transform="rotate(-0 191.16 86.408437)">ÓPTICOS</text>
+   </g>
+   <g id="text_3">
+    <text style="font-weight: 700; font-size: 18px; font-family: 'Liberation Serif'; text-anchor: middle; fill: #ffffff" x="582.84" y="86.408437" transform="rotate(-0 582.84 86.408437)">RADAR (SAR)</text>
+   </g>
+   <g id="text_4">
+    <text style="font-weight: 700; font-size: 18px; font-family: 'Liberation Serif'; text-anchor: middle; fill: #ffffff" x="975.24" y="86.408437" transform="rotate(-0 975.24 86.408437)">LiDAR</text>
+   </g>
+   <g id="text_5">
+    <text style="font-weight: 700; font-size: 12.5px; font-family: 'Liberation Serif'; text-anchor: middle; fill: #ffffff" x="191.16" y="125.411719" transform="rotate(-0 191.16 125.411719)">Sentinel-2 L2A · óptico (JP2, 10 m)</text>
+   </g>
+   <g id="text_6">
+    <text style="font-weight: 700; font-size: 12.5px; font-family: 'Liberation Serif'; text-anchor: middle; fill: #ffffff" x="191.16" y="164.285859" transform="rotate(-0 191.16 164.285859)">Landsat 9 OLI-2 · C2L2 (30 m)</text>
+   </g>
+   <g id="text_7">
+    <text style="font-weight: 700; font-size: 12.5px; font-family: 'Liberation Serif'; text-anchor: middle; fill: #ffffff" x="582.84" y="125.405859" transform="rotate(-0 582.84 125.405859)">Sentinel-1 SLC · banda C · dual-pol (VV+VH)</text>
+   </g>
+   <g id="text_8">
+    <text style="font-weight: 700; font-size: 12.5px; font-family: 'Liberation Serif'; text-anchor: middle; fill: #ffffff" x="582.84" y="164.285859" transform="rotate(-0 582.84 164.285859)">Sentinel-1 GRD · banda C · dual-pol (VV+VH)</text>
+   </g>
+   <g id="text_9">
+    <text style="font-weight: 700; font-size: 12.5px; font-family: 'Liberation Serif'; text-anchor: middle; fill: #ffffff" x="582.84" y="203.148281" transform="rotate(-0 582.84 203.148281)">SAOCOM L1A · banda L · quad-pol y dual-pol</text>
+   </g>
+   <g id="text_10">
+    <text style="font-weight: 700; font-size: 12.5px; font-family: 'Liberation Serif'; text-anchor: middle; fill: #ffffff" x="582.84" y="242.045859" transform="rotate(-0 582.84 242.045859)">NISAR GCOV · banda L · dual-pol (HH+HV)</text>
+   </g>
+   <g id="text_11">
+    <text style="font-weight: 700; font-size: 12.5px; font-family: 'Liberation Serif'; text-anchor: middle; fill: #ffffff" x="582.84" y="280.989336" transform="rotate(-0 582.84 280.989336)">BIOMASS L1 · banda P · full-pol (HH HV VH VV)</text>
+   </g>
+   <g id="text_12">
+    <text style="font-weight: 700; font-size: 12.5px; font-family: 'Liberation Serif'; text-anchor: middle; fill: #ffffff" x="975.24" y="125.405859" transform="rotate(-0 975.24 125.405859)">GEDI L2A / L2B / L4A V003 · la referencia</text>
+   </g>
+   <g id="text_13">
+    <text style="font-weight: 700; font-size: 12.5px; font-family: 'Liberation Serif'; text-anchor: middle; fill: #ffffff" x="975.24" y="164.300508" transform="rotate(-0 975.24 164.300508)">ICESat-2 ATL08 V007 · segunda referencia</text>
+   </g>
+   <g id="text_14">
+    <text style="font-weight: 700; font-size: 12.5px; font-family: 'Liberation Serif'; text-anchor: middle; fill: #ffffff" x="975.24" y="203.229336" transform="rotate(-0 975.24 203.229336)">CCI Biomass v7 · 100 m · referencia de mapa</text>
+   </g>
+   <g id="text_15">
+    <text style="font-weight: 700; font-size: 14px; font-family: 'Liberation Serif'; text-anchor: middle; fill: #ffffff" x="191.16" y="331.675075" transform="rotate(-0 191.16 331.675075)">TP1_03_descargar_sentinel.py (CDSE)</text>
+   </g>
+   <g id="text_16">
+    <text style="font-weight: 700; font-size: 14px; font-family: 'Liberation Serif'; text-anchor: middle; fill: #ffffff" x="191.16" y="346.023675" transform="rotate(-0 191.16 346.023675)">Landsat 9: Planetary Computer (sin credencial)</text>
+   </g>
+   <g id="text_17">
+    <text style="font-weight: 700; font-size: 14px; font-family: 'Liberation Serif'; text-anchor: middle; fill: #ffffff" x="582.84" y="331.675075" transform="rotate(-0 582.84 331.675075)">TP1_03_descargar_sentinel.py (CDSE)</text>
+   </g>
+   <g id="text_18">
+    <text style="font-weight: 700; font-size: 14px; font-family: 'Liberation Serif'; text-anchor: middle; fill: #ffffff" x="582.84" y="346.043362" transform="rotate(-0 582.84 346.043362)">SAOCOM: CONAE · BIOMASS / NISAR: ESA / ASF</text>
+   </g>
+   <g id="text_19">
+    <text style="font-weight: 700; font-size: 14px; font-family: 'Liberation Serif'; text-anchor: middle; fill: #ffffff" x="975.24" y="331.675075" transform="rotate(-0 975.24 331.675075)">TP1_05_descargar_gedi.py · GEDI e ICESat-2</text>
+   </g>
+   <g id="text_20">
+    <text style="font-weight: 700; font-size: 14px; font-family: 'Liberation Serif'; text-anchor: middle; fill: #ffffff" x="975.24" y="346.043362" transform="rotate(-0 975.24 346.043362)">(NASA Earthdata) · CCI: portal ESA, manual</text>
+   </g>
+   <g id="text_21">
+    <text style="font-weight: 700; font-size: 14px; font-family: 'Liberation Serif'; text-anchor: middle; fill: #ffffff" x="191.16" y="431.113275" transform="rotate(-0 191.16 431.113275)">TP3_01_recortar_sentinel2.py</text>
+   </g>
+   <g id="text_22">
+    <text style="font-weight: 700; font-size: 14px; font-family: 'Liberation Serif'; text-anchor: middle; fill: #ffffff" x="191.16" y="445.446562" transform="rotate(-0 191.16 445.446562)">JP2 / GeoTIFF → recorte al AOI</text>
+   </g>
+   <g id="text_23">
+    <text style="font-weight: 700; font-size: 14px; font-family: 'Liberation Serif'; text-anchor: middle; fill: #ffffff" x="191.16" y="459.747038" transform="rotate(-0 191.16 459.747038)">reproyección UTM 19S · remuestreo 10 m</text>
+   </g>
+   <g id="text_24">
+    <text style="font-weight: 700; font-size: 14px; font-family: 'Liberation Serif'; text-anchor: middle; fill: #ffffff" x="582.84" y="423.921475" transform="rotate(-0 582.84 423.921475)">TP4_01_procesar_sar.py (ESA SNAP · gpt)</text>
+   </g>
+   <g id="text_25">
+    <text style="font-weight: 700; font-size: 14px; font-family: 'Liberation Serif'; text-anchor: middle; fill: #ffffff" x="582.84" y="438.296325" transform="rotate(-0 582.84 438.296325)">órbita precisa → calibración →</text>
+   </g>
+   <g id="text_26">
+    <!-- Terrain Flattening ($\mathbf{\gamma^{0}}$) → speckle → -->
+    <g style="fill: #ffffff" transform="translate(473.08 453.6468)">
+     <text>
+      <tspan x="0" y="-0.1" style="font-weight: 700; font-size: 14px; font-family: 'Liberation Serif'; fill: #ffffff">T</tspan>
+      <tspan x="9.337891" y="-0.1" style="font-weight: 700; font-size: 14px; font-family: 'Liberation Serif'; fill: #ffffff">e</tspan>
+      <tspan x="15.551758" y="-0.1" style="font-weight: 700; font-size: 14px; font-family: 'Liberation Serif'; fill: #ffffff">r</tspan>
+      <tspan x="21.765625" y="-0.1" style="font-weight: 700; font-size: 14px; font-family: 'Liberation Serif'; fill: #ffffff">r</tspan>
+      <tspan x="27.979492" y="-0.1" style="font-weight: 700; font-size: 14px; font-family: 'Liberation Serif'; fill: #ffffff">a</tspan>
+      <tspan x="34.979492" y="-0.1" style="font-weight: 700; font-size: 14px; font-family: 'Liberation Serif'; fill: #ffffff">i</tspan>
+      <tspan x="38.869141" y="-0.1" style="font-weight: 700; font-size: 14px; font-family: 'Liberation Serif'; fill: #ffffff">n</tspan>
+      <tspan x="46.655273" y="-0.1" style="font-weight: 700; font-size: 14px; font-family: 'Liberation Serif'; fill: #ffffff"> </tspan>
+      <tspan x="50.155273" y="-0.1" style="font-weight: 700; font-size: 14px; font-family: 'Liberation Serif'; fill: #ffffff">F</tspan>
+      <tspan x="58.707031" y="-0.1" style="font-weight: 700; font-size: 14px; font-family: 'Liberation Serif'; fill: #ffffff">l</tspan>
+      <tspan x="62.59668" y="-0.1" style="font-weight: 700; font-size: 14px; font-family: 'Liberation Serif'; fill: #ffffff">a</tspan>
+      <tspan x="69.59668" y="-0.1" style="font-weight: 700; font-size: 14px; font-family: 'Liberation Serif'; fill: #ffffff">t</tspan>
+      <tspan x="74.258789" y="-0.1" style="font-weight: 700; font-size: 14px; font-family: 'Liberation Serif'; fill: #ffffff">t</tspan>
+      <tspan x="78.920898" y="-0.1" style="font-weight: 700; font-size: 14px; font-family: 'Liberation Serif'; fill: #ffffff">e</tspan>
+      <tspan x="85.134766" y="-0.1" style="font-weight: 700; font-size: 14px; font-family: 'Liberation Serif'; fill: #ffffff">n</tspan>
+      <tspan x="92.920898" y="-0.1" style="font-weight: 700; font-size: 14px; font-family: 'Liberation Serif'; fill: #ffffff">i</tspan>
+      <tspan x="96.810547" y="-0.1" style="font-weight: 700; font-size: 14px; font-family: 'Liberation Serif'; fill: #ffffff">n</tspan>
+      <tspan x="104.59668" y="-0.1" style="font-weight: 700; font-size: 14px; font-family: 'Liberation Serif'; fill: #ffffff">g</tspan>
+      <tspan x="111.59668" y="-0.1" style="font-weight: 700; font-size: 14px; font-family: 'Liberation Serif'; fill: #ffffff"> </tspan>
+      <tspan x="115.09668" y="-0.1" style="font-weight: 700; font-size: 14px; font-family: 'Liberation Serif'; fill: #ffffff">(</tspan>
+      <tspan x="132.78196" y="-0.1" style="font-weight: 700; font-size: 14px; font-family: 'Liberation Serif'; fill: #ffffff">)</tspan>
+      <tspan x="137.444069" y="-0.1" style="font-weight: 700; font-size: 14px; font-family: 'Liberation Serif'; fill: #ffffff"> </tspan>
+      <tspan x="140.944069" y="-0.1" style="font-weight: 700; font-size: 14px; font-family: 'Liberation Serif'; fill: #ffffff">→</tspan>
+      <tspan x="154.944069" y="-0.1" style="font-weight: 700; font-size: 14px; font-family: 'Liberation Serif'; fill: #ffffff"> </tspan>
+      <tspan x="158.444069" y="-0.1" style="font-weight: 700; font-size: 14px; font-family: 'Liberation Serif'; fill: #ffffff">s</tspan>
+      <tspan x="163.892311" y="-0.1" style="font-weight: 700; font-size: 14px; font-family: 'Liberation Serif'; fill: #ffffff">p</tspan>
+      <tspan x="171.678444" y="-0.1" style="font-weight: 700; font-size: 14px; font-family: 'Liberation Serif'; fill: #ffffff">e</tspan>
+      <tspan x="177.892311" y="-0.1" style="font-weight: 700; font-size: 14px; font-family: 'Liberation Serif'; fill: #ffffff">c</tspan>
+      <tspan x="184.106179" y="-0.1" style="font-weight: 700; font-size: 14px; font-family: 'Liberation Serif'; fill: #ffffff">k</tspan>
+      <tspan x="191.892311" y="-0.1" style="font-weight: 700; font-size: 14px; font-family: 'Liberation Serif'; fill: #ffffff">l</tspan>
+      <tspan x="195.78196" y="-0.1" style="font-weight: 700; font-size: 14px; font-family: 'Liberation Serif'; fill: #ffffff">e</tspan>
+      <tspan x="201.995827" y="-0.1" style="font-weight: 700; font-size: 14px; font-family: 'Liberation Serif'; fill: #ffffff"> </tspan>
+      <tspan x="205.495827" y="-0.1" style="font-weight: 700; font-size: 14px; font-family: 'Liberation Serif'; fill: #ffffff">→</tspan>
+      <tspan x="119.758789" y="-0.1" style="font-weight: 700; font-size: 14px; font-family: 'STIXGeneral'; fill: #ffffff">γ</tspan>
+      <tspan x="127.236647" y="-5.2625" style="font-weight: 700; font-size: 9.8px; font-family: 'STIXGeneral'; fill: #ffffff">0</tspan>
+     </text>
+    </g>
+   </g>
+   <g id="text_27">
+    <text style="font-weight: 700; font-size: 14px; font-family: 'Liberation Serif'; text-anchor: middle; fill: #ffffff" x="582.84" y="466.862275" transform="rotate(-0 582.84 466.862275)">Range-Doppler Terrain Correction</text>
+   </g>
+   <g id="text_28">
+    <text style="font-weight: 700; font-size: 14px; font-family: 'Liberation Serif'; text-anchor: middle; fill: #ffffff" x="975.24" y="423.936787" transform="rotate(-0 975.24 423.936787)">TP2_02_recortar_AOI.py · HDF5 → CSV</text>
+   </g>
+   <g id="text_29">
+    <text style="font-weight: 700; font-size: 14px; font-family: 'Liberation Serif'; text-anchor: middle; fill: #ffffff" x="975.24" y="438.235075" transform="rotate(-0 975.24 438.235075)">TP2_12_cargar_ATL08.py · segmentos a la grilla</text>
+   </g>
+   <g id="text_30">
+    <text style="font-weight: 700; font-size: 14px; font-family: 'Liberation Serif'; text-anchor: middle; fill: #ffffff" x="975.24" y="452.603363" transform="rotate(-0 975.24 452.603363)">cotejos del TP2: GEDI–ICESat-2 (TP2_13)</text>
+   </g>
+   <g id="text_31">
+    <text style="font-weight: 700; font-size: 14px; font-family: 'Liberation Serif'; text-anchor: middle; fill: #ffffff" x="975.24" y="466.897275" transform="rotate(-0 975.24 466.897275)">y GEDI–CCI Biomass (04_Tablas)</text>
+   </g>
+   <g id="patch_23">
+    <path d="M 191.16 179.123357 
+Q 191.16 240.12079 191.16 299.354878 
+" style="fill: none; stroke: #8c8c8c; stroke-width: 1.6; stroke-linecap: round"/>
+    <path d="M 193.96 293.854878 
+L 191.16 299.354878 
+L 188.36 293.854878 
+z
+" style="fill: #8c8c8c; stroke: #8c8c8c; stroke-width: 1.6; stroke-linecap: round"/>
+   </g>
+   <g id="patch_24">
+    <path d="M 582.84 295.757227 
+Q 582.84 298.437377 582.84 299.354181 
+" style="fill: none; stroke: #8c8c8c; stroke-width: 1.6; stroke-linecap: round"/>
+    <path d="M 585.64 293.854181 
+L 582.84 299.354181 
+L 580.04 293.854181 
+z
+" style="fill: #8c8c8c; stroke: #8c8c8c; stroke-width: 1.6; stroke-linecap: round"/>
+   </g>
+   <g id="patch_25">
+    <path d="M 975.24 218.001995 
+Q 975.24 259.562222 975.24 299.359104 
+" style="fill: none; stroke: #8c8c8c; stroke-width: 1.6; stroke-linecap: round"/>
+    <path d="M 978.04 293.859104 
+L 975.24 299.359104 
+L 972.44 293.859104 
+z
+" style="fill: #8c8c8c; stroke: #8c8c8c; stroke-width: 1.6; stroke-linecap: round"/>
+   </g>
+   <g id="patch_26">
+    <path d="M 191.16 368.479688 
+Q 191.16 377.999453 191.16 385.755873 
+" style="fill: none; stroke: #8c8c8c; stroke-width: 1.6; stroke-linecap: round"/>
+    <path d="M 193.96 380.255873 
+L 191.16 385.755873 
+L 188.36 380.255873 
+z
+" style="fill: #8c8c8c; stroke: #8c8c8c; stroke-width: 1.6; stroke-linecap: round"/>
+   </g>
+   <g id="patch_27">
+    <path d="M 191.16 495.199687 
+Q 191.16 504.719453 191.16 512.475873 
+" style="fill: none; stroke: #8c8c8c; stroke-width: 1.6; stroke-linecap: round"/>
+    <path d="M 193.96 506.975873 
+L 191.16 512.475873 
+L 188.36 506.975873 
+z
+" style="fill: #8c8c8c; stroke: #8c8c8c; stroke-width: 1.6; stroke-linecap: round"/>
+   </g>
+   <g id="patch_28">
+    <path d="M 582.84 368.479688 
+Q 582.84 377.999453 582.84 385.755873 
+" style="fill: none; stroke: #8c8c8c; stroke-width: 1.6; stroke-linecap: round"/>
+    <path d="M 585.64 380.255873 
+L 582.84 385.755873 
+L 580.04 380.255873 
+z
+" style="fill: #8c8c8c; stroke: #8c8c8c; stroke-width: 1.6; stroke-linecap: round"/>
+   </g>
+   <g id="patch_29">
+    <path d="M 582.84 495.199687 
+Q 582.84 504.719453 582.84 512.475873 
+" style="fill: none; stroke: #8c8c8c; stroke-width: 1.6; stroke-linecap: round"/>
+    <path d="M 585.64 506.975873 
+L 582.84 512.475873 
+L 580.04 506.975873 
+z
+" style="fill: #8c8c8c; stroke: #8c8c8c; stroke-width: 1.6; stroke-linecap: round"/>
+   </g>
+   <g id="patch_30">
+    <path d="M 975.24 368.479688 
+Q 975.24 377.999453 975.24 385.755873 
+" style="fill: none; stroke: #8c8c8c; stroke-width: 1.6; stroke-linecap: round"/>
+    <path d="M 978.04 380.255873 
+L 975.24 385.755873 
+L 972.44 380.255873 
+z
+" style="fill: #8c8c8c; stroke: #8c8c8c; stroke-width: 1.6; stroke-linecap: round"/>
+   </g>
+   <g id="patch_31">
+    <path d="M 975.24 495.199687 
+Q 975.24 504.719453 975.24 512.475873 
+" style="fill: none; stroke: #8c8c8c; stroke-width: 1.6; stroke-linecap: round"/>
+    <path d="M 978.04 506.975873 
+L 975.24 512.475873 
+L 972.44 506.975873 
+z
+" style="fill: #8c8c8c; stroke: #8c8c8c; stroke-width: 1.6; stroke-linecap: round"/>
+   </g>
+   <g id="text_32">
+    <text style="font-weight: 700; font-size: 17px; font-family: 'Liberation Serif'; text-anchor: middle; fill: #ffffff" x="580.68" y="550.459131" transform="rotate(-0 580.68 550.459131)">SALIDA:   02_Subsets_SNAP_QGIS de cada práctico   —   GeoTIFF 1500 × 1500 en grilla común (EPSG:32719, 10 m)   +   CSV GEDI y ATL08</text>
+   </g>
+   <g id="text_33">
+    <text style="font-weight: 700; font-size: 17px; font-family: 'Liberation Serif'; text-anchor: middle; fill: #ffffff" x="580.68" y="567.906337" transform="rotate(-0 580.68 567.906337)">listos para el análisis multisensor de biomasa en el ecotono bosque – estepa</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p5718d79663">
+   <rect x="0" y="0" width="1161.36" height="601.92"/>
+  </clipPath>
+ </defs>
+</svg>

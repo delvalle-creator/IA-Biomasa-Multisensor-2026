@@ -1,0 +1,18 @@
+{
+  "aoi": "BOSQUE_NW_02",
+  "crs_salida": "EPSG:32719",
+  "area_aoi_m2": 225000000.0000166,
+  "area_aoi_km2": 225.0000000000166,
+  "perimetro_aoi_km": 60.00000000000221,
+  "poligonos_fuente_intersectados": 1780,
+  "fragmentos_recortados": 1833,
+  "clases_leyenda_n3": 18,
+  "area_suma_fragmentos_km2": 224.999999972979,
+  "area_union_cubierta_km2": 224.99999997297812,
+  "cobertura_aoi_pct": 99.99999998798289,
+  "huecos_estimados_km2": 2.7038484811782836e-08,
+  "solapamientos_estimados_km2": 8.940696716308594e-13,
+  "geometrias_invalidas_detalle": 0,
+  "geometrias_invalidas_resumen": 0,
+  "clases_sin_color_leyenda": 0
+}

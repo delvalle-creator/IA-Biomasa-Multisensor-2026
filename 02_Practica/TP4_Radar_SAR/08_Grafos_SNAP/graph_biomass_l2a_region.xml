@@ -1,0 +1,113 @@
+<!--
+ BIOMASS NIVEL 2A - ALTURA DE DOSEL, EL MARCO ENTERO  (para mostrar en clase)
+ ===========================================================================
+ Escrito el 02/08/2026, a pedido: "estos estan pixelados por el tamano de
+ nuestros aoi, quisiera bajar un tamano mas grande para mostrar a mis alumnos".
+
+ EL DIAGNOSTICO, QUE CONVIENE ENTENDER ANTES DE TOCAR NADA
+ ========================================
+ No hace falta bajar nada mas. El producto que usted ya tiene ES el area grande:
+ un marco de BIOMASS mide unos 146 x 83 km. El recinto del curso mide 15 x 15.
+ O sea que el marco es CINCUENTA Y CUATRO VECES el AOI.
+
+ Lo que se veia pixelado no era el producto: era el RECORTE. A 50 m de pixel, un
+ recuadro de 15 km da 300 x 300 pixeles, y 300 pixeles en una pantalla se ven
+ como ladrillos. El mismo dato, sin recortar, da unos 1.660 x 2.920 pixeles.
+
+ Y CONVIENE DECIRLO EN CLASE: agrandar el area NO mejora la resolucion. El pixel
+ sigue midiendo 50 m. Lo que cambia es cuanto terreno entra en la pantalla. La
+ tentacion de "arreglar" el pixelado remuestreando a 10 m hay que resistirla:
+ eso no agrega detalle, lo inventa.
+
+ QUE HACE ESTE GRAFO
+ ===================
+   Read -> BandMaths -> Reproject -> Write
+ Es el mismo que graph_biomass_l2a_altura.xml PERO SIN EL NODO Subset: deja el
+ marco entero. Enmascara igual por la capa de calidad y reproyecta a EPSG:32719
+ conservando los 50 m nativos.
+
+ QUE MARCO ELEGIR, con los datos del catalogo al 02/08/2026:
+
+   Marco F274, pasada del 09/06/2026, traza T036
+       lon -71,88 a -70,87   lat -43,33 a -42,01
+       Entran Lago Puelo, El Hoyo, Epuyen, Esquel, Trevelin Y LOS DOS RECINTOS
+       del curso. Es el mejor para mostrar: el alumno ve el bosque andino
+       completo y adentro, chiquito, el cuadrado donde trabajo todo el curso.
+
+   Marco F192, pasada del 07/06/2026, traza T014
+       lon -71,66 a -70,62   lat -43,47 a -42,15
+       Entran Epuyen, Esquel, Trevelin y los dos recintos. NO llega a Lago Puelo.
+
+ SI QUIERE MAS TODAVIA: los marcos vecinos de LA MISMA PASADA se pegan sin
+ costura, porque son la misma orbita y el mismo dia. Sumando F275 al norte y F273
+ al sur del 09/06 se arma una tira de unos 440 km. Los cinco marcos completos de
+ esa pasada cubren 684 x 192 km, del paralelo 41 al 47.
+
+ QUE SE EDITA AQUI: las dos rutas y los dos nombres de banda.
+ ANTES: correr TP4_11_inspeccionar_biomass_L2A.py, como en el otro grafo.
+-->
+<graph id="BIOMASS_L2A_altura_marco_entero">
+
+  <node id="Read">
+    <operator>Read</operator>
+    <sources/>
+    <parameters>
+      <!-- Carpeta o archivo del producto FP_FH__L2A ya descomprimido. -->
+      <file>C:\Temp\CURSO_BIOMASA_2026\02_Practica\00_COMUN\08_Originales_crudos\03_post\BIOMASS_bandaP\CAMBIAR_POR_EL_PRODUCTO_FH</file>
+    </parameters>
+  </node>
+
+
+  <node id="BandMaths">
+    <operator>BandMaths</operator>
+    <sources><sourceProduct refid="Read"/></sources>
+    <parameters>
+      <targetBands>
+        <targetBand>
+          <name>altura_dosel_P</name>
+          <type>float32</type>
+          <!-- LOS DOS NOMBRES A VERIFICAR ESTAN EN ESTA LINEA.
+               La regla es: si la capa de calidad no marca el pixel como bueno,
+               el pixel sale como "sin dato" y no como cero. Un cero se
+               promedia; un "sin dato" no. Ajustar el umbral segun lo que
+               informe el script de inspeccion: en algunos productos la capa de
+               calidad es 1 = bueno y en otros es 0 = bueno. -->
+          <expression>fh_quality &gt; 0 ? forest_height : NaN</expression>
+          <noDataValue>NaN</noDataValue>
+          <unit>m</unit>
+          <description>Altura de dosel de banda P, enmascarada por su capa de calidad</description>
+        </targetBand>
+      </targetBands>
+      <variables/>
+    </parameters>
+  </node>
+
+  <node id="Reproject">
+    <operator>Reproject</operator>
+    <sources><sourceProduct refid="BandMaths"/></sources>
+    <parameters>
+      <crs>EPSG:32719</crs>
+      <resampling>Nearest</resampling>
+      <!-- 50 m: el pixel nativo. Ver la nota del encabezado. -->
+      <pixelSizeX>50.0</pixelSizeX>
+      <pixelSizeY>50.0</pixelSizeY>
+      <orthorectify>false</orthorectify>
+      <noDataValue>NaN</noDataValue>
+      <includeTiePointGrids>false</includeTiePointGrids>
+      <addDeltaBands>false</addDeltaBands>
+    </parameters>
+  </node>
+
+  <node id="Write">
+    <operator>Write</operator>
+    <sources><sourceProduct refid="Reproject"/></sources>
+    <parameters>
+      <file>C:\Temp\CURSO_BIOMASA_2026\02_Practica\TP4_Radar_SAR\02_Subsets_SNAP_QGIS\BIOMASS_L2A\BIOMASS_altura_marco_F274_09jun2026.tif</file>
+      <!-- GeoTIFF y no BEAM-DIMAP: este producto ya viene geocodificado y no se
+           va a seguir procesando en SNAP; el destino es QGIS y la comparacion
+           contra el mapa del TP5. -->
+      <formatName>GeoTIFF</formatName>
+    </parameters>
+  </node>
+
+</graph>

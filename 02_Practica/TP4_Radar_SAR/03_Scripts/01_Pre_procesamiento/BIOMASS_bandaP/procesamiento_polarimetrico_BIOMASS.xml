@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+============================================================================
+ GRAFO POLARIMETRICO BIOMASS (ESA SNAP) - para estructura de bosque
+============================================================================
+ CORREGIDO EL 27/07/2026. La version anterior de este encabezado afirmaba que
+ "el Terrain Flattening de SNAP opera sobre intensidades, no sobre la matriz de
+ covarianza". ES FALSO, y por eso el grafo no lo llevaba. Lo desmiente el propio
+ grafo oficial de ESA TerrainFlattenedT3.xml, que hace exactamente
+ Polarimetric-Matrices(T3) > Terrain-Flattening > Terrain-Correction. Ahora el
+ grafo lo lleva.
+
+ BIOMASS es totalmente polarimetrico (banda P). Esta cadena separa los
+ mecanismos de dispersion (superficie, doble rebote, volumen), util para
+ caracterizar el dosel y la biomasa.
+
+ CADENA
+ ::::::
+   Read
+   > Calibration (en COMPLEJO)
+   > Polarimetric-Matrices (T3)
+   > Orientation-Angle-Correction
+   > Polarimetric-Speckle-Filter (Refined Lee)
+   > Terrain-Flattening
+   > Polarimetric-Decomposition (Freeman-Durden)
+   > Terrain-Correction
+   > Write
+
+ Es la cadena de los grafos oficiales de ESA, con el flattening agregado. Los
+ dos grafos de ESA que la respaldan estan en la coleccion del docente:
+   Pol_Cal_Mat_Orn_Spk_Params.xml -> Calibration(complejo) > Matrices(T3) >
+       Orientation-Angle-Correction > Speckle pol. > Polarimetric-Parameters
+   TerrainFlattenedT3.xml -> Matrices(T3) > Terrain-Flattening >
+       Terrain-Correction
+
+ LOS TRES CAMBIOS RESPECTO DE LA VERSION ANTERIOR
+ ::::::::::::::::::::::::::::::::::::::::::::::::
+ 1. CALIBRATION EN COMPLEJO al principio. Antes la cadena iba de Read directo a
+    Polarimetric-Matrices, sin calibrar. Los grafos oficiales de ESA calibran
+    primero, con outputImageInComplex=true, porque la matriz necesita la fase y
+    los valores tienen que estar en unidades fisicas antes de combinarse.
+
+ 2. ORIENTATION-ANGLE-CORRECTION despues de la matriz. El terreno inclinado
+    ROTA el plano de polarizacion, y sin corregirlo la descomposicion
+    SOBREESTIMA el volumen justo donde hay mas pendiente, que es casi todo el
+    sitio de bosque. El encabezado viejo reconocia el problema pero lo dejaba
+    sin resolver: proponia guardar el angulo de incidencia local y descartar
+    despues los pixeles de ladera fuerte. Descartar sigue siendo util como
+    control, pero primero conviene corregir.
+
+ 3. TERRAIN-FLATTENING sobre la matriz. Normaliza por el area iluminada real y
+    deja el resultado comparable entre laderas.
+
+ El argumento viejo de que "la proporcion entre mecanismos es menos sensible al
+ area iluminada que un nivel de retorno" no es del todo falso, pero no alcanza:
+ la pendiente no afecta a las tres componentes por igual, y en ladera andina la
+ diferencia importa.
+
+ QUE DESCOMPOSICION
+ ::::::::::::::::::
+ Abajo esta Freeman-Durden, que sale en tres bandas de lectura directa:
+   Freeman_surf  = SUPERFICIE (suelo desnudo, agua)
+   Freeman_dbl   = DOBLE REBOTE (troncos, estructuras verticales)
+   Freeman_vol   = VOLUMEN (dosel / follaje) -> alto en bosque
+ Para el plano entropia-alfa de Cloude y Pottier, cambiar el valor de
+ <decomposition> por "H-A-Alpha Quad Pol Decomposition". Las dos salen del
+ mismo T3 y se corren una despues de la otra sin rehacer nada.
+
+ POR QUE T3 Y NO C3
+ ::::::::::::::::::
+ La version anterior usaba C3. Se cambio a T3 porque es la matriz que usan los
+ dos grafos oficiales de ESA citados arriba, tanto para el Terrain-Flattening
+ como para la descomposicion. Las dos matrices son equivalentes -una es la
+ transformacion unitaria de la otra- pero conviene calcar el camino verificado.
+
+
+ SI SE PASA A CLASIFICACION, HAY QUE CAMBIAR EL REMUESTREO
+ :::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+ Distincion que conviene tener clara, porque se confunden facil:
+
+   - Freeman-Durden y H-A-Alpha Quad Pol Decomposition producen bandas
+     CONTINUAS (potencias, entropia, anisotropia, angulo alfa). Para esas, el
+     Terrain-Correction final va con BILINEAR_INTERPOLATION, como esta abajo.
+
+   - Polarimetric-Classification (H Alpha Wishart y similares) produce CLASES
+     DISCRETAS: cada pixel lleva un numero de clase, no una magnitud. Ahi el
+     Terrain-Correction final tiene que ir con NEAREST_NEIGHBOUR en
+     <imgResamplingMethod>. Interpolar linealmente entre la clase 3 y la clase 7
+     da 5, que es una clase que ese pixel no es. El error es silencioso: la
+     imagen sale linda y los bordes entre clases quedan inventados.
+
+ Es el unico parametro que hay que tocar al cambiar de descomposicion a
+ clasificacion. El resto de la cadena es la misma.
+
+ GRILLA COMUN
+ ::::::::::::
+ Sale en EPSG:32719 a 10 m, alineado a la grilla del resto del proyecto, para
+ poder superponerlo con Sentinel, SAOCOM, NISAR y el optico sin remuestrear una
+ segunda vez. NO significa que BIOMASS resuelva 10 m.
+
+ USO
+ :::
+ A) SNAP > Tools > Graph Builder > abrir este .xml > editar Read/Write > Run.
+ B) gpt procesamiento_polarimetrico_BIOMASS.xml -Pentrada="prod" -Psalida="salida.dim"
+
+ NOTA: el soporte BIOMASS en SNAP es BETA. Es una PLANTILLA sin probar sobre
+ los productos de este proyecto: verificar que el quad-pol sea aceptado y
+ ajustar parametros. Requiere producto 1S.
+============================================================================
+
+ TERRAIN-FLATTENING QUITADO EL 28/07/2026, CON DATOS
+ ===================================================
+ Este grafo llevaba Terrain-Flattening sobre la matriz T3. Se saco. Medido sobre la
+ escena del 16/01/2024, comparando la fraccion de volumen de Freeman-Durden contra el
+ RVI recalculado, pixel a pixel:
+
+     CON flattening ... correlacion 0,227   recorrido 0,173 -> 0,226
+     SIN flattening ... correlacion 0,372   recorrido 0,136 -> 0,220
+
+ Quitarlo mejora la correlacion un 64 % y ensancha la respuesta. El flattening estaba
+ amortiguando la señal polarimetrica.
+
+ OJO: no resuelve todo. Aun sin flattening, el volumen domina en solo el 0,3 % de los
+ pixeles, y las descomposiciones de MODELO (Freeman, Yamaguchi, van Zyl, Cloude,
+ Model-free) no responden al contenido polarimetrico. La que si responde es H-A-Alpha,
+ que no supone ningun modelo. Ver la seccion 36 de CONTEXTO_IA.md.
+
+ Para BIOMASA conviene apoyarse en H-A-Alpha y en los indices, y usar esta salida como
+ ilustracion cualitativa.
+-->
+<graph id="BIOMASS_polarimetrico">
+  <version>1.0</version>
+
+  <!-- 1) LEER el producto quad-pol 1S -->
+  <node id="Read">
+    <operator>Read</operator>
+    <sources/>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <file/>
+    </parameters>
+  </node>
+
+  <!-- 2) CALIBRACION EN COMPLEJO. Sin la fase no hay polarimetria posible.
+       No se fijan polarizaciones: procesa las cuatro que traiga el producto. -->
+  <node id="Calibration">
+    <operator>Calibration</operator>
+    <sources>
+      <sourceProduct refid="Read"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <sourceBands/>
+      <outputImageInComplex>true</outputImageInComplex>
+      <outputImageScaleInDb>false</outputImageScaleInDb>
+      <selectedPolarisations/>
+    
+      <auxFile>Latest Auxiliary File</auxFile>
+      <externalAuxFile/>
+      <createGammaBand>false</createGammaBand>
+      <createBetaBand>false</createBetaBand>
+    </parameters>
+  </node>
+
+  <!-- 3) MATRIZ de coherencia T3 (base de todo lo polarimetrico) -->
+  <node id="Polarimetric-Matrices">
+    <operator>Polarimetric-Matrices</operator>
+    <sources>
+      <sourceProduct refid="Calibration"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <matrix>T3</matrix>
+    </parameters>
+  </node>
+
+  <!-- 4) CORRECCION DEL ANGULO DE ORIENTACION. Compensa el giro del plano de
+       polarizacion que produce la inclinacion del terreno. En llanura casi no
+       cambia nada; en ladera andina es la diferencia entre un Freeman_vol
+       creible y uno inflado. -->
+  <node id="Orientation-Angle-Correction">
+    <operator>Orientation-Angle-Correction</operator>
+    <sources>
+      <sourceProduct refid="Polarimetric-Matrices"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <outputOrientationAngle>false</outputOrientationAngle>
+    </parameters>
+  </node>
+
+  <!-- 5) FILTRO de speckle polarimetrico: opera sobre la matriz entera y no
+       banda a banda, que es lo que preserva las relaciones de fase. -->
+  <node id="Polarimetric-Speckle-Filter">
+    <operator>Polarimetric-Speckle-Filter</operator>
+    <sources>
+      <sourceProduct refid="Orientation-Angle-Correction"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <filter>Refined Lee Filter</filter>
+      <filterSize>5</filterSize>
+      <numLooksStr>1</numLooksStr>
+      <windowSize>5x5</windowSize>
+      <targetWindowSizeStr>3x3</targetWindowSizeStr>
+      <anSize>50</anSize>
+      <sigmaStr>0.9</sigmaStr>
+    
+      <patchSizeStr>5</patchSizeStr>
+      <scaleSizeStr>1</scaleSizeStr>
+      <searchWindowSizeStr>15</searchWindowSizeStr>
+    </parameters>
+  </node>
+
+  <!-- 6) TERRAIN FLATTENING sobre la matriz. Es el paso que faltaba. Ver la
+       explicacion del encabezado: el grafo oficial de ESA TerrainFlattenedT3
+       hace exactamente esto. -->
+  
+
+  <!-- 7) DESCOMPOSICION. Para el plano H/alfa, cambiar el valor de abajo por
+       "H-A-Alpha Quad Pol Decomposition". -->
+  <node id="Polarimetric-Decomposition">
+    <operator>Polarimetric-Decomposition</operator>
+    <sources>
+      <sourceProduct refid="Polarimetric-Speckle-Filter"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <decomposition>Freeman-Durden Decomposition</decomposition>
+      <windowSize>5</windowSize>
+      <outputType>Polarimetric</outputType>
+    
+      <outputHAAlpha>false</outputHAAlpha>
+      <outputBetaDeltaGammaLambda>false</outputBetaDeltaGammaLambda>
+      <outputAlpha123>false</outputAlpha123>
+      <outputLambda123>false</outputLambda123>
+      <outputTouziParamSet0>false</outputTouziParamSet0>
+      <outputTouziParamSet1>false</outputTouziParamSet1>
+      <outputTouziParamSet2>false</outputTouziParamSet2>
+      <outputTouziParamSet3>false</outputTouziParamSet3>
+    </parameters>
+  </node>
+
+
+  <!-- OJO con imgResamplingMethod: BILINEAR sirve para bandas continuas
+       (Freeman-Durden, H-A-Alpha). Si se reemplaza la descomposicion por
+       Polarimetric-Classification, cambiarlo por NEAREST_NEIGHBOUR, porque las
+       clases son etiquetas y no se interpolan. Ver la nota del encabezado. -->
+  <!-- 8) CORRECCION POR TERRENO: geocodifica a la grilla comun. Se sigue
+       guardando el angulo de incidencia local, ahora no para tapar el problema
+       de la ladera sino como control de calidad: permite verificar que la
+       correccion de orientacion y el flattening hicieron su trabajo. -->
+  <node id="Terrain-Correction">
+    <operator>Terrain-Correction</operator>
+    <sources>
+      <sourceProduct refid="Polarimetric-Decomposition"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <demName>Copernicus 30m Global DEM</demName>
+      <demResamplingMethod>BILINEAR_INTERPOLATION</demResamplingMethod>
+      <imgResamplingMethod>BILINEAR_INTERPOLATION</imgResamplingMethod>
+      <pixelSpacingInMeter>10.0</pixelSpacingInMeter>
+      <pixelSpacingInDegree>8.983152841195213e-05</pixelSpacingInDegree>
+      <mapProjection>EPSG:32719</mapProjection>
+      <nodataValueAtSea>false</nodataValueAtSea>
+      <alignToStandardGrid>true</alignToStandardGrid>
+      <standardGridOriginX>5.0</standardGridOriginX>
+      <standardGridOriginY>5.0</standardGridOriginY>
+      <saveLocalIncidenceAngle>true</saveLocalIncidenceAngle>
+      <saveSelectedSourceBand>true</saveSelectedSourceBand>
+    
+      <sourceBands/>
+      <externalDEMFile/>
+      <externalDEMNoDataValue>0.0</externalDEMNoDataValue>
+      <externalDEMApplyEGM>true</externalDEMApplyEGM>
+      <saveDEM>false</saveDEM>
+      <saveLatLon>false</saveLatLon>
+      <saveIncidenceAngleFromEllipsoid>false</saveIncidenceAngleFromEllipsoid>
+      <saveProjectedLocalIncidenceAngle>false</saveProjectedLocalIncidenceAngle>
+      <saveLayoverShadowMask>false</saveLayoverShadowMask>
+      <applyRadiometricNormalization>false</applyRadiometricNormalization>
+      <saveSigmaNought>false</saveSigmaNought>
+      <saveGammaNought>false</saveGammaNought>
+      <saveBetaNought>false</saveBetaNought>
+      <incidenceAngleForSigma0>Use projected local incidence angle from DEM</incidenceAngleForSigma0>
+      <incidenceAngleForGamma0>Use projected local incidence angle from DEM</incidenceAngleForGamma0>
+      <auxFile>Latest Auxiliary File</auxFile>
+      <externalAuxFile/>
+    </parameters>
+  </node>
+
+  <!-- 9) ESCRIBIR en BEAM-DIMAP (formato nativo de SNAP: conserva metadatos).
+       Para mirar en QGIS, exportar despues una copia GeoTIFF. -->
+  <node id="Write">
+    <operator>Write</operator>
+    <sources>
+      <sourceProduct refid="Terrain-Correction"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <file/>
+      <formatName>BEAM-DIMAP</formatName>
+    </parameters>
+  </node>
+
+  <applicationData id="Presentation">
+    <Description/>
+    <node id="Read">
+      <displayPosition x="15.0" y="20.0"/>
+    </node>
+    <node id="Calibration">
+      <displayPosition x="220.0" y="20.0"/>
+    </node>
+    <node id="Polarimetric-Matrices">
+      <displayPosition x="425.0" y="20.0"/>
+    </node>
+    <node id="Orientation-Angle-Correction">
+      <displayPosition x="220.0" y="82.0"/>
+    </node>
+    <node id="Polarimetric-Speckle-Filter">
+      <displayPosition x="425.0" y="82.0"/>
+    </node>
+    <node id="Polarimetric-Decomposition">
+      <displayPosition x="15.0" y="144.0"/>
+    </node>
+    <node id="Terrain-Correction">
+      <displayPosition x="220.0" y="144.0"/>
+    </node>
+    <node id="Write">
+      <displayPosition x="425.0" y="144.0"/>
+    </node>
+  </applicationData>
+</graph>

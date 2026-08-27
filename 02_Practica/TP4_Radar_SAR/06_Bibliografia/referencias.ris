@@ -1,0 +1,396 @@
+TY  - JOUR
+AU  - Adam, Markus
+AU  - Urbazaev, Mikhail
+AU  - Dubois, Clémence
+AU  - Schmullius, Christiane
+PY  - 2020
+TI  - Accuracy assessment of GEDI terrain elevation and canopy height estimates in European temperate forests: Influence of environmental and acquisition parameters
+JO  - Remote Sensing
+VL  - 12
+IS  - 23
+SP  - 3948
+DO  - 10.3390/rs12233948
+UR  - https://doi.org/10.3390/rs12233948
+ER  -
+
+TY  - JOUR
+AU  - D.Kovács, Dávid
+AU  - Musial, Jan
+AU  - Bojanowski, Jędrzej
+AU  - Clarijs, Dennis
+AU  - de la Mar, Jurry
+AU  - Zlinszky, András
+PY  - 2026
+TI  - Copernicus Data Space Ecosystem establishes public cloud processing for earth observation data
+JO  - Scientific Data
+VL  - 13
+SP  - 537
+DO  - 10.1038/s41597-026-06765-8
+UR  - https://doi.org/10.1038/s41597-026-06765-8
+ER  -
+
+TY  - JOUR
+AU  - Dostálová, Alena
+AU  - Navacchi, Claudio
+AU  - Greimeister-Pfeil, Isabella
+AU  - Small, David
+AU  - Wagner, Wolfgang
+PY  - 2022
+TI  - The effects of radiometric terrain flattening on SAR-based forest mapping and classification
+JO  - Remote Sensing Letters
+VL  - 13
+IS  - 9
+SP  - 855
+EP  - 864
+DO  - 10.1080/2150704X.2022.2092911
+UR  - https://doi.org/10.1080/2150704X.2022.2092911
+ER  -
+
+TY  - JOUR
+AU  - Dubayah, Ralph
+AU  - Blair, James Bryan
+AU  - Goetz, Scott
+AU  - Fatoyinbo, Lola
+AU  - Hansen, Matthew
+AU  - Healey, Sean
+AU  - Hofton, Michelle
+AU  - Hurtt, George
+AU  - Kellner, James
+AU  - Luthcke, Scott
+AU  - Armston, John
+AU  - Tang, Hao
+AU  - Duncanson, Laura
+AU  - Hancock, Steven
+AU  - Jantz, Patrick
+AU  - Marselis, Suzanne
+AU  - Patterson, Paul L.
+AU  - Qi, Wenlu
+AU  - Silva, Carlos
+PY  - 2020
+TI  - The Global Ecosystem Dynamics Investigation: High-resolution laser ranging of the Earth's forests and topography
+JO  - Science of Remote Sensing
+VL  - 1
+SP  - 100002
+DO  - 10.1016/j.srs.2020.100002
+UR  - https://doi.org/10.1016/j.srs.2020.100002
+ER  -
+
+TY  - JOUR
+AU  - Guo, Qiyu
+AU  - Du, Shouhang
+AU  - Jiang, Jinbao
+AU  - Guo, Wei
+AU  - Zhao, Hengqian
+AU  - Yan, Xuzhe
+AU  - Zhao, Yinpeng
+AU  - Xiao, Wanshan
+PY  - 2023
+TI  - Combining GEDI and Sentinel data to estimate forest canopy mean height and aboveground biomass
+JO  - Ecological Informatics
+VL  - 78
+SP  - 102348
+DO  - 10.1016/j.ecoinf.2023.102348
+UR  - https://doi.org/10.1016/j.ecoinf.2023.102348
+ER  -
+
+TY  - JOUR
+AU  - Guth, Peter L.
+AU  - Geoffroy, Tera M.
+PY  - 2021
+TI  - LiDAR point cloud and ICESat-2 evaluation of 1 second global digital elevation models: Copernicus wins
+JO  - Transactions in GIS
+VL  - 25
+IS  - 5
+SP  - 2245
+EP  - 2261
+DO  - 10.1111/tgis.12825
+UR  - https://doi.org/10.1111/tgis.12825
+ER  -
+
+TY  - JOUR
+AU  - Ji, Yongjie
+AU  - Huang, Jimao
+AU  - Ju, Yilin
+AU  - Guo, Shipeng
+AU  - Yue, Cairong
+PY  - 2020
+TI  - Forest structure dependency analysis of L-band SAR backscatter
+JO  - PeerJ
+VL  - 8
+SP  - e10055
+DO  - 10.7717/peerj.10055
+UR  - https://doi.org/10.7717/peerj.10055
+ER  -
+
+TY  - JOUR
+AU  - Moudrý, Vítězslav
+AU  - Prošek, Jiří
+AU  - Marselis, Suzanne
+AU  - Marešová, Jana
+AU  - Šárovcová, Eliška
+AU  - Gdulová, Kateřina
+AU  - Kozhoridze, Giorgi
+AU  - Torresani, Michele
+AU  - Rocchini, Duccio
+AU  - Eltner, Anette
+AU  - Liu, Xiao
+AU  - Potůčková, Markéta
+AU  - Šedová, Alena
+AU  - Crespo-Peremarch, Pablo
+AU  - Torralba, Jesús
+AU  - Ruiz, Luis A.
+AU  - Perrone, Michela
+AU  - Špatenková, Olga
+AU  - Wild, Jan
+PY  - 2024
+TI  - How to find accurate terrain and canopy height GEDI footprints in temperate forests and grasslands?
+JO  - Earth and Space Science
+VL  - 11
+IS  - 10
+SP  - e2024EA003709
+DO  - 10.1029/2024EA003709
+UR  - https://doi.org/10.1029/2024EA003709
+ER  -
+
+TY  - JOUR
+AU  - Mullissa, Adugna
+AU  - Vollrath, Andreas
+AU  - Odongo-Braun, Christelle
+AU  - Slagter, Bart
+AU  - Balling, Johannes
+AU  - Gou, Yaqing
+AU  - Gorelick, Noel
+AU  - Reiche, Johannes
+PY  - 2021
+TI  - Sentinel-1 SAR backscatter analysis ready data preparation in Google Earth Engine
+JO  - Remote Sensing
+VL  - 13
+IS  - 10
+SP  - 1954
+DO  - 10.3390/rs13101954
+UR  - https://doi.org/10.3390/rs13101954
+ER  -
+
+TY  - JOUR
+AU  - Navacchi, Claudio
+AU  - Cao, Senmao
+AU  - Bauer-Marschallinger, Bernhard
+AU  - Snoeij, Paul
+AU  - Small, David
+AU  - Wagner, Wolfgang
+PY  - 2022
+TI  - Utilising Sentinel-1's orbital stability for efficient pre-processing of sigma nought backscatter
+JO  - ISPRS Journal of Photogrammetry and Remote Sensing
+VL  - 192
+SP  - 130
+EP  - 141
+DO  - 10.1016/j.isprsjprs.2022.07.023
+UR  - https://doi.org/10.1016/j.isprsjprs.2022.07.023
+ER  -
+
+TY  - JOUR
+AU  - Navacchi, Claudio
+AU  - Cao, Senmao
+AU  - Bauer-Marschallinger, Bernhard
+AU  - Snoeij, Paul
+AU  - Small, David
+AU  - Wagner, Wolfgang
+PY  - 2023
+TI  - Utilising Sentinel-1's orbital stability for efficient pre-processing of radiometric terrain corrected gamma nought backscatter
+JO  - Sensors
+VL  - 23
+IS  - 13
+SP  - 6072
+DO  - 10.3390/s23136072
+UR  - https://doi.org/10.3390/s23136072
+ER  -
+
+TY  - JOUR
+AU  - Palomeque, Matias
+AU  - Ferreyra, Joaquin
+AU  - Thibeault, Marc
+PY  - 2025
+TI  - Monitoring results of the SAOCOM-1 constellation: A mission overview and summary of results
+JO  - IEEE Geoscience and Remote Sensing Magazine
+VL  - 13
+IS  - 2
+SP  - 49
+EP  - 57
+DO  - 10.1109/MGRS.2024.3475228
+UR  - https://doi.org/10.1109/MGRS.2024.3475228
+ER  -
+
+TY  - CONF
+AU  - Pascual, Ignacio
+AU  - Edrosa, Rodrigo
+AU  - Machado, Federico
+AU  - Thiebault, Marc
+PY  - 2024
+TI  - Operational crop classification with SAOCOM L-band SAR images in the Pampas region, Argentina
+BT  - 2024 IEEE Biennial Congress of Argentina (ARGENCON)
+SP  - 1
+EP  - 7
+PB  - IEEE
+DO  - 10.1109/ARGENCON62399.2024.10735849
+UR  - https://doi.org/10.1109/ARGENCON62399.2024.10735849
+ER  -
+
+TY  - JOUR
+AU  - Potapov, Peter
+AU  - Li, Xinyuan
+AU  - Hernandez-Serna, Andres
+AU  - Tyukavina, Alexandra
+AU  - Hansen, Matthew C.
+AU  - Kommareddy, Anil
+AU  - Pickens, Amy
+AU  - Turubanova, Svetlana
+AU  - Tang, Hao
+AU  - Silva, Carlos Edibaldo
+AU  - Armston, John
+AU  - Dubayah, Ralph
+AU  - Blair, J. Bryan
+AU  - Hofton, Michelle
+PY  - 2021
+TI  - Mapping global forest canopy height through integration of GEDI and Landsat data
+JO  - Remote Sensing of Environment
+VL  - 253
+SP  - 112165
+DO  - 10.1016/j.rse.2020.112165
+UR  - https://doi.org/10.1016/j.rse.2020.112165
+ER  -
+
+TY  - JOUR
+AU  - Tamiminia, Haifa
+AU  - Salehi, Bahram
+AU  - Mahdianpari, Masoud
+AU  - Goulden, Tristan
+PY  - 2024
+TI  - State-wide forest canopy height and aboveground biomass map for New York with 10 m resolution, integrating GEDI, Sentinel-1, and Sentinel-2 data
+JO  - Ecological Informatics
+VL  - 79
+SP  - 102404
+DO  - 10.1016/j.ecoinf.2023.102404
+UR  - https://doi.org/10.1016/j.ecoinf.2023.102404
+ER  -
+
+TY  - JOUR
+AU  - Tarrio, Katelyn
+AU  - Tang, Xiaojing
+AU  - Masek, Jeffrey G.
+AU  - Claverie, Martin
+AU  - Ju, Junchang
+AU  - Qiu, Shi
+AU  - Zhu, Zhe
+AU  - Woodcock, Curtis E.
+PY  - 2020
+TI  - Comparison of cloud detection algorithms for Sentinel-2 imagery
+JO  - Science of Remote Sensing
+VL  - 2
+SP  - 100010
+DO  - 10.1016/j.srs.2020.100010
+UR  - https://doi.org/10.1016/j.srs.2020.100010
+ER  -
+
+TY  - JOUR
+AU  - Vollrath, Andreas
+AU  - Mullissa, Adugna
+AU  - Reiche, Johannes
+PY  - 2020
+TI  - Angular-based radiometric slope correction for Sentinel-1 on Google Earth Engine
+JO  - Remote Sensing
+VL  - 12
+IS  - 11
+SP  - 1867
+DO  - 10.3390/rs12111867
+UR  - https://doi.org/10.3390/rs12111867
+ER  -
+
+TY  - JOUR
+AU  - Zeng, Peng
+AU  - Zhang, Wangfei
+AU  - Li, Yun
+AU  - Shi, Jianmin
+AU  - Wang, Zhanhui
+PY  - 2022
+TI  - Forest total and component above-ground biomass (AGB) estimation through C- and L-band polarimetric SAR data
+JO  - Forests
+VL  - 13
+IS  - 3
+SP  - 442
+DO  - 10.3390/f13030442
+UR  - https://doi.org/10.3390/f13030442
+ER  -
+TY  - BOOK
+AU  - Flores-Anderson, Africa I.
+AU  - Herndon, Kelsey E.
+AU  - Thapa, Rajesh Bahadur
+AU  - Cherrington, Emil
+A2  - Aukema, Juliann
+A2  - Wilson, Sylvia
+A2  - Irwin, Daniel
+PY  - 2019
+TI  - The SAR Handbook: Comprehensive Methodologies for Forest Monitoring and Biomass Estimation
+PB  - SERVIR Global Science Coordination Office, NASA Marshall Space Flight Center
+CY  - Huntsville, Alabama, EE.UU.
+DO  - 10.25966/nr2c-s697
+UR  - https://ntrs.nasa.gov/citations/20190002563
+N1  - Prefacio de Juliann Aukema y Sylvia Wilson; prologo de Daniel Irwin. Tabla 2.3 (p. 29): asignacion de aplicaciones por banda. Tabla 4.1 (p. 179): saturacion nominal de la retrodispersion HV frente a la altura del rodal, 10 cm en banda X, 1 m en banda C y 10 m en banda L. Seccion 5.3 y Tabla 5.3: indices polarimetricos RVI y RFDI. Incluye ejercicios resueltos.
+ER  -
+
+TY  - JOUR
+AU  - Mandal, Dipankar
+AU  - Kumar, Vineet
+AU  - Ratha, Debanshu
+AU  - Dey, Subhadip
+AU  - Bhattacharya, Avik
+AU  - Lopez-Sanchez, Juan M.
+AU  - McNairn, Heather
+AU  - Rao, Y. S.
+PY  - 2020
+TI  - Dual polarimetric radar vegetation index for crop growth monitoring using Sentinel-1 SAR data
+JO  - Remote Sensing of Environment
+VL  - 247
+SP  - 111954
+DO  - 10.1016/j.rse.2020.111954
+UR  - https://doi.org/10.1016/j.rse.2020.111954
+N1  - Propone el DpRVI, construido sobre el autovalor dominante y el grado de polarizacion, invariante a la base de polarizacion. Advierte que los indices apoyados en la intensidad de la polarizacion cruzada pueden indicar falsamente un valor alto aunque el dosel no este desarrollado. Atribuye la forma dual del RVI a Trudel et al. (2012) como modificacion de la version quad-pol de Kim y van Zyl (2009).
+ER  - 
+
+TY  - JOUR
+AU  - Trudel, Melanie
+AU  - Charbonneau, Francois
+AU  - Serrar, Soumia
+PY  - 2012
+TI  - Using RADARSAT-2 polarimetric and ENVISAT-ASAR dual-polarization data for estimating soil moisture over agricultural fields
+JO  - Canadian Journal of Remote Sensing
+VL  - 38
+IS  - 4
+SP  - 514
+N1  - Origen de la forma DUAL del RVI, 4*cross/(co+cross), aplicable tanto a HH+HV como a VV+VH. Es la que permite calcular RVI con Sentinel-1.
+ER  - 
+
+TY  - JOUR
+AU  - Kim, Yunjin
+AU  - van Zyl, Jakob J.
+PY  - 2009
+TI  - A time-series approach to estimate soil moisture using polarimetric radar data
+JO  - IEEE Transactions on Geoscience and Remote Sensing
+N1  - Origen de la version QUAD-POL del RVI, 8*HV/(HH+VV+2*HV), que es la que reproduce el SAR Handbook. ATENCION: volumen, numero y paginas quedaron sin verificar y hay que completarlos antes de citar formalmente.
+ER  - 
+
+TY  - CONF
+AU  - Beltramone, Giuliana
+AU  - Alvarez, Maria Paula
+AU  - Paccioretti, Pablo
+AU  - Albornoz, Jimena
+AU  - Nicolaus, David
+AU  - Minotti, Priscilla
+AU  - Villalba, Rossana
+AU  - Marinelli, Victoria
+PY  - 2021
+TI  - Taller Integrador DGSE: evaluacion de indicadores satelitales SAR SAOCOM para el seguimiento temporal de cultivos
+PB  - Doctorado en Geomatica y Sistemas Espaciales, Instituto de Altos Estudios Espaciales "Mario Gulich" (CONAE - UNC)
+CY  - Cordoba, Argentina
+N1  - Presentacion del 17/09/2021. Cuatro grafos de SNAP para SAOCOM quad-pol: retrodispersion, indices via Polarimetric-Parameters (RVI, CSI, VSI, BMI, HHHV, VVVH), descomposicion polarimetrica y altura de pedestal. Para Sentinel-1 usa el RVI dual 4*VH/(VV+VH) sobre sigma0 lineal. RESULTADO CLAVE para el TP4: sobre cultivos de 20 a 300 cm el RVI de banda C supera al de banda L, lo contrario que en este proyecto sobre un dosel de 5,07 m. Las dos cosas se explican con el techo de 1 m de la Tabla 4.1 del SAR Handbook.
+ER  - 
+

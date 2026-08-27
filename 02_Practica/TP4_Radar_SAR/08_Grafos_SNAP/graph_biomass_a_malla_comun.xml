@@ -1,0 +1,95 @@
+<!--
+ BIOMASS NIVEL 2A -> LA MALLA COMUN DEL PROYECTO  (colocacion)
+ ============================================================
+ Escrito el 01/08/2026. Segundo paso, posterior a graph_biomass_l2a_altura.xml.
+
+ PARA QUE SIRVE
+   Deja la altura de dosel de banda P EXACTAMENTE sobre la grilla del proyecto
+   -EPSG:32719, 10 m, 1500 x 1500, mismo origen-, de modo que se pueda comparar
+   pixel a pixel contra el mapa del TP5 y contra cualquier otra capa del curso.
+
+ POR QUE ES UN SEGUNDO GRAFO Y NO UN PASO DEL PRIMERO
+   Porque son dos cosas distintas y conviene poder hacer una sin la otra. El
+   primer grafo entrega el producto en su resolucion nativa, unos 50 m, que es
+   la honesta para mirarlo y para informar estadisticas. Este segundo lo
+   replica sobre la malla de 10 m, que es lo unico que permite restar dos capas
+   una de otra. Quien solo quiera mirar el producto no necesita este paso.
+
+ LO QUE HAY QUE TENER CLARO, Y ESCRIBIRLO EN EL INFORME
+   Pasar de 50 m a 10 m NO agrega informacion: cada celda de 50 m se reparte en
+   veinticinco de 10 m con el mismo valor. Es replicacion, no interpolacion, y
+   por eso el remuestreo es el vecino mas proximo. El pixel resultante mide 10 m
+   pero LA INFORMACION SIGUE SIENDO DE 50. Cualquier estadistica que se calcule
+   sobre la capa colocada tiene, en la practica, veinticinco veces menos grados
+   de libertad de los que sugiere el numero de pixeles. Decirlo no es una
+   formalidad: es lo que evita que una comparacion parezca mas fina de lo que es.
+
+ COMO SE COLOCA, Y POR QUE ASI
+   Se usa el operador Reproject con una SEGUNDA fuente, la de referencia
+   -parametro collocateWith-. Reproject toma de ella el sistema de referencia,
+   el tamano de pixel, el origen y las dimensiones, de modo que la salida cae
+   sobre la misma grilla sin que haya que escribir un solo numero a mano. Es
+   preferible a fijar crs y pixelSize por separado, porque asi no hay forma de
+   equivocarse en el origen: la desalineacion de medio pixel es el error clasico
+   de esta operacion y no se ve hasta que uno resta dos capas y le aparece un
+   borde.
+
+   El operador Collocate de SNAP hace algo equivalente, pero los nombres de sus
+   parametros cambiaron entre versiones -master y slave en unas, reference y
+   secondary en otras-, y un grafo que no abre en la version del alumno no sirve
+   de nada. Reproject con collocateWith es estable desde hace varias versiones.
+
+ QUE SE EDITA AQUI: las tres rutas. Nada mas.
+ QUE NO: el remuestreo. Si alguien lo cambia a bilineal, la capa deja de ser
+ una medicion replicada y pasa a ser un dibujo suave que nadie midio.
+-->
+<graph id="BIOMASS_a_malla_comun">
+
+  <node id="Read">
+    <operator>Read</operator>
+    <sources/>
+    <parameters>
+      <!-- La salida del primer grafo: la altura ya enmascarada por calidad. -->
+      <file>C:\Temp\CURSO_BIOMASA_2026\02_Practica\TP4_Radar_SAR\02_Subsets_SNAP_QGIS\BIOMASS_L2A\BIOMASS_altura_BOSQUE_NW_02.tif</file>
+    </parameters>
+  </node>
+
+  <node id="Read_referencia">
+    <operator>Read</operator>
+    <sources/>
+    <parameters>
+      <!-- CUALQUIER capa del proyecto que ya este en la malla comun sirve como
+           referencia: son todas 1500 x 1500 a 10 m con el mismo origen.
+           Comprobado el 01/08/2026 sobre las cinco fuentes del TP5 -Sentinel-2,
+           Sentinel-1, SAOCOM, NISAR y PALSAR-2-: coinciden hasta la ultima
+           cifra util. Se usa la escena optica porque es la que define la malla. -->
+      <file>C:\Temp\CURSO_BIOMASA_2026\02_Practica\TP3_Datos_Opticos\02_Subsets_SNAP_QGIS\Sentinel_2\02_pre_incendio_2025_26\BOSQUE_NW_02\S2B_L2A_20251125_R053_T18GYT.tif</file>
+    </parameters>
+  </node>
+
+  <node id="Reproject">
+    <operator>Reproject</operator>
+    <sources>
+      <sourceProduct refid="Read"/>
+      <collocateWith refid="Read_referencia"/>
+    </sources>
+    <parameters>
+      <!-- Sin crs ni pixelSize: los toma de la referencia. Ver el encabezado. -->
+      <resampling>Nearest</resampling>
+      <orthorectify>false</orthorectify>
+      <noDataValue>NaN</noDataValue>
+      <includeTiePointGrids>false</includeTiePointGrids>
+      <addDeltaBands>false</addDeltaBands>
+    </parameters>
+  </node>
+
+  <node id="Write">
+    <operator>Write</operator>
+    <sources><sourceProduct refid="Reproject"/></sources>
+    <parameters>
+      <file>C:\Temp\CURSO_BIOMASA_2026\02_Practica\TP4_Radar_SAR\02_Subsets_SNAP_QGIS\BIOMASS_L2A\BIOMASS_altura_BOSQUE_NW_02_malla10m.tif</file>
+      <formatName>GeoTIFF</formatName>
+    </parameters>
+  </node>
+
+</graph>

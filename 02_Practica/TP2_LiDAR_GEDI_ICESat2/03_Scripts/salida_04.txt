@@ -1,0 +1,75 @@
+
+TP2_04_dem_y_pendiente.py   ---> CUARTO script del TP2.
+
+QUE HACE
+--------
+Descarga el modelo digital de elevacion Copernicus GLO-30 y calcula, a partir de
+el, la pendiente, la orientacion (aspecto) y el sombreado. Los guarda en la
+carpeta COMUN del proyecto, porque son datos auxiliares que usan varios
+practicos: el TP2 los necesita para filtrar disparos GEDI en pendiente fuerte, y
+el TP4 los necesita para analizar el efecto del relieve sobre el radar.
+
+Se ejecuta una sola vez. Si los archivos ya existen, no vuelve a hacer nada.
+
+POR QUE HACE FALTA UN DEM EN UN PRACTICO DE LiDAR
+-------------------------------------------------
+GEDI mide la altura del dosel como la diferencia entre la primera energia que
+vuelve (la copa) y la ultima (el suelo). En terreno inclinado eso se distorsiona:
+dentro de una misma huella de 25 m, el suelo de un extremo esta mas alto que el
+del otro. El retorno del suelo se "ensancha" y se confunde con el de la
+vegetacion baja, de modo que la altura del dosel sale SOBRESTIMADA. Cuanto mayor
+la pendiente, peor. Por eso, en el script siguiente, se descartan los disparos
+que caen en pendientes fuertes.
+
+DE DONDE SALE EL DEM
+--------------------
+Del catalogo abierto de Microsoft Planetary Computer (coleccion 'cop-dem-glo-30'),
+que no pide credenciales. Es el mismo DEM que SNAP usa internamente para el
+Terrain Flattening del TP4, de modo que todo el proyecto queda coherente: una
+sola fuente de topografia.
+
+El DEM se recorta a la grilla comun (EPSG:32719, 10 m). Ojo: su resolucion real
+es de 30 m; llevarlo a 10 m solo sirve para que la grilla coincida con la de los
+demas sensores, no agrega detalle.
+
+SALIDA   00_COMUN/03_Topografia/DEM/dem_<AOI>.tif  y  dem_<AOI>_30m.tif
+         00_COMUN/03_Topografia/pendiente/pendiente_<AOI>.tif     (grados)
+         00_COMUN/03_Topografia/orientacion/orientacion_<AOI>.tif (grados)
+         00_COMUN/03_Topografia/sombreado/sombreado_<AOI>.tif
+
+USO (entorno conda 'aoi'):   python TP2_04_dem_y_pendiente.py
+
+Fuente del DEM: Planetary Computer
+
+========================================================================
+BOSQUE_NW_02
+========================================================================
+   espejo publico de AWS: 1 tile(s), sin token
+   1 tile(s) de DEM; recortando a la grilla comun...
+   DEM -> dem_BOSQUE_NW_02.tif
+   DEM nativo 30 m -> dem_BOSQUE_NW_02_30m.tif
+   pendiente    -> pendiente_BOSQUE_NW_02.tif  (inclinacion del terreno, en grados; derivado a 30 m, remuestreado a 10 m)
+   orientacion  -> orientacion_BOSQUE_NW_02.tif  (hacia donde mira la ladera, en grados desde el norte; derivado a 30 m, remuestreado a 10 m)
+   sombreado    -> sombreado_BOSQUE_NW_02.tif  (sombreado para visualizacion; derivado a 30 m, remuestreado a 10 m)
+
+========================================================================
+ESTEPA_NW_02
+========================================================================
+   espejo publico de AWS: 1 tile(s), sin token
+   1 tile(s) de DEM; recortando a la grilla comun...
+   DEM -> dem_ESTEPA_NW_02.tif
+   DEM nativo 30 m -> dem_ESTEPA_NW_02_30m.tif
+   pendiente    -> pendiente_ESTEPA_NW_02.tif  (inclinacion del terreno, en grados; derivado a 30 m, remuestreado a 10 m)
+   orientacion  -> orientacion_ESTEPA_NW_02.tif  (hacia donde mira la ladera, en grados desde el norte; derivado a 30 m, remuestreado a 10 m)
+   sombreado    -> sombreado_ESTEPA_NW_02.tif  (sombreado para visualizacion; derivado a 30 m, remuestreado a 10 m)
+
+Topografia disponible en 00_COMUN/03_Topografia/:
+   DEM          4 archivo(s)
+   pendiente    2 archivo(s)
+   orientacion  2 archivo(s)
+   sombreado    2 archivo(s)
+
+Estos productos los usan TAMBIEN el TP4 (efecto del relieve sobre el
+radar) y el TP5 (variables auxiliares del modelo).
+
+SIGUIENTE PASO:  python TP2_05_filtrar_pendiente.py

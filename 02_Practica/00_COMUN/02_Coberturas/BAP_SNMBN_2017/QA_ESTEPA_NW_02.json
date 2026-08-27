@@ -1,0 +1,18 @@
+{
+  "aoi": "ESTEPA_NW_02",
+  "crs_salida": "EPSG:32719",
+  "area_aoi_m2": 224999999.99999565,
+  "area_aoi_km2": 224.99999999999565,
+  "perimetro_aoi_km": 59.99999999999942,
+  "poligonos_fuente_intersectados": 2209,
+  "fragmentos_recortados": 2252,
+  "clases_leyenda_n3": 21,
+  "area_suma_fragmentos_km2": 224.9999999885102,
+  "area_union_cubierta_km2": 224.99999998851524,
+  "cobertura_aoi_pct": 99.99999999489759,
+  "huecos_estimados_km2": 1.14804208278656e-08,
+  "solapamientos_estimados_km2": 0.0,
+  "geometrias_invalidas_detalle": 0,
+  "geometrias_invalidas_resumen": 0,
+  "clases_sin_color_leyenda": 0
+}

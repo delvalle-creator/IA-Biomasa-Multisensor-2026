@@ -1,0 +1,3 @@
+entrena,predice,n_destino,umbral_DI,dentro_del_area,porcentaje_dentro,R2_todo,R2_solo_dentro
+bosque,estepa,3038,0.2269,195,6.4,0.3286,0.135
+estepa,bosque,675,0.1287,449,66.5,0.1067,0.1587

@@ -1,0 +1,636 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1540.8pt" height="1022.4pt" viewBox="0 0 1540.8 1022.4" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-08-26T12:02:18.527244</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.9, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 1022.4 
+L 1540.8 1022.4 
+L 1540.8 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 47.7648 122.4 
+L 256.5432 122.4 
+Q 264.2472 122.4 264.2472 126 
+L 264.2472 313.2 
+Q 264.2472 316.8 256.5432 316.8 
+L 47.7648 316.8 
+Q 40.0608 316.8 40.0608 313.2 
+L 40.0608 126 
+Q 40.0608 122.4 47.7648 122.4 
+z
+" clip-path="url(#p850bf27536)" style="fill: #dee2e6; stroke: #1d3557; stroke-width: 2; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 295.0632 122.4 
+L 503.8416 122.4 
+Q 511.5456 122.4 511.5456 126 
+L 511.5456 313.2 
+Q 511.5456 316.8 503.8416 316.8 
+L 295.0632 316.8 
+Q 287.3592 316.8 287.3592 313.2 
+L 287.3592 126 
+Q 287.3592 122.4 295.0632 122.4 
+z
+" clip-path="url(#p850bf27536)" style="fill: #dee2e6; stroke: #1d3557; stroke-width: 2; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 542.3616 122.4 
+L 751.14 122.4 
+Q 758.844 122.4 758.844 126 
+L 758.844 313.2 
+Q 758.844 316.8 751.14 316.8 
+L 542.3616 316.8 
+Q 534.6576 316.8 534.6576 313.2 
+L 534.6576 126 
+Q 534.6576 122.4 542.3616 122.4 
+z
+" clip-path="url(#p850bf27536)" style="fill: #dee2e6; stroke: #1d3557; stroke-width: 2; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 789.66 122.4 
+L 998.4384 122.4 
+Q 1006.1424 122.4 1006.1424 126 
+L 1006.1424 313.2 
+Q 1006.1424 316.8 998.4384 316.8 
+L 789.66 316.8 
+Q 781.956 316.8 781.956 313.2 
+L 781.956 126 
+Q 781.956 122.4 789.66 122.4 
+z
+" clip-path="url(#p850bf27536)" style="fill: #ffd6a5; stroke: #1d3557; stroke-width: 2; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 1036.9584 122.4 
+L 1245.7368 122.4 
+Q 1253.4408 122.4 1253.4408 126 
+L 1253.4408 313.2 
+Q 1253.4408 316.8 1245.7368 316.8 
+L 1036.9584 316.8 
+Q 1029.2544 316.8 1029.2544 313.2 
+L 1029.2544 126 
+Q 1029.2544 122.4 1036.9584 122.4 
+z
+" clip-path="url(#p850bf27536)" style="fill: #caf0f8; stroke: #1d3557; stroke-width: 2; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 1284.2568 122.4 
+L 1493.0352 122.4 
+Q 1500.7392 122.4 1500.7392 126 
+L 1500.7392 313.2 
+Q 1500.7392 316.8 1493.0352 316.8 
+L 1284.2568 316.8 
+Q 1276.5528 316.8 1276.5528 313.2 
+L 1276.5528 126 
+Q 1276.5528 122.4 1284.2568 122.4 
+z
+" clip-path="url(#p850bf27536)" style="fill: #ffd6a5; stroke: #1d3557; stroke-width: 2; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_8">
+    <path d="M 47.7648 446.4 
+L 256.5432 446.4 
+Q 264.2472 446.4 264.2472 450 
+L 264.2472 637.2 
+Q 264.2472 640.8 256.5432 640.8 
+L 47.7648 640.8 
+Q 40.0608 640.8 40.0608 637.2 
+L 40.0608 450 
+Q 40.0608 446.4 47.7648 446.4 
+z
+" clip-path="url(#p850bf27536)" style="fill: #b7e4c7; stroke: #1d3557; stroke-width: 2; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_9">
+    <path d="M 295.0632 446.4 
+L 503.8416 446.4 
+Q 511.5456 446.4 511.5456 450 
+L 511.5456 637.2 
+Q 511.5456 640.8 503.8416 640.8 
+L 295.0632 640.8 
+Q 287.3592 640.8 287.3592 637.2 
+L 287.3592 450 
+Q 287.3592 446.4 295.0632 446.4 
+z
+" clip-path="url(#p850bf27536)" style="fill: #b7e4c7; stroke: #1d3557; stroke-width: 2; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_10">
+    <path d="M 542.3616 446.4 
+L 751.14 446.4 
+Q 758.844 446.4 758.844 450 
+L 758.844 637.2 
+Q 758.844 640.8 751.14 640.8 
+L 542.3616 640.8 
+Q 534.6576 640.8 534.6576 637.2 
+L 534.6576 450 
+Q 534.6576 446.4 542.3616 446.4 
+z
+" clip-path="url(#p850bf27536)" style="fill: #b7e4c7; stroke: #1d3557; stroke-width: 2; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_11">
+    <path d="M 789.66 446.4 
+L 998.4384 446.4 
+Q 1006.1424 446.4 1006.1424 450 
+L 1006.1424 637.2 
+Q 1006.1424 640.8 998.4384 640.8 
+L 789.66 640.8 
+Q 781.956 640.8 781.956 637.2 
+L 781.956 450 
+Q 781.956 446.4 789.66 446.4 
+z
+" clip-path="url(#p850bf27536)" style="fill: #dcc9e8; stroke: #1d3557; stroke-width: 2; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_12">
+    <path d="M 1036.9584 446.4 
+L 1245.7368 446.4 
+Q 1253.4408 446.4 1253.4408 450 
+L 1253.4408 637.2 
+Q 1253.4408 640.8 1245.7368 640.8 
+L 1036.9584 640.8 
+Q 1029.2544 640.8 1029.2544 637.2 
+L 1029.2544 450 
+Q 1029.2544 446.4 1036.9584 446.4 
+z
+" clip-path="url(#p850bf27536)" style="fill: #dcc9e8; stroke: #1d3557; stroke-width: 2; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_13">
+    <path d="M 1284.2568 446.4 
+L 1493.0352 446.4 
+Q 1500.7392 446.4 1500.7392 450 
+L 1500.7392 637.2 
+Q 1500.7392 640.8 1493.0352 640.8 
+L 1284.2568 640.8 
+Q 1276.5528 640.8 1276.5528 637.2 
+L 1276.5528 450 
+Q 1276.5528 446.4 1284.2568 446.4 
+z
+" clip-path="url(#p850bf27536)" style="fill: #dcc9e8; stroke: #1d3557; stroke-width: 2; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_14">
+    <path d="M 47.7648 770.4 
+L 256.5432 770.4 
+Q 264.2472 770.4 264.2472 774 
+L 264.2472 961.2 
+Q 264.2472 964.8 256.5432 964.8 
+L 47.7648 964.8 
+Q 40.0608 964.8 40.0608 961.2 
+L 40.0608 774 
+Q 40.0608 770.4 47.7648 770.4 
+z
+" clip-path="url(#p850bf27536)" style="fill: #bde0fe; stroke: #1d3557; stroke-width: 2; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_15">
+    <path d="M 295.0632 770.4 
+L 503.8416 770.4 
+Q 511.5456 770.4 511.5456 774 
+L 511.5456 961.2 
+Q 511.5456 964.8 503.8416 964.8 
+L 295.0632 964.8 
+Q 287.3592 964.8 287.3592 961.2 
+L 287.3592 774 
+Q 287.3592 770.4 295.0632 770.4 
+z
+" clip-path="url(#p850bf27536)" style="fill: #bde0fe; stroke: #1d3557; stroke-width: 2; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_16">
+    <path d="M 542.3616 770.4 
+L 751.14 770.4 
+Q 758.844 770.4 758.844 774 
+L 758.844 961.2 
+Q 758.844 964.8 751.14 964.8 
+L 542.3616 964.8 
+Q 534.6576 964.8 534.6576 961.2 
+L 534.6576 774 
+Q 534.6576 770.4 542.3616 770.4 
+z
+" clip-path="url(#p850bf27536)" style="fill: #bde0fe; stroke: #1d3557; stroke-width: 2; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_17">
+    <path d="M 789.66 770.4 
+L 998.4384 770.4 
+Q 1006.1424 770.4 1006.1424 774 
+L 1006.1424 961.2 
+Q 1006.1424 964.8 998.4384 964.8 
+L 789.66 964.8 
+Q 781.956 964.8 781.956 961.2 
+L 781.956 774 
+Q 781.956 770.4 789.66 770.4 
+z
+" clip-path="url(#p850bf27536)" style="fill: #bde0fe; stroke: #1d3557; stroke-width: 2; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_18">
+    <path d="M 1036.9584 770.4 
+L 1245.7368 770.4 
+Q 1253.4408 770.4 1253.4408 774 
+L 1253.4408 961.2 
+Q 1253.4408 964.8 1245.7368 964.8 
+L 1036.9584 964.8 
+Q 1029.2544 964.8 1029.2544 961.2 
+L 1029.2544 774 
+Q 1029.2544 770.4 1036.9584 770.4 
+z
+" clip-path="url(#p850bf27536)" style="fill: #bde0fe; stroke: #1d3557; stroke-width: 2; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_19">
+    <path d="M 1284.2568 770.4 
+L 1493.0352 770.4 
+Q 1500.7392 770.4 1500.7392 774 
+L 1500.7392 961.2 
+Q 1500.7392 964.8 1493.0352 964.8 
+L 1284.2568 964.8 
+Q 1276.5528 964.8 1276.5528 961.2 
+L 1276.5528 774 
+Q 1276.5528 770.4 1284.2568 770.4 
+z
+" clip-path="url(#p850bf27536)" style="fill: #fdf3b4; stroke: #1d3557; stroke-width: 2; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_20">
+    <path d="M 27.7344 115.2 
+L 771.1704 115.2 
+L 771.1704 324 
+L 27.7344 324 
+L 27.7344 115.2 
+z
+" clip-path="url(#p850bf27536)" style="fill: none; stroke-dasharray: 1.4,2.8; stroke-dashoffset: 0; stroke: #6c757d; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="text_1">
+    <text style="font-size: 17px; font-family: 'Liberation Serif'; text-anchor: middle; fill: #555555" x="152.154" y="173.143969" transform="rotate(-0 152.154 173.143969)">paso 1</text>
+   </g>
+   <g id="text_2">
+    <text style="font-weight: 700; font-size: 25px; font-family: 'Liberation Serif'; text-anchor: middle; fill: #111111" x="152.154" y="225.611719" transform="rotate(-0 152.154 225.611719)">TP2_01</text>
+   </g>
+   <g id="text_3">
+    <text style="font-size: 20px; font-family: 'Liberation Serif'; fill: #111111" transform="translate(111.799312 269.231703)">Descargar</text>
+    <text style="font-size: 20px; font-family: 'Liberation Serif'; fill: #111111" transform="translate(106.613375 292.282797)">GEDI (.h5)</text>
+   </g>
+   <g id="patch_21">
+    <path d="M 268.55813 219.6 
+Q 275.802642 219.6 280.630545 219.6 
+" style="fill: none; stroke: #1d3557; stroke-width: 2; stroke-linecap: round"/>
+    <path d="M 275.130545 217.1 
+L 280.630545 219.6 
+L 275.130545 222.1 
+z
+" style="fill: #1d3557; stroke: #1d3557; stroke-width: 2; stroke-linecap: round"/>
+   </g>
+   <g id="text_4">
+    <text style="font-size: 17px; font-family: 'Liberation Serif'; text-anchor: middle; fill: #555555" x="399.4524" y="173.143969" transform="rotate(-0 399.4524 173.143969)">paso 1b</text>
+   </g>
+   <g id="text_5">
+    <text style="font-weight: 700; font-size: 25px; font-family: 'Liberation Serif'; text-anchor: middle; fill: #111111" x="399.4524" y="225.611719" transform="rotate(-0 399.4524 225.611719)">TP2_01b</text>
+   </g>
+   <g id="text_6">
+    <text style="font-size: 20px; font-family: 'Liberation Serif'; fill: #111111" transform="translate(359.097712 269.231703)">Descargar</text>
+    <text style="font-size: 20px; font-family: 'Liberation Serif'; fill: #111111" transform="translate(371.405525 292.282797)">el L4A</text>
+   </g>
+   <g id="patch_22">
+    <path d="M 515.85653 219.6 
+Q 523.101042 219.6 527.928945 219.6 
+" style="fill: none; stroke: #1d3557; stroke-width: 2; stroke-linecap: round"/>
+    <path d="M 522.428945 217.1 
+L 527.928945 219.6 
+L 522.428945 222.1 
+z
+" style="fill: #1d3557; stroke: #1d3557; stroke-width: 2; stroke-linecap: round"/>
+   </g>
+   <g id="text_7">
+    <text style="font-size: 17px; font-family: 'Liberation Serif'; text-anchor: middle; fill: #555555" x="646.7508" y="173.143969" transform="rotate(-0 646.7508 173.143969)">paso 2</text>
+   </g>
+   <g id="text_8">
+    <text style="font-weight: 700; font-size: 25px; font-family: 'Liberation Serif'; text-anchor: middle; fill: #111111" x="646.7508" y="225.611719" transform="rotate(-0 646.7508 225.611719)">TP2_02</text>
+   </g>
+   <g id="text_9">
+    <text style="font-size: 20px; font-family: 'Liberation Serif'; fill: #111111" transform="translate(612.3258 269.287953)">Recortar</text>
+    <text style="font-size: 20px; font-family: 'Liberation Serif'; fill: #111111" transform="translate(619.810175 292.282797)">al AOI</text>
+   </g>
+   <g id="patch_23">
+    <path d="M 763.15493 219.6 
+Q 770.399442 219.6 775.227345 219.6 
+" style="fill: none; stroke: #1d3557; stroke-width: 2; stroke-linecap: round"/>
+    <path d="M 769.727345 217.1 
+L 775.227345 219.6 
+L 769.727345 222.1 
+z
+" style="fill: #1d3557; stroke: #1d3557; stroke-width: 2; stroke-linecap: round"/>
+   </g>
+   <g id="text_10">
+    <text style="font-size: 17px; font-family: 'Liberation Serif'; text-anchor: middle; fill: #555555" x="894.0492" y="173.143969" transform="rotate(-0 894.0492 173.143969)">paso 3</text>
+   </g>
+   <g id="text_11">
+    <text style="font-weight: 700; font-size: 25px; font-family: 'Liberation Serif'; text-anchor: middle; fill: #111111" x="894.0492" y="225.611719" transform="rotate(-0 894.0492 225.611719)">TP2_03</text>
+   </g>
+   <g id="text_12">
+    <text style="font-size: 20px; font-family: 'Liberation Serif'; fill: #111111" transform="translate(869.05545 269.287953)">Filtrar</text>
+    <text style="font-size: 20px; font-family: 'Liberation Serif'; fill: #111111" transform="translate(865.175762 292.282797)">calidad</text>
+   </g>
+   <g id="patch_24">
+    <path d="M 1010.45333 219.6 
+Q 1017.697842 219.6 1022.525745 219.6 
+" style="fill: none; stroke: #1d3557; stroke-width: 2; stroke-linecap: round"/>
+    <path d="M 1017.025745 217.1 
+L 1022.525745 219.6 
+L 1017.025745 222.1 
+z
+" style="fill: #1d3557; stroke: #1d3557; stroke-width: 2; stroke-linecap: round"/>
+   </g>
+   <g id="text_13">
+    <text style="font-size: 17px; font-family: 'Liberation Serif'; text-anchor: middle; fill: #555555" x="1141.3476" y="173.143969" transform="rotate(-0 1141.3476 173.143969)">paso 4</text>
+   </g>
+   <g id="text_14">
+    <text style="font-weight: 700; font-size: 25px; font-family: 'Liberation Serif'; text-anchor: middle; fill: #111111" x="1141.3476" y="225.611719" transform="rotate(-0 1141.3476 225.611719)">TP2_04</text>
+   </g>
+   <g id="text_15">
+    <text style="font-size: 20px; font-family: 'Liberation Serif'; fill: #111111" transform="translate(1111.625725 269.231703)">DEM y</text>
+    <text style="font-size: 20px; font-family: 'Liberation Serif'; fill: #111111" transform="translate(1102.474162 292.282797)">pendiente</text>
+   </g>
+   <g id="patch_25">
+    <path d="M 1257.75173 219.6 
+Q 1264.996242 219.6 1269.824145 219.6 
+" style="fill: none; stroke: #1d3557; stroke-width: 2; stroke-linecap: round"/>
+    <path d="M 1264.324145 217.1 
+L 1269.824145 219.6 
+L 1264.324145 222.1 
+z
+" style="fill: #1d3557; stroke: #1d3557; stroke-width: 2; stroke-linecap: round"/>
+   </g>
+   <g id="text_16">
+    <text style="font-size: 17px; font-family: 'Liberation Serif'; text-anchor: middle; fill: #555555" x="1388.646" y="173.143969" transform="rotate(-0 1388.646 173.143969)">paso 5</text>
+   </g>
+   <g id="text_17">
+    <text style="font-weight: 700; font-size: 25px; font-family: 'Liberation Serif'; text-anchor: middle; fill: #111111" x="1388.646" y="225.611719" transform="rotate(-0 1388.646 225.611719)">TP2_05</text>
+   </g>
+   <g id="text_18">
+    <text style="font-size: 20px; font-family: 'Liberation Serif'; fill: #111111" transform="translate(1363.65225 269.287953)">Filtrar</text>
+    <text style="font-size: 20px; font-family: 'Liberation Serif'; fill: #111111" transform="translate(1349.772562 292.282797)">pendiente</text>
+   </g>
+   <g id="text_19">
+    <text style="font-size: 17px; font-family: 'Liberation Serif'; text-anchor: middle; fill: #555555" x="152.154" y="497.143969" transform="rotate(-0 152.154 497.143969)">paso 6</text>
+   </g>
+   <g id="text_20">
+    <text style="font-weight: 700; font-size: 25px; font-family: 'Liberation Serif'; text-anchor: middle; fill: #111111" x="152.154" y="549.611719" transform="rotate(-0 152.154 549.611719)">TP2_06</text>
+   </g>
+   <g id="text_21">
+    <text style="font-size: 20px; font-family: 'Liberation Serif'; fill: #111111" transform="translate(105.227437 593.287953)">Métricas de</text>
+    <text style="font-size: 20px; font-family: 'Liberation Serif'; fill: #111111" transform="translate(112.729 616.282797)">estructura</text>
+   </g>
+   <g id="patch_26">
+    <path d="M 268.55813 543.6 
+Q 275.802642 543.6 280.630545 543.6 
+" style="fill: none; stroke: #1d3557; stroke-width: 2; stroke-linecap: round"/>
+    <path d="M 275.130545 541.1 
+L 280.630545 543.6 
+L 275.130545 546.1 
+z
+" style="fill: #1d3557; stroke: #1d3557; stroke-width: 2; stroke-linecap: round"/>
+   </g>
+   <g id="text_22">
+    <text style="font-size: 17px; font-family: 'Liberation Serif'; text-anchor: middle; fill: #555555" x="399.4524" y="497.143969" transform="rotate(-0 399.4524 497.143969)">paso 7</text>
+   </g>
+   <g id="text_23">
+    <text style="font-weight: 700; font-size: 25px; font-family: 'Liberation Serif'; text-anchor: middle; fill: #111111" x="399.4524" y="549.611719" transform="rotate(-0 399.4524 549.611719)">TP2_07</text>
+   </g>
+   <g id="text_24">
+    <text style="font-size: 20px; font-family: 'Liberation Serif'; fill: #111111" transform="translate(352.516462 593.287953)">Biomasa de</text>
+    <text style="font-size: 20px; font-family: 'Liberation Serif'; fill: #111111" transform="translate(359.4899 616.282797)">referencia</text>
+   </g>
+   <g id="patch_27">
+    <path d="M 515.85653 543.6 
+Q 523.101042 543.6 527.928945 543.6 
+" style="fill: none; stroke: #1d3557; stroke-width: 2; stroke-linecap: round"/>
+    <path d="M 522.428945 541.1 
+L 527.928945 543.6 
+L 522.428945 546.1 
+z
+" style="fill: #1d3557; stroke: #1d3557; stroke-width: 2; stroke-linecap: round"/>
+   </g>
+   <g id="text_25">
+    <text style="font-size: 17px; font-family: 'Liberation Serif'; text-anchor: middle; fill: #555555" x="646.7508" y="497.143969" transform="rotate(-0 646.7508 497.143969)">paso 8</text>
+   </g>
+   <g id="text_26">
+    <text style="font-weight: 700; font-size: 25px; font-family: 'Liberation Serif'; text-anchor: middle; fill: #111111" x="646.7508" y="549.611719" transform="rotate(-0 646.7508 549.611719)">TP2_08</text>
+   </g>
+   <g id="text_27">
+    <text style="font-size: 20px; font-family: 'Liberation Serif'; fill: #111111" transform="translate(611.766425 593.287953)">Exportar</text>
+    <text style="font-size: 20px; font-family: 'Liberation Serif'; fill: #111111" transform="translate(603.708612 616.282797)">para QGIS</text>
+   </g>
+   <g id="patch_28">
+    <path d="M 763.15493 543.6 
+Q 770.399442 543.6 775.227345 543.6 
+" style="fill: none; stroke: #1d3557; stroke-width: 2; stroke-linecap: round"/>
+    <path d="M 769.727345 541.1 
+L 775.227345 543.6 
+L 769.727345 546.1 
+z
+" style="fill: #1d3557; stroke: #1d3557; stroke-width: 2; stroke-linecap: round"/>
+   </g>
+   <g id="text_28">
+    <text style="font-size: 17px; font-family: 'Liberation Serif'; text-anchor: middle; fill: #555555" x="894.0492" y="497.143969" transform="rotate(-0 894.0492 497.143969)">paso 9</text>
+   </g>
+   <g id="text_29">
+    <text style="font-weight: 700; font-size: 25px; font-family: 'Liberation Serif'; text-anchor: middle; fill: #111111" x="894.0492" y="549.611719" transform="rotate(-0 894.0492 549.611719)">TP2_09</text>
+   </g>
+   <g id="text_30">
+    <text style="font-size: 20px; font-family: 'Liberation Serif'; fill: #111111" transform="translate(859.891387 593.287953)">Clase de</text>
+    <text style="font-size: 20px; font-family: 'Liberation Serif'; fill: #111111" transform="translate(856.294512 616.282797)">cobertura</text>
+   </g>
+   <g id="patch_29">
+    <path d="M 1010.45333 543.6 
+Q 1017.697842 543.6 1022.525745 543.6 
+" style="fill: none; stroke: #1d3557; stroke-width: 2; stroke-linecap: round"/>
+    <path d="M 1017.025745 541.1 
+L 1022.525745 543.6 
+L 1017.025745 546.1 
+z
+" style="fill: #1d3557; stroke: #1d3557; stroke-width: 2; stroke-linecap: round"/>
+   </g>
+   <g id="text_31">
+    <text style="font-size: 17px; font-family: 'Liberation Serif'; text-anchor: middle; fill: #555555" x="1141.3476" y="497.143969" transform="rotate(-0 1141.3476 497.143969)">paso 10</text>
+   </g>
+   <g id="text_32">
+    <text style="font-weight: 700; font-size: 25px; font-family: 'Liberation Serif'; text-anchor: middle; fill: #111111" x="1141.3476" y="549.611719" transform="rotate(-0 1141.3476 549.611719)">TP2_10</text>
+   </g>
+   <g id="text_33">
+    <text style="font-size: 20px; font-family: 'Liberation Serif'; fill: #111111" transform="translate(1110.800725 593.287953)">Auditar</text>
+    <text style="font-size: 20px; font-family: 'Liberation Serif'; fill: #111111" transform="translate(1113.300725 616.282797)">el L4A</text>
+   </g>
+   <g id="patch_30">
+    <path d="M 1257.75173 543.6 
+Q 1264.996242 543.6 1269.824145 543.6 
+" style="fill: none; stroke: #1d3557; stroke-width: 2; stroke-linecap: round"/>
+    <path d="M 1264.324145 541.1 
+L 1269.824145 543.6 
+L 1264.324145 546.1 
+z
+" style="fill: #1d3557; stroke: #1d3557; stroke-width: 2; stroke-linecap: round"/>
+   </g>
+   <g id="text_34">
+    <text style="font-size: 17px; font-family: 'Liberation Serif'; text-anchor: middle; fill: #555555" x="1388.646" y="497.143969" transform="rotate(-0 1388.646 497.143969)">paso 11</text>
+   </g>
+   <g id="text_35">
+    <text style="font-weight: 700; font-size: 25px; font-family: 'Liberation Serif'; text-anchor: middle; fill: #111111" x="1388.646" y="549.611719" transform="rotate(-0 1388.646 549.611719)">TP2_11</text>
+   </g>
+   <g id="text_36">
+    <text style="font-size: 20px; font-family: 'Liberation Serif'; fill: #111111" transform="translate(1345.328812 593.268969)">Escenarios</text>
+    <text style="font-size: 20px; font-family: 'Liberation Serif'; fill: #111111" transform="translate(1347.8335 616.301781)">hoja caída</text>
+   </g>
+   <g id="text_37">
+    <text style="font-size: 17px; font-family: 'Liberation Serif'; text-anchor: middle; fill: #555555" x="152.154" y="821.143969" transform="rotate(-0 152.154 821.143969)">paso 12</text>
+   </g>
+   <g id="text_38">
+    <text style="font-weight: 700; font-size: 25px; font-family: 'Liberation Serif'; text-anchor: middle; fill: #111111" x="152.154" y="873.611719" transform="rotate(-0 152.154 873.611719)">TP2_12</text>
+   </g>
+   <g id="text_39">
+    <text style="font-size: 20px; font-family: 'Liberation Serif'; fill: #111111" transform="translate(117.621187 917.203578)">Cargar y</text>
+    <text style="font-size: 20px; font-family: 'Liberation Serif'; fill: #111111" transform="translate(84.124312 940.254672)">proyectar ATL08</text>
+   </g>
+   <g id="patch_31">
+    <path d="M 268.55813 867.6 
+Q 275.802642 867.6 280.630545 867.6 
+" style="fill: none; stroke: #1d3557; stroke-width: 2; stroke-linecap: round"/>
+    <path d="M 275.130545 865.1 
+L 280.630545 867.6 
+L 275.130545 870.1 
+z
+" style="fill: #1d3557; stroke: #1d3557; stroke-width: 2; stroke-linecap: round"/>
+   </g>
+   <g id="text_40">
+    <text style="font-size: 17px; font-family: 'Liberation Serif'; text-anchor: middle; fill: #555555" x="399.4524" y="821.143969" transform="rotate(-0 399.4524 821.143969)">paso 13</text>
+   </g>
+   <g id="text_41">
+    <text style="font-weight: 700; font-size: 25px; font-family: 'Liberation Serif'; text-anchor: middle; fill: #111111" x="399.4524" y="873.611719" transform="rotate(-0 399.4524 873.611719)">TP2_13</text>
+   </g>
+   <g id="text_42">
+    <text style="font-size: 20px; font-family: 'Liberation Serif'; fill: #111111" transform="translate(370.018025 917.287953)">Cotejar</text>
+    <text style="font-size: 20px; font-family: 'Liberation Serif'; fill: #111111" transform="translate(333.355525 940.282797)">GEDI–ICESat-2</text>
+   </g>
+   <g id="patch_32">
+    <path d="M 515.85653 867.6 
+Q 523.101042 867.6 527.928945 867.6 
+" style="fill: none; stroke: #1d3557; stroke-width: 2; stroke-linecap: round"/>
+    <path d="M 522.428945 865.1 
+L 527.928945 867.6 
+L 522.428945 870.1 
+z
+" style="fill: #1d3557; stroke: #1d3557; stroke-width: 2; stroke-linecap: round"/>
+   </g>
+   <g id="text_43">
+    <text style="font-size: 17px; font-family: 'Liberation Serif'; text-anchor: middle; fill: #555555" x="646.7508" y="821.143969" transform="rotate(-0 646.7508 821.143969)">paso 14</text>
+   </g>
+   <g id="text_44">
+    <text style="font-weight: 700; font-size: 25px; font-family: 'Liberation Serif'; text-anchor: middle; fill: #111111" x="646.7508" y="873.611719" transform="rotate(-0 646.7508 873.611719)">TP2_14</text>
+   </g>
+   <g id="text_45">
+    <text style="font-size: 20px; font-family: 'Liberation Serif'; fill: #111111" transform="translate(584.83205 917.287953)">Exportar cotejo</text>
+    <text style="font-size: 20px; font-family: 'Liberation Serif'; fill: #111111" transform="translate(603.708612 940.282797)">para QGIS</text>
+   </g>
+   <g id="patch_33">
+    <path d="M 763.15493 867.6 
+Q 770.399442 867.6 775.227345 867.6 
+" style="fill: none; stroke: #1d3557; stroke-width: 2; stroke-linecap: round"/>
+    <path d="M 769.727345 865.1 
+L 775.227345 867.6 
+L 769.727345 870.1 
+z
+" style="fill: #1d3557; stroke: #1d3557; stroke-width: 2; stroke-linecap: round"/>
+   </g>
+   <g id="text_46">
+    <text style="font-size: 17px; font-family: 'Liberation Serif'; text-anchor: middle; fill: #555555" x="894.0492" y="821.143969" transform="rotate(-0 894.0492 821.143969)">paso 15</text>
+   </g>
+   <g id="text_47">
+    <text style="font-weight: 700; font-size: 25px; font-family: 'Liberation Serif'; text-anchor: middle; fill: #111111" x="894.0492" y="873.611719" transform="rotate(-0 894.0492 873.611719)">TP2_15</text>
+   </g>
+   <g id="text_48">
+    <text style="font-size: 20px; font-family: 'Liberation Serif'; fill: #111111" transform="translate(820.738262 917.287953)">Control de terreno</text>
+    <text style="font-size: 20px; font-family: 'Liberation Serif'; fill: #111111" transform="translate(846.452325 940.282797)">(FABDEM)</text>
+   </g>
+   <g id="patch_34">
+    <path d="M 1010.45333 867.6 
+Q 1017.697842 867.6 1022.525745 867.6 
+" style="fill: none; stroke: #1d3557; stroke-width: 2; stroke-linecap: round"/>
+    <path d="M 1017.025745 865.1 
+L 1022.525745 867.6 
+L 1017.025745 870.1 
+z
+" style="fill: #1d3557; stroke: #1d3557; stroke-width: 2; stroke-linecap: round"/>
+   </g>
+   <g id="text_49">
+    <text style="font-size: 17px; font-family: 'Liberation Serif'; text-anchor: middle; fill: #555555" x="1141.3476" y="821.143969" transform="rotate(-0 1141.3476 821.143969)">paso 16</text>
+   </g>
+   <g id="text_50">
+    <text style="font-weight: 700; font-size: 25px; font-family: 'Liberation Serif'; text-anchor: middle; fill: #111111" x="1141.3476" y="873.611719" transform="rotate(-0 1141.3476 873.611719)">TP2_16</text>
+   </g>
+   <g id="text_51">
+    <text style="font-size: 20px; font-family: 'Liberation Serif'; fill: #111111" transform="translate(1085.5351 917.287953)">Re-cotejo tras</text>
+    <text style="font-size: 20px; font-family: 'Liberation Serif'; fill: #111111" transform="translate(1103.305412 940.282797)">el control</text>
+   </g>
+   <g id="patch_35">
+    <path d="M 1257.75173 867.6 
+Q 1264.996242 867.6 1269.824145 867.6 
+" style="fill: none; stroke: #1d3557; stroke-width: 2; stroke-linecap: round"/>
+    <path d="M 1264.324145 865.1 
+L 1269.824145 867.6 
+L 1264.324145 870.1 
+z
+" style="fill: #1d3557; stroke: #1d3557; stroke-width: 2; stroke-linecap: round"/>
+   </g>
+   <g id="text_52">
+    <text style="font-size: 17px; font-family: 'Liberation Serif'; text-anchor: middle; fill: #555555" x="1388.646" y="821.143969" transform="rotate(-0 1388.646 821.143969)">paso 17</text>
+   </g>
+   <g id="text_53">
+    <text style="font-weight: 700; font-size: 25px; font-family: 'Liberation Serif'; text-anchor: middle; fill: #111111" x="1388.646" y="873.611719" transform="rotate(-0 1388.646 873.611719)">TP2_17</text>
+   </g>
+   <g id="text_54">
+    <text style="font-size: 20px; font-family: 'Liberation Serif'; fill: #111111" transform="translate(1342.811625 917.287953)">Mapa AGB</text>
+    <text style="font-size: 20px; font-family: 'Liberation Serif'; fill: #111111" transform="translate(1343.094437 940.282797)">GEDI–CCI</text>
+   </g>
+   <g id="text_55">
+    <text style="font-style: italic; font-size: 21px; font-family: 'Liberation Serif'; text-anchor: middle; fill: #6c757d" x="399.4524" y="90.009844" transform="rotate(-0 399.4524 90.009844)">Ya ejecutados</text>
+   </g>
+   <g id="text_56">
+    <text style="font-style: italic; font-size: 21px; font-family: 'Liberation Serif'; text-anchor: middle; fill: #e8590c" x="1141.3476" y="90.019688" transform="rotate(-0 1141.3476 90.019688)">Filtrado: el corazón del práctico</text>
+   </g>
+   <g id="text_57">
+    <text style="font-style: italic; font-size: 21px; font-family: 'Liberation Serif'; text-anchor: middle; fill: #2d6a4f" x="399.4524" y="414.009844" transform="rotate(-0 399.4524 414.009844)">Productos para TP3-TP5</text>
+   </g>
+   <g id="text_58">
+    <text style="font-style: italic; font-size: 21px; font-family: 'Liberation Serif'; text-anchor: middle; fill: #6f42c1" x="1141.3476" y="414.019687" transform="rotate(-0 1141.3476 414.019687)">Auditoría por clase de cobertura</text>
+   </g>
+   <g id="text_59">
+    <text style="font-style: italic; font-size: 21px; font-family: 'Liberation Serif'; text-anchor: middle; fill: #1d6fb8" x="646.7508" y="738.116484" transform="rotate(-0 646.7508 738.116484)">Rama ICESat-2: la segunda referencia, con su control de terreno</text>
+   </g>
+   <g id="text_60">
+    <text style="font-style: italic; font-size: 21px; font-family: 'Liberation Serif'; text-anchor: middle; fill: #8b7a00" x="1388.646" y="738.009844" transform="rotate(-0 1388.646 738.009844)">El mapa</text>
+   </g>
+   <g id="text_61">
+    <text style="font-size: 19px; font-family: 'Liberation Serif'; text-anchor: middle; fill: #333333" x="770.4" y="983.782266" transform="rotate(-0 770.4 983.782266)">Diecisiete pasos numerados, del 1 al 17, más el 1b, que se intercala porque el paso 7 necesita lo que produce.</text>
+   </g>
+   <g id="text_62">
+    <text style="font-size: 19px; font-family: 'Liberation Serif'; text-anchor: middle; fill: #333333" x="770.4" y="1012.555547" transform="rotate(-0 770.4 1012.555547)">Cada paso consume lo que dejó el anterior; la rama ICESat-2 (12 a 16) corre aparte: el 13 y el 16 leen, además, la salida del paso 6.</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p850bf27536">
+   <rect x="0" y="0" width="1540.8" height="1022.4"/>
+  </clipPath>
+ </defs>
+</svg>

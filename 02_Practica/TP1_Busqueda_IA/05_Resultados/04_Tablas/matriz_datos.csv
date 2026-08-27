@@ -1,0 +1,15 @@
+sensor,producto,nivel,periodo_cubierto,epocas,resolucion_nativa,bandas_o_polarizacion,cobertura_AOI_verificada,acceso,credenciales,estado
+Sentinel-2,MSI L2A,L2A,2023-10-22 a 2026-03-05,"linea base, pre, post",10 m,B2-B12 (10 bandas) + SCL,100% ambos AOI,Copernicus Data Space (CDSE) - OData,usuario CDSE,descargado y recortado (14 escenas)
+Landsat 9,OLI-2 Collection 2 L2,L2SP,2024-03-03 a 2026-02-21,"linea base, pre, post",30 m,coastal-SWIR2 (7 bandas refl.) + QA_PIXEL,100% ambos AOI - 0% nubes en AOI,Microsoft Planetary Computer (STAC),ninguna,descargado y recortado (6 escenas)
+Sentinel-1,IW GRDH,L1 GRD,2023-10-17 a 2026-02-27,las 4 epocas,10 m (grilla),VV + VH (dual),100% ambos AOI - track 164 ascendente,Copernicus Data Space (CDSE) - OData,usuario CDSE,descargado y procesado (14 escenas)
+Sentinel-1,IW SLC,L1 SLC,2023-10-17 a 2026-02-27,las 4 epocas,10 m (grilla),VV + VH (dual),100% ambos AOI - track 164 ascendente,Copernicus Data Space (CDSE) - OData,usuario CDSE,descargado y procesado (14 escenas)
+SAOCOM-1B,L1A SLC,L1A,2025-11-23 a 2026-02-27,"pre, post",10 m (grilla),HH + HV (dual - modo S4DP),100% ambos AOI - descendente,CONAE - portal con solicitud,cuenta CONAE + autorizacion,descargado y procesado (3 escenas)
+SAOCOM-1A/1B,L1A quad-pol,L1A,2023-10-27 a 2024-02-25,linea base,10 m (grilla),HH+HV+VH+VV (quad) y HH+HV (dual),100% BOSQUE_NW_02; no cubren ESTEPA. 5 quad-pol descendentes + 2 dual-pol ASCENDENTES (control de geometria),CONAE - portal con solicitud,cuenta CONAE + autorizacion,"descargado (7 productos, entregados por CONAE con identificadores distintos a los del pedido) - AUN SIN PROCESAR por TP4_01"
+NISAR,GCOV beta,L2,2025-12-04 a 2026-01-08,pre-incendio,10 m,HH + HV (dual),100% ambos AOI (trazas 003 y 169),NASA Earthdata / ASF,usuario Earthdata,descargado y recortado (3 fechas utiles de 9)
+ALOS-2 PALSAR-2,Mosaico anual global,CEOS-ARD,2023 - 2024 - 2025,"linea base, pre",25 m,HH + HV (dual),100% ambos AOI (tile S42W072),JAXA EORC - descarga manual,registro gratuito JAXA,descargado y recortado (3 anos)
+ALOS-1 PALSAR,L1.1 quad-pol (PLR),L1.1,2007-07-21 a 2009-06-06,historica,complejo,HH+HV+VH+VV (quad completo),"bosque 99-100%, estepa 93%",NASA Earthdata / ASF,usuario Earthdata,descargado (5 fechas - 10 frames)
+GEDI,L2A,L2A,2024-09 a 2025-03,pre-incendio,huella 25 m,"rh25/50/75/95/98, elev, sensitivity",6288 disparos en BOSQUE y 11222 en ESTEPA; tras los filtros de calidad y pendiente quedan 690 y 3083 huellas validas,NASA Earthdata,usuario Earthdata,descargado y recortado
+GEDI,L2B,L2B,2024-09 a 2025-03,pre-incendio,huella 25 m,"pai, fhd_normal, cover","idem L2A (mismos disparos, otras variables)",NASA Earthdata,usuario Earthdata,descargado y recortado
+ESA WorldCover,v200,mapa tematico,2021,auxiliar,10 m,11 clases de cobertura,100% ambos AOI,SNAP (Add Land Cover Band) / ESA,ninguna,disponible
+Copernicus DEM,GLO-30,DSM,2011-2015,auxiliar,30 m,elevacion,100% ambos AOI,SNAP (descarga automatica),ninguna,usado en Terrain Flattening
+CONAE-AQD,Area quemada oficial,vectorial,2020 - 2026,post,poligonos,area quemada,Cushamen y Futaleufu,CONAE,ninguna,incorporado (estadisticas por AOI)

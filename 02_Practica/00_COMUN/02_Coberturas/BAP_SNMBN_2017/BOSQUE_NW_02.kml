@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document id="root_doc">
+    <Schema id="candidatos_noroeste" name="candidatos_noroeste">
+      <SimpleField name="Name" type="string"/>
+      <SimpleField name="tipo" type="string"/>
+      <SimpleField name="ranking" type="string"/>
+      <SimpleField name="pureza" type="string"/>
+      <SimpleField name="geometry" type="string"/>
+    </Schema>
+    <Schema id="candidatos_noroeste.schema">
+      <SimpleField name="tipo" type="string"/>
+      <SimpleField name="ranking" type="string"/>
+      <SimpleField name="pureza" type="string"/>
+      <SimpleField name="geometry" type="string"/>
+    </Schema>
+    <Document id="candidatos_noroeste">
+      <name>candidatos_noroeste</name>
+      <Placemark id="BOSQUE_NW_02">
+        <ExtendedData>
+          <SchemaData schemaUrl="#candidatos_noroeste.schema">
+            <SimpleData name="tipo">bosque</SimpleData>
+            <SimpleData name="ranking">2</SimpleData>
+            <SimpleData name="pureza">0.906978</SimpleData>
+            <SimpleData name="geometry">POLYGON ((287200 5270200, 302200 5270200, 302200 5285200, 287200 5285200, 287200 5270200))</SimpleData>
+          </SchemaData>
+        </ExtendedData>
+        <Polygon>
+          <outerBoundaryIs>
+            <LinearRing>
+              <coordinates>
+                -71.5977324305059,-42.6912348567992,0
+                -71.4147860692823,-42.695240249841,0
+                -71.4095719388935,-42.5602750103151,0
+                -71.5921243145435,-42.5562883807196,0
+                -71.5977324305059,-42.6912348567992,0
+              </coordinates>
+            </LinearRing>
+          </outerBoundaryIs>
+        </Polygon>
+      </Placemark>
+    </Document>
+  </Document>
+</kml>

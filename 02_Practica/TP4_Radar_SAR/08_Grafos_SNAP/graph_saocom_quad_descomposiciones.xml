@@ -1,0 +1,545 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+============================================================================
+ PASO 2 DE 2 - TODAS LAS DESCOMPOSICIONES, DE UNA CORRIDA
+============================================================================
+ ENTRADA: la salida de graph_saocom_quad_T3_preparada.xml (la matriz T3 ya
+ corregida de angulo de orientacion y filtrada). NO el producto original.
+
+ Se ramifica en ocho descomposiciones INCOHERENTES, cada una con su propio
+ Terrain-Correction y su propia salida. La parte cara (matriz, correccion de
+ orientacion, speckle) NO se repite: ya esta hecha en el paso 1.
+
+ Las ocho, y para que sirve cada una:
+   Freeman-Durden ....... superficie / doble rebote / volumen. La mas legible.
+   Yamaguchi ............ igual pero con cuarto termino de helice; NO exige
+                          simetria de reflexion, que en ladera no se cumple.
+                          Es el control natural de Freeman.
+   van Zyl .............. modelo parecido a Freeman con restriccion de
+                          autovalores no negativos: no puede dar potencias
+                          negativas, que es el defecto conocido de Freeman.
+   H-A-Alpha Quad Pol ... entropia, anisotropia y angulo alfa. NO es un modelo
+                          de mecanismos sino la descomposicion en autovalores:
+                          no supone nada sobre el blanco. Da el plano H/alfa.
+   Cloude ............... mecanismo dominante segun el autovalor mayor.
+   Touzi ................ agrega la fase del mecanismo de dispersion.
+   Huynen ............... la clasica de 1970, util para comparar historicamente.
+   Model-free 3-comp .... sin modelo ni supuesto de simetria; la mas moderna.
+
+ Falta Pauli, y no por olvido: Pauli, Sinclair, Krogager y Cameron son
+ COHERENTES, trabajan sobre la matriz de dispersion S y no sobre T3. Van en
+ graph_saocom_quad_coherentes.xml.
+
+ SI ALGUNA RAMA FALLA cae el grafo entero. Conviene la primera vez borrar las
+ ramas dudosas y dejar dos o tres, y agregar el resto cuando anden.
+=======================================================================
+ RUTAS YA CARGADAS (28/07/2026). Las cajas Read y Write vienen con el
+ nombre escrito, para no tener que tipearlos uno por uno en cada corrida.
+ Si cambia de escena, lo unico que hay que editar es la fecha en los
+ nombres de salida. Convencion: sensor_fecha_contenido.dim
+=====
+-->
+<graph id="SAOCOM_descomposiciones">
+  <version>1.0</version>
+  <node id="Read">
+    <operator>Read</operator>
+    <sources></sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <file>C:\Temp\CURSO_BIOMASA_2026\02_Practica\TP4_Radar_SAR\05_Resultados\SAOCOM_16ene2024_T3.dim</file>
+    </parameters>
+  </node>
+  <node id="Desc_FreemanDurden">
+    <operator>Polarimetric-Decomposition</operator>
+    <sources><sourceProduct refid="Read"/></sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <decomposition>Freeman-Durden Decomposition</decomposition>
+      <windowSize>5</windowSize>
+      <outputType>Polarimetric</outputType>
+    </parameters>
+  </node>
+  <node id="TC_FreemanDurden">
+    <operator>Terrain-Correction</operator>
+    <sources><sourceProduct refid="Desc_FreemanDurden"/></sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <demName>Copernicus 30m Global DEM</demName>
+      <demResamplingMethod>BILINEAR_INTERPOLATION</demResamplingMethod>
+      <imgResamplingMethod>BILINEAR_INTERPOLATION</imgResamplingMethod>
+      <pixelSpacingInMeter>10.0</pixelSpacingInMeter>
+      <pixelSpacingInDegree>8.983152841195213e-05</pixelSpacingInDegree>
+      <mapProjection>EPSG:32719</mapProjection>
+      <nodataValueAtSea>false</nodataValueAtSea>
+      <alignToStandardGrid>true</alignToStandardGrid>
+      <standardGridOriginX>5.0</standardGridOriginX>
+      <standardGridOriginY>5.0</standardGridOriginY>
+      <saveLocalIncidenceAngle>true</saveLocalIncidenceAngle>
+      <saveSelectedSourceBand>true</saveSelectedSourceBand>
+      <sourceBands/>
+      <externalDEMFile/>
+      <externalDEMNoDataValue>0.0</externalDEMNoDataValue>
+      <externalDEMApplyEGM>true</externalDEMApplyEGM>
+      <saveDEM>false</saveDEM>
+      <saveLatLon>false</saveLatLon>
+      <saveIncidenceAngleFromEllipsoid>false</saveIncidenceAngleFromEllipsoid>
+      <saveProjectedLocalIncidenceAngle>true</saveProjectedLocalIncidenceAngle>
+      <saveLayoverShadowMask>true</saveLayoverShadowMask>
+      <applyRadiometricNormalization>false</applyRadiometricNormalization>
+      <saveSigmaNought>false</saveSigmaNought>
+      <saveGammaNought>false</saveGammaNought>
+      <saveBetaNought>false</saveBetaNought>
+      <incidenceAngleForSigma0>Use projected local incidence angle from DEM</incidenceAngleForSigma0>
+      <incidenceAngleForGamma0>Use projected local incidence angle from DEM</incidenceAngleForGamma0>
+      <auxFile>Latest Auxiliary File</auxFile>
+      <externalAuxFile/>
+    </parameters>
+  </node>
+  <node id="Write_FreemanDurden">
+    <operator>Write</operator>
+    <sources><sourceProduct refid="TC_FreemanDurden"/></sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <file>C:\Temp\CURSO_BIOMASA_2026\02_Practica\TP4_Radar_SAR\05_Resultados\SAOCOM_16ene2024_freeman.dim</file>
+      <formatName>BEAM-DIMAP</formatName>
+    </parameters>
+  </node>
+  <node id="Desc_Yamaguchi">
+    <operator>Polarimetric-Decomposition</operator>
+    <sources><sourceProduct refid="Read"/></sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <decomposition>Yamaguchi Decomposition</decomposition>
+      <windowSize>5</windowSize>
+      <outputType>Polarimetric</outputType>
+    </parameters>
+  </node>
+  <node id="TC_Yamaguchi">
+    <operator>Terrain-Correction</operator>
+    <sources><sourceProduct refid="Desc_Yamaguchi"/></sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <demName>Copernicus 30m Global DEM</demName>
+      <demResamplingMethod>BILINEAR_INTERPOLATION</demResamplingMethod>
+      <imgResamplingMethod>BILINEAR_INTERPOLATION</imgResamplingMethod>
+      <pixelSpacingInMeter>10.0</pixelSpacingInMeter>
+      <pixelSpacingInDegree>8.983152841195213e-05</pixelSpacingInDegree>
+      <mapProjection>EPSG:32719</mapProjection>
+      <nodataValueAtSea>false</nodataValueAtSea>
+      <alignToStandardGrid>true</alignToStandardGrid>
+      <standardGridOriginX>5.0</standardGridOriginX>
+      <standardGridOriginY>5.0</standardGridOriginY>
+      <saveLocalIncidenceAngle>true</saveLocalIncidenceAngle>
+      <saveSelectedSourceBand>true</saveSelectedSourceBand>
+      <sourceBands/>
+      <externalDEMFile/>
+      <externalDEMNoDataValue>0.0</externalDEMNoDataValue>
+      <externalDEMApplyEGM>true</externalDEMApplyEGM>
+      <saveDEM>false</saveDEM>
+      <saveLatLon>false</saveLatLon>
+      <saveIncidenceAngleFromEllipsoid>false</saveIncidenceAngleFromEllipsoid>
+      <saveProjectedLocalIncidenceAngle>true</saveProjectedLocalIncidenceAngle>
+      <saveLayoverShadowMask>true</saveLayoverShadowMask>
+      <applyRadiometricNormalization>false</applyRadiometricNormalization>
+      <saveSigmaNought>false</saveSigmaNought>
+      <saveGammaNought>false</saveGammaNought>
+      <saveBetaNought>false</saveBetaNought>
+      <incidenceAngleForSigma0>Use projected local incidence angle from DEM</incidenceAngleForSigma0>
+      <incidenceAngleForGamma0>Use projected local incidence angle from DEM</incidenceAngleForGamma0>
+      <auxFile>Latest Auxiliary File</auxFile>
+      <externalAuxFile/>
+    </parameters>
+  </node>
+  <node id="Write_Yamaguchi">
+    <operator>Write</operator>
+    <sources><sourceProduct refid="TC_Yamaguchi"/></sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <file>C:\Temp\CURSO_BIOMASA_2026\02_Practica\TP4_Radar_SAR\05_Resultados\SAOCOM_16ene2024_yamaguchi.dim</file>
+      <formatName>BEAM-DIMAP</formatName>
+    </parameters>
+  </node>
+  <node id="Desc_vanZyl">
+    <operator>Polarimetric-Decomposition</operator>
+    <sources><sourceProduct refid="Read"/></sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <decomposition>van Zyl Decomposition</decomposition>
+      <windowSize>5</windowSize>
+      <outputType>Polarimetric</outputType>
+    </parameters>
+  </node>
+  <node id="TC_vanZyl">
+    <operator>Terrain-Correction</operator>
+    <sources><sourceProduct refid="Desc_vanZyl"/></sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <demName>Copernicus 30m Global DEM</demName>
+      <demResamplingMethod>BILINEAR_INTERPOLATION</demResamplingMethod>
+      <imgResamplingMethod>BILINEAR_INTERPOLATION</imgResamplingMethod>
+      <pixelSpacingInMeter>10.0</pixelSpacingInMeter>
+      <pixelSpacingInDegree>8.983152841195213e-05</pixelSpacingInDegree>
+      <mapProjection>EPSG:32719</mapProjection>
+      <nodataValueAtSea>false</nodataValueAtSea>
+      <alignToStandardGrid>true</alignToStandardGrid>
+      <standardGridOriginX>5.0</standardGridOriginX>
+      <standardGridOriginY>5.0</standardGridOriginY>
+      <saveLocalIncidenceAngle>true</saveLocalIncidenceAngle>
+      <saveSelectedSourceBand>true</saveSelectedSourceBand>
+      <sourceBands/>
+      <externalDEMFile/>
+      <externalDEMNoDataValue>0.0</externalDEMNoDataValue>
+      <externalDEMApplyEGM>true</externalDEMApplyEGM>
+      <saveDEM>false</saveDEM>
+      <saveLatLon>false</saveLatLon>
+      <saveIncidenceAngleFromEllipsoid>false</saveIncidenceAngleFromEllipsoid>
+      <saveProjectedLocalIncidenceAngle>true</saveProjectedLocalIncidenceAngle>
+      <saveLayoverShadowMask>true</saveLayoverShadowMask>
+      <applyRadiometricNormalization>false</applyRadiometricNormalization>
+      <saveSigmaNought>false</saveSigmaNought>
+      <saveGammaNought>false</saveGammaNought>
+      <saveBetaNought>false</saveBetaNought>
+      <incidenceAngleForSigma0>Use projected local incidence angle from DEM</incidenceAngleForSigma0>
+      <incidenceAngleForGamma0>Use projected local incidence angle from DEM</incidenceAngleForGamma0>
+      <auxFile>Latest Auxiliary File</auxFile>
+      <externalAuxFile/>
+    </parameters>
+  </node>
+  <node id="Write_vanZyl">
+    <operator>Write</operator>
+    <sources><sourceProduct refid="TC_vanZyl"/></sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <file>C:\Temp\CURSO_BIOMASA_2026\02_Practica\TP4_Radar_SAR\05_Resultados\SAOCOM_16ene2024_vanzyl.dim</file>
+      <formatName>BEAM-DIMAP</formatName>
+    </parameters>
+  </node>
+  <node id="Desc_HAAlpha">
+    <operator>Polarimetric-Decomposition</operator>
+    <sources><sourceProduct refid="Read"/></sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <decomposition>H-A-Alpha Quad Pol Decomposition</decomposition>
+      <windowSize>5</windowSize>
+      <outputType>Polarimetric</outputType>
+    </parameters>
+  </node>
+  <node id="TC_HAAlpha">
+    <operator>Terrain-Correction</operator>
+    <sources><sourceProduct refid="Desc_HAAlpha"/></sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <demName>Copernicus 30m Global DEM</demName>
+      <demResamplingMethod>BILINEAR_INTERPOLATION</demResamplingMethod>
+      <imgResamplingMethod>BILINEAR_INTERPOLATION</imgResamplingMethod>
+      <pixelSpacingInMeter>10.0</pixelSpacingInMeter>
+      <pixelSpacingInDegree>8.983152841195213e-05</pixelSpacingInDegree>
+      <mapProjection>EPSG:32719</mapProjection>
+      <nodataValueAtSea>false</nodataValueAtSea>
+      <alignToStandardGrid>true</alignToStandardGrid>
+      <standardGridOriginX>5.0</standardGridOriginX>
+      <standardGridOriginY>5.0</standardGridOriginY>
+      <saveLocalIncidenceAngle>true</saveLocalIncidenceAngle>
+      <saveSelectedSourceBand>true</saveSelectedSourceBand>
+      <sourceBands/>
+      <externalDEMFile/>
+      <externalDEMNoDataValue>0.0</externalDEMNoDataValue>
+      <externalDEMApplyEGM>true</externalDEMApplyEGM>
+      <saveDEM>false</saveDEM>
+      <saveLatLon>false</saveLatLon>
+      <saveIncidenceAngleFromEllipsoid>false</saveIncidenceAngleFromEllipsoid>
+      <saveProjectedLocalIncidenceAngle>true</saveProjectedLocalIncidenceAngle>
+      <saveLayoverShadowMask>true</saveLayoverShadowMask>
+      <applyRadiometricNormalization>false</applyRadiometricNormalization>
+      <saveSigmaNought>false</saveSigmaNought>
+      <saveGammaNought>false</saveGammaNought>
+      <saveBetaNought>false</saveBetaNought>
+      <incidenceAngleForSigma0>Use projected local incidence angle from DEM</incidenceAngleForSigma0>
+      <incidenceAngleForGamma0>Use projected local incidence angle from DEM</incidenceAngleForGamma0>
+      <auxFile>Latest Auxiliary File</auxFile>
+      <externalAuxFile/>
+    </parameters>
+  </node>
+  <node id="Write_HAAlpha">
+    <operator>Write</operator>
+    <sources><sourceProduct refid="TC_HAAlpha"/></sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <file>C:\Temp\CURSO_BIOMASA_2026\02_Practica\TP4_Radar_SAR\05_Resultados\SAOCOM_16ene2024_halpha.dim</file>
+      <formatName>BEAM-DIMAP</formatName>
+    </parameters>
+  </node>
+  <node id="Desc_Cloude">
+    <operator>Polarimetric-Decomposition</operator>
+    <sources><sourceProduct refid="Read"/></sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <decomposition>Cloude Decomposition</decomposition>
+      <windowSize>5</windowSize>
+      <outputType>Polarimetric</outputType>
+    </parameters>
+  </node>
+  <node id="TC_Cloude">
+    <operator>Terrain-Correction</operator>
+    <sources><sourceProduct refid="Desc_Cloude"/></sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <demName>Copernicus 30m Global DEM</demName>
+      <demResamplingMethod>BILINEAR_INTERPOLATION</demResamplingMethod>
+      <imgResamplingMethod>BILINEAR_INTERPOLATION</imgResamplingMethod>
+      <pixelSpacingInMeter>10.0</pixelSpacingInMeter>
+      <pixelSpacingInDegree>8.983152841195213e-05</pixelSpacingInDegree>
+      <mapProjection>EPSG:32719</mapProjection>
+      <nodataValueAtSea>false</nodataValueAtSea>
+      <alignToStandardGrid>true</alignToStandardGrid>
+      <standardGridOriginX>5.0</standardGridOriginX>
+      <standardGridOriginY>5.0</standardGridOriginY>
+      <saveLocalIncidenceAngle>true</saveLocalIncidenceAngle>
+      <saveSelectedSourceBand>true</saveSelectedSourceBand>
+      <sourceBands/>
+      <externalDEMFile/>
+      <externalDEMNoDataValue>0.0</externalDEMNoDataValue>
+      <externalDEMApplyEGM>true</externalDEMApplyEGM>
+      <saveDEM>false</saveDEM>
+      <saveLatLon>false</saveLatLon>
+      <saveIncidenceAngleFromEllipsoid>false</saveIncidenceAngleFromEllipsoid>
+      <saveProjectedLocalIncidenceAngle>true</saveProjectedLocalIncidenceAngle>
+      <saveLayoverShadowMask>true</saveLayoverShadowMask>
+      <applyRadiometricNormalization>false</applyRadiometricNormalization>
+      <saveSigmaNought>false</saveSigmaNought>
+      <saveGammaNought>false</saveGammaNought>
+      <saveBetaNought>false</saveBetaNought>
+      <incidenceAngleForSigma0>Use projected local incidence angle from DEM</incidenceAngleForSigma0>
+      <incidenceAngleForGamma0>Use projected local incidence angle from DEM</incidenceAngleForGamma0>
+      <auxFile>Latest Auxiliary File</auxFile>
+      <externalAuxFile/>
+    </parameters>
+  </node>
+  <node id="Write_Cloude">
+    <operator>Write</operator>
+    <sources><sourceProduct refid="TC_Cloude"/></sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <file>C:\Temp\CURSO_BIOMASA_2026\02_Practica\TP4_Radar_SAR\05_Resultados\SAOCOM_16ene2024_cloude.dim</file>
+      <formatName>BEAM-DIMAP</formatName>
+    </parameters>
+  </node>
+  <node id="Desc_Touzi">
+    <operator>Polarimetric-Decomposition</operator>
+    <sources><sourceProduct refid="Read"/></sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <decomposition>Touzi Decomposition</decomposition>
+      <windowSize>5</windowSize>
+      <outputType>Polarimetric</outputType>
+    </parameters>
+  </node>
+  <node id="TC_Touzi">
+    <operator>Terrain-Correction</operator>
+    <sources><sourceProduct refid="Desc_Touzi"/></sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <demName>Copernicus 30m Global DEM</demName>
+      <demResamplingMethod>BILINEAR_INTERPOLATION</demResamplingMethod>
+      <imgResamplingMethod>BILINEAR_INTERPOLATION</imgResamplingMethod>
+      <pixelSpacingInMeter>10.0</pixelSpacingInMeter>
+      <pixelSpacingInDegree>8.983152841195213e-05</pixelSpacingInDegree>
+      <mapProjection>EPSG:32719</mapProjection>
+      <nodataValueAtSea>false</nodataValueAtSea>
+      <alignToStandardGrid>true</alignToStandardGrid>
+      <standardGridOriginX>5.0</standardGridOriginX>
+      <standardGridOriginY>5.0</standardGridOriginY>
+      <saveLocalIncidenceAngle>true</saveLocalIncidenceAngle>
+      <saveSelectedSourceBand>true</saveSelectedSourceBand>
+      <sourceBands/>
+      <externalDEMFile/>
+      <externalDEMNoDataValue>0.0</externalDEMNoDataValue>
+      <externalDEMApplyEGM>true</externalDEMApplyEGM>
+      <saveDEM>false</saveDEM>
+      <saveLatLon>false</saveLatLon>
+      <saveIncidenceAngleFromEllipsoid>false</saveIncidenceAngleFromEllipsoid>
+      <saveProjectedLocalIncidenceAngle>true</saveProjectedLocalIncidenceAngle>
+      <saveLayoverShadowMask>true</saveLayoverShadowMask>
+      <applyRadiometricNormalization>false</applyRadiometricNormalization>
+      <saveSigmaNought>false</saveSigmaNought>
+      <saveGammaNought>false</saveGammaNought>
+      <saveBetaNought>false</saveBetaNought>
+      <incidenceAngleForSigma0>Use projected local incidence angle from DEM</incidenceAngleForSigma0>
+      <incidenceAngleForGamma0>Use projected local incidence angle from DEM</incidenceAngleForGamma0>
+      <auxFile>Latest Auxiliary File</auxFile>
+      <externalAuxFile/>
+    </parameters>
+  </node>
+  <node id="Write_Touzi">
+    <operator>Write</operator>
+    <sources><sourceProduct refid="TC_Touzi"/></sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <file>C:\Temp\CURSO_BIOMASA_2026\02_Practica\TP4_Radar_SAR\05_Resultados\SAOCOM_16ene2024_touzi.dim</file>
+      <formatName>BEAM-DIMAP</formatName>
+    </parameters>
+  </node>
+  <node id="Desc_Huynen">
+    <operator>Polarimetric-Decomposition</operator>
+    <sources><sourceProduct refid="Read"/></sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <decomposition>Huynen Decomposition</decomposition>
+      <windowSize>5</windowSize>
+      <outputType>Polarimetric</outputType>
+    </parameters>
+  </node>
+  <node id="TC_Huynen">
+    <operator>Terrain-Correction</operator>
+    <sources><sourceProduct refid="Desc_Huynen"/></sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <demName>Copernicus 30m Global DEM</demName>
+      <demResamplingMethod>BILINEAR_INTERPOLATION</demResamplingMethod>
+      <imgResamplingMethod>BILINEAR_INTERPOLATION</imgResamplingMethod>
+      <pixelSpacingInMeter>10.0</pixelSpacingInMeter>
+      <pixelSpacingInDegree>8.983152841195213e-05</pixelSpacingInDegree>
+      <mapProjection>EPSG:32719</mapProjection>
+      <nodataValueAtSea>false</nodataValueAtSea>
+      <alignToStandardGrid>true</alignToStandardGrid>
+      <standardGridOriginX>5.0</standardGridOriginX>
+      <standardGridOriginY>5.0</standardGridOriginY>
+      <saveLocalIncidenceAngle>true</saveLocalIncidenceAngle>
+      <saveSelectedSourceBand>true</saveSelectedSourceBand>
+      <sourceBands/>
+      <externalDEMFile/>
+      <externalDEMNoDataValue>0.0</externalDEMNoDataValue>
+      <externalDEMApplyEGM>true</externalDEMApplyEGM>
+      <saveDEM>false</saveDEM>
+      <saveLatLon>false</saveLatLon>
+      <saveIncidenceAngleFromEllipsoid>false</saveIncidenceAngleFromEllipsoid>
+      <saveProjectedLocalIncidenceAngle>true</saveProjectedLocalIncidenceAngle>
+      <saveLayoverShadowMask>true</saveLayoverShadowMask>
+      <applyRadiometricNormalization>false</applyRadiometricNormalization>
+      <saveSigmaNought>false</saveSigmaNought>
+      <saveGammaNought>false</saveGammaNought>
+      <saveBetaNought>false</saveBetaNought>
+      <incidenceAngleForSigma0>Use projected local incidence angle from DEM</incidenceAngleForSigma0>
+      <incidenceAngleForGamma0>Use projected local incidence angle from DEM</incidenceAngleForGamma0>
+      <auxFile>Latest Auxiliary File</auxFile>
+      <externalAuxFile/>
+    </parameters>
+  </node>
+  <node id="Write_Huynen">
+    <operator>Write</operator>
+    <sources><sourceProduct refid="TC_Huynen"/></sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <file>C:\Temp\CURSO_BIOMASA_2026\02_Practica\TP4_Radar_SAR\05_Resultados\SAOCOM_16ene2024_huynen.dim</file>
+      <formatName>BEAM-DIMAP</formatName>
+    </parameters>
+  </node>
+  <node id="Desc_ModelFree3">
+    <operator>Polarimetric-Decomposition</operator>
+    <sources><sourceProduct refid="Read"/></sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <decomposition>Model-free 3-component Decomposition</decomposition>
+      <windowSize>5</windowSize>
+      <outputType>Polarimetric</outputType>
+    </parameters>
+  </node>
+  <node id="TC_ModelFree3">
+    <operator>Terrain-Correction</operator>
+    <sources><sourceProduct refid="Desc_ModelFree3"/></sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <demName>Copernicus 30m Global DEM</demName>
+      <demResamplingMethod>BILINEAR_INTERPOLATION</demResamplingMethod>
+      <imgResamplingMethod>BILINEAR_INTERPOLATION</imgResamplingMethod>
+      <pixelSpacingInMeter>10.0</pixelSpacingInMeter>
+      <pixelSpacingInDegree>8.983152841195213e-05</pixelSpacingInDegree>
+      <mapProjection>EPSG:32719</mapProjection>
+      <nodataValueAtSea>false</nodataValueAtSea>
+      <alignToStandardGrid>true</alignToStandardGrid>
+      <standardGridOriginX>5.0</standardGridOriginX>
+      <standardGridOriginY>5.0</standardGridOriginY>
+      <saveLocalIncidenceAngle>true</saveLocalIncidenceAngle>
+      <saveSelectedSourceBand>true</saveSelectedSourceBand>
+      <sourceBands/>
+      <externalDEMFile/>
+      <externalDEMNoDataValue>0.0</externalDEMNoDataValue>
+      <externalDEMApplyEGM>true</externalDEMApplyEGM>
+      <saveDEM>false</saveDEM>
+      <saveLatLon>false</saveLatLon>
+      <saveIncidenceAngleFromEllipsoid>false</saveIncidenceAngleFromEllipsoid>
+      <saveProjectedLocalIncidenceAngle>true</saveProjectedLocalIncidenceAngle>
+      <saveLayoverShadowMask>true</saveLayoverShadowMask>
+      <applyRadiometricNormalization>false</applyRadiometricNormalization>
+      <saveSigmaNought>false</saveSigmaNought>
+      <saveGammaNought>false</saveGammaNought>
+      <saveBetaNought>false</saveBetaNought>
+      <incidenceAngleForSigma0>Use projected local incidence angle from DEM</incidenceAngleForSigma0>
+      <incidenceAngleForGamma0>Use projected local incidence angle from DEM</incidenceAngleForGamma0>
+      <auxFile>Latest Auxiliary File</auxFile>
+      <externalAuxFile/>
+    </parameters>
+  </node>
+  <node id="Write_ModelFree3">
+    <operator>Write</operator>
+    <sources><sourceProduct refid="TC_ModelFree3"/></sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <file>C:\Temp\CURSO_BIOMASA_2026\02_Practica\TP4_Radar_SAR\05_Resultados\SAOCOM_16ene2024_modelfree3.dim</file>
+      <formatName>BEAM-DIMAP</formatName>
+    </parameters>
+  </node>
+  <applicationData id="Presentation">
+    <Description/>
+    <node id="Read">
+      <displayPosition x="15.0" y="20.0"/>
+    </node>
+    <node id="Desc_FreemanDurden">
+      <displayPosition x="15.0" y="90.0"/>
+    </node>
+    <node id="TC_FreemanDurden">
+      <displayPosition x="230.0" y="90.0"/>
+    </node>
+    <node id="Write_FreemanDurden">
+      <displayPosition x="445.0" y="90.0"/>
+    </node>
+    <node id="Desc_Yamaguchi">
+      <displayPosition x="15.0" y="152.0"/>
+    </node>
+    <node id="TC_Yamaguchi">
+      <displayPosition x="230.0" y="152.0"/>
+    </node>
+    <node id="Write_Yamaguchi">
+      <displayPosition x="445.0" y="152.0"/>
+    </node>
+    <node id="Desc_vanZyl">
+      <displayPosition x="15.0" y="214.0"/>
+    </node>
+    <node id="TC_vanZyl">
+      <displayPosition x="230.0" y="214.0"/>
+    </node>
+    <node id="Write_vanZyl">
+      <displayPosition x="445.0" y="214.0"/>
+    </node>
+    <node id="Desc_HAAlpha">
+      <displayPosition x="15.0" y="276.0"/>
+    </node>
+    <node id="TC_HAAlpha">
+      <displayPosition x="230.0" y="276.0"/>
+    </node>
+    <node id="Write_HAAlpha">
+      <displayPosition x="445.0" y="276.0"/>
+    </node>
+    <node id="Desc_Cloude">
+      <displayPosition x="15.0" y="338.0"/>
+    </node>
+    <node id="TC_Cloude">
+      <displayPosition x="230.0" y="338.0"/>
+    </node>
+    <node id="Write_Cloude">
+      <displayPosition x="445.0" y="338.0"/>
+    </node>
+    <node id="Desc_Touzi">
+      <displayPosition x="15.0" y="400.0"/>
+    </node>
+    <node id="TC_Touzi">
+      <displayPosition x="230.0" y="400.0"/>
+    </node>
+    <node id="Write_Touzi">
+      <displayPosition x="445.0" y="400.0"/>
+    </node>
+    <node id="Desc_Huynen">
+      <displayPosition x="15.0" y="462.0"/>
+    </node>
+    <node id="TC_Huynen">
+      <displayPosition x="230.0" y="462.0"/>
+    </node>
+    <node id="Write_Huynen">
+      <displayPosition x="445.0" y="462.0"/>
+    </node>
+    <node id="Desc_ModelFree3">
+      <displayPosition x="15.0" y="524.0"/>
+    </node>
+    <node id="TC_ModelFree3">
+      <displayPosition x="230.0" y="524.0"/>
+    </node>
+    <node id="Write_ModelFree3">
+      <displayPosition x="445.0" y="524.0"/>
+    </node>
+  </applicationData>
+</graph>

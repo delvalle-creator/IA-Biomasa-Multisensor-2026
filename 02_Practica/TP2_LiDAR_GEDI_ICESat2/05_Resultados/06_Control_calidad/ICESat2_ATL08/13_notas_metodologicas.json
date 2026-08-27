@@ -1,0 +1,15 @@
+{
+  "producto": "ATL08 V007",
+  "periodo_consulta": [
+    "2018-10-14",
+    "2026-08-18"
+  ],
+  "observaciones": [
+    "Los seis campos RH50-RH100 están vacíos en ambos CSV: el extractor no leyó canopy_h_metrics.",
+    "h_canopy_m corresponde a RH98 y h_max_canopy_m a RH100 según el diccionario ATL08 V007.",
+    "Los CSV no incluyen can_quality_score, te_quality_score, layer_flag, dem_removal_flag ni canopy_rh_conf; la evaluación de calidad queda limitada.",
+    "El nivel operacional exige altura válida, fotones de copa y terreno, suelo sin nieve, cloud_flag_atm=0, msw_flag=0 y terrain_flg=0.",
+    "El nivel conservador agrega disponibilidad de las incertidumbres de copa y terreno. Esta selección reduce mucho la muestra y no es aleatoria, por lo que puede sesgar contra sectores forestales de topografía compleja.",
+    "Las comparaciones inferenciales se realizaron sobre medianas por gránulo para reducir pseudorreplicación; los segmentos individuales no son observaciones independientes."
+  ]
+}

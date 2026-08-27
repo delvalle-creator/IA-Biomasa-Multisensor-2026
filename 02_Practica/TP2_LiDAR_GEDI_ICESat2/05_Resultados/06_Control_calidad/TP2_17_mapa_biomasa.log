@@ -1,0 +1,23 @@
+MAPA DE BIOMASA: GEDI L4A (mediana por celda de 500 m) contra CCI 2024
+celdas GEDI con menos de 3 huellas: VACIAS (asi se ve un muestreo)
+
+BOSQUE_NW_02
+   495 huellas L4A en 172 celdas; 78 celdas de 900 con mediana valida
+   GEDI  (celdas con dato): mediana 8.4, p25 1.0, p75 27.5 Mg/ha
+   CCI   (mismas celdas):   mediana 136.0, p25 97.1, p75 160.9 Mg/ha
+   dif   (CCI - GEDI):      mediana +113.5, p5 -21.6, p95 +181.0 Mg/ha
+
+ESTEPA_NW_02
+   1129 huellas L4A en 303 celdas; 172 celdas de 900 con mediana valida
+   GEDI  (celdas con dato): mediana 3.2, p25 1.9, p75 7.3 Mg/ha
+   CCI   (mismas celdas):   mediana 2.1, p25 0.5, p75 4.9 Mg/ha
+   dif   (CCI - GEDI):      mediana -1.2, p5 -15.4, p95 +9.3 Mg/ha
+
+COMO SE LEE ESTO
+   El mapa de GEDI tiene huecos porque GEDI es un muestreo orbital,
+   no una imagen: donde no paso o no dejo 3 huellas validas, no hay
+   celda. Rellenar esos huecos es tarea de un MODELO (el TP5), no
+   del mapa. La diferencia repite en el espacio lo que el anexo
+   encontro en la tabla: acuerdo en la lenga alta y en la estepa,
+   CCI por encima en el dosel bajo de ladera. Un mapa continuo no
+   es mas cierto por ser continuo: es mas modelo.

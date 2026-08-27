@@ -1,0 +1,63 @@
+<graph id="S1_SLC_recorte_crudo_InSAR">
+  <!-- RECORTE CRUDO de Sentinel-1 IW SLC.
+       Conserva la GEOMETRIA DE RADAR y la FASE COMPLEJA (bandas i y q), de modo
+       que el producto sigue siendo apto para interferometria y polarimetria.
+       NO se calibra, NO se aplana el terreno y NO se geocodifica: eso lo hace
+       el otro flujo (graph_s1_slc_tc.xml), que produce gamma0 en la grilla
+       comun pero pierde la fase.
+
+       TOPSAR-Split selecciona la subfranja (IW1, IW2 o IW3) y, mediante el
+       parametro wktAoi, unicamente las rafagas (bursts) que cubren el AOI.
+       El resultado pesa unos cientos de MB en lugar de 7,8 GB. -->
+  <version>1.0</version>
+  <node id="Read">
+    <operator>Read</operator>
+    <sources/>
+    <parameters><file/></parameters>
+  </node>
+  <node id="TOPSAR-Split">
+    <operator>TOPSAR-Split</operator>
+    <sources><sourceProduct refid="Read"/></sources>
+    <parameters>
+      <subswath/>
+      <selectedPolarisations>VV,VH</selectedPolarisations>
+      <wktAoi/>
+    
+      <firstBurstIndex>1</firstBurstIndex>
+      <lastBurstIndex>9999</lastBurstIndex>
+    </parameters>
+  </node>
+  <node id="Apply-Orbit-File">
+    <operator>Apply-Orbit-File</operator>
+    <sources><sourceProduct refid="TOPSAR-Split"/></sources>
+    <parameters>
+      <orbitType>Sentinel Precise (Auto Download)</orbitType>
+      <continueOnFail>true</continueOnFail>
+    
+      <polyDegree>3</polyDegree>
+    </parameters>
+  </node>
+  <node id="Write">
+    <operator>Write</operator>
+    <sources><sourceProduct refid="Apply-Orbit-File"/></sources>
+    <parameters>
+      <file/>
+      <formatName>BEAM-DIMAP</formatName>
+    </parameters>
+  </node>
+  <applicationData id="Presentation">
+    <Description/>
+    <node id="Read">
+      <displayPosition x="15.0" y="20.0"/>
+    </node>
+    <node id="TOPSAR-Split">
+      <displayPosition x="220.0" y="20.0"/>
+    </node>
+    <node id="Apply-Orbit-File">
+      <displayPosition x="425.0" y="20.0"/>
+    </node>
+    <node id="Write">
+      <displayPosition x="15.0" y="82.0"/>
+    </node>
+  </applicationData>
+</graph>

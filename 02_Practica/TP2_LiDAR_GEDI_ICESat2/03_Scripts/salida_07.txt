@@ -1,0 +1,78 @@
+
+TP2_07_biomasa_referencia.py   ---> SEPTIMO script del TP2.
+
+QUE HACE
+--------
+Obtiene la biomasa de referencia por disparo a partir del producto oficial
+GEDI L4A, la une a los footprints validos y produce la tabla que usaran como
+referencia el TP3, el TP4 y el TP5.
+
+POR QUE L4A Y NO UNA FORMULA PROPIA
+-----------------------------------
+Es tentador inventar una ecuacion del tipo "biomasa = a * altura^b" con
+coeficientes sacados de un paper cualquiera. NO se hace, y conviene entender por
+que: los coeficientes alometricos son ESPECIFICOS de un tipo de bosque. Una
+ecuacion ajustada en la Amazonia, o en un pinar del hemisferio norte, aplicada a
+un bosque de Nothofagus patagonico, produce numeros que parecen razonables y son
+falsos. El error no se nota: simplemente todo el TP5 queda mal calibrado.
+
+GEDI L4A (Aboveground Biomass Density) resuelve eso: la NASA ajusto modelos por
+GRUPO DE VEGETACION (aqui, bosque templado de hoja caduca del hemisferio sur) con
+parcelas de campo reales, y ademas publica el INTERVALO DE PREDICCION de cada
+disparo. Es decir, no solo dice cuanta biomasa hay, sino cuanto se puede confiar.
+
+QUE ENTREGA L4A
+   agbd            biomasa aerea, en megagramos por hectarea (Mg/ha)
+   agbd_se         error estandar de esa estimacion, en Mg/ha
+   l4_quality_flag calidad especifica del producto de biomasa
+   predict_stratum el grupo de vegetacion con el que se modelo
+
+SI NO SE PUEDE DESCARGAR EL L4A
+-------------------------------
+El script avisa y NO inventa nada. En ese caso el TP5 debera calibrarse contra
+la ALTURA DEL DOSEL (rh95) en vez de contra biomasa, y decirlo explicitamente:
+es una limitacion honesta, no un defecto.
+
+ENTRADA   04_Subsets/01_Bosque | 02_Estepa/*_con_estructura.csv (del TP2_06)
+          02_Insumos/GEDI_L4A/*.csv   (si existe; ver instrucciones abajo)
+SALIDA    05_Resultados/04_Tablas/biomasa_<AOI>.csv
+          04_Subsets/04_Entrenamiento/ y 05_Validacion/  (particion 70/30
+          POR BLOQUES ESPACIALES de 3 x 3 km, no al azar: ver particionar())
+
+USO (entorno conda 'aoi'):   python TP2_07_biomasa_referencia.py
+
+========================================================================
+GEDI_BOSQUE_NW_02_validos_con_estructura.csv
+========================================================================
+   disparos validos        :   690
+   con biomasa L4A         :   271
+   biomasa mediana         :   17.8 Mg/ha
+   biomasa maxima          :  220.6 Mg/ha
+   error estandar mediano  :   11.1 Mg/ha (62% de la mediana)
+
+========================================================================
+GEDI_ESTEPA_NW_02_validos_con_estructura.csv
+========================================================================
+   disparos validos        :  3083
+   con biomasa L4A         :  1129
+   biomasa mediana         :    3.4 Mg/ha
+   biomasa maxima          :  177.2 Mg/ha
+   error estandar mediano  :    3.0 Mg/ha (87% de la mediana)
+
+========================================================================
+PARTICION DE MUESTRAS (semilla 42, reproducible)
+========================================================================
+   BOSQUE_NW_02   entrenamiento  517 / validacion  173  (22 bloques de 3000 m, 16 a entrenamiento)
+   ESTEPA_NW_02   entrenamiento 2312 / validacion  771  (30 bloques de 3000 m, 24 a entrenamiento)
+
+SIGUIENTE PASO:  python TP2_08_exportar_para_gis.py
+(exporta las huellas a QGIS para que usted VERIFIQUE todo esto en un mapa)
+
+Productos del TP2 que consumen los practicos siguientes:
+Los productos que usaran el TP3, el TP4 y el TP5 son:
+   04_Subsets/04_Entrenamiento/ y 05_Validacion/
+   05_Resultados/04_Tablas/
+
+Recuerde declarar en el informe que GEDI es de sep. 2024 a mar. 2025 y
+NO es contemporaneo de la linea de base 2023-24 (el instrumento estuvo
+hibernado entre marzo de 2023 y abril de 2024).

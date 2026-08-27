@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: "Si usa este material, por favor cítelo como se indica."
+title: "IA Multisensor para Estimar Biomasa en Bosques Andinos y su Ecotono Bosque–Estepa: curso de posgrado con datos expuestos"
+type: dataset
+authors:
+  - family-names: "del Valle"
+    given-names: "Héctor Francisco"
+    orcid: "https://orcid.org/0000-0002-3329-1057"
+    affiliation: "CeReGeo–FCyT–UADER; LEMIV–FI–UNPSJB"
+    email: "hfdelvalle@gmail.com"
+version: "1.0.0"
+date-released: "2026-08-28"
+license: CC-BY-NC-SA-4.0
+repository-code: "https://github.com/delvalle-creator/IA-Biomasa-Multisensor-2026"
+keywords:
+  - biomasa aérea
+  - GEDI
+  - ICESat-2
+  - CCI Biomass
+  - SAR
+  - SAOCOM
+  - teledetección multisensor
+  - Patagonia

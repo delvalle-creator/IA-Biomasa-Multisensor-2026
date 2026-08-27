@@ -1,0 +1,23 @@
+# Entorno conda para los scripts de descarga y recorte.
+# Instalar Miniforge (https://conda-forge.org/download/) y luego:
+#   conda env create -f entorno_aoi.yml
+#   conda activate aoi
+name: aoi
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - gdal
+  - libgdal-jp2openjpeg   # lector JPEG-2000: obligatorio para Sentinel-2
+  - h5py                  # lectura de GEDI (.h5)
+  - pyproj                # reproyeccion a EPSG:32719
+  - requests              # descarga Sentinel (CDSE)
+  - earthaccess
+  - shapely               # medir cobertura AOI-huella antes de descargar
+  - pyshp                 # leer los shapefiles de cobertura BAP (TP2_09)
+  - numpy                 # calculo numerico: lo usan todos los scripts del TP5
+  - rasterio              # lectura de GeoTIFF (TP5_01, TP5_03, TP5_04, TP5_05)
+  - scikit-learn          # regresion Ridge y metricas (TP5_02)
+  - scipy                 # filtro de moteado por ventana movil (TP4_06)
+  - pandas                # tablas de la validacion estricta (TP5_06)
+  - pystac-client         # consulta del catalogo STAC de BIOMASS (TP1_08)

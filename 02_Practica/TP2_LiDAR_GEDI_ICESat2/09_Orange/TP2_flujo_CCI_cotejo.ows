@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='utf-8'?>
+<scheme version="2.0" title="TP2 · CCI Biomass contra GEDI L4A, huella por huella" description='El cotejo del anexo: cada punto es una huella GEDI con la biomasa L4A y la del mapa CCI 2024. La diagonal 1:1 se activa en Scatter Plot con "Show color regions" apagado y mirando los ejes iguales.'>
+	<nodes>
+		<node id="0" name="File" qualified_name="Orange.widgets.data.owfile.OWFile" project_name="Orange3" version="" title="Bosque" position="(90.0, 100.0)" />
+		<node id="1" name="File" qualified_name="Orange.widgets.data.owfile.OWFile" project_name="Orange3" version="" title="Estepa" position="(90.0, 240.0)" />
+		<node id="2" name="Concatenate" qualified_name="Orange.widgets.data.owconcatenate.OWConcatenate" project_name="Orange3" version="" title="Unir recintos" position="(260.0, 170.0)" />
+		<node id="3" name="Scatter Plot" qualified_name="Orange.widgets.visualize.owscatterplot.OWScatterPlot" project_name="Orange3" version="" title="CCI contra L4A (la dicotomía)" position="(470.0, 60.0)" />
+		<node id="4" name="Scatter Plot" qualified_name="Orange.widgets.visualize.owscatterplot.OWScatterPlot" project_name="Orange3" version="" title="pendiente contra CCI" position="(470.0, 155.0)" />
+		<node id="5" name="Correlations" qualified_name="Orange.widgets.data.owcorrelations.OWCorrelations" project_name="Orange3" version="" title="Correlaciones" position="(470.0, 250.0)" />
+		<node id="6" name="Feature Statistics" qualified_name="Orange.widgets.data.owfeaturestatistics.OWFeatureStatistics" project_name="Orange3" version="" title="Estadísticos por columna" position="(470.0, 345.0)" />
+		<node id="7" name="Data Table" qualified_name="Orange.widgets.data.owtable.OWTable" project_name="Orange3" version="" title="Tabla del cotejo" position="(470.0, 440.0)" />
+	</nodes>
+	<links>
+		<link id="0" source_node_id="0" sink_node_id="2" source_channel="Data" sink_channel="Additional Data" enabled="true" />
+		<link id="1" source_node_id="1" sink_node_id="2" source_channel="Data" sink_channel="Additional Data" enabled="true" />
+		<link id="2" source_node_id="2" sink_node_id="3" source_channel="Data" sink_channel="Data" enabled="true" />
+		<link id="3" source_node_id="2" sink_node_id="4" source_channel="Data" sink_channel="Data" enabled="true" />
+		<link id="4" source_node_id="2" sink_node_id="5" source_channel="Data" sink_channel="Data" enabled="true" />
+		<link id="5" source_node_id="2" sink_node_id="6" source_channel="Data" sink_channel="Data" enabled="true" />
+		<link id="6" source_node_id="2" sink_node_id="7" source_channel="Data" sink_channel="Data" enabled="true" />
+	</links>
+	<annotations>
+		<text id="0" type="text/plain" rect="(30.0, 330.0, 460.0, 110.0)" font-family="Helvetica" font-size="12">El cotejo del anexo: cada punto es una huella GEDI con la biomasa L4A y la del mapa CCI 2024. La diagonal 1:1 se activa en Scatter Plot con "Show color regions" apagado y mirando los ejes iguales.</text>
+	</annotations>
+	<thumbnail />
+	<node_properties>
+		<properties node_id="0" format="pickle">gAJ9cQAoWAwAAAByZWNlbnRfcGF0aHNxAV1xAmNvcmFuZ2V3aWRnZXQudXRpbHMuZmlsZWRpYWxvZ3MKUmVjZW50UGF0aApxAymBcQR9cQUoWAcAAABhYnNwYXRocQZYPgAAAC4uLzA1X1Jlc3VsdGFkb3MvMDRfVGFibGFzL1RQMl9jb3Rlam9fQ0NJX0w0QV9CT1NRVUVfTldfMDIuY3N2cQdYBgAAAHByZWZpeHEIWAcAAABiYXNlZGlycQlYBwAAAHJlbHBhdGhxClg+AAAALi4vMDVfUmVzdWx0YWRvcy8wNF9UYWJsYXMvVFAyX2NvdGVqb19DQ0lfTDRBX0JPU1FVRV9OV18wMi5jc3ZxC1gFAAAAdGl0bGVxDFgAAAAAcQ1YBQAAAHNoZWV0cQ5oDVgLAAAAZmlsZV9mb3JtYXRxD051YmFYCwAAAHJlY2VudF91cmxzcRBdcRFYBgAAAHNvdXJjZXESSwBYAwAAAHVybHETaA1YCwAAAF9fdmVyc2lvbl9fcRRLAXUu</properties>
+		<properties node_id="1" format="pickle">gAJ9cQAoWAwAAAByZWNlbnRfcGF0aHNxAV1xAmNvcmFuZ2V3aWRnZXQudXRpbHMuZmlsZWRpYWxvZ3MKUmVjZW50UGF0aApxAymBcQR9cQUoWAcAAABhYnNwYXRocQZYPgAAAC4uLzA1X1Jlc3VsdGFkb3MvMDRfVGFibGFzL1RQMl9jb3Rlam9fQ0NJX0w0QV9FU1RFUEFfTldfMDIuY3N2cQdYBgAAAHByZWZpeHEIWAcAAABiYXNlZGlycQlYBwAAAHJlbHBhdGhxClg+AAAALi4vMDVfUmVzdWx0YWRvcy8wNF9UYWJsYXMvVFAyX2NvdGVqb19DQ0lfTDRBX0VTVEVQQV9OV18wMi5jc3ZxC1gFAAAAdGl0bGVxDFgAAAAAcQ1YBQAAAHNoZWV0cQ5oDVgLAAAAZmlsZV9mb3JtYXRxD051YmFYCwAAAHJlY2VudF91cmxzcRBdcRFYBgAAAHNvdXJjZXESSwBYAwAAAHVybHETaA1YCwAAAF9fdmVyc2lvbl9fcRRLAXUu</properties>
+		<properties node_id="2" format="pickle">gAJ9cQAoWBQAAABhcHBlbmRfc291cmNlX2NvbHVtbnEBiFgSAAAAc291cmNlX2NvbHVtbl9yb2xlcQJLAFgQAAAAc291cmNlX2F0dHJfbmFtZXEDWAcAAAByZWNpbnRvcQRYCgAAAG1lcmdlX3R5cGVxBUsAWBQAAABpZ25vcmVfY29tcHV0ZV92YWx1ZXEGiFgLAAAAX192ZXJzaW9uX19xB0sBdS4=</properties>
+		<properties node_id="3" format="pickle">gAJ9cQAoWBAAAABjb250ZXh0X3NldHRpbmdzcQFdcQJjb3Jhbmdld2lkZ2V0LnNldHRpbmdzCkNvbnRleHQKcQMpgXEEfXEFKFgGAAAAdmFsdWVzcQZ9cQcoWAYAAABhdHRyX3hxCFgOAAAAYWdiZF9MNEFfTWdfaGFxCUtmhnEKWAYAAABhdHRyX3lxC1gSAAAAYWdiZF9DQ0kyMDI0X01nX2hhcQxLZoZxDVgKAAAAYXR0cl9jb2xvcnEOWAcAAAByZWNpbnRvcQ9LZYZxEFgLAAAAX192ZXJzaW9uX19xEUsFdVgKAAAAYXR0cmlidXRlc3ESfXETKFgLAAAAc2hvdF9udW1iZXJxFEsCWAMAAABsYXRxFUsCWAMAAABsb25xFksCWAQAAAByaDk4cRdLAlgQAAAAcGVuZGllbnRlX2dyYWRvc3EYSwJYDwAAAHByZWRpY3Rfc3RyYXR1bXEZSwFYCwAAAGFnYmRfb3JpZ2VucRpLAVgOAAAAYWdiZF9MNEFfTWdfaGFxG0sCWBIAAABhZ2JkX0NDSTIwMjRfTWdfaGFxHEsCaA9LAXVYBQAAAG1ldGFzcR19cR51YmFoEUsFdS4=</properties>
+		<properties node_id="4" format="pickle">gAJ9cQAoWBAAAABjb250ZXh0X3NldHRpbmdzcQFdcQJjb3Jhbmdld2lkZ2V0LnNldHRpbmdzCkNvbnRleHQKcQMpgXEEfXEFKFgGAAAAdmFsdWVzcQZ9cQcoWAYAAABhdHRyX3hxCFgQAAAAcGVuZGllbnRlX2dyYWRvc3EJS2aGcQpYBgAAAGF0dHJfeXELWBIAAABhZ2JkX0NDSTIwMjRfTWdfaGFxDEtmhnENWAoAAABhdHRyX2NvbG9ycQ5YBwAAAHJlY2ludG9xD0tlhnEQWAsAAABfX3ZlcnNpb25fX3ERSwV1WAoAAABhdHRyaWJ1dGVzcRJ9cRMoWAsAAABzaG90X251bWJlcnEUSwJYAwAAAGxhdHEVSwJYAwAAAGxvbnEWSwJYBAAAAHJoOThxF0sCWBAAAABwZW5kaWVudGVfZ3JhZG9zcRhLAlgPAAAAcHJlZGljdF9zdHJhdHVtcRlLAVgLAAAAYWdiZF9vcmlnZW5xGksBWA4AAABhZ2JkX0w0QV9NZ19oYXEbSwJYEgAAAGFnYmRfQ0NJMjAyNF9NZ19oYXEcSwJoD0sBdVgFAAAAbWV0YXNxHX1xHnViYWgRSwV1Lg==</properties>
+	</node_properties>
+</scheme>

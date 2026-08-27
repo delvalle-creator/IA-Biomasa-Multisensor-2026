@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+============================================================================
+ SAOCOM QUAD-POL -> DESCOMPOSICION POLARIMETRICA, CON gamma0
+============================================================================
+ PLANTILLA. Probar con UNA escena antes de lanzarla sobre las cinco.
+
+ PARA QUE
+ ::::::::
+ Separa los mecanismos de dispersion del bosque: superficie, doble rebote y
+ volumen. Es lo que permite decir POR QUE cambia el retorno, y no solo cuanto.
+ Con Freeman-Durden salen tres bandas; con Cloude-Pottier salen entropia,
+ anisotropia y alfa, que es lo que uso el taller DGSE de CONAE-Gulich.
+
+ LA DIFERENCIA IMPORTANTE CON EL GRAFO DE aquel TALLER
+ :::::::::::::::::::::::::::::::::::::::::::::::::::::
+ Alli la cadena era Read > Polarimetric-Decomposition > Terrain-Correction, y
+ alcanzaba porque el area de estudio es la llanura de Cordoba. En ladera andina
+ hacen falta dos pasos mas, y este grafo los tiene:
+
+   Orientation-Angle-Correction  antes del filtro, porque la inclinacion del
+       terreno rota el plano de polarizacion y sin corregirlo la descomposicion
+       SOBREESTIMA el volumen justo donde hay mas pendiente.
+
+   Terrain-Flattening  sobre la matriz. Se puede: el grafo oficial de ESA
+       TerrainFlattenedT3.xml hace Polarimetric-Matrices > Terrain-Flattening >
+       Terrain-Correction. Normaliza por el area iluminada real y deja el
+       resultado comparable entre laderas.
+
+ QUE DESCOMPOSICION ELEGIR
+ :::::::::::::::::::::::::
+ Abajo esta puesta Freeman-Durden, que da surface / double-bounce / volume y se
+ lee de forma directa en terminos de estructura del bosque. Para reproducir el
+ plano entropia-alfa de Cloude y Pottier (1997), cambiar el valor de
+ <decomposition> por "H-A-Alpha Quad Pol Decomposition". Las dos salen del mismo
+ T3 y se pueden correr una despues de la otra sin rehacer nada.
+
+
+ SI SE PASA A CLASIFICACION, HAY QUE CAMBIAR EL REMUESTREO
+ :::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+ Distincion que conviene tener clara, porque se confunden facil:
+
+   - Freeman-Durden y H-A-Alpha Quad Pol Decomposition producen bandas
+     CONTINUAS (potencias, entropia, anisotropia, angulo alfa). Para esas, el
+     Terrain-Correction final va con BILINEAR_INTERPOLATION, como esta abajo.
+
+   - Polarimetric-Classification (H Alpha Wishart y similares) produce CLASES
+     DISCRETAS: cada pixel lleva un numero de clase, no una magnitud. Ahi el
+     Terrain-Correction final tiene que ir con NEAREST_NEIGHBOUR en
+     <imgResamplingMethod>. Interpolar linealmente entre la clase 3 y la clase 7
+     da 5, que es una clase que ese pixel no es. El error es silencioso: la
+     imagen sale linda y los bordes entre clases quedan inventados.
+
+ Es el unico parametro que hay que tocar al cambiar de descomposicion a
+ clasificacion. El resto de la cadena es la misma.
+
+ SALIDA
+ ::::::
+ BEAM-DIMAP en la grilla comun (EPSG:32719, 10 m, bordes alineados).
+
+ USO
+ :::
+  gpt graph_saocom_quad_polarimetria.xml -Pentrada="RUTA/producto" \
+      -Pgeowkt="POLYGON((...))" -Psalida="RUTA/salida.dim"
+=======================================================================
+ RUTAS YA CARGADAS (28/07/2026). Las cajas Read y Write vienen con el
+ nombre escrito, para no tener que tipearlos uno por uno en cada corrida.
+ Si cambia de escena, lo unico que hay que editar es la fecha en los
+ nombres de salida. Convencion: sensor_fecha_contenido.dim
+=====
+
+ TERRAIN-FLATTENING QUITADO EL 28/07/2026, CON DATOS
+ ===================================================
+ Este grafo llevaba Terrain-Flattening sobre la matriz T3. Se saco. Medido sobre la
+ escena del 16/01/2024, comparando la fraccion de volumen de Freeman-Durden contra el
+ RVI recalculado, pixel a pixel:
+
+     CON flattening ... correlacion 0,227   recorrido 0,173 -> 0,226
+     SIN flattening ... correlacion 0,372   recorrido 0,136 -> 0,220
+
+ Quitarlo mejora la correlacion un 64 % y ensancha la respuesta. El flattening estaba
+ amortiguando la señal polarimetrica.
+
+ OJO: no resuelve todo. Aun sin flattening, el volumen domina en solo el 0,3 % de los
+ pixeles, y las descomposiciones de MODELO (Freeman, Yamaguchi, van Zyl, Cloude,
+ Model-free) no responden al contenido polarimetrico. La que si responde es H-A-Alpha,
+ que no supone ningun modelo. Ver la seccion 36 de CONTEXTO_IA.md.
+
+ Para BIOMASA conviene apoyarse en H-A-Alpha y en los indices, y usar esta salida como
+ ilustracion cualitativa.
+-->
+<graph id="SAOCOM_quad_polarimetria">
+  <version>1.0</version>
+
+  <node id="Read">
+    <operator>Read</operator>
+    <sources/>
+    <parameters><file>C:\Temp\CURSO_BIOMASA_2026\02_Practica\00_COMUN\08_Originales_crudos\01_base\SAOCOM\EOL1ASARSAO1B15229867\S1B_OPER_SAR_EOSSP__CORE_L1A_OLF_20260715T181612.xemt</file></parameters>
+  </node>
+
+  <node id="Calibration">
+    <operator>Calibration</operator>
+    <sources><sourceProduct refid="Read"/></sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <outputImageInComplex>true</outputImageInComplex>
+      <outputImageScaleInDb>false</outputImageScaleInDb>
+      <selectedPolarisations/>
+    
+      <sourceBands/>
+      <auxFile>Latest Auxiliary File</auxFile>
+      <externalAuxFile/>
+      <createGammaBand>false</createGammaBand>
+      <createBetaBand>false</createBetaBand>
+    </parameters>
+  </node>
+
+  <node id="Subset">
+    <operator>Subset</operator>
+    <sources><sourceProduct refid="Calibration"/></sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <geoRegion>POLYGON((-71.6200 -42.5300, -71.3900 -42.5300, -71.3900 -42.7200, -71.6200 -42.7200, -71.6200 -42.5300))</geoRegion>
+      <copyMetadata>true</copyMetadata>
+    
+      <sourceBands/>
+      <region>0,0,0,0</region>
+      <subSamplingX>1</subSamplingX>
+      <subSamplingY>1</subSamplingY>
+      <fullSwath>false</fullSwath>
+      <tiePointGridNames/>
+    </parameters>
+  </node>
+
+  <node id="Polarimetric-Matrices">
+    <operator>Polarimetric-Matrices</operator>
+    <sources><sourceProduct refid="Subset"/></sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <matrix>T3</matrix>
+    </parameters>
+  </node>
+
+  <node id="Orientation-Angle-Correction">
+    <operator>Orientation-Angle-Correction</operator>
+    <sources><sourceProduct refid="Polarimetric-Matrices"/></sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <outputOrientationAngle>false</outputOrientationAngle>
+    </parameters>
+  </node>
+
+  <node id="Polarimetric-Speckle-Filter">
+    <operator>Polarimetric-Speckle-Filter</operator>
+    <sources><sourceProduct refid="Orientation-Angle-Correction"/></sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <filter>Refined Lee Filter</filter>
+      <filterSize>5</filterSize>
+      <numLooksStr>1</numLooksStr>
+      <windowSize>5x5</windowSize>
+      <targetWindowSizeStr>3x3</targetWindowSizeStr>
+      <anSize>50</anSize>
+      <sigmaStr>0.9</sigmaStr>
+    
+      <patchSizeStr>5</patchSizeStr>
+      <scaleSizeStr>1</scaleSizeStr>
+      <searchWindowSizeStr>15</searchWindowSizeStr>
+    </parameters>
+  </node>
+
+  <!-- TERRAIN FLATTENING sobre la matriz. Es el paso que el grafo del taller
+       DGSE no necesitaba y este si. -->
+  
+
+  <!-- Para el plano H/alfa de Cloude y Pottier, cambiar el valor de abajo por
+       "H-A-Alpha Quad Pol Decomposition". -->
+  <node id="Polarimetric-Decomposition">
+    <operator>Polarimetric-Decomposition</operator>
+    <sources><sourceProduct refid="Polarimetric-Speckle-Filter"/></sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <decomposition>Freeman-Durden Decomposition</decomposition>
+      <windowSize>5</windowSize>
+      <outputType>Polarimetric</outputType>
+    
+      <outputHAAlpha>false</outputHAAlpha>
+      <outputBetaDeltaGammaLambda>false</outputBetaDeltaGammaLambda>
+      <outputAlpha123>false</outputAlpha123>
+      <outputLambda123>false</outputLambda123>
+      <outputTouziParamSet0>false</outputTouziParamSet0>
+      <outputTouziParamSet1>false</outputTouziParamSet1>
+      <outputTouziParamSet2>false</outputTouziParamSet2>
+      <outputTouziParamSet3>false</outputTouziParamSet3>
+    </parameters>
+  </node>
+
+
+  <!-- OJO con imgResamplingMethod: BILINEAR sirve para bandas continuas
+       (Freeman-Durden, H-A-Alpha). Si se reemplaza la descomposicion por
+       Polarimetric-Classification, cambiarlo por NEAREST_NEIGHBOUR, porque las
+       clases son etiquetas y no se interpolan. Ver la nota del encabezado. -->
+  <node id="Terrain-Correction">
+    <operator>Terrain-Correction</operator>
+    <sources><sourceProduct refid="Polarimetric-Decomposition"/></sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <demName>Copernicus 30m Global DEM</demName>
+      <demResamplingMethod>BILINEAR_INTERPOLATION</demResamplingMethod>
+      <imgResamplingMethod>BILINEAR_INTERPOLATION</imgResamplingMethod>
+      <pixelSpacingInMeter>10.0</pixelSpacingInMeter>
+      <pixelSpacingInDegree>8.983152841195213e-05</pixelSpacingInDegree>
+      <mapProjection>EPSG:32719</mapProjection>
+      <nodataValueAtSea>false</nodataValueAtSea>
+      <alignToStandardGrid>true</alignToStandardGrid>
+      <standardGridOriginX>5.0</standardGridOriginX>
+      <standardGridOriginY>5.0</standardGridOriginY>
+      <saveLocalIncidenceAngle>true</saveLocalIncidenceAngle>
+      <saveSelectedSourceBand>true</saveSelectedSourceBand>
+    
+      <sourceBands/>
+      <externalDEMFile/>
+      <externalDEMNoDataValue>0.0</externalDEMNoDataValue>
+      <externalDEMApplyEGM>true</externalDEMApplyEGM>
+      <saveDEM>false</saveDEM>
+      <saveLatLon>false</saveLatLon>
+      <saveIncidenceAngleFromEllipsoid>false</saveIncidenceAngleFromEllipsoid>
+      <saveProjectedLocalIncidenceAngle>false</saveProjectedLocalIncidenceAngle>
+      <saveLayoverShadowMask>true</saveLayoverShadowMask>
+      <applyRadiometricNormalization>false</applyRadiometricNormalization>
+      <saveSigmaNought>false</saveSigmaNought>
+      <saveGammaNought>false</saveGammaNought>
+      <saveBetaNought>false</saveBetaNought>
+      <incidenceAngleForSigma0>Use projected local incidence angle from DEM</incidenceAngleForSigma0>
+      <incidenceAngleForGamma0>Use projected local incidence angle from DEM</incidenceAngleForGamma0>
+      <auxFile>Latest Auxiliary File</auxFile>
+      <externalAuxFile/>
+    </parameters>
+  </node>
+
+  <node id="Write">
+    <operator>Write</operator>
+    <sources><sourceProduct refid="Terrain-Correction"/></sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <file>C:\Temp\CURSO_BIOMASA_2026\02_Practica\TP4_Radar_SAR\05_Resultados\SAOCOM_16ene2024_freeman_conTF.dim</file>
+      <formatName>BEAM-DIMAP</formatName>
+    </parameters>
+  </node>
+  <applicationData id="Presentation">
+    <Description/>
+    <node id="Read">
+      <displayPosition x="15.0" y="20.0"/>
+    </node>
+    <node id="Calibration">
+      <displayPosition x="220.0" y="20.0"/>
+    </node>
+    <node id="Subset">
+      <displayPosition x="425.0" y="20.0"/>
+    </node>
+    <node id="Polarimetric-Matrices">
+      <displayPosition x="15.0" y="82.0"/>
+    </node>
+    <node id="Orientation-Angle-Correction">
+      <displayPosition x="425.0" y="82.0"/>
+    </node>
+    <node id="Polarimetric-Speckle-Filter">
+      <displayPosition x="15.0" y="144.0"/>
+    </node>
+    <node id="Polarimetric-Decomposition">
+      <displayPosition x="220.0" y="144.0"/>
+    </node>
+    <node id="Terrain-Correction">
+      <displayPosition x="425.0" y="144.0"/>
+    </node>
+    <node id="Write">
+      <displayPosition x="15.0" y="206.0"/>
+    </node>
+  </applicationData>
+</graph>

@@ -1,0 +1,1 @@
+python: can't open file 'C:\\Temp\\CURSO_BIOMASA_2026\\TP2_LiDAR_GEDI\\03_Scripts\\02_Procesamiento\\biomasa_GEDI\\TP2_04_dem_y_pendiente.py': [Errno 2] No such file or directory

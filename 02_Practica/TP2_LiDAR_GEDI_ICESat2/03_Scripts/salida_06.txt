@@ -1,0 +1,81 @@
+
+TP2_06_metricas_estructura.py   ---> SEXTO script del TP2.
+
+QUE HACE
+--------
+Une, para cada disparo valido, las metricas de altura del L2A con las de
+estructura del L2B, y compara el bosque con el ecotono de estepa.
+
+QUE SIGNIFICA CADA METRICA (esto es lo importante del practico)
+---------------------------------------------------------------
+Del producto L2A, las metricas 'rh' (relative height) describen la forma
+vertical de la vegetacion. rh95 es la altura por debajo de la cual vuelve el
+95 % de la energia: en la practica, la ALTURA DEL DOSEL. Se prefiere rh95 o rh98
+antes que rh100 porque el 100 % es sensible al ruido: una sola hoja alta, o un
+pajaro, corren el maximo varios metros.
+
+  rh25, rh50, rh75  ->  como se reparte la vegetacion en altura
+  rh95, rh98        ->  altura del dosel
+
+Del producto L2B:
+
+  cover       fraccion del suelo cubierta por vegetacion vista desde arriba (0 a 1)
+  pai         indice de area foliar de la planta: metros cuadrados de superficie
+              vegetal (hojas y ramas) por metro cuadrado de suelo. A mas denso,
+              mayor pai
+  fhd_normal  diversidad de alturas del follaje. Alto = muchos estratos (un
+              bosque maduro con sotobosque, arboles medios y emergentes);
+              bajo = un solo estrato (un pastizal o una plantacion pareja)
+
+POR QUE ESTO ANTECEDE A LA BIOMASA
+----------------------------------
+La biomasa no se mide desde el espacio: se INFIERE. Y se infiere de estas
+metricas, sobre todo de la altura y de la densidad. Un arbol alto y denso tiene
+mas madera que uno bajo y ralo. Por eso, antes de estimar biomasa (TP2_07), hay
+que entender que miden estas variables y comprobar que se comportan como
+esperamos: el bosque debe dar alturas y pai claramente mayores que la estepa. Si
+eso no ocurre, hay un error en algun paso anterior.
+
+ENTRADA   04_Subsets/01_Bosque | 02_Estepa/*.csv  (salida del TP2_05)
+          02_Insumos/GEDI_L2B/*.csv
+SALIDA    04_Subsets/01_Bosque | 02_Estepa/*_con_estructura.csv
+          05_Resultados/04_Tablas/altura_dosel_<AOI>.csv
+          05_Resultados/06_Control_calidad/comparacion_bosque_estepa.csv
+
+USO (entorno conda 'aoi'):   python TP2_06_metricas_estructura.py
+
+========================================================================
+GEDI_BOSQUE_NW_02_validos.csv
+========================================================================
+   disparos con estructura :   690  (sin par en L2B: 0)
+   metrica           mediana      p90   maximo
+   altura dosel (m)     5.07    20.50    35.57
+   rh98 (m)             6.17    21.75    36.54
+   cobertura (0-1)      0.15     0.85     0.94
+   pai                  0.34     3.80     5.79
+   fhd (estratos)       1.92     2.99     3.32
+
+========================================================================
+GEDI_ESTEPA_NW_02_validos.csv
+========================================================================
+   disparos con estructura :  3083  (sin par en L2B: 1)
+   metrica           mediana      p90   maximo
+   altura dosel (m)     2.62     5.11    20.65
+   rh98 (m)             3.28     6.24    22.30
+   cobertura (0-1)      0.04     0.16     0.96
+   pai                  0.08     0.35     6.39
+   fhd (estratos)       1.46     1.97     2.96
+
+========================================================================
+COMPARACION BOSQUE vs ESTEPA  (medianas)
+========================================================================
+   metrica                    bosque     estepa      razon
+   altura dosel (m)             5.07       2.62       1.9x
+   cobertura                    0.15       0.04       4.2x
+   pai                          0.34       0.08       4.5x
+   fhd (estratos)               1.92       1.46       1.3x
+
+Si el bosque NO da alturas y pai claramente mayores que la estepa,
+hay un error en algun paso anterior: revise el filtrado.
+
+SIGUIENTE PASO:  python TP2_07_biomasa_referencia.py

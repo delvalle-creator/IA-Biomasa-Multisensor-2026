@@ -1,0 +1,58 @@
+
+TP2_01c_reextraer_l4a.py   ---> vuelve a leer los .h5 del L4A que YA ESTAN.
+
+QUE HACE Y QUE NO HACE
+----------------------
+NO se conecta a internet. NO pide credenciales de Earthdata. NO descarga nada.
+Lee los granulos GEDI L4A que ya estan guardados en
+
+    00_COMUN/08_Orig/02_pre/GEDI_L4A/<AOI>/*.h5
+
+y vuelve a escribir el CSV de disparos con la lista COMPLETA de campos, la que
+esta en funciones/gedi_l4a.py. Tarda unos minutos y no consume ancho de banda.
+
+CUANDO SE CORRE
+---------------
+Cada vez que se agregue o se saque un campo de la lista de gedi_l4a.py. La
+descarga -TP2_01b- solo hace falta si cambia el PERIODO, el RECINTO o la version
+del producto. Mientras los .h5 sigan en disco, este script alcanza.
+
+POR QUE ESTO IMPORTA
+--------------------
+Los granulos pesan 2,7 GB y bajarlos lleva horas. Son el dato crudo del que sale
+todo lo demas: se guardan y no se borran nunca. Si alguna vez faltan, hay que
+volver a bajarlos con TP2_01b, y recien entonces.
+
+SALIDA    TP2_LiDAR_GEDI/02_Insumos/GEDI_L4A/GEDI04_A_<AOI>_shots15km.csv
+          (se sobrescribe; el anterior se guarda con el sufijo .previo)
+
+USO (entorno conda 'aoi'):   python TP2_01c_reextraer_l4a.py
+
+   BOSQUE_NW_02    9 granulos en C:\Temp\BIOMASA_BOSQUE_ESTEPA\00_COMUN\08_Orig\02_pre\GEDI_L4A\BOSQUE_NW_02
+   ESTEPA_NW_02   10 granulos en C:\Temp\BIOMASA_BOSQUE_ESTEPA\00_COMUN\08_Orig\02_pre\GEDI_L4A\ESTEPA_NW_02
+
+=== BOSQUE_NW_02 ===
+   copia del CSV anterior -> GEDI04_A_BOSQUE_NW_02_shots15km.csv.previo
+   9 granulos leidos, 8 aportaron disparos dentro del recinto
+   6287 disparos  ->  GEDI04_A_BOSQUE_NW_02_shots15km.csv
+   columnas escritas: 27  (agbd, agbd_se, agbd_pi_lower, agbd_pi_upper, l4_quality_flag, l2_quality_flag, algorithm_run_flag, predictor_limit_flag, response_limit_flag, surface_flag, selected_algorithm, degrade_flag, sensitivity, solar_elevation, predict_stratum, pft_class, region_class, leaf_off_flag, landsat_treecover, urban_proportion)
+
+=== ESTEPA_NW_02 ===
+   copia del CSV anterior -> GEDI04_A_ESTEPA_NW_02_shots15km.csv.previo
+   10 granulos leidos, 10 aportaron disparos dentro del recinto
+   11223 disparos  ->  GEDI04_A_ESTEPA_NW_02_shots15km.csv
+   columnas escritas: 27  (agbd, agbd_se, agbd_pi_lower, agbd_pi_upper, l4_quality_flag, l2_quality_flag, algorithm_run_flag, predictor_limit_flag, response_limit_flag, surface_flag, selected_algorithm, degrade_flag, sensitivity, solar_elevation, predict_stratum, pft_class, region_class, leaf_off_flag, landsat_treecover, urban_proportion)
+
+========================================================================
+17510 disparos extraidos en total.
+
+SIGUIENTE PASO, en este orden:
+   python TP2_10_auditoria_L4A.py
+      (ahora si puede decir cuantas huellas se caen por predictor_limit,
+       por response_limit y por algorithm_run, y cuantas por hoja caida)
+   python TP2_07_biomasa_referencia.py
+   python TP2_09_cobertura_BAP.py
+BOSQUE_NW_02: sensibilidad minima entre las aceptadas = 0.9501 (el umbral que se usa aca es 0.95)
+ESTEPA_NW_02: sensibilidad minima entre las aceptadas = 0.9500 (el umbral que se usa aca es 0.95)
+tabla  TP2_rechazo_L4A_por_cobertura.csv  (25 filas)
+tabla  TP2_estrato_L4A_vs_cobertura.csv  (32 filas)

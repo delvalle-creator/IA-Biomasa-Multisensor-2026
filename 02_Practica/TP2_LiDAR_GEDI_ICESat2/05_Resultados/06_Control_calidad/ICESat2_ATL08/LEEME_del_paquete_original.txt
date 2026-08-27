@@ -1,0 +1,25 @@
+PAQUETE ICESat-2 / ATLAS — BOSQUE Y ESTEPA
+
+Contenido
+1. ICESat2_ATLAS_BOSQUE_ESTEPA_CORREGIDO.pptx
+   Presentación con perfiles ATL08 de BOSQUE_NW_02 y ESTEPA_NW_02 y una lámina sobre el incendio de diciembre de 2025–enero de 2026.
+
+2. ATL08_BOSQUE_ESTEPA_analisis.xlsx
+   Libro de resultados del análisis anterior.
+
+3. ATL08_BOSQUE_ESTEPA_QGIS.gpkg
+   Base geográfica para inspección en QGIS.
+
+4. CSV operacionales y conservadores
+   Segmentos ATL08 filtrados para cada AOI.
+
+5. resumenes_csv
+   Estadísticos, comparaciones y controles de calidad utilizados en la presentación académica.
+
+6. KML
+   BOSQUE_NW_02.kml y ESTEPA_NW_02.kml.
+
+Corrección metodológica principal
+ATL08 puede registrar reducciones de altura o pérdida de estructura provocadas por incendios y deforestación. Sin embargo, las adquisiciones disponibles alrededor del incendio de BOSQUE_NW_02 no constituyen una comparación temporal directa: el 09/12/2025 hay 45 segmentos operacionales del RGT 1314 y el 09/02/2026 solo 3 segmentos del RGT 872. Por eso no debe interpretarse la diferencia entre sus medianas como ausencia o magnitud del daño.
+
+Para cuantificar el efecto se recomienda delimitar la cicatriz con dNBR/RdNBR, intersectar los segmentos ATL08 con el área quemada y comparar huellas espaciales equivalentes.

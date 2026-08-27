@@ -1,0 +1,49 @@
+<graph id="SAOCOM_L1A_recorte_crudo">
+  <!-- RECORTE CRUDO de SAOCOM L1A (banda L, dual-pol HH/HV).
+       Conserva la geometria original y la informacion compleja. Solo se recorta
+       la region que cubre el AOI (con margen), sin calibrar ni geocodificar.
+       Si el operador Subset no lograra reducir el producto -porque la
+       geocodificacion aproximada del L1A no lo permita-, el script lo advierte
+       y el original de 04_descargas sigue siendo la fuente valida. -->
+  <version>1.0</version>
+  <node id="Read">
+    <operator>Read</operator>
+    <sources/>
+    <parameters><file/></parameters>
+  </node>
+  <node id="Subset">
+    <operator>Subset</operator>
+    <sources><sourceProduct refid="Read"/></sources>
+    <parameters>
+      <geoRegion/>
+      <copyMetadata>true</copyMetadata>
+    
+      <sourceBands/>
+      <region>0,0,0,0</region>
+      <subSamplingX>1</subSamplingX>
+      <subSamplingY>1</subSamplingY>
+      <fullSwath>false</fullSwath>
+      <tiePointGridNames/>
+    </parameters>
+  </node>
+  <node id="Write">
+    <operator>Write</operator>
+    <sources><sourceProduct refid="Subset"/></sources>
+    <parameters>
+      <file/>
+      <formatName>BEAM-DIMAP</formatName>
+    </parameters>
+  </node>
+  <applicationData id="Presentation">
+    <Description/>
+    <node id="Read">
+      <displayPosition x="15.0" y="20.0"/>
+    </node>
+    <node id="Subset">
+      <displayPosition x="220.0" y="20.0"/>
+    </node>
+    <node id="Write">
+      <displayPosition x="425.0" y="20.0"/>
+    </node>
+  </applicationData>
+</graph>

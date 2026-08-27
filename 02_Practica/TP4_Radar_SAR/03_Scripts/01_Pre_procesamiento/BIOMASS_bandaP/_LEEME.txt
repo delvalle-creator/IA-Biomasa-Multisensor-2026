@@ -1,0 +1,17 @@
+SNAP — Procesamiento en ESA SNAP
+- Guia_SNAP_BIOMASS.pdf : abrir/visualizar un 1S + los dos grafos automatizables.
+- procesamiento_BIOMASS.xml : GRAFO A (intensidad, gamma0):
+    Read -> Calibration(beta0) -> Multilook -> Speckle -> TERRAIN FLATTENING
+    -> Terrain-Correction -> Write (BEAM-DIMAP, EPSG:32719 a 10 m).
+- procesamiento_polarimetrico_BIOMASS.xml : GRAFO B (polarimetrico, bosque):
+    Read -> Polarimetric-Matrices(C3) -> Speckle pol -> Freeman-Durden
+    -> Terrain-Correction -> Write (BEAM-DIMAP, 3 bandas).
+- esquema_grafo.png / esquema_grafo_polarimetrico.png : diagramas de cada grafo.
+
+DOS COSAS QUE NO HAY QUE CAMBIAR SIN PENSARLO
+- El grafo A calibra a BETA0, no a sigma0, porque el Terrain Flattening lo exige
+  y porque sin flattening la pendiente falsea el retorno tanto como lo hace la
+  biomasa. El resto del practico (Sentinel-1, SAOCOM) tambien trabaja en gamma0:
+  un producto en sigma0 no seria comparable con ellos.
+- La salida va en escala LINEAL, no en dB. Todo promedio o estadistica se hace
+  en lineal; el paso a dB (10*log10) es solo para mirar y va al final.

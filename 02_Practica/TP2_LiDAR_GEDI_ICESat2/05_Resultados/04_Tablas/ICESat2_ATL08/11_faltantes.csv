@@ -1,0 +1,23 @@
+﻿AOI,Campo,Faltantes,% faltante
+Bosque,h_canopy_m,643,3.634000226065333
+Bosque,h_max_canopy_m,643,3.634000226065333
+Bosque,h_te_best_fit_m,0,0.0
+Bosque,h_canopy_uncertainty_m,2854,16.129761501073812
+Bosque,h_te_uncertainty_m,2222,12.557929241550807
+Bosque,rh50_m,17694,100.0
+Bosque,rh75_m,17694,100.0
+Bosque,rh90_m,17694,100.0
+Bosque,rh95_m,17694,100.0
+Bosque,rh98_m,17694,100.0
+Bosque,rh100_m,17694,100.0
+Estepa,h_canopy_m,3716,18.66211329851346
+Estepa,h_max_canopy_m,3716,18.66211329851346
+Estepa,h_te_best_fit_m,0,0.0
+Estepa,h_canopy_uncertainty_m,4637,23.287464845319406
+Estepa,h_te_uncertainty_m,931,4.675572519083969
+Estepa,rh50_m,19912,100.0
+Estepa,rh75_m,19912,100.0
+Estepa,rh90_m,19912,100.0
+Estepa,rh95_m,19912,100.0
+Estepa,rh98_m,19912,100.0
+Estepa,rh100_m,19912,100.0

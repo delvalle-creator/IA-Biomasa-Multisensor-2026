@@ -1,0 +1,223 @@
+<!--
+============================================================================
+ SAOCOM TNA (TopSAR Narrow) DE LA ESTEPA -> INDICES POLARIMETRICOS
+============================================================================
+ Encabezado escrito el 31/07/2026. Era el unico grafo del conjunto que no lo
+ tenia, y es el homologo, para el sitio de estepa, de
+ graph_saocom_quad_indices.xml, que es el mejor documentado de todos.
+
+   Read > BandSelect > Calibration(complejo) > Polarimetric-Parameters
+        > Terrain-Correction > Subset > Write
+
+ DOS PARTICULARIDADES QUE NO SON ERRORES, aunque lo parezcan al leerlo de
+ corrido, y que por eso conviene dejar escritas:
+
+ 1) LA PROYECCION VA COMO TEXTO COMPLETO, no como EPSG:32719. Es la misma
+    proyeccion, WGS 84 / UTM zona 19 Sur, y por lo tanto el resultado cae en la
+    misma malla que el resto. La diferencia es de legibilidad: si alguien busca
+    EPSG:32719 con una busqueda de texto sobre los catorce grafos, este no
+    aparece. Se dejo como estaba porque cambiarlo obliga a reprocesar.
+
+ 2) EL RECORTE VA DESPUES DEL TERRAIN-CORRECTION, y no antes como en el grafo
+    del bosque. Cuesta tiempo de computo, porque la escena atraviesa los
+    operadores caros antes de reducirse. En la practica el exceso es acotado:
+    el nodo Read ya limita la region de pixeles a 3724 x 8760 y el BandSelect ya
+    se queda con una sola sub-franja, la S4.
+
+ LO QUE VALE DEL GRAFO DEL BOSQUE Y TAMBIEN VALE ACA:
+   - La banda RVI que escribe Polarimetric-Parameters NO es el RVI. Medido, la
+     correlacion con el RVI verdadero es 0,108. Se calcula con Band Maths:
+         8 * HHVVRatio / (HHHVRatio * HHVVRatio + HHHVRatio + 2 * HHVVRatio)
+   - No lleva Polarimetric-Matrices, ni correccion de angulo de orientacion, ni
+     filtro de speckle polarimetrico, y no es una simplificacion: el operador
+     Polarimetric-Parameters no acepta matrices de entrada. El filtrado esta
+     adentro, en useMeanMatrix con ventana 5x5.
+   - Las demas bandas (RFDI, CSI, VSI, BMI, altura de pedestal, Span) salieron
+     en rango.
+
+ EL LECTOR DE SAOCOM TNA TIENE UNA TRAMPA descrita en CONTEXTO_IA.md: SNAP le
+ asigna al producto UNA SOLA geocodificacion, no una por sub-franja, de modo que
+ recortar por coordenadas antes del Terrain-Correction devuelve un recorte en el
+ lugar equivocado y sin mensaje de error. Para saber que sub-franja cubre el
+ sitio se usa graph_saocom_tna_localizar.xml.
+-->
+<graph id="SAOCOM_TNA_indices_polarimetricos">
+  <version>1.0</version>
+  <node id="Read">
+    <operator>Read</operator>
+    <sources/>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <useAdvancedOptions>false</useAdvancedOptions>
+      <file>C:\Temp\CURSO_BIOMASA_2026\02_Practica\00_COMUN\08_Originales_crudos\01_base\SAOCOM\EOL1ASARSAO1A15230003\S1A_OPER_SAR_EOSSP__CORE_L1A_OLF_20260715T181426.xemt</file>
+      <copyMetadata>true</copyMetadata>
+      <bandNames/>
+      <pixelRegion>0,0,3724,8760</pixelRegion>
+      <maskNames/>
+    </parameters>
+  </node>
+  <node id="BandSelect">
+    <operator>BandSelect</operator>
+    <sources>
+      <sourceProduct refid="Read"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <selectedPolarisations/>
+      <selectedSubImages/>
+      <sourceBands/>
+      <bandNamePattern>[iq]_S4_(HH|HV|VH|VV)</bandNamePattern>
+      <sourceMasks/>
+      <includeReferences>false</includeReferences>
+    </parameters>
+  </node>
+  <node id="Calibration">
+    <operator>Calibration</operator>
+    <sources>
+      <sourceProduct refid="BandSelect"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <sourceBands/>
+      <auxFile>Latest Auxiliary File</auxFile>
+      <externalAuxFile/>
+      <outputImageInComplex>true</outputImageInComplex>
+      <outputImageScaleInDb>false</outputImageScaleInDb>
+      <createGammaBand>false</createGammaBand>
+      <createBetaBand>false</createBetaBand>
+      <selectedPolarisations/>
+      <outputSigmaBand>false</outputSigmaBand>
+      <outputGammaBand>false</outputGammaBand>
+      <outputBetaBand>false</outputBetaBand>
+    </parameters>
+  </node>
+  <node id="Polarimetric-Parameters">
+    <operator>Polarimetric-Parameters</operator>
+    <sources>
+      <sourceProduct refid="Calibration"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <useMeanMatrix>true</useMeanMatrix>
+      <windowSizeXStr>5</windowSizeXStr>
+      <windowSizeYStr>5</windowSizeYStr>
+      <outputSpan>true</outputSpan>
+      <outputPedestalHeight>true</outputPedestalHeight>
+      <outputRVI>true</outputRVI>
+      <outputRFDI>true</outputRFDI>
+      <outputCSI>true</outputCSI>
+      <outputVSI>true</outputVSI>
+      <outputBMI>true</outputBMI>
+      <outputITI>false</outputITI>
+      <outputHHVVRatio>true</outputHHVVRatio>
+      <outputHHHVRatio>true</outputHHHVRatio>
+      <outputVVVHRatio>true</outputVVVHRatio>
+    </parameters>
+  </node>
+  <node id="Terrain-Correction">
+    <operator>Terrain-Correction</operator>
+    <sources>
+      <sourceProduct refid="Polarimetric-Parameters"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <sourceBands/>
+      <demName>Copernicus 30m Global DEM</demName>
+      <externalDEMFile/>
+      <externalDEMNoDataValue>0.0</externalDEMNoDataValue>
+      <externalDEMApplyEGM>true</externalDEMApplyEGM>
+      <demResamplingMethod>BILINEAR_INTERPOLATION</demResamplingMethod>
+      <imgResamplingMethod>BILINEAR_INTERPOLATION</imgResamplingMethod>
+      <pixelSpacingInMeter>10.0</pixelSpacingInMeter>
+      <pixelSpacingInDegree>8.983152841195213E-5</pixelSpacingInDegree>
+      <mapProjection>PROJCS[&quot;WGS 84 / UTM zone 19S&quot;, &#xd;
+  GEOGCS[&quot;WGS 84&quot;, &#xd;
+    DATUM[&quot;World Geodetic System 1984&quot;, &#xd;
+      SPHEROID[&quot;WGS 84&quot;, 6378137.0, 298.257223563, AUTHORITY[&quot;EPSG&quot;,&quot;7030&quot;]], &#xd;
+      AUTHORITY[&quot;EPSG&quot;,&quot;6326&quot;]], &#xd;
+    PRIMEM[&quot;Greenwich&quot;, 0.0, AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]], &#xd;
+    UNIT[&quot;degree&quot;, 0.017453292519943295], &#xd;
+    AXIS[&quot;Geodetic longitude&quot;, EAST], &#xd;
+    AXIS[&quot;Geodetic latitude&quot;, NORTH], &#xd;
+    AUTHORITY[&quot;EPSG&quot;,&quot;4326&quot;]], &#xd;
+  PROJECTION[&quot;Transverse_Mercator&quot;], &#xd;
+  PARAMETER[&quot;central_meridian&quot;, -69.0], &#xd;
+  PARAMETER[&quot;latitude_of_origin&quot;, 0.0], &#xd;
+  PARAMETER[&quot;scale_factor&quot;, 0.9996], &#xd;
+  PARAMETER[&quot;false_easting&quot;, 500000.0], &#xd;
+  PARAMETER[&quot;false_northing&quot;, 10000000.0], &#xd;
+  UNIT[&quot;m&quot;, 1.0], &#xd;
+  AXIS[&quot;Easting&quot;, EAST], &#xd;
+  AXIS[&quot;Northing&quot;, NORTH], &#xd;
+  AUTHORITY[&quot;EPSG&quot;,&quot;32719&quot;]]</mapProjection>
+      <alignToStandardGrid>true</alignToStandardGrid>
+      <standardGridOriginX>5.0</standardGridOriginX>
+      <standardGridOriginY>5.0</standardGridOriginY>
+      <nodataValueAtSea>false</nodataValueAtSea>
+      <saveDEM>false</saveDEM>
+      <saveLatLon>false</saveLatLon>
+      <saveIncidenceAngleFromEllipsoid>false</saveIncidenceAngleFromEllipsoid>
+      <saveLocalIncidenceAngle>true</saveLocalIncidenceAngle>
+      <saveProjectedLocalIncidenceAngle>false</saveProjectedLocalIncidenceAngle>
+      <saveSelectedSourceBand>true</saveSelectedSourceBand>
+      <saveLayoverShadowMask>true</saveLayoverShadowMask>
+      <outputComplex>false</outputComplex>
+      <applyRadiometricNormalization>false</applyRadiometricNormalization>
+      <saveSigmaNought>false</saveSigmaNought>
+      <saveGammaNought>false</saveGammaNought>
+      <saveBetaNought>false</saveBetaNought>
+      <incidenceAngleForSigma0>Use projected local incidence angle from DEM</incidenceAngleForSigma0>
+      <incidenceAngleForGamma0>Use projected local incidence angle from DEM</incidenceAngleForGamma0>
+      <auxFile>Latest Auxiliary File</auxFile>
+      <externalAuxFile/>
+    </parameters>
+  </node>
+  <node id="Subset">
+    <operator>Subset</operator>
+    <sources>
+      <sourceProduct refid="Terrain-Correction"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <sourceBands/>
+      <tiePointGrids/>
+      <region>0,0,0,0</region>
+      <referenceBand/>
+      <geoRegion>POLYGON ((-71.21369934082031 -42.70840072631836, -71.0259017944336 -42.70840072631836, -71.0259017944336 -42.8468017578125, -71.21369934082031 -42.8468017578125, -71.21369934082031 -42.70840072631836, -71.21369934082031 -42.70840072631836))</geoRegion>
+      <subSamplingX>1</subSamplingX>
+      <subSamplingY>1</subSamplingY>
+      <fullSwath>false</fullSwath>
+      <vectorFile/>
+      <polygonRegion/>
+      <copyMetadata>true</copyMetadata>
+    </parameters>
+  </node>
+  <node id="Write">
+    <operator>Write</operator>
+    <sources>
+      <sourceProduct refid="Subset"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <file>C:\Temp\CURSO_BIOMASA_2026\02_Practica\TP4_Radar_SAR\04_Tablas_de_trabajo\ESTEPA_NW_02_SAOCOM_TNA_S4_indices.dim</file>
+      <formatName>BEAM-DIMAP</formatName>
+    </parameters>
+  </node>
+  <applicationData id="Presentation">
+    <Description/>
+    <node id="Read">
+      <displayPosition x="15.0" y="20.0"/>
+    </node>
+    <node id="BandSelect">
+      <displayPosition x="220.0" y="20.0"/>
+    </node>
+    <node id="Calibration">
+      <displayPosition x="425.0" y="20.0"/>
+    </node>
+    <node id="Polarimetric-Parameters">
+      <displayPosition x="15.0" y="82.0"/>
+    </node>
+    <node id="Terrain-Correction">
+      <displayPosition x="220.0" y="82.0"/>
+    </node>
+    <node id="Subset">
+      <displayPosition x="425.0" y="82.0"/>
+    </node>
+    <node id="Write">
+      <displayPosition x="15.0" y="144.0"/>
+    </node>
+  </applicationData>
+</graph>

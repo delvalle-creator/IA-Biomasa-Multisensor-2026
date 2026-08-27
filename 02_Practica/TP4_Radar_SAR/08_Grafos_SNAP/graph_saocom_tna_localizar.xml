@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+============================================================================
+ SAOCOM TNA (TopSAR) - PASO 0: LOCALIZAR QUE SUB-FRANJA CUBRE EL AOI
+============================================================================
+ PLANTILLA. Se corre CINCO veces, una por sub-franja, y es rapido a proposito:
+ no produce nada que se use despues, solo contesta donde cae cada una.
+
+ POR QUE HACE FALTA ESTE PASO
+ ::::::::::::::::::::::::::::
+ El producto TNA trae CINCO sub-franjas (S1 a S5), cada una con su propio
+ raster y sus cuatro polarizaciones. Uno esperaria poder recortar por
+ coordenadas y listo, pero NO SE PUEDE, y conviene saber por que:
+
+ SNAP le asigna al producto UNA SOLA geocodificacion, no una por sub-franja.
+ En Tie-Point Grids hay cuatro grillas para todo el producto (latitude,
+ longitude, incident_angle, slant_range_time), y el Analysis > Geo-Coding de
+ cualquier banda devuelve las esquinas de la HUELLA COMPLETA:
+
+     Sup. izq.  40 21 24 S   69 06 35 W
+     Sup. der.  40 04 41 S   70 27 42 W
+     Inf. izq.  43 10 37 S   70 03 34 W
+     Inf. der.  42 53 07 S   71 29 13 W
+
+ Eso no puede corresponder a una sub-franja: el raster de S1 tiene 3725
+ muestras con paso de 1,67e-08 s, o sea 2,5 m en rango inclinado, unos 9 km,
+ que en tierra son quince o veinte kilometros. Las esquinas de arriba abarcan
+ ciento quince.
+
+ CONSECUENCIA PRACTICA: si usted usa Raster > Subset con la pestana Geo
+ Coordinates sobre la banda de una sub-franja, SNAP convierte sus coordenadas
+ a pixeles con una geocodificacion que NO corresponde a ese raster, y le
+ devuelve un recorte EN EL LUGAR EQUIVOCADO, sin ningun mensaje de error.
+
+ La unica geometria confiable es la que sale DESPUES del Terrain-Correction,
+ porque ahi la posicion se resuelve con la orbita y el DEM. De eso se trata
+ este grafo.
+
+
+ CORRECCION DEL 27/07/2026, DESPUES DE LA PRIMERA CORRIDA FALLIDA
+ :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+ La primera vez se probo la sub-franja 4, deducida de las esquinas que devuelve
+ Analysis > Geo-Coding. Salio VACIA. Los metadatos del producto dicen otra cosa:
+
+     ACQUISITION_MODE  TOPSARNarrow    antenna_pointing right   PASS DESCENDING
+     first_near_long   -71,4806        first_far_long   -69,1102
+     incidence_near     17,60 grados   incidence_far     27,30 grados
+
+ O sea que el RANGO CERCANO esta al OESTE, no al este. Con eso, el AOI de la
+ estepa cae al 19% del ancho de la pasada contando desde el rango cercano: en la
+ sub-franja 1, y quiza tocando la 2. Por eso abajo el patron dice S1.
+
+ Y hay una contradiccion de fondo en el producto: las esquinas del Geo-Coding
+ describen un paralelogramo torcido y los metadatos describen un rectangulo con
+ el rango cercano al oeste de punta a punta. No pueden ser las dos ciertas.
+ SNAP no avisa: geocodifica con las grillas de tie-points que tiene.
+
+ QUE SE ESTA MIDIENDO ACA
+ ::::::::::::::::::::::::
+ Este grafo NO lleva recorte a proposito. Se corre, se abre la salida y se mira
+ DONDE CAYO. Dos desenlaces posibles:
+
+   - Cae sobre el AOI (E 326.590 a 342.340 / N 5.245.935 a 5.261.695 en UTM 19S).
+     Entonces la sub-franja es la correcta y se sigue con el grafo de indices.
+
+   - Cae otra vez en el este, junto con todo lo demas. Entonces el problema no es
+     que sub-franja se elige: es que el Terrain-Correction no puede resolver la
+     geometria de este TNA, y hay que cambiar de plan -pedir a CONAE el producto
+     por sub-franja, o hacer la estepa con StripMap en vez de TopSAR-.
+
+ Referencia medida el 27/07 sobre el producto Cal_ML_TC del docente: las cinco
+ sub-franjas geocodificadas caian TODAS en la misma caja, E 386.706 a 486.806 /
+ N 5.232.879 a 5.540.779. El AOI queda unos 50 km al oeste de ese borde.
+
+ COMO USARLO
+ :::::::::::
+ Correrlo cinco veces cambiando SOLO el nombre de las bandas, de S1 a S5:
+
+   gpt graph_saocom_tna_localizar.xml -Pentrada="RUTA/producto.xemt" \
+       -Pbandas="i_S1_HH,q_S1_HH" -Psalida="RUTA/ubicacion_S1.dim"
+   ... y asi con i_S2_HH,q_S2_HH hasta i_S5_HH,q_S5_HH
+
+ Despues se abren los cinco en SNAP o en QGIS y se mira cual cubre el AOI:
+
+   ESTEPA_NW_02:  norte -42,7084   sur -42,8468
+                  oeste -71,2137   este -71,0259
+
+ Es deliberadamente GRUESO -100 m de pixel y multilook fuerte- porque no se
+ usa para medir nada: se usa para ubicar. Sale en minutos, no en horas.
+============================================================================
+-->
+<!--
+ RUTAS CARGADAS EL 31/07/2026
+ ===========================
+ Este grafo NO lo invoca ningun script: se corre a mano, una vez por sub-franja.
+ Por eso lleva las rutas escritas, igual que la familia cuadripolar del SAOCOM.
+
+ PARA CAMBIAR DE SUB-FRANJA hay que tocar DOS cosas a la vez, y si se cambia una
+ sola el resultado sale con nombre equivocado:
+   1) el bandNamePattern del nodo BandSelect:  [iq]_S4_HH  ->  [iq]_S1_HH ... S5
+   2) la ultima parte del nombre de salida:    _S4.dim     ->  _S1.dim ... _S5
+-->
+<graph id="SAOCOM_TNA_localizar_subfranja">
+  <version>1.0</version>
+
+  <node id="Read">
+    <operator>Read</operator>
+    <sources/>
+    <parameters><file>C:\Temp\CURSO_BIOMASA_2026\02_Practica\00_COMUN\08_Originales_crudos\01_base\SAOCOM\EOL1ASARSAO1A15230003\S1A_OPER_SAR_EOSSP__CORE_L1A_OLF_20260715T181426.xemt</file></parameters>
+  </node>
+
+  <!-- Una sola sub-franja y una sola polarizacion: lo minimo para ubicarla -->
+  <node id="BandSelect">
+    <operator>BandSelect</operator>
+    <sources><sourceProduct refid="Read"/></sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <sourceBands/>
+    
+      <selectedPolarisations/>
+      <bandNamePattern>[iq]_S4_HH</bandNamePattern>
+    </parameters>
+  </node>
+
+  <node id="Calibration">
+    <operator>Calibration</operator>
+    <sources><sourceProduct refid="BandSelect"/></sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <outputImageInComplex>false</outputImageInComplex>
+      <outputBetaBand>false</outputBetaBand>
+      <outputSigmaBand>true</outputSigmaBand>
+    
+      <sourceBands/>
+      <auxFile>Latest Auxiliary File</auxFile>
+      <externalAuxFile/>
+      <createGammaBand>false</createGammaBand>
+      <createBetaBand>false</createBetaBand>
+    
+      <outputImageScaleInDb>false</outputImageScaleInDb>
+    </parameters>
+  </node>
+
+  <!-- Multilook fuerte: baja el tamano y acelera. No importa la calidad. -->
+  <node id="Multilook">
+    <operator>Multilook</operator>
+    <sources><sourceProduct refid="Calibration"/></sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <nRgLooks>10</nRgLooks>
+      <nAzLooks>10</nAzLooks>
+      <outputIntensity>true</outputIntensity>
+      <grSquarePixel>true</grSquarePixel>
+    
+      <sourceBands/>
+    </parameters>
+  </node>
+
+  <!-- El paso que resuelve la geometria de verdad -->
+  <node id="Terrain-Correction">
+    <operator>Terrain-Correction</operator>
+    <sources><sourceProduct refid="Multilook"/></sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <demName>Copernicus 30m Global DEM</demName>
+      <demResamplingMethod>BILINEAR_INTERPOLATION</demResamplingMethod>
+      <imgResamplingMethod>NEAREST_NEIGHBOUR</imgResamplingMethod>
+      <pixelSpacingInMeter>100.0</pixelSpacingInMeter>
+      <pixelSpacingInDegree>0.0008983152841195213</pixelSpacingInDegree>
+      <mapProjection>EPSG:32719</mapProjection>
+      <nodataValueAtSea>false</nodataValueAtSea>
+      <saveSelectedSourceBand>true</saveSelectedSourceBand>
+    
+      <sourceBands/>
+      <externalDEMFile/>
+      <externalDEMNoDataValue>0.0</externalDEMNoDataValue>
+      <externalDEMApplyEGM>true</externalDEMApplyEGM>
+      <saveDEM>true</saveDEM>
+      <saveLocalIncidenceAngle>true</saveLocalIncidenceAngle>
+      <saveLatLon>false</saveLatLon>
+      <saveIncidenceAngleFromEllipsoid>false</saveIncidenceAngleFromEllipsoid>
+      <saveProjectedLocalIncidenceAngle>true</saveProjectedLocalIncidenceAngle>
+      <saveLayoverShadowMask>true</saveLayoverShadowMask>
+      <applyRadiometricNormalization>false</applyRadiometricNormalization>
+      <saveSigmaNought>false</saveSigmaNought>
+      <saveGammaNought>false</saveGammaNought>
+      <saveBetaNought>false</saveBetaNought>
+      <incidenceAngleForSigma0>Use projected local incidence angle from DEM</incidenceAngleForSigma0>
+      <incidenceAngleForGamma0>Use projected local incidence angle from DEM</incidenceAngleForGamma0>
+      <auxFile>Latest Auxiliary File</auxFile>
+      <externalAuxFile/>
+    </parameters>
+  </node>
+
+  <node id="Write">
+    <operator>Write</operator>
+    <sources><sourceProduct refid="Terrain-Correction"/></sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <file>C:\Temp\CURSO_BIOMASA_2026\02_Practica\TP4_Radar_SAR\05_Resultados\SAOCOM_TNA_localizar_S4.dim</file>
+      <formatName>BEAM-DIMAP</formatName>
+    </parameters>
+  </node>
+  <applicationData id="Presentation">
+    <Description/>
+    <node id="Read">
+      <displayPosition x="15.0" y="20.0"/>
+    </node>
+    <node id="BandSelect">
+      <displayPosition x="220.0" y="20.0"/>
+    </node>
+    <node id="Calibration">
+      <displayPosition x="425.0" y="20.0"/>
+    </node>
+    <node id="Multilook">
+      <displayPosition x="15.0" y="82.0"/>
+    </node>
+    <node id="Terrain-Correction">
+      <displayPosition x="220.0" y="82.0"/>
+    </node>
+    <node id="Write">
+      <displayPosition x="425.0" y="82.0"/>
+    </node>
+  </applicationData>
+</graph>

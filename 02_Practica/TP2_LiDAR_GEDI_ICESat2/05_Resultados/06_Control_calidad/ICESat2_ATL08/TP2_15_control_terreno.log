@@ -1,0 +1,51 @@
+CONTROL DE TERRENO CONTRA FABDEM (suelo desnudo, 30 m)
+delta = h_satelital(elipsoidal WGS84) - (FABDEM + N_EGM2008)
+criterio declarado: |delta| <= 5 m pasa; se informa 3 y 10 m
+
+BOSQUE_NW_02: N_EGM2008 - N_Ar16 = -0.21 m (mediana); la eleccion del
+   geoide no cambia el control (umbral de 5 m).
+
+ATL08 BOSQUE_NW_02 operacional
+   1949 segmentos, 0 sin muestra FABDEM
+   delta: mediana -1.46 m, MAD 2.12, p5 -9.54, p95 +3.38
+   sensibilidad: |d|>3m: 40.7%  |d|>5m: 23.7%  |d|>10m: 4.5%
+   PASAN 1487 de 1949 (76.3%)  ->  ATL08_BOSQUE_NW_02_operacional_terreno_utm.csv
+
+ATL08 BOSQUE_NW_02 conservador
+   905 segmentos, 0 sin muestra FABDEM
+   delta: mediana -0.43 m, MAD 1.05, p5 -4.76, p95 +2.75
+   sensibilidad: |d|>3m: 15.1%  |d|>5m: 4.9%  |d|>10m: 0.2%
+   PASAN 861 de 905 (95.1%)  ->  ATL08_BOSQUE_NW_02_conservador_terreno_utm.csv
+
+GEDI BOSQUE_NW_02 (control informativo: la referencia NO se filtra)
+   690 huellas con muestra
+   delta: mediana +0.22 m, MAD 2.40, p5 -9.75, p95 +5.63
+   sensibilidad: |d|>3m: 43.2%  |d|>5m: 26.5%  |d|>10m: 5.1%
+
+ESTEPA_NW_02: N_EGM2008 - N_Ar16 = -0.06 m (mediana); la eleccion del
+   geoide no cambia el control (umbral de 5 m).
+
+ATL08 ESTEPA_NW_02 operacional
+   1923 segmentos, 0 sin muestra FABDEM
+   delta: mediana -0.55 m, MAD 0.74, p5 -8.10, p95 +0.54
+   sensibilidad: |d|>3m: 22.3%  |d|>5m: 12.7%  |d|>10m: 3.0%
+   PASAN 1678 de 1923 (87.3%)  ->  ATL08_ESTEPA_NW_02_operacional_terreno_utm.csv
+
+ATL08 ESTEPA_NW_02 conservador
+   1482 segmentos, 0 sin muestra FABDEM
+   delta: mediana -0.28 m, MAD 0.44, p5 -3.75, p95 +0.62
+   sensibilidad: |d|>3m: 7.0%  |d|>5m: 1.9%  |d|>10m: 0.1%
+   PASAN 1454 de 1482 (98.1%)  ->  ATL08_ESTEPA_NW_02_conservador_terreno_utm.csv
+
+GEDI ESTEPA_NW_02 (control informativo: la referencia NO se filtra)
+   3083 huellas con muestra
+   delta: mediana +0.47 m, MAD 0.95, p5 -3.65, p95 +4.37
+   sensibilidad: |d|>3m: 16.3%  |d|>5m: 6.6%  |d|>10m: 0.8%
+
+COMO SE LEE ESTO
+   FABDEM no es verdad de campo: es otro modelo. Por eso audita y
+   filtra, pero jamas corrige: ninguna altura se toca. El paso 16
+   repite el cotejo del paso 13 solo con los segmentos que PASAN.
+   Si la mediana del delta esta cerca de cero, el datum vertical
+   quedo bien llevado: un error de geoide se veria como un salto
+   de ~20 m, no de centimetros.

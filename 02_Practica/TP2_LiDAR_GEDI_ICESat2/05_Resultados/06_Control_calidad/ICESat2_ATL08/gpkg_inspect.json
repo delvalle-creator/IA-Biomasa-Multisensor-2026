@@ -1,0 +1,626 @@
+{
+  "tables": [
+    "bosque_all",
+    "bosque_conservative",
+    "bosque_operational",
+    "estepa_all",
+    "estepa_conservative",
+    "estepa_operational",
+    "gpkg_contents",
+    "gpkg_extensions",
+    "gpkg_geometry_columns",
+    "gpkg_ogr_contents",
+    "gpkg_spatial_ref_sys",
+    "gpkg_tile_matrix",
+    "gpkg_tile_matrix_set",
+    "rtree_bosque_all_geom",
+    "rtree_bosque_all_geom_node",
+    "rtree_bosque_all_geom_parent",
+    "rtree_bosque_all_geom_rowid",
+    "rtree_bosque_conservative_geom",
+    "rtree_bosque_conservative_geom_node",
+    "rtree_bosque_conservative_geom_parent",
+    "rtree_bosque_conservative_geom_rowid",
+    "rtree_bosque_operational_geom",
+    "rtree_bosque_operational_geom_node",
+    "rtree_bosque_operational_geom_parent",
+    "rtree_bosque_operational_geom_rowid",
+    "rtree_estepa_all_geom",
+    "rtree_estepa_all_geom_node",
+    "rtree_estepa_all_geom_parent",
+    "rtree_estepa_all_geom_rowid",
+    "rtree_estepa_conservative_geom",
+    "rtree_estepa_conservative_geom_node",
+    "rtree_estepa_conservative_geom_parent",
+    "rtree_estepa_conservative_geom_rowid",
+    "rtree_estepa_operational_geom",
+    "rtree_estepa_operational_geom_node",
+    "rtree_estepa_operational_geom_parent",
+    "rtree_estepa_operational_geom_rowid",
+    "sqlite_sequence"
+  ],
+  "contents": [
+    {
+      "table": "bosque_all",
+      "n": 17694,
+      "columns": [
+        "fid",
+        "geom",
+        "aoi",
+        "granule",
+        "acquisition_datetime",
+        "beam",
+        "longitude",
+        "latitude",
+        "delta_time",
+        "rgt",
+        "cycle",
+        "region",
+        "version",
+        "revision",
+        "orbit_number",
+        "sc_orient",
+        "segment_id_beg",
+        "segment_id_end",
+        "h_te_best_fit_m",
+        "h_te_uncertainty_m",
+        "h_canopy_m",
+        "h_canopy_uncertainty_m",
+        "h_max_canopy_m",
+        "canopy_openness_m",
+        "rh50_m",
+        "rh75_m",
+        "rh90_m",
+        "rh95_m",
+        "rh98_m",
+        "rh100_m",
+        "n_ca_photons",
+        "n_te_photons",
+        "segment_landcover",
+        "segment_snowcover",
+        "cloud_flag_atm",
+        "msw_flag",
+        "night_flag",
+        "terrain_flg",
+        "year",
+        "month",
+        "season",
+        "landcover_label",
+        "qa_valid_height",
+        "qa_operational",
+        "qa_uncertainty_available",
+        "qa_conservative",
+        "uncertainty_ratio",
+        "height_class",
+        "segment_key"
+      ],
+      "rh_canopy_counts": {
+        "h_canopy_m": {
+          "non_null": 17051,
+          "pct": 96.366
+        },
+        "h_canopy_uncertainty_m": {
+          "non_null": 14840,
+          "pct": 83.87
+        },
+        "h_max_canopy_m": {
+          "non_null": 17051,
+          "pct": 96.366
+        },
+        "canopy_openness_m": {
+          "non_null": 17051,
+          "pct": 96.366
+        },
+        "rh50_m": {
+          "non_null": 0,
+          "pct": 0.0
+        },
+        "rh75_m": {
+          "non_null": 0,
+          "pct": 0.0
+        },
+        "rh90_m": {
+          "non_null": 0,
+          "pct": 0.0
+        },
+        "rh95_m": {
+          "non_null": 0,
+          "pct": 0.0
+        },
+        "rh98_m": {
+          "non_null": 0,
+          "pct": 0.0
+        },
+        "rh100_m": {
+          "non_null": 0,
+          "pct": 0.0
+        }
+      }
+    },
+    {
+      "table": "bosque_conservative",
+      "n": 905,
+      "columns": [
+        "fid",
+        "geom",
+        "aoi",
+        "granule",
+        "acquisition_datetime",
+        "beam",
+        "longitude",
+        "latitude",
+        "delta_time",
+        "rgt",
+        "cycle",
+        "region",
+        "version",
+        "revision",
+        "orbit_number",
+        "sc_orient",
+        "segment_id_beg",
+        "segment_id_end",
+        "h_te_best_fit_m",
+        "h_te_uncertainty_m",
+        "h_canopy_m",
+        "h_canopy_uncertainty_m",
+        "h_max_canopy_m",
+        "canopy_openness_m",
+        "rh50_m",
+        "rh75_m",
+        "rh90_m",
+        "rh95_m",
+        "rh98_m",
+        "rh100_m",
+        "n_ca_photons",
+        "n_te_photons",
+        "segment_landcover",
+        "segment_snowcover",
+        "cloud_flag_atm",
+        "msw_flag",
+        "night_flag",
+        "terrain_flg",
+        "year",
+        "month",
+        "season",
+        "landcover_label",
+        "qa_valid_height",
+        "qa_operational",
+        "qa_uncertainty_available",
+        "qa_conservative",
+        "uncertainty_ratio",
+        "height_class",
+        "segment_key"
+      ],
+      "rh_canopy_counts": {
+        "h_canopy_m": {
+          "non_null": 905,
+          "pct": 100.0
+        },
+        "h_canopy_uncertainty_m": {
+          "non_null": 905,
+          "pct": 100.0
+        },
+        "h_max_canopy_m": {
+          "non_null": 905,
+          "pct": 100.0
+        },
+        "canopy_openness_m": {
+          "non_null": 905,
+          "pct": 100.0
+        },
+        "rh50_m": {
+          "non_null": 0,
+          "pct": 0.0
+        },
+        "rh75_m": {
+          "non_null": 0,
+          "pct": 0.0
+        },
+        "rh90_m": {
+          "non_null": 0,
+          "pct": 0.0
+        },
+        "rh95_m": {
+          "non_null": 0,
+          "pct": 0.0
+        },
+        "rh98_m": {
+          "non_null": 0,
+          "pct": 0.0
+        },
+        "rh100_m": {
+          "non_null": 0,
+          "pct": 0.0
+        }
+      }
+    },
+    {
+      "table": "bosque_operational",
+      "n": 1949,
+      "columns": [
+        "fid",
+        "geom",
+        "aoi",
+        "granule",
+        "acquisition_datetime",
+        "beam",
+        "longitude",
+        "latitude",
+        "delta_time",
+        "rgt",
+        "cycle",
+        "region",
+        "version",
+        "revision",
+        "orbit_number",
+        "sc_orient",
+        "segment_id_beg",
+        "segment_id_end",
+        "h_te_best_fit_m",
+        "h_te_uncertainty_m",
+        "h_canopy_m",
+        "h_canopy_uncertainty_m",
+        "h_max_canopy_m",
+        "canopy_openness_m",
+        "rh50_m",
+        "rh75_m",
+        "rh90_m",
+        "rh95_m",
+        "rh98_m",
+        "rh100_m",
+        "n_ca_photons",
+        "n_te_photons",
+        "segment_landcover",
+        "segment_snowcover",
+        "cloud_flag_atm",
+        "msw_flag",
+        "night_flag",
+        "terrain_flg",
+        "year",
+        "month",
+        "season",
+        "landcover_label",
+        "qa_valid_height",
+        "qa_operational",
+        "qa_uncertainty_available",
+        "qa_conservative",
+        "uncertainty_ratio",
+        "height_class",
+        "segment_key"
+      ],
+      "rh_canopy_counts": {
+        "h_canopy_m": {
+          "non_null": 1949,
+          "pct": 100.0
+        },
+        "h_canopy_uncertainty_m": {
+          "non_null": 905,
+          "pct": 46.434
+        },
+        "h_max_canopy_m": {
+          "non_null": 1949,
+          "pct": 100.0
+        },
+        "canopy_openness_m": {
+          "non_null": 1949,
+          "pct": 100.0
+        },
+        "rh50_m": {
+          "non_null": 0,
+          "pct": 0.0
+        },
+        "rh75_m": {
+          "non_null": 0,
+          "pct": 0.0
+        },
+        "rh90_m": {
+          "non_null": 0,
+          "pct": 0.0
+        },
+        "rh95_m": {
+          "non_null": 0,
+          "pct": 0.0
+        },
+        "rh98_m": {
+          "non_null": 0,
+          "pct": 0.0
+        },
+        "rh100_m": {
+          "non_null": 0,
+          "pct": 0.0
+        }
+      }
+    },
+    {
+      "table": "estepa_all",
+      "n": 19912,
+      "columns": [
+        "fid",
+        "geom",
+        "aoi",
+        "granule",
+        "acquisition_datetime",
+        "beam",
+        "longitude",
+        "latitude",
+        "delta_time",
+        "rgt",
+        "cycle",
+        "region",
+        "version",
+        "revision",
+        "orbit_number",
+        "sc_orient",
+        "segment_id_beg",
+        "segment_id_end",
+        "h_te_best_fit_m",
+        "h_te_uncertainty_m",
+        "h_canopy_m",
+        "h_canopy_uncertainty_m",
+        "h_max_canopy_m",
+        "canopy_openness_m",
+        "rh50_m",
+        "rh75_m",
+        "rh90_m",
+        "rh95_m",
+        "rh98_m",
+        "rh100_m",
+        "n_ca_photons",
+        "n_te_photons",
+        "segment_landcover",
+        "segment_snowcover",
+        "cloud_flag_atm",
+        "msw_flag",
+        "night_flag",
+        "terrain_flg",
+        "year",
+        "month",
+        "season",
+        "landcover_label",
+        "qa_valid_height",
+        "qa_operational",
+        "qa_uncertainty_available",
+        "qa_conservative",
+        "uncertainty_ratio",
+        "height_class",
+        "segment_key"
+      ],
+      "rh_canopy_counts": {
+        "h_canopy_m": {
+          "non_null": 16196,
+          "pct": 81.338
+        },
+        "h_canopy_uncertainty_m": {
+          "non_null": 15275,
+          "pct": 76.713
+        },
+        "h_max_canopy_m": {
+          "non_null": 16196,
+          "pct": 81.338
+        },
+        "canopy_openness_m": {
+          "non_null": 16196,
+          "pct": 81.338
+        },
+        "rh50_m": {
+          "non_null": 0,
+          "pct": 0.0
+        },
+        "rh75_m": {
+          "non_null": 0,
+          "pct": 0.0
+        },
+        "rh90_m": {
+          "non_null": 0,
+          "pct": 0.0
+        },
+        "rh95_m": {
+          "non_null": 0,
+          "pct": 0.0
+        },
+        "rh98_m": {
+          "non_null": 0,
+          "pct": 0.0
+        },
+        "rh100_m": {
+          "non_null": 0,
+          "pct": 0.0
+        }
+      }
+    },
+    {
+      "table": "estepa_conservative",
+      "n": 1482,
+      "columns": [
+        "fid",
+        "geom",
+        "aoi",
+        "granule",
+        "acquisition_datetime",
+        "beam",
+        "longitude",
+        "latitude",
+        "delta_time",
+        "rgt",
+        "cycle",
+        "region",
+        "version",
+        "revision",
+        "orbit_number",
+        "sc_orient",
+        "segment_id_beg",
+        "segment_id_end",
+        "h_te_best_fit_m",
+        "h_te_uncertainty_m",
+        "h_canopy_m",
+        "h_canopy_uncertainty_m",
+        "h_max_canopy_m",
+        "canopy_openness_m",
+        "rh50_m",
+        "rh75_m",
+        "rh90_m",
+        "rh95_m",
+        "rh98_m",
+        "rh100_m",
+        "n_ca_photons",
+        "n_te_photons",
+        "segment_landcover",
+        "segment_snowcover",
+        "cloud_flag_atm",
+        "msw_flag",
+        "night_flag",
+        "terrain_flg",
+        "year",
+        "month",
+        "season",
+        "landcover_label",
+        "qa_valid_height",
+        "qa_operational",
+        "qa_uncertainty_available",
+        "qa_conservative",
+        "uncertainty_ratio",
+        "height_class",
+        "segment_key"
+      ],
+      "rh_canopy_counts": {
+        "h_canopy_m": {
+          "non_null": 1482,
+          "pct": 100.0
+        },
+        "h_canopy_uncertainty_m": {
+          "non_null": 1482,
+          "pct": 100.0
+        },
+        "h_max_canopy_m": {
+          "non_null": 1482,
+          "pct": 100.0
+        },
+        "canopy_openness_m": {
+          "non_null": 1482,
+          "pct": 100.0
+        },
+        "rh50_m": {
+          "non_null": 0,
+          "pct": 0.0
+        },
+        "rh75_m": {
+          "non_null": 0,
+          "pct": 0.0
+        },
+        "rh90_m": {
+          "non_null": 0,
+          "pct": 0.0
+        },
+        "rh95_m": {
+          "non_null": 0,
+          "pct": 0.0
+        },
+        "rh98_m": {
+          "non_null": 0,
+          "pct": 0.0
+        },
+        "rh100_m": {
+          "non_null": 0,
+          "pct": 0.0
+        }
+      }
+    },
+    {
+      "table": "estepa_operational",
+      "n": 1923,
+      "columns": [
+        "fid",
+        "geom",
+        "aoi",
+        "granule",
+        "acquisition_datetime",
+        "beam",
+        "longitude",
+        "latitude",
+        "delta_time",
+        "rgt",
+        "cycle",
+        "region",
+        "version",
+        "revision",
+        "orbit_number",
+        "sc_orient",
+        "segment_id_beg",
+        "segment_id_end",
+        "h_te_best_fit_m",
+        "h_te_uncertainty_m",
+        "h_canopy_m",
+        "h_canopy_uncertainty_m",
+        "h_max_canopy_m",
+        "canopy_openness_m",
+        "rh50_m",
+        "rh75_m",
+        "rh90_m",
+        "rh95_m",
+        "rh98_m",
+        "rh100_m",
+        "n_ca_photons",
+        "n_te_photons",
+        "segment_landcover",
+        "segment_snowcover",
+        "cloud_flag_atm",
+        "msw_flag",
+        "night_flag",
+        "terrain_flg",
+        "year",
+        "month",
+        "season",
+        "landcover_label",
+        "qa_valid_height",
+        "qa_operational",
+        "qa_uncertainty_available",
+        "qa_conservative",
+        "uncertainty_ratio",
+        "height_class",
+        "segment_key"
+      ],
+      "rh_canopy_counts": {
+        "h_canopy_m": {
+          "non_null": 1923,
+          "pct": 100.0
+        },
+        "h_canopy_uncertainty_m": {
+          "non_null": 1482,
+          "pct": 77.067
+        },
+        "h_max_canopy_m": {
+          "non_null": 1923,
+          "pct": 100.0
+        },
+        "canopy_openness_m": {
+          "non_null": 1923,
+          "pct": 100.0
+        },
+        "rh50_m": {
+          "non_null": 0,
+          "pct": 0.0
+        },
+        "rh75_m": {
+          "non_null": 0,
+          "pct": 0.0
+        },
+        "rh90_m": {
+          "non_null": 0,
+          "pct": 0.0
+        },
+        "rh95_m": {
+          "non_null": 0,
+          "pct": 0.0
+        },
+        "rh98_m": {
+          "non_null": 0,
+          "pct": 0.0
+        },
+        "rh100_m": {
+          "non_null": 0,
+          "pct": 0.0
+        }
+      }
+    }
+  ]
+}

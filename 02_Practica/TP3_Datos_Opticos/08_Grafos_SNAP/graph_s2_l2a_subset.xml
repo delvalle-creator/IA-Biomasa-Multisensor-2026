@@ -1,0 +1,52 @@
+<graph id="S2_L2A_subset_grilla_comun">
+  <!-- Sentinel-2 L2A -> BEAM-DIMAP en la grilla comun (EPSG:32719, 10 m,
+       1500 x 1500 px), conservando los metadatos del producto.
+       El operador Reproject fija la esquina y el tamano exactos, de modo que
+       el resultado cae en la MISMA malla que los productos SAR.
+       El .SAFE original (JPEG-2000) queda intacto en 04_descargas/. -->
+  <version>1.0</version>
+  <node id="Read">
+    <operator>Read</operator>
+    <sources/>
+    <parameters><file>${entrada}</file></parameters>
+  </node>
+  <node id="Resample">
+    <!-- lleva las bandas de 20 m y 60 m a 10 m, requisito para reproyectar -->
+    <operator>Resample</operator>
+    <sources><sourceProduct refid="Read"/></sources>
+    <parameters>
+      <targetResolution>10</targetResolution>
+      <upsampling>Bilinear</upsampling>
+      <downsampling>Mean</downsampling>
+      <flagDownsampling>First</flagDownsampling>
+      <resampleOnPyramidLevels>false</resampleOnPyramidLevels>
+    </parameters>
+  </node>
+  <node id="Reproject">
+    <operator>Reproject</operator>
+    <sources><sourceProduct refid="Resample"/></sources>
+    <parameters>
+      <crs>EPSG:32719</crs>
+      <resampling>Bilinear</resampling>
+      <pixelSizeX>10.0</pixelSizeX>
+      <pixelSizeY>10.0</pixelSizeY>
+      <easting>${easting}</easting>
+      <northing>${northing}</northing>
+      <referencePixelX>0.0</referencePixelX>
+      <referencePixelY>0.0</referencePixelY>
+      <width>1500</width>
+      <height>1500</height>
+      <orthorectify>false</orthorectify>
+      <noDataValue>0.0</noDataValue>
+      <includeTiePointGrids>true</includeTiePointGrids>
+    </parameters>
+  </node>
+  <node id="Write">
+    <operator>Write</operator>
+    <sources><sourceProduct refid="Reproject"/></sources>
+    <parameters>
+      <file>${salida}</file>
+      <formatName>BEAM-DIMAP</formatName>
+    </parameters>
+  </node>
+</graph>

@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+============================================================================
+ GRAFO DE PROCESAMIENTO BIOMASS (ESA SNAP) - banda P a gamma0
+============================================================================
+ Cadena: Read -> Calibration (beta0) -> Multilook -> Speckle-Filter
+         -> TERRAIN FLATTENING (gamma0) -> Terrain-Correction -> Write
+
+ POR QUE gamma0 Y NO sigma0
+ ::::::::::::::::::::::::::
+ Esta cadena calibraba a sigma0 y geocodificaba con Terrain-Correction. Eso
+ corrige la GEOMETRIA (pone cada pixel en su lugar) pero NO corrige la
+ RADIOMETRIA: el area de terreno que ilumina cada pixel cambia con la
+ pendiente, de modo que en una ladera que mira al radar el retorno sube y en
+ la opuesta baja, sin que la vegetacion haya cambiado. En los sitios de este
+ practico, con laderas andinas, ese efecto es del mismo orden que la senal de
+ biomasa que se quiere medir: se estaria midiendo topografia, no bosque.
+
+ El Terrain Flattening normaliza por el area ILUMINADA REAL, calculada con el
+ DEM, y entrega gamma0. Es lo que ya hacen los grafos de Sentinel-1 y SAOCOM
+ de este mismo practico (ver ../graph_saocom_tc.xml). Mezclar un producto en
+ sigma0 con otros en gamma0 impide compararlos.
+
+ Requisito: Terrain-Flattening necesita beta0 en la entrada, por eso
+ Calibration lleva outputBetaBand=true y outputSigmaBand=false.
+
+ SALIDA EN ESCALA LINEAL, NO EN dB
+ :::::::::::::::::::::::::::::::::
+ El grafo escribe BEAM-DIMAP con gamma0 en LINEAL. Es la regla del proyecto:
+ todo promedio, filtro o estadistica se hace en lineal, porque el promedio de
+ decibeles no es el decibel del promedio. El paso a dB (10*log10) es solo para
+ mirar, y se hace al final. Para una copia en dB para QGIS: abrir la salida en
+ SNAP y aplicar Raster > Data Conversion > Linear to/from dB, o agregar un nodo
+ LinearToFromdB entre Terrain-Correction y un segundo Write.
+
+ GRILLA COMUN
+ ::::::::::::
+ Sale en EPSG:32719 a 10 m, alineado a la grilla del resto del proyecto. No es
+ que BIOMASS resuelva 10 m -no los resuelve-: es que sus bordes de pixel caigan
+ sobre los mismos que Sentinel, SAOCOM, NISAR y el optico, de modo que se pueda
+ superponer sin remuestrear una segunda vez.
+
+ COMO USARLO (dos formas)
+ ::::::::::::::::::::::::
+ A) Interfaz: SNAP > Tools > Graph Builder > (icono abrir) > este .xml.
+    Editar el nodo Read (archivo de entrada) y Write (archivo de salida) -> Run.
+
+ B) Por linea de comandos (procesa muchos productos sin abrir SNAP):
+    gpt procesamiento_BIOMASS.xml -Pentrada="RUTA/producto" -Psalida="RUTA/salida.dim"
+
+ NOTA IMPORTANTE
+ ::::::::::::::::
+ El soporte de BIOMASS en SNAP es BETA (SNAP 13+). Es una PLANTILLA: verifica
+ que cada operador acepte el producto y ajusta parametros. Si Terrain-Flattening
+ falla en beta sobre este producto, NO lo reemplaces por sigma0 sin dejarlo
+ escrito en el informe: el resultado deja de ser comparable con el resto y hay
+ que decirlo. Usa siempre productos 1S (con imagen); los 1M no tienen imagen.
+============================================================================
+-->
+<graph id="BIOMASS_procesamiento">
+  <version>1.0</version>
+
+  <!-- 1) LEER el producto (editar la ruta o usar el parametro ${entrada}) -->
+  <node id="Read">
+    <operator>Read</operator>
+    <sources/>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <file/>
+    </parameters>
+  </node>
+
+  <!-- 2) CALIBRACION radiometrica a BETA0.
+       beta0 es la entrada que exige Terrain-Flattening. No se pide sigma0.
+       No se fijan polarizaciones: asi procesa las que traiga el producto
+       (BIOMASS es quad-pol, pero la beta puede nombrar las bandas de otro
+       modo y una lista fija haria fallar el grafo). -->
+  <node id="Calibration">
+    <operator>Calibration</operator>
+    <sources>
+      <sourceProduct refid="Read"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <outputImageInComplex>false</outputImageInComplex>
+      <outputBetaBand>true</outputBetaBand>
+      <outputSigmaBand>false</outputSigmaBand>
+    
+      <sourceBands/>
+      <auxFile>Latest Auxiliary File</auxFile>
+      <externalAuxFile/>
+      <createGammaBand>false</createGammaBand>
+      <createBetaBand>false</createBetaBand>
+    
+      <outputImageScaleInDb>false</outputImageScaleInDb>
+    </parameters>
+  </node>
+
+  <!-- 3) MULTILOOK: promedia miradas -> reduce speckle y hace el pixel mas
+       cuadrado (ajustar nRgLooks/nAzLooks segun el espaciamiento nativo). -->
+  <node id="Multilook">
+    <operator>Multilook</operator>
+    <sources>
+      <sourceProduct refid="Calibration"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <nRgLooks>2</nRgLooks>
+      <nAzLooks>2</nAzLooks>
+      <outputIntensity>true</outputIntensity>
+      <grSquarePixel>true</grSquarePixel>
+    
+      <sourceBands/>
+    </parameters>
+  </node>
+
+  <!-- 4) FILTRO DE SPECKLE (Refined Lee): reduce el ruido moteado.
+       Va ANTES del Terrain Flattening, que es el orden recomendado por ESA:
+       el flattening usa el DEM y conviene que la entrada ya este suavizada. -->
+  <node id="Speckle-Filter">
+    <operator>Speckle-Filter</operator>
+    <sources>
+      <sourceProduct refid="Multilook"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <filter>Refined Lee</filter>
+    
+      <sourceBands/>
+      <filterSizeX>3</filterSizeX>
+      <filterSizeY>3</filterSizeY>
+      <dampingFactor>2</dampingFactor>
+      <estimateENL>true</estimateENL>
+      <enl>1.0</enl>
+    </parameters>
+  </node>
+
+  <!-- 5) TERRAIN FLATTENING: beta0 -> gamma0.
+       Normaliza por el area de terreno realmente iluminada, calculada con el
+       DEM. Es el paso que hace comparable una ladera con otra. -->
+  <node id="Terrain-Flattening">
+    <operator>Terrain-Flattening</operator>
+    <sources>
+      <sourceProduct refid="Speckle-Filter"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <demName>Copernicus 30m Global DEM</demName>
+      <demResamplingMethod>BILINEAR_INTERPOLATION</demResamplingMethod>
+      <additionalOverlap>0.1</additionalOverlap>
+      <oversamplingMultiple>1.0</oversamplingMultiple>
+    
+      <externalDEMApplyEGM>true</externalDEMApplyEGM>
+      <outputSimulatedImage>false</outputSimulatedImage>
+    
+      <sourceBands/>
+      <externalDEMFile/>
+      <externalDEMNoDataValue>0.0</externalDEMNoDataValue>
+    </parameters>
+  </node>
+
+  <!-- 6) CORRECCION GEOMETRICA por terreno: geocodifica a la grilla comun. -->
+  <node id="Terrain-Correction">
+    <operator>Terrain-Correction</operator>
+    <sources>
+      <sourceProduct refid="Terrain-Flattening"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <demName>Copernicus 30m Global DEM</demName>
+      <demResamplingMethod>BILINEAR_INTERPOLATION</demResamplingMethod>
+      <imgResamplingMethod>BILINEAR_INTERPOLATION</imgResamplingMethod>
+      <pixelSpacingInMeter>10.0</pixelSpacingInMeter>
+      <pixelSpacingInDegree>8.983152841195213e-05</pixelSpacingInDegree>
+      <mapProjection>EPSG:32719</mapProjection>
+      <nodataValueAtSea>false</nodataValueAtSea>
+      <alignToStandardGrid>true</alignToStandardGrid>
+      <!-- Origen desplazado medio pixel: SNAP alinea los CENTROS de pixel al
+           origen indicado. Con origen 0,0 los centros caerian en multiplos de
+           10 m y los BORDES quedarian desfasados 5 m respecto de la grilla del
+           AOI (cuyas esquinas son multiplos de 10). Con origen 5,5 los centros
+           caen en 5, 15, 25... y los bordes en 0, 10, 20...: la grilla coincide
+           exactamente con la del optico. Es el mismo criterio de
+           ../graph_saocom_tc.xml. -->
+      <standardGridOriginX>5.0</standardGridOriginX>
+      <standardGridOriginY>5.0</standardGridOriginY>
+      <saveLocalIncidenceAngle>true</saveLocalIncidenceAngle>
+      <saveSelectedSourceBand>true</saveSelectedSourceBand>
+    
+      <sourceBands/>
+      <externalDEMFile/>
+      <externalDEMNoDataValue>0.0</externalDEMNoDataValue>
+      <externalDEMApplyEGM>true</externalDEMApplyEGM>
+      <saveDEM>false</saveDEM>
+      <saveLatLon>false</saveLatLon>
+      <saveIncidenceAngleFromEllipsoid>false</saveIncidenceAngleFromEllipsoid>
+      <saveProjectedLocalIncidenceAngle>false</saveProjectedLocalIncidenceAngle>
+      <saveLayoverShadowMask>false</saveLayoverShadowMask>
+      <applyRadiometricNormalization>false</applyRadiometricNormalization>
+      <saveSigmaNought>false</saveSigmaNought>
+      <saveGammaNought>false</saveGammaNought>
+      <saveBetaNought>false</saveBetaNought>
+      <incidenceAngleForSigma0>Use projected local incidence angle from DEM</incidenceAngleForSigma0>
+      <incidenceAngleForGamma0>Use projected local incidence angle from DEM</incidenceAngleForGamma0>
+      <auxFile>Latest Auxiliary File</auxFile>
+      <externalAuxFile/>
+    </parameters>
+  </node>
+
+  <!-- 7) ESCRIBIR en BEAM-DIMAP, el formato nativo de SNAP.
+       Conserva todos los metadatos, de modo que el producto puede seguir
+       procesandose (polarimetria, apilado, filtros). El GeoTIFF los perderia:
+       usarlo solo como copia para mirar en QGIS. -->
+  <node id="Write">
+    <operator>Write</operator>
+    <sources>
+      <sourceProduct refid="Terrain-Correction"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <file/>
+      <formatName>BEAM-DIMAP</formatName>
+    </parameters>
+  </node>
+
+  <applicationData id="Presentation">
+    <Description/>
+    <node id="Read">
+      <displayPosition x="15.0" y="20.0"/>
+    </node>
+    <node id="Calibration">
+      <displayPosition x="220.0" y="20.0"/>
+    </node>
+    <node id="Multilook">
+      <displayPosition x="425.0" y="20.0"/>
+    </node>
+    <node id="Speckle-Filter">
+      <displayPosition x="15.0" y="82.0"/>
+    </node>
+    <node id="Terrain-Flattening">
+      <displayPosition x="220.0" y="82.0"/>
+    </node>
+    <node id="Terrain-Correction">
+      <displayPosition x="425.0" y="82.0"/>
+    </node>
+    <node id="Write">
+      <displayPosition x="15.0" y="144.0"/>
+    </node>
+  </applicationData>
+</graph>

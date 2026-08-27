@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+============================================================================
+ LEA ESTO PRIMERO - CAMBIO DEL 27/07/2026 POR LA NOCHE
+============================================================================
+ La cadena de este grafo CAMBIO y el texto de mas abajo es en parte anterior
+ al cambio. La cadena que vale es la que esta en los nodos:
+
+   Read > Calibration > Subset > Polarimetric-Parameters > Terrain-Correction
+        > Write
+
+ Se sacaron Polarimetric-Matrices, Orientation-Angle-Correction y el filtro de
+ speckle polarimetrico. Motivo comprobado en SNAP 13: el operador
+ Polarimetric-Parameters NO acepta una matriz de entrada. Con C3 o con T3
+ responde
+
+     [NodeId: Polarimetric-Parameters] Input product containing HH and VV
+     bands is required
+
+ y tampoco sirve poner solo la correccion de angulo de orientacion, porque esa
+ tambien convierte el producto a matriz. Necesita el producto FULL-POL, con las
+ cuatro polarizaciones como bandas.
+
+ QUE SE PIERDE: la correccion de orientacion. En ladera empinada el RVI queda
+ algo sobreestimado. El contraste esta en graph_saocom_quad_polarimetria.xml,
+ que si la lleva porque termina en una descomposicion y no en
+ Polarimetric-Parameters.
+
+ QUE NO SE PIERDE: el filtrado. Esta adentro, en useMeanMatrix con ventana 5x5,
+ que promedia la matriz antes de formar los cocientes.
+
+ RECORTE YA CARGADO (28/07/2026): el nodo Subset trae escrito el poligono de
+ BOSQUE_NW_02 con 0,02 grados de margen. NO hay que tipearlo a mano y NO se
+ usa ningun ${placeholder}, que en el Graph Builder se lee como texto literal.
+ Si se quiere otra area, se cambia el <geoRegion> del nodo Subset.
+
+
+ ATENCION - LA BANDA RVI DE ESTE GRAFO NO SE USA (comprobado el 28/07/2026)
+ =========================================================================
+ Polarimetric-Parameters escribe una banda llamada RVI que NO es el RVI.
+ Medido sobre la escena del 16/01/2024, 7.034.926 pixeles validos:
+
+     banda RVI del producto ... mediana 0,00219   (p1 0,0001  max 0,179)
+     RVI recalculado a mano ... mediana 1,265     (p5 0,458   p95 2,172)
+
+ Lo que lo condena no es el factor -584x de mediana, pero entre 106x y 6.888x
+ segun el pixel, o sea ni siquiera constante- sino la CORRELACION de 0,108
+ entre esa banda y el RVI verdadero, pixel a pixel. Un RVI definido de otra
+ manera (por autovalores, por ejemplo) seguiria correlacionando fuerte. Con
+ 0,11 no esta midiendo el RVI: correlaciona mas con el Span (0,39) que con el.
+
+ EL RVI SE CALCULA CON BAND MATHS, asi:
+
+     8 * HHVVRatio / (HHHVRatio * HHVVRatio + HHHVRatio + 2 * HHVVRatio)
+
+ De donde sale: el RVI del SAR Handbook es 8*HV/(HH+VV+2*HV). El producto no
+ trae HH, HV y VV sueltos, trae las razones. Poniendo HH = 1 queda
+ HV = 1/HHHVRatio y VV = 1/HHVVRatio; se sustituye y se multiplica numerador y
+ denominador por HHHVRatio*HHVVRatio. Las razones de SNAP son LINEALES, no en
+ dB: van de 0,033 a 5.866 y son estrictamente positivas.
+
+ CONTROL de que el metodo vale: el RFDI del producto (mediana 0,311) y el
+ recalculado desde las mismas razones (0,394) coinciden en rango. El que falla
+ es el RVI, no la cadena.
+
+ Las demas bandas salieron bien: RFDI 0,311 / CSI 0,495 / VSI 0,336 /
+ BMI 0,285 / altura de pedestal 0,194 / Span 0,609, todas en rango de bosque.
+ Geometria verificada: contiene BOSQUE_NW_02 con 7,7-8,6 km de margen; la
+ elevacion va de 535 a 2.138 m (mediana 1.107), que es Los Alerces.
+
+ Este grafo es para el S6 StripMap del BOSQUE, que no tiene sub-franjas. El de
+ la estepa es graph_saocom_tna_indices.xml y tiene ademas el problema del lector
+ de SAOCOM descrito en CONTEXTO_IA.md.
+=======================================================================
+ RUTAS YA CARGADAS (28/07/2026). Las cajas Read y Write vienen con el
+ nombre escrito, para no tener que tipearlos uno por uno en cada corrida.
+ Si cambia de escena, lo unico que hay que editar es la fecha en los
+ nombres de salida. Convencion: sensor_fecha_contenido.dim
+=====
+-->
+<graph id="SAOCOM_quad_indices_polarimetricos">
+  <version>1.0</version>
+
+  <node id="Read">
+    <operator>Read</operator>
+    <sources/>
+    <parameters><file>C:\Temp\CURSO_BIOMASA_2026\02_Practica\00_COMUN\08_Originales_crudos\01_base\SAOCOM\EOL1ASARSAO1B15229867\S1B_OPER_SAR_EOSSP__CORE_L1A_OLF_20260715T181612.xemt</file></parameters>
+  </node>
+
+  <!-- 1) CALIBRACION EN COMPLEJO. No se fijan polarizaciones: procesa las
+       cuatro que traiga el producto. La fase es imprescindible aguas abajo. -->
+  <node id="Calibration">
+    <operator>Calibration</operator>
+    <sources><sourceProduct refid="Read"/></sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <outputImageInComplex>true</outputImageInComplex>
+      <outputImageScaleInDb>false</outputImageScaleInDb>
+      <selectedPolarisations/>
+    
+      <sourceBands/>
+      <auxFile>Latest Auxiliary File</auxFile>
+      <externalAuxFile/>
+      <createGammaBand>false</createGammaBand>
+      <createBetaBand>false</createBetaBand>
+    </parameters>
+  </node>
+
+  <!-- 2) RECORTE al AOI con un margen, antes de lo pesado -->
+  <node id="Subset">
+    <operator>Subset</operator>
+    <sources><sourceProduct refid="Calibration"/></sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <geoRegion>POLYGON((-71.6200 -42.5300, -71.3900 -42.5300, -71.3900 -42.7200, -71.6200 -42.7200, -71.6200 -42.5300))</geoRegion>
+      <copyMetadata>true</copyMetadata>
+    
+      <sourceBands/>
+      <region>0,0,0,0</region>
+      <subSamplingX>1</subSamplingX>
+      <subSamplingY>1</subSamplingY>
+      <fullSwath>false</fullSwath>
+      <tiePointGridNames/>
+    </parameters>
+  </node>
+
+
+
+
+
+
+  <!-- 6) LOS INDICES. Aca SNAP calcula el RVI y el RFDI del Handbook, mas los
+       demas. La ventana de 5x5 promedia la matriz antes de formar los
+       cocientes, que es lo correcto: promediar primero y dividir despues. -->
+  <node id="Polarimetric-Parameters">
+    <operator>Polarimetric-Parameters</operator>
+    <sources><sourceProduct refid="Subset"/></sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <useMeanMatrix>true</useMeanMatrix>
+      <windowSizeXStr>5</windowSizeXStr>
+      <windowSizeYStr>5</windowSizeYStr>
+      <outputSpan>true</outputSpan>
+      <outputPedestalHeight>true</outputPedestalHeight>
+      <outputRVI>true</outputRVI>
+      <outputRFDI>true</outputRFDI>
+      <outputCSI>true</outputCSI>
+      <outputVSI>true</outputVSI>
+      <outputBMI>true</outputBMI>
+      <outputITI>false</outputITI>
+      <outputHHVVRatio>true</outputHHVVRatio>
+      <outputHHHVRatio>true</outputHHHVRatio>
+      <outputVVVHRatio>true</outputVVVHRatio>
+    </parameters>
+  </node>
+
+  <!-- 7) GEOCODIFICACION a la grilla comun del proyecto. Mismo criterio de
+       alineacion que graph_saocom_tc.xml: origen desplazado medio pixel para
+       que los BORDES caigan en multiplos de 10 m. -->
+  <node id="Terrain-Correction">
+    <operator>Terrain-Correction</operator>
+    <sources><sourceProduct refid="Polarimetric-Parameters"/></sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <demName>Copernicus 30m Global DEM</demName>
+      <demResamplingMethod>BILINEAR_INTERPOLATION</demResamplingMethod>
+      <imgResamplingMethod>BILINEAR_INTERPOLATION</imgResamplingMethod>
+      <pixelSpacingInMeter>10.0</pixelSpacingInMeter>
+      <pixelSpacingInDegree>8.983152841195213e-05</pixelSpacingInDegree>
+      <mapProjection>EPSG:32719</mapProjection>
+      <nodataValueAtSea>false</nodataValueAtSea>
+      <alignToStandardGrid>true</alignToStandardGrid>
+      <standardGridOriginX>5.0</standardGridOriginX>
+      <standardGridOriginY>5.0</standardGridOriginY>
+      <saveLocalIncidenceAngle>true</saveLocalIncidenceAngle>
+      <saveSelectedSourceBand>true</saveSelectedSourceBand>
+    
+      <sourceBands/>
+      <externalDEMFile/>
+      <externalDEMNoDataValue>0.0</externalDEMNoDataValue>
+      <externalDEMApplyEGM>true</externalDEMApplyEGM>
+      <saveDEM>false</saveDEM>
+      <saveLatLon>false</saveLatLon>
+      <saveIncidenceAngleFromEllipsoid>false</saveIncidenceAngleFromEllipsoid>
+      <saveProjectedLocalIncidenceAngle>false</saveProjectedLocalIncidenceAngle>
+      <saveLayoverShadowMask>true</saveLayoverShadowMask>
+      <applyRadiometricNormalization>false</applyRadiometricNormalization>
+      <saveSigmaNought>false</saveSigmaNought>
+      <saveGammaNought>false</saveGammaNought>
+      <saveBetaNought>false</saveBetaNought>
+      <incidenceAngleForSigma0>Use projected local incidence angle from DEM</incidenceAngleForSigma0>
+      <incidenceAngleForGamma0>Use projected local incidence angle from DEM</incidenceAngleForGamma0>
+      <auxFile>Latest Auxiliary File</auxFile>
+      <externalAuxFile/>
+    </parameters>
+  </node>
+
+  <node id="Write">
+    <operator>Write</operator>
+    <sources><sourceProduct refid="Terrain-Correction"/></sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <file>C:\Temp\CURSO_BIOMASA_2026\02_Practica\TP4_Radar_SAR\05_Resultados\SAOCOM_16ene2024_indices.dim</file>
+      <formatName>BEAM-DIMAP</formatName>
+    </parameters>
+  </node>
+  <applicationData id="Presentation">
+    <Description/>
+    <node id="Read">
+      <displayPosition x="15.0" y="20.0"/>
+    </node>
+    <node id="Calibration">
+      <displayPosition x="220.0" y="20.0"/>
+    </node>
+    <node id="Subset">
+      <displayPosition x="425.0" y="20.0"/>
+    </node>
+    <node id="Polarimetric-Parameters">
+      <displayPosition x="15.0" y="82.0"/>
+    </node>
+    <node id="Terrain-Correction">
+      <displayPosition x="220.0" y="82.0"/>
+    </node>
+    <node id="Write">
+      <displayPosition x="425.0" y="82.0"/>
+    </node>
+  </applicationData>
+</graph>

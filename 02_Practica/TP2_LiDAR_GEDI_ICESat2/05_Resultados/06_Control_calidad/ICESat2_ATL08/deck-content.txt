@@ -1,0 +1,19 @@
+NOTA (21/8/2026): este archivo describe el guion del paquete ORIGINAL de
+ICESat-2, tal como llegó. La presentacion del curso que salio de el
+(01_Teoria\02_Fuentes_pptx\04_ICESat2_ATLAS.pptx) tiene hoy 29 laminas: la
+lamina 20, nueva del 21/8, agrega el cotejo contra GEDI. Este guion no se
+actualiza: es el registro de lo recibido.
+
+1. Portada — ATL08 V007: altura del dosel en bosque y estepa.
+2. Pregunta y métrica — h_canopy = RH98; h_max_canopy = RH100; segmentos de 100 m.
+3. Cobertura espacial — dos AOI bien diferenciadas y 46 gránulos operacionales.
+4. Del dato bruto a la muestra — retención operacional cercana a 10%; conservadora no comparable como simple filtro.
+5. Estrategia analítica — segmentos para descripción, gránulos para inferencia, sensibilidad a extremos y tamaño de gránulo.
+6. Resultado descriptivo — mediana RH98 16,28 m Bosque vs 10,45 m Estepa.
+7. Evidencia por gránulo — diferencia 3,75 m; IC95% 2,58–6,07; delta de Cliff 0,68.
+8. Robustez — diferencia operacional estable al exigir 5–50 segmentos por gránulo y al retirar extremos.
+9. El filtro conservador cambia la muestra — disponibilidad de incertidumbre asociada con menores alturas, más en Bosque.
+10. Sensibilidad del estimando — conservador 0,49 m; IC95% incluye cero; no contradice automáticamente al operacional.
+11. Adquisición y cobertura — composición de cobertura coherente con AOI; análisis diurno mantiene diferencia; nocturno escaso.
+12. Conclusiones — evidencia sólida en la muestra operacional; inferencia condicionada a selección, producto y extracción.
+13. Recomendaciones — reextraer campos oficiales de calidad y percentiles intermedios; modelo jerárquico/estratificado; validación externa.

@@ -1,0 +1,449 @@
+ 
+############ PASO 1 - TP5_02_modelos.py 
+
+TP5_02_modelos.py   ---> SEGUNDO script del TP5.
+
+QUE HACE
+--------
+Ajusta los CUATRO modelos del practico -optico, SAR, optico+SAR y
+optico+SAR+LiDAR- sobre exactamente las mismas huellas y con exactamente la misma
+particion.
+
+EL OBJETIVO DE LOS MODELOS ES LA ALTURA DEL DOSEL (rh95), NO LA BIOMASA.
+Y esa decision, que parece un retroceso respecto del titulo del curso, es lo
+contrario: es lo que permite que la biomasa se estime de manera defendible.
+
+POR QUE. La biomasa del GEDI L4A NO es una medicion independiente: la NASA la
+MODELO a partir de las metricas de altura del propio L2A. Ajustar un modelo que
+prediga `agbd` usando `rh95` entre las variables es reconstruir el modelo de la
+NASA con otro nombre, y el R2 alto que sale de ahi no demuestra que la fusion de
+sensores funcione. Este script lo deja medido, mas abajo, para que se vea el
+tamano del problema en vez de discutirlo en abstracto.
+
+La biomasa entra al final de la cadena, en TP5_04, convirtiendo la altura
+predicha con la relacion altura-biomasa del L4A y arrastrando las TRES fuentes de
+error: la del modelo de altura, la de esa conversion, y la del propio L4A.
+
+QUE PREGUNTA CONTESTA, Y CUAL NO
+--------------------------------
+NO contesta "cual sensor es mejor". Esa pregunta ya se hizo en el TP4 y la
+respuesta fue que optico y radar dan R2 parecidos. Contesta la unica que queda en
+pie: CUANTO APORTA CADA FAMILIA DE VARIABLES CUANDO YA ESTAN LAS OTRAS. Eso es el
+delta de R2 al agregarla, y es lo que este script reporta.
+
+DOS ALGORITMOS, Y POR QUE
+-------------------------
+El LINEAL MULTIPLE es la referencia: transparente, reproducible con una planilla,
+y su delta de R2 se lee sin ambiguedad. El BOSQUE ALEATORIO (Random Forest) se
+corre al lado con la misma particion, no para ganarle, sino para medir cuanto de
+la mejora es no linealidad real y cuanto es sobreajuste. Por eso se informan
+SIEMPRE las dos cifras, entrenamiento y validacion: si la de entrenamiento es
+mucho mejor que la de validacion, el modelo memorizo.
+
+CASO COMPLETO
+-------------
+Una huella entra en la comparacion solo si tiene TODAS las variables de TODOS los
+modelos y ademas el objetivo. Si cada modelo usara las huellas que le convienen,
+la comparacion no seria justa. El script informa cuantas huellas quedan.
+
+ENTRADA   04_Subsets/TP5_dataset_<AOI>.csv  (del TP5_01)
+SALIDA    05_Resultados/04_Tablas/TP5_modelos_<objetivo>.csv
+USO       python TP5_02_modelos.py
+
+========================================================================
+OBJETIVO: ALTURA  (rh95, en m)
+========================================================================
+   huellas con TODAS las variables y el objetivo: 3713 de 3773
+      bosque   675
+      estepa  3038
+
+   los dos sitios juntos   (entrena 3018, valida 695)
+      modelo             lineal (entren / valid)  bosque aleatorio        
+      optico             0.411 / 0.464  RMSE  2.37         0.778 / 0.605  RMSE 2.04
+      SAR                0.409 / 0.346  RMSE  2.62  (-0.118) 0.852 / 0.601  RMSE 2.05
+      optico+SAR         0.440 / 0.437  RMSE  2.43  (+0.091) 0.872 / 0.635  RMSE 1.96
+      optico+SAR+LiDAR   0.880 / 0.832  RMSE  1.33  (+0.395) 0.991 / 0.964  RMSE 0.61
+      solo LiDAR (control) 0.870 / 0.821  RMSE  1.37         0.986 / 0.956  RMSE 0.68
+
+   solo bosque   (entrena 560, valida 115)
+      modelo             lineal (entren / valid)  bosque aleatorio        
+      optico             0.280 / 0.484  RMSE  4.34         0.712 / 0.545  RMSE 4.08
+      SAR                0.476 / 0.429  RMSE  4.57  (-0.055) 0.826 / 0.533  RMSE 4.13
+      optico+SAR         0.516 / 0.552  RMSE  4.05  (+0.123) 0.847 / 0.594  RMSE 3.86
+      optico+SAR+LiDAR   0.908 / 0.851  RMSE  2.34  (+0.299) 0.990 / 0.977  RMSE 0.91
+      solo LiDAR (control) 0.899 / 0.851  RMSE  2.33         0.988 / 0.977  RMSE 0.91
+
+   solo estepa   (entrena 2458, valida 580)
+      modelo             lineal (entren / valid)  bosque aleatorio        
+      optico             0.365 / 0.395  RMSE  1.35         0.656 / 0.352  RMSE 1.40
+      SAR                0.407 / 0.448  RMSE  1.29  (+0.053) 0.746 / 0.390  RMSE 1.35
+      optico+SAR         0.429 / 0.453  RMSE  1.28  (+0.005) 0.762 / 0.449  RMSE 1.29
+      optico+SAR+LiDAR   0.857 / 0.764  RMSE  0.84  (+0.311) 0.976 / 0.910  RMSE 0.52
+      solo LiDAR (control) 0.814 / 0.687  RMSE  0.97         0.959 / 0.879  RMSE 0.60
+
+   entrena bosque -> valida estepa   (entrena 675, valida 3038)
+      modelo             lineal (entren / valid)  bosque aleatorio        
+      optico             0.315 / -17.025  RMSE  8.16         0.726 / 0.271  RMSE 1.64
+      SAR                0.478 / -110.922  RMSE 20.32  (-93.897) 0.827 / 0.084  RMSE 1.84
+      optico+SAR         0.527 / -89.427  RMSE 18.27  (+21.495) 0.849 / 0.250  RMSE 1.66
+      optico+SAR+LiDAR   0.903 / -4.172  RMSE  4.37  (+85.255) 0.991 / 0.912  RMSE 0.57
+      solo LiDAR (control) 0.894 / -0.067  RMSE  1.98         0.989 / 0.882  RMSE 0.66
+
+   entrena estepa -> valida bosque   (entrena 3038, valida 675)
+      modelo             lineal (entren / valid)  bosque aleatorio        
+      optico             0.371 / 0.088  RMSE  6.77         0.661 / 0.207  RMSE 6.31
+      SAR                0.415 / 0.043  RMSE  6.93  (-0.045) 0.749 / 0.096  RMSE 6.74
+      optico+SAR         0.435 / 0.070  RMSE  6.84  (+0.027) 0.765 / 0.150  RMSE 6.54
+      optico+SAR+LiDAR   0.844 / 0.734  RMSE  3.66  (+0.664) 0.974 / 0.884  RMSE 2.42
+      solo LiDAR (control) 0.795 / 0.731  RMSE  3.68         0.954 / 0.887  RMSE 2.38
+
+   -> C:\Temp\BIOMASA_BOSQUE_ESTEPA\TP5_Sinergia_Multisensor\05_Resultados\04_Tablas\TP5_modelos_altura.csv
+
+========================================================================
+OBJETIVO: BIOMASA  (agbd_Mg_ha, en Mg/ha)
+========================================================================
+   huellas con TODAS las variables y el objetivo: 1599 de 3773
+      bosque   484
+      estepa  1115
+
+   >>> ESTE BLOQUE ES UN DIAGNOSTICO, NO EL MODELO DEL PRACTICO. <<<
+   Se corre para MEDIR la circularidad, no para usar sus resultados.
+   ATENCION: la biomasa del L4A la modelo la NASA A PARTIR DE LAS METRICAS
+   DE ALTURA DEL L2A. Predecirla con rh95 es reconstruir ese modelo, no
+   demostrar sinergia. Mire la fila 'solo LiDAR (control)': lo que ese
+   modelo ya explica por si solo NO es merito de la fusion.
+
+   PISO del propio L4A (error estandar mediano por disparo):
+      bosque 11.1 Mg/ha    estepa 3.0 Mg/ha
+      Un RMSE parecido a esos valores NO es un mal modelo: es el techo del dato.
+
+   los dos sitios juntos   (entrena 1273, valida 326)
+      modelo             lineal (entren / valid)  bosque aleatorio        
+      optico             0.303 / 0.301  RMSE 22.76         0.741 / 0.411  RMSE 20.90
+      SAR                0.273 / 0.154  RMSE 25.04  (-0.147) 0.774 / 0.381  RMSE 21.42
+      optico+SAR         0.339 / 0.287  RMSE 23.00  (+0.132) 0.815 / 0.333  RMSE 22.24
+      optico+SAR+LiDAR   0.925 / 0.886  RMSE  9.18  (+0.600) 0.965 / 0.899  RMSE 8.67
+      solo LiDAR (control) 0.922 / 0.873  RMSE  9.71         0.954 / 0.858  RMSE 10.26
+
+   solo bosque   (entrena 397, valida 87)
+      modelo             lineal (entren / valid)  bosque aleatorio        
+      optico             0.255 / 0.361  RMSE 37.29         0.699 / 0.306  RMSE 38.88
+      SAR                0.307 / 0.215  RMSE 41.34  (-0.147) 0.745 / 0.275  RMSE 39.72
+      optico+SAR         0.368 / 0.345  RMSE 37.76  (+0.130) 0.794 / 0.204  RMSE 41.63
+      optico+SAR+LiDAR   0.945 / 0.921  RMSE 13.12  (+0.576) 0.962 / 0.901  RMSE 14.68
+      solo LiDAR (control) 0.925 / 0.911  RMSE 13.88         0.952 / 0.898  RMSE 14.88
+
+   solo estepa   (entrena 876, valida 239)
+      modelo             lineal (entren / valid)  bosque aleatorio        
+      optico             0.323 / 0.290  RMSE  9.56         0.633 / 0.302  RMSE 9.48
+      SAR                0.302 / 0.389  RMSE  8.87  (+0.099) 0.664 / 0.385  RMSE 8.90
+      optico+SAR         0.350 / 0.369  RMSE  9.02  (-0.020) 0.709 / 0.436  RMSE 8.53
+      optico+SAR+LiDAR   0.969 / 0.865  RMSE  4.18  (+0.495) 0.985 / 0.856  RMSE 4.31
+      solo LiDAR (control) 0.968 / 0.875  RMSE  4.01         0.985 / 0.857  RMSE 4.29
+
+   entrena bosque -> valida estepa   (entrena 484, valida 1115)
+      modelo             lineal (entren / valid)  bosque aleatorio        
+      optico             0.276 / -9.379  RMSE 52.44         0.704 / 0.340  RMSE 13.22
+      SAR                0.308 / -66.630  RMSE 133.87  (-57.251) 0.741 / 0.283  RMSE 13.78
+      optico+SAR         0.376 / -37.650  RMSE 101.20  (+28.980) 0.792 / 0.403  RMSE 12.58
+      optico+SAR+LiDAR   0.943 / -2.554  RMSE 30.69  (+35.096) 0.963 / 0.744  RMSE 8.24
+      solo LiDAR (control) 0.924 / 0.692  RMSE  9.04         0.953 / 0.716  RMSE 8.68
+
+   entrena estepa -> valida bosque   (entrena 1115, valida 484)
+      modelo             lineal (entren / valid)  bosque aleatorio        
+      optico             0.321 / 0.106  RMSE 51.16         0.629 / 0.312  RMSE 44.91
+      SAR                0.313 / 0.064  RMSE 52.36  (-0.042) 0.673 / 0.187  RMSE 48.81
+      optico+SAR         0.355 / 0.106  RMSE 51.16  (+0.042) 0.717 / 0.331  RMSE 44.26
+      optico+SAR+LiDAR   0.962 / 0.767  RMSE 26.10  (+0.661) 0.979 / 0.688  RMSE 30.23
+      solo LiDAR (control) 0.959 / 0.773  RMSE 25.78         0.977 / 0.692  RMSE 30.02
+
+   -> C:\Temp\BIOMASA_BOSQUE_ESTEPA\TP5_Sinergia_Multisensor\05_Resultados\04_Tablas\TP5_modelos_biomasa.csv
+
+SIGUIENTE PASO:  python TP5_03_validacion.py
+
+RECORDATORIO: el modelo del practico es el de ALTURA. El bloque de biomasa
+de mas arriba esta para mostrar por que NO se usa como objetivo directo.
+
+COMO SE LEE ESTA SALIDA, y es lo que hay que escribir en el informe:
+  - El numero entre parentesis es el DELTA de R2 al agregar esa familia de
+    variables a la anterior. Ahi esta la respuesta del practico.
+  - Si el R2 de entrenamiento es mucho mayor que el de validacion, el modelo
+    memorizo. Declararlo vale mas que esconderlo.
+  - La fila 'solo LiDAR (control)' NO entra en la cadena de deltas. Esta
+    para que se vea cuanto del resultado es circularidad del propio L4A.
+  - Las dos ultimas comparaciones son el test duro: entrenar en un sitio y
+    predecir en el otro. Es normal que den mal. Eso mide transferibilidad,
+    que es lo que hace falta para dibujar un mapa fuera del area de ajuste.
+ 
+############ PASO 2 - TP5_03_validacion.py 
+
+TP5_03_validacion.py   ---> TERCER script del TP5.
+
+QUE HACE
+--------
+Toma el mejor modelo de altura del TP5_02 y lo somete a las pruebas que un R2 de
+validacion no contesta:
+
+  1. POR SITIO      ¿funciona igual en el bosque que en la estepa?
+  2. POR FRANJA     ¿donde se equivoca? El sesgo por franja de altura dice mas
+                    que el RMSE global: un modelo puede tener buen R2 y estar
+                    subestimando sistematicamente los arboles altos, que es
+                    justamente donde esta la biomasa.
+  3. PRE / POST     ¿el modelo ajustado ANTES del incendio sirve DESPUES?
+                    Se aplica a las mismas huellas con el optico y el radar
+                    posteriores al fuego. No hay verdad de campo post-incendio,
+                    de modo que esto NO valida: MIDE EL CAMBIO. Un bosque quemado
+                    tiene que dar altura predicha menor. Si no baja, el modelo
+                    esta respondiendo a otra cosa.
+
+POR QUE ESTE SCRIPT EXISTE
+--------------------------
+Porque el criterio de evaluacion del TP5 no es "que numero dio" sino "distinguir
+mejora real de sobreajuste". Un modelo que anda bien en promedio y mal en la cola
+alta es inservible para biomasa, y el R2 no lo delata. El sesgo por franja, si.
+
+ENTRADA   04_Subsets/TP5_dataset_<AOI>.csv          (del TP5_01)
+          02_Insumos post-incendio, via TP3 y TP4   (para el punto 3)
+SALIDA    05_Resultados/04_Tablas/TP5_validacion_sitio.csv
+          05_Resultados/04_Tablas/TP5_validacion_franjas.csv
+          05_Resultados/04_Tablas/TP5_cambio_pre_post.csv
+USO       python TP5_03_validacion.py
+
+========================================================================
+MODELO: altura del dosel a partir de optico + radar (12 variables)
+========================================================================
+   ajustado con 3018 huellas de entrenamiento, de los dos sitios
+   SIN variables de GEDI entre las predictoras: el modelo tiene que servir
+   donde NO hay huellas, que es casi todo el terreno.
+
+1. POR SITIO
+   los dos juntos   n= 695   R2 0.437   RMSE 2.43 m   sesgo +0.05 m
+   bosque           n= 115   R2 0.393   RMSE 4.71 m   sesgo +0.57 m
+   estepa           n= 580   R2 0.106   RMSE 1.64 m   sesgo -0.06 m
+
+2. POR FRANJA DE ALTURA   (donde se equivoca, que es lo que el R2 esconde)
+   bosque
+      franja         n      sesgo       RMSE
+       0- 3 m     27     3,93 m     4,02 m
+       3- 6 m     48     2,82 m     3,01 m
+       6- 9 m     10     1,14 m     2,17 m
+       9-12 m      5    -1,80 m     2,01 m
+      12-15 m     10    -3,65 m     3,84 m
+      15-18 m      5    -6,15 m     6,21 m
+      18-21 m      5    -9,27 m     9,31 m
+      -> en las huellas de mas de 15 m (n=15) el sesgo es -9,45 m
+         Si es muy negativo, el modelo SUBESTIMA los arboles altos,
+         que es justo donde esta la biomasa. Hay que declararlo.
+   estepa
+      franja         n      sesgo       RMSE
+       0- 3 m    333     0,11 m     1,04 m
+       3- 6 m    200    -0,10 m     1,93 m
+       6- 9 m     36    -0,54 m     2,97 m
+       9-12 m     11    -2,68 m     3,47 m
+
+3. PRE CONTRA POST INCENDIO
+   No hay verdad de campo despues del fuego: esto NO valida el modelo,
+   MIDE EL CAMBIO. El bosque quemado tiene que bajar; la estepa, no.
+   BOSQUE_NW_02   n= 675   altura predicha:  pre 8,63 m -> post 3,84 m   cambio -4,37 m
+   ESTEPA_NW_02   n=3036   altura predicha:  pre 2,74 m -> post 2,60 m   cambio -0,11 m
+
+   El bosque tiene que dar un cambio NEGATIVO y la estepa uno cercano a
+   cero. Si la estepa tambien baja, el modelo esta leyendo estacionalidad
+   o humedad, no fuego, y hay que decirlo antes de seguir.
+
+SIGUIENTE PASO:  python TP5_04_biomasa_quemada.py
+ 
+############ PASO 3 - TP5_04_biomasa_quemada.py 
+
+TP5_04_biomasa_quemada.py   ---> CUARTO script del TP5.
+
+QUE HACE
+--------
+Es el ultimo eslabon de la cadena del curso: convierte la ALTURA predicha en
+BIOMASA, cruza el resultado con las clases de severidad del incendio y estima
+cuanta biomasa se perdio, CON SU INCERTIDUMBRE.
+
+POR QUE LA BIOMASA ENTRA RECIEN ACA, Y NO COMO OBJETIVO DEL MODELO
+------------------------------------------------------------------
+Porque la biomasa del GEDI L4A no es una medicion independiente: la NASA la
+modelo a partir de las metricas de altura del L2A. Ajustar un modelo que prediga
+`agbd` con `rh95` adentro es reconstruir el modelo de la NASA y llamarlo sinergia.
+Poniendola al final, la cadena queda explicita y auditable:
+
+    optico + radar  --modelo del TP5_02-->  ALTURA
+    ALTURA          --relacion alometrica-->  BIOMASA
+
+LAS TRES FUENTES DE ERROR, Y POR QUE SE SUMAN ASI
+--------------------------------------------------
+  s1  error del modelo de altura            (RMSE de TP5_03, por sitio)
+  s2  error de la conversion altura-biomasa (RMSE de este ajuste, en validacion)
+  s3  error del propio L4A                  (su error estandar mediano por disparo)
+
+s1 esta en metros y hay que pasarlo a Mg/ha antes de sumarlo: se propaga por la
+derivada de la relacion, db/dh. Las tres se combinan en cuadratura porque son
+independientes entre si. NO se suman directamente: eso exageraria el resultado.
+
+    s_total = raiz( (db/dh * s1)^2 + s2^2 + s3^2 )
+
+LO QUE ESTE SCRIPT NO PUEDE ARREGLAR, Y DECLARA
+------------------------------------------------
+El TP5_03 midio que el modelo de altura SUBESTIMA los arboles altos: por encima
+de 15 m el sesgo es de casi diez metros. Como la biomasa crece mas que
+proporcionalmente con la altura, ese sesgo se amplifica al convertir. Por eso el
+script informa SIEMPRE dos columnas: la biomasa desde la altura PREDICHA y la
+biomasa desde la altura OBSERVADA por GEDI. La diferencia entre ambas es el
+tamano del problema, y no hay que esconderla.
+
+ENTRADA   04_Subsets/TP5_dataset_<AOI>.csv
+          Escenas Sentinel-2 pre y post, para el dNBR y las clases de severidad
+SALIDA    05_Resultados/04_Tablas/TP5_biomasa_por_severidad.csv
+          05_Resultados/04_Tablas/TP5_cadena_de_error.csv
+USO       python TP5_04_biomasa_quemada.py
+
+========================================================================
+BOSQUE_NW_02  (bosque)
+========================================================================
+   s1  error del modelo de altura      4,32 m   (n validacion 115)
+   relacion ajustada:  biomasa = 0,04 · altura^2,605   (R² 0,918 en validación, n 83)
+   s2  error de la conversión          13,6 Mg/ha
+   s3  error del propio L4A            13,1 Mg/ha
+
+   clase de severidad       hectáreas     huellas     pérdida biomasa perdida
+                                                        Mg/ha Mg (± incert.)
+   Regeneración baja            257,0           5       -15,0  -3862 ± 3138
+   Sin cambio                  4170,5          87       -10,2 -42742 ± 12397
+   Severidad baja              1842,7          50        11,5  21195 ± 5780
+   Severidad moderada-baja     2825,5          39        15,5  43898 ± 9849
+   Severidad moderada-alta     3672,0         106        12,8  47021 ± 7533
+   Severidad alta              9668,2         388        15,2 147039 ± 11563
+   TOTAL QUEMADO              18008,4                         259153 ± 17913
+
+   ENSAYO NULO. En la clase «Sin cambio» no hubo fuego, de modo que la
+   pérdida tendría que dar CERO. Da -10,2 Mg/ha sobre 4170,5 ha.
+   Ése es el PISO DE RUIDO del método completo, y hay dos motivos claros:
+   el óptico compara noviembre contra marzo, o sea dos estaciones, y el
+   radar del 27/02 puede tener otra humedad de suelo que el del 10/01.
+   Regla para el informe: la pérdida de una clase sólo es creíble si es
+   bastante mayor que 10,2 Mg/ha en valor absoluto.
+   Comparación: la clase «Severidad alta» pierde 15,2 Mg/ha, o sea 1,5 veces el piso.
+
+   AVISO. Biomasa desde la altura PREDICHA contra la OBSERVADA por GEDI:
+   la predicha da en promedio 10,9 Mg/ha MENOS. Es el sesgo del modelo de altura
+   trasladado a biomasa: el TP5_03 midió que subestima los árboles altos, y
+   la alometría lo amplifica porque la biomasa crece con la altura elevada a 2,61.
+
+========================================================================
+ESTEPA_NW_02  (estepa)
+========================================================================
+   s1  error del modelo de altura      1,31 m   (n validacion 580)
+   relacion ajustada:  biomasa = 0,24 · altura^2,347   (R² 0,827 en validación, n 239)
+   s2  error de la conversión          4,7 Mg/ha
+   s3  error del propio L4A            3,0 Mg/ha
+
+   clase de severidad       hectáreas     huellas     pérdida biomasa perdida
+                                                        Mg/ha Mg (± incert.)
+   Regeneración baja            377,2          30        -0,0     -18 ± 634
+   Sin cambio                 21583,8        2946         1,0  21537 ± 2628
+   Severidad baja               397,0          57         3,7    1482 ± 422
+   Severidad moderada-baja       15,5           3         3,9       61 ± 69
+   TOTAL QUEMADO                412,5                            1543 ± 428
+
+   ENSAYO NULO. En la clase «Sin cambio» no hubo fuego, de modo que la
+   pérdida tendría que dar CERO. Da 1,0 Mg/ha sobre 21583,8 ha.
+   Ése es el PISO DE RUIDO del método completo, y hay dos motivos claros:
+   el óptico compara noviembre contra marzo, o sea dos estaciones, y el
+   radar del 27/02 puede tener otra humedad de suelo que el del 10/01.
+   Regla para el informe: la pérdida de una clase sólo es creíble si es
+   bastante mayor que 1,0 Mg/ha en valor absoluto.
+   Comparación: la clase «Severidad alta» pierde 0,0 Mg/ha, o sea 0,0 veces el piso.
+
+   AVISO. Biomasa desde la altura PREDICHA contra la OBSERVADA por GEDI:
+   la predicha da en promedio 1,6 Mg/ha MENOS. Es el sesgo del modelo de altura
+   trasladado a biomasa: el TP5_03 midió que subestima los árboles altos, y
+   la alometría lo amplifica porque la biomasa crece con la altura elevada a 2,35.
+
+   -> TP5_biomasa_por_severidad.csv
+   -> TP5_cadena_de_error.csv
+
+SIGUIENTE PASO:  python TP5_05_mapas.py
+
+COMO SE LEE: la cifra de biomasa perdida NO es una medición, es una estimación
+con tres errores encadenados. Repórtela SIEMPRE con su ± y con la advertencia
+del sesgo. Un número sin incertidumbre, en este trabajo, es un número falso.
+ 
+############ PASO 4 - TP5_05_mapas.py 
+
+TP5_05_mapas.py   ---> QUINTO y ULTIMO script del TP5.
+
+QUE HACE
+--------
+Lleva el modelo del practico del punto al pixel. Aplica el modelo de altura sobre
+TODA la grilla -no solo donde cayeron las huellas de GEDI-, convierte a biomasa
+con la alometria del TP5_04 y escribe seis capas por sitio, mas sus estilos de
+QGIS:
+
+    altura_pre, altura_post          m
+    biomasa_pre, biomasa_post        Mg/ha
+    biomasa_cambio                   Mg/ha  (post menos pre: negativo = perdida)
+    incertidumbre                    Mg/ha  (la cadena de error del TP5_04)
+
+ESTO ES LO QUE GEDI NO PUEDE HACER SOLO, y es el argumento del curso entero: GEDI
+mide bien pero en lineas de huellas separadas por kilometros; el optico y el radar
+cubren el terreno entero pero no miden estructura. El mapa existe porque se
+calibro uno contra el otro.
+
+LA MASCARA NO ES UN ADORNO
+--------------------------
+Se enmascara todo pixel donde el modelo NO tiene derecho a hablar:
+  - nube o sombra en cualquiera de las dos fechas opticas (banda SCL)
+  - sin dato de radar
+  - por ENCIMA del rango de altura con el que se ajusto el modelo: extrapolar
+    una alometria de exponente mayor que 2 es multiplicar el error por su
+    cuadrado. Por DEBAJO no se enmascara y se recorta a cero, porque un pixel
+    quemado tiene altura casi nula de manera legitima
+Un pixel enmascarado NO es un fracaso: es honestidad. Un mapa que cubre el 100 %
+del recinto casi siempre esta inventando en alguna parte.
+
+ADVERTENCIA QUE VIAJA CON EL MAPA
+---------------------------------
+El TP5_03 midio que el modelo de altura SUBESTIMA los arboles altos, y la
+alometria amplifica ese sesgo. El mapa de biomasa, por lo tanto, subestima los
+rodales altos. Esta escrito en el .qml y en este encabezado para que no se pierda
+cuando alguien abra el raster dentro de seis meses.
+
+ENTRADA   04_Subsets/TP5_dataset_<AOI>.csv y las escenas de TP3 y TP4
+SALIDA    05_Resultados/02_Rasters/TP5_<capa>_<AOI>.tif  y  .qml
+USO       python TP5_05_mapas.py
+
+========================================================================
+BOSQUE_NW_02
+========================================================================
+   modelo de altura: 8 variables, 560 huellas de entrenamiento
+   alometría: biomasa = 0,04 · altura^2,605
+   rango con el que se ajustó: 2,0 a 26,3 m. Por encima se enmascara; por debajo se recorta a 0.
+   pre    píxeles con dato:  99.8 %
+   post   píxeles con dato:  99.7 %
+   cadena de error: s1 4,32 m | s2 13,6 Mg/ha | s3 13,1 Mg/ha
+   -> 6 capas .tif con su .qml en 05_Resultados/02_Rasters/
+   biomasa perdida sobre los píxeles con dato: 276717 Mg en 15980,3 ha
+
+========================================================================
+ESTEPA_NW_02
+========================================================================
+   modelo de altura: 8 variables, 2458 huellas de entrenamiento
+   alometría: biomasa = 0,24 · altura^2,347
+   rango con el que se ajustó: 1,9 a 13,3 m. Por encima se enmascara; por debajo se recorta a 0.
+   pre    píxeles con dato: 100.0 %
+   post   píxeles con dato:  99.5 %
+   cadena de error: s1 1,31 m | s2 4,7 Mg/ha | s3 3,0 Mg/ha
+   -> 6 capas .tif con su .qml en 05_Resultados/02_Rasters/
+   biomasa perdida sobre los píxeles con dato: 27645 Mg en 20729,0 ha
+
+EL TP5 TERMINA ACA. Antes de usar estos mapas, tres cosas que hay que decir
+en el informe y que el .qml lleva escritas adentro:
+  1. El mapa SUBESTIMA los rodales altos: el modelo de altura tiene un sesgo
+     de casi 10 m por encima de 15 m y la alometría lo amplifica.
+  2. Los píxeles enmascarados no son un error: son donde el modelo no tiene
+     derecho a hablar. Informe qué porcentaje del recinto quedó sin dato.
+  3. La pérdida sólo es creíble por encima del piso de ruido que midió el
+     TP5_04 con la clase «Sin cambio». Compárela contra ese piso, no contra cero.

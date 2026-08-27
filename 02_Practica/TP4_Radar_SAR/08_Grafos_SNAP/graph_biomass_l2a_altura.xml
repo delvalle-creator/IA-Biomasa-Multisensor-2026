@@ -1,0 +1,125 @@
+<!--
+ BIOMASS NIVEL 2A - ALTURA DE DOSEL -> RECINTO, ENMASCARADA POR CALIDAD, EN EPSG:32719
+ =====================================================================================
+ Escrito el 01/08/2026, a los pocos dias de que la ESA publicara los primeros
+ productos de nivel 2A (30/06/2026). Es un grafo NUEVO: no habia ninguno para
+ banda P de nivel 2 porque hasta junio de 2026 el nivel 2 no existia.
+
+ QUE HACE
+   Read -> Subset -> BandMaths -> Reproject -> Write
+   Toma un producto FP_FH__L2A -altura de dosel + capa de calidad-, lo recorta al
+   recinto, DESCARTA los pixeles que la capa de calidad marca como malos, lo lleva
+   a la grilla del proyecto (EPSG:32719) y lo deja en GeoTIFF.
+
+ ANTES DE CORRERLO HAY QUE HACER UNA COSA, Y NO ES OPCIONAL
+ ========================================
+ LOS NOMBRES DE BANDA DE ESTE GRAFO SON PROVISIONALES. No se pudieron verificar
+ contra un producto real: al escribirse este archivo todavia no habia ninguno
+ descargado, y la descarga exige autenticarse ante la ESA. Poner un nombre de
+ banda que no existe NO da error visible en algunos operadores: da una banda
+ vacia, que es peor.
+
+ Por eso: correr primero
+
+     python TP4_11_inspeccionar_biomass_L2A.py <carpeta del producto>
+
+ que imprime los nombres reales, el tamano, el sistema de referencia y el valor
+ "sin dato", y ademas escribe las dos lineas exactas que hay que pegar aqui
+ abajo. Es el mismo criterio que el TP2 aplica a las variables de GEDI: no se
+ asume un nombre, se verifica y se falla con un mensaje claro si no esta.
+
+ SOBRE EL REMUESTREO, QUE ES UNA DECISION Y NO UN DETALLE
+ ========================================
+ El pixel nativo del producto ronda los 50 m y la grilla del proyecto es de 10 m.
+ Aqui NO se remuestrea a 10: se conserva 50. Llevar una altura de 50 m a 10 m
+ con interpolacion bilineal fabrica un detalle que el sensor nunca midio, y
+ despues nadie se acuerda de que era inventado. Si mas adelante hace falta
+ comparar pixel a pixel contra el mapa del TP5, eso se resuelve con un
+ Collocate en un segundo paso, declarando que el maestro es el producto grueso.
+ El metodo elegido es el vecino mas proximo, por el mismo motivo.
+
+ QUE SE EDITA AQUI: las dos rutas, el recuadro y los dos nombres de banda.
+ QUE NO: el resto. El gemelo terminado en _cli es el de la linea de ordenes.
+-->
+<graph id="BIOMASS_L2A_altura_a_recinto">
+
+  <node id="Read">
+    <operator>Read</operator>
+    <sources/>
+    <parameters>
+      <!-- Carpeta o archivo del producto FP_FH__L2A ya descomprimido. -->
+      <file>C:\Temp\CURSO_BIOMASA_2026\02_Practica\00_COMUN\08_Originales_crudos\03_post\BIOMASS_bandaP\CAMBIAR_POR_EL_PRODUCTO_FH</file>
+    </parameters>
+  </node>
+
+  <node id="Subset">
+    <operator>Subset</operator>
+    <sources><sourceProduct refid="Read"/></sources>
+    <parameters>
+      <!-- BOSQUE_NW_02 con 0,02 grados de margen, el mismo criterio que los
+           grafos del SAOCOM. Para ESTEPA_NW_02:
+           POLYGON((-71.2338 -42.6884,-71.0058 -42.6884,-71.0058 -42.8668,-71.2338 -42.8668,-71.2338 -42.6884)) -->
+      <geoRegion>POLYGON((-71.6178 -42.5362,-71.3895 -42.5362,-71.3895 -42.7153,-71.6178 -42.7153,-71.6178 -42.5362))</geoRegion>
+      <copyMetadata>true</copyMetadata>
+      <sourceBands/>
+      <region>0,0,0,0</region>
+      <subSamplingX>1</subSamplingX>
+      <subSamplingY>1</subSamplingY>
+      <fullSwath>false</fullSwath>
+      <tiePointGridNames/>
+    </parameters>
+  </node>
+
+  <node id="BandMaths">
+    <operator>BandMaths</operator>
+    <sources><sourceProduct refid="Subset"/></sources>
+    <parameters>
+      <targetBands>
+        <targetBand>
+          <name>altura_dosel_P</name>
+          <type>float32</type>
+          <!-- LOS DOS NOMBRES A VERIFICAR ESTAN EN ESTA LINEA.
+               La regla es: si la capa de calidad no marca el pixel como bueno,
+               el pixel sale como "sin dato" y no como cero. Un cero se
+               promedia; un "sin dato" no. Ajustar el umbral segun lo que
+               informe el script de inspeccion: en algunos productos la capa de
+               calidad es 1 = bueno y en otros es 0 = bueno. -->
+          <expression>fh_quality &gt; 0 ? forest_height : NaN</expression>
+          <noDataValue>NaN</noDataValue>
+          <unit>m</unit>
+          <description>Altura de dosel de banda P, enmascarada por su capa de calidad</description>
+        </targetBand>
+      </targetBands>
+      <variables/>
+    </parameters>
+  </node>
+
+  <node id="Reproject">
+    <operator>Reproject</operator>
+    <sources><sourceProduct refid="BandMaths"/></sources>
+    <parameters>
+      <crs>EPSG:32719</crs>
+      <resampling>Nearest</resampling>
+      <!-- 50 m: el pixel nativo. Ver la nota del encabezado. -->
+      <pixelSizeX>50.0</pixelSizeX>
+      <pixelSizeY>50.0</pixelSizeY>
+      <orthorectify>false</orthorectify>
+      <noDataValue>NaN</noDataValue>
+      <includeTiePointGrids>false</includeTiePointGrids>
+      <addDeltaBands>false</addDeltaBands>
+    </parameters>
+  </node>
+
+  <node id="Write">
+    <operator>Write</operator>
+    <sources><sourceProduct refid="Reproject"/></sources>
+    <parameters>
+      <file>C:\Temp\CURSO_BIOMASA_2026\02_Practica\TP4_Radar_SAR\02_Subsets_SNAP_QGIS\BIOMASS_L2A\BIOMASS_altura_BOSQUE_NW_02.tif</file>
+      <!-- GeoTIFF y no BEAM-DIMAP: este producto ya viene geocodificado y no se
+           va a seguir procesando en SNAP; el destino es QGIS y la comparacion
+           contra el mapa del TP5. -->
+      <formatName>GeoTIFF</formatName>
+    </parameters>
+  </node>
+
+</graph>

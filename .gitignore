@@ -1,0 +1,26 @@
+# Datos crudos originales (~260 GB) — se obtienen de los proveedores
+08_Originales_crudos/
+
+# Material privado del docente
+99_PRIVADO_NO_DISTRIBUIR/
+
+# Documentos fuente internos
+_fuente/
+
+# Paquete de entrega a estudiantes (se genera con el bat)
+_ENTREGA_ESTUDIANTES/
+
+# Artículos con derechos de terceros
+**/06_Bibliografia/01_Articulos/
+
+# Productos intermedios pesados de SNAP/QGIS (archivos >100 MB)
+*.data/
+*.dim
+02_Subsets_SNAP_QGIS/
+
+# Temporales
+Thumbs.db
+desktop.ini
+__pycache__/
+*.pyc
+.~lock.*

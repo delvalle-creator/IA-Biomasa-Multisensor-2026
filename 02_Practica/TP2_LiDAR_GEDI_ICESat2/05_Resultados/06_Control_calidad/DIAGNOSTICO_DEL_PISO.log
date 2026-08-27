@@ -1,0 +1,108 @@
+
+TP5_06_diagnostico_del_piso.py   ---> de donde sale el piso del ensayo nulo.
+
+LA PREGUNTA
+-----------
+El TP5_04 mide, sobre la clase «Sin cambio» -terreno que NO se quemo-, una
+variacion aparente de biomasa de **-10,25 Mg/ha en el bosque**, es decir una
+ganancia. Deberia dar cero. Ese numero es el piso de ruido del metodo completo, y
+es grande: las clases quemadas pierden entre 11,5 y 15,5 Mg/ha, o sea apenas
+entre 1,1 y 1,5 veces el piso.
+
+Mientras no se sepa DE DONDE sale, no se puede decidir que hacer con el. Restarlo
+a ciegas subiria la cifra central del practico, que es justo la direccion que a
+uno le conviene, y eso obliga a ser mas exigente, no menos.
+
+LO QUE YA SE DESCARTO, MIDIENDO
+-------------------------------
+La primera sospecha fue el desfase fenologico: la escena PRE es del 25/11/2025
+-primavera- y la POST del 05/03/2026 -verano-, y la lenga y el nire son
+caducifolias. **Es falso.** Sobre el bosque no quemado el NDVI mediano da 0,8679
+en noviembre y 0,8654 en marzo: 0,0031 de diferencia. El NBR difiere 0,0216. El
+dosel es opticamente el mismo en las dos fechas. (Ver el LEEME de
+TP3_Datos_Opticos/02_Insumos/Sentinel_2/02_pre_incendio_2025_26/.)
+
+LO QUE QUEDA, Y QUE MIDE ESTE SCRIPT
+------------------------------------
+Si el optico no se movio, el piso tiene que venir del OTRO grupo de predictores.
+Los del radar del PRE son del **10/01/2026** y los del POST del **27/02/2026**:
+siete semanas en las que la humedad del suelo pudo cambiar, y con ella el gamma0.
+
+El script ajusta el MISMO modelo de altura con tres juegos de variables y compara
+el piso que produce cada uno:
+
+    OPTICO         NDVI, EVI, NDMI, NBR
+    SAR            gamma0 de banda C y de banda L
+    OPTICO+SAR     los ocho juntos  (es el modelo que usa hoy el practico)
+
+Si el piso se derrumba al quitar el radar, la causa son las fechas del radar y
+queda identificada. Si no se mueve, la causa esta en otra parte y habra que
+buscarla en la propia alometria.
+
+POR QUE UN METRO ALCANZA PARA EXPLICAR TODO EL PISO
+---------------------------------------------------
+La conversion de altura a biomasa es alometrica, con exponente 2,605. Sobre un
+dosel de 8,6 m y un stock de unos 40 Mg/ha, un corrimiento SISTEMATICO de un solo
+metro en la altura predicha produce del orden de +13 Mg/ha. Por eso el script
+informa, ademas del cambio de biomasa, **el cambio de ALTURA en metros**: es la
+magnitud fisica donde el problema se ve sin amplificar.
+
+ENTRADA   04_Subsets/TP5_dataset_<AOI>.csv
+          las mismas escenas opticas y de radar que usa el TP5_04
+SALIDA    05_Resultados/04_Tablas/TP5_diagnostico_del_piso.csv
+          No toca ningun resultado del practico: solo diagnostica.
+
+USO (entorno conda 'aoi'):   python TP5_06_diagnostico_del_piso.py
+
+==============================================================================
+BOSQUE_NW_02
+==============================================================================
+   alometría común a los tres juegos:  biomasa = 0,04 · altura^2,605
+   huellas con PRE y POST completos: 675 de 675
+
+   juego              s1 m   h_pre m  h_post m      Δh m    Δbiomasa  señal/piso
+                             mediana   mediana   mediana       Mg/ha            
+   OPTICO             4,34     10,54     11,99      2,04       -8,48        1,31
+   OPTICO sin EVI     4,36     10,31     11,22      1,22       -4,82        2,30
+   SAR                5,13     11,71     10,35     -0,44        2,35        7,39
+   RFDI C y L         6,27      9,00      8,06     -0,81        2,66        0,23
+   Span C y L         4,96     11,11     11,02      0,03       -0,13       63,77
+   RFDI + Span        5,12     11,75     10,52     -0,41        2,31        7,19
+   OPTICO+SAR         4,32     12,39     13,45      1,48       -5,01        1,53
+   sin EVI + SAR      4,31     12,17     11,90      0,18       -0,47       15,25
+
+==============================================================================
+ESTEPA_NW_02
+==============================================================================
+   alometría común a los tres juegos:  biomasa = 0,24 · altura^2,347
+   huellas con PRE y POST completos: 3036 de 3038
+
+   juego              s1 m   h_pre m  h_post m      Δh m    Δbiomasa  señal/piso
+                             mediana   mediana   mediana       Mg/ha            
+   OPTICO             1,35      2,75      2,75      0,01       -0,02      202,76
+   OPTICO sin EVI     1,34      2,75      2,78      0,05       -0,10       46,03
+   SAR                1,30      2,78      2,54     -0,23        0,51        1,80
+   RFDI C y L         1,61      3,10      2,77     -0,34        0,73        1,55
+   Span C y L         1,35      2,91      2,81     -0,08        0,19        1,40
+   RFDI + Span        1,31      2,78      2,57     -0,21        0,46        1,84
+   OPTICO+SAR         1,31      2,73      2,49     -0,29        0,57        5,90
+   sin EVI + SAR      1,29      2,73      2,58     -0,16        0,34        8,61
+
+tabla  TP5_diagnostico_del_piso.csv  (16 filas)
+
+COMO SE LEE ESTA TABLA
+  - 'piso' es la variacion aparente de biomasa sobre terreno NO quemado.
+    Deberia dar cero. Cuanto mas cerca de cero, mejor el metodo.
+  - 'delta h' es ese mismo piso ANTES de que la alometria lo amplifique.
+    Ahi se ve el problema en metros, que es donde se puede razonar.
+  - 'senal/piso' es cuantas veces la perdida en lo quemado supera al piso.
+    Por debajo de 2 el resultado no se distingue del ruido del metodo.
+  - Comparar OPTICO contra OPTICO sin EVI: si el piso se derrumba al sacar
+    el EVI, queda probado que el corrimiento lo introduce ese indice, por
+    no ser invariante a la iluminacion.
+  - Comparar SAR contra los juegos con optico: el radar no depende del sol.
+  - RFDI y Span: los cocientes del radar SI son invariantes a un factor
+    multiplicativo, que es lo que le falta al EVI. Lo que hay que mirar en
+    ellos es otra cosa: si el moteado los arruina. El Span, que es una suma,
+    deberia ser mas estable que el RFDI, que es un cociente.
+  - El RVI dual no figura porque es 2(1-RFDI): la misma variable.

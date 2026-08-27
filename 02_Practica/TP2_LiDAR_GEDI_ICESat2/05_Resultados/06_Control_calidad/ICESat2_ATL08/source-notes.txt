@@ -1,0 +1,22 @@
+Fuentes de datos principales
+
+- ATL08_BOSQUE_operacional.csv y ATL08_ESTEPA_operacional.csv: muestras operacionales y variables por segmento de 100 m.
+- ATL08_BOSQUE_conservador.csv y ATL08_ESTEPA_conservador.csv: subconjuntos con incertidumbres disponibles.
+- 01_resumen_calidad.csv a 12_valores_extremos.csv: resultados derivados entregados por el usuario, recalculados y auditados contra los CSV operacionales/conservadores.
+- ATL08_BOSQUE_ESTEPA_QGIS.gpkg: verificación de recuentos, geometría y disponibilidad de campos.
+- ATL08_BOSQUE_ESTEPA_analisis.xlsx: referencia de resultados del análisis anterior, no usada como autoridad para conclusiones.
+
+Fuentes metodológicas externas
+
+- NSIDC, ATL08 V007 User Guide: https://nsidc.org/sites/default/files/documents/user-guide/atl08-v007-userguide.pdf
+- NSIDC, ATL08 V007 Data Dictionary: https://nsidc.org/sites/default/files/documents/technical-reference/icesat2_atl08_data_dict_v007.pdf
+- NSIDC, ATL08 V007 Known Issues: https://nsidc.org/sites/default/files/documents/technical-reference/icesat2_atl08_known_issues_v007.pdf
+
+Interpretación verificada
+
+- h_canopy es la altura relativa del dosel al percentil 98 sobre la superficie de terreno estimada.
+- h_max_canopy es la altura relativa máxima y equivale al RH100 usado en la literatura.
+- Las columnas auxiliares rh50_m…rh100_m del extracto previo son redundantes/incompletas y no se usan en la presentación.
+- La unidad primaria de inferencia se aproxima mediante medianas por gránulo para reducir pseudorreplicación entre segmentos contiguos.
+- El filtro conservador no es un simple aumento de calidad: selecciona segmentos con disponibilidad de incertidumbres y cambia fuertemente la distribución, especialmente en Bosque.
+

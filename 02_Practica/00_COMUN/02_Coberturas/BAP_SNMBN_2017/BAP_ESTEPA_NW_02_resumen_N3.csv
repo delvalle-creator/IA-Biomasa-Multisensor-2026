@@ -1,0 +1,22 @@
+﻿AOI_ID,TIPO_AOI,PUREZA,RANK_AREA,BOSQUE,LEYENDA_N1,LEYENDA_N2,LEYENDA_N3,GRUPO,R,G,B,HEX,N_POLIG,N_FRAG,AREA_M2,AREA_HA,AREA_KM2,PERIM_M,PERIM_KM,PCT_AOI
+ESTEPA_NW_02,estepa_ecotono,0.8472,1,NO,Otras tierras,Herbaceo Subarbustivo,Estepa,estepa,202,170,88,#CAAA58,836,854,190445396.87,19044.5397,190.445397,887919.4,887.9194,84.642399
+ESTEPA_NW_02,estepa_ecotono,0.8472,2,NO,Otras tierras,Erial,Erial,estepa,163,118,51,#A37633,232,239,6120931.66,612.0932,6.120932,208390.42,208.3904,2.720414
+ESTEPA_NW_02,estepa_ecotono,0.8472,3,SI,Otras tierras forestales,Ñire,Ñire Bajo,nire,179,151,52,#B39734,318,326,5372817.62,537.2818,5.372818,198551.36,198.5514,2.387919
+ESTEPA_NW_02,estepa_ecotono,0.8472,4,NO,Otras tierras,Humedales,Mallin,humedal,81,179,184,#51B3B8,137,140,5289293.82,528.9294,5.289294,192866.74,192.8667,2.350797
+ESTEPA_NW_02,estepa_ecotono,0.8472,5,SI,Tierras forestales,Lenga,Lenga,lenga,83,163,51,#53A333,126,127,4601112.08,460.1112,4.601112,94256.78,94.2568,2.044939
+ESTEPA_NW_02,estepa_ecotono,0.8472,6,SI,Otras tierras forestales,Lenga,Lenga Baja,lenga,89,186,59,#59BA3B,116,116,2910288.21,291.0288,2.910288,82502.07,82.5021,1.293461
+ESTEPA_NW_02,estepa_ecotono,0.8472,7,NO,Otras tierras,Exotico-Artificial,Forestacion,exotico,211,153,105,#D39969,34,34,2523239.68,252.324,2.52324,25650.87,25.6509,1.12144
+ESTEPA_NW_02,estepa_ecotono,0.8472,8,SI,Tierras forestales,Ñire,Ñire,nire,166,137,48,#A68930,160,160,2503387.97,250.3388,2.503388,82994.12,82.9941,1.112617
+ESTEPA_NW_02,estepa_ecotono,0.8472,9,SI,Otras tierras forestales,Lenga,Lenga Achaparrada,lenga,86,174,55,#56AE37,90,94,1370193.88,137.0194,1.370194,57856.01,57.856,0.608975
+ESTEPA_NW_02,estepa_ecotono,0.8472,10,NO,Otras tierras forestales,Arbustal Nativo,Arbustal Nativo,arbustonat,129,195,96,#81C360,65,65,1136500.03,113.65,1.1365,39930.45,39.9304,0.505111
+ESTEPA_NW_02,estepa_ecotono,0.8472,11,NO,Otras tierras,Exotico-Artificial,Infraestructura,infra,136,136,136,#888888,10,11,798256.5,79.8256,0.798256,49137.12,49.1371,0.354781
+ESTEPA_NW_02,estepa_ecotono,0.8472,12,NO,Otras tierras,Humedales,Otros Humedales,humedal,117,189,199,#75BDC7,1,2,452227.43,45.2227,0.452227,8712.56,8.7126,0.20099
+ESTEPA_NW_02,estepa_ecotono,0.8472,13,SI,Tierras forestales,Lenga,Lenga-Ñire,lenga,141,217,135,#8DD987,22,22,377075.59,37.7076,0.377076,14483.07,14.4831,0.167589
+ESTEPA_NW_02,estepa_ecotono,0.8472,14,SI,Otras tierras forestales,Chacay,Chacay,chacay,159,100,56,#9F6438,1,1,299844.18,29.9844,0.299844,8115.45,8.1154,0.133264
+ESTEPA_NW_02,estepa_ecotono,0.8472,15,SI,Otras tierras forestales,Lenga,Lenga Marginal,lenga,107,202,88,#6BCA58,18,18,253547.0,25.3547,0.253547,11030.13,11.0301,0.112688
+ESTEPA_NW_02,estepa_ecotono,0.8472,16,SI,Tierras forestales,Ñire,Ñire-Lenga,nire,215,209,118,#D7D176,21,21,204954.34,20.4954,0.204954,7504.53,7.5045,0.091091
+ESTEPA_NW_02,estepa_ecotono,0.8472,17,SI,Otras tierras forestales,Matorral Mixto,Matorral Mixto,matorral,101,189,109,#65BD6D,4,4,138760.72,13.8761,0.138761,6650.54,6.6505,0.061671
+ESTEPA_NW_02,estepa_ecotono,0.8472,18,NO,Otras tierras,Exotico-Artificial,Arboles Exoticos,exotico,166,84,48,#A65430,5,5,88796.78,8.8797,0.088797,1608.55,1.6086,0.039465
+ESTEPA_NW_02,estepa_ecotono,0.8472,19,SI,Otras tierras forestales,Ñire,Ñire Bajo-Lenga,nire,204,185,78,#CCB94E,5,5,60241.86,6.0242,0.060242,2248.94,2.2489,0.026774
+ESTEPA_NW_02,estepa_ecotono,0.8472,20,SI,Tierras forestales,Lenga,Lenga-Ñire Bajo,lenga,150,221,146,#96DD92,6,6,43034.78,4.3035,0.043035,2692.61,2.6926,0.019127
+ESTEPA_NW_02,estepa_ecotono,0.8472,21,NO,Otras tierras,Hielo-Nieve,Hielo-Nieve,hielo,200,216,224,#C8D8E0,2,2,10099.0,1.0099,0.010099,699.97,0.7,0.004488

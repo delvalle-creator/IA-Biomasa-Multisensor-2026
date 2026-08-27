@@ -1,0 +1,63 @@
+<!--
+ VARIANTE DE LINEA DE ORDENES. NO ABRIR EN EL GRAPH BUILDER.
+ ==========================================================
+ Gemelo de graph_biomass_a_malla_comun.xml. Las tres rutas van como marcadores
+ ${...}, que es lo que gpt sustituye con sus opciones -P.
+
+ Marcadores que espera este grafo:
+     entrada      la salida del primer grafo (altura ya enmascarada, ~50 m)
+     referencia   cualquier capa del proyecto en la malla comun (10 m)
+     salida       GeoTIFF colocado sobre la malla comun
+
+ QUE SE EDITA AQUI: nada. Los valores los pone quien invoca a gpt.
+-->
+<graph id="BIOMASS_a_malla_comun_cli">
+
+  <node id="Read">
+    <operator>Read</operator>
+    <sources/>
+    <parameters>
+      <!-- La salida del primer grafo: la altura ya enmascarada por calidad. -->
+      <file>${entrada}</file>
+    </parameters>
+  </node>
+
+  <node id="Read_referencia">
+    <operator>Read</operator>
+    <sources/>
+    <parameters>
+      <!-- CUALQUIER capa del proyecto que ya este en la malla comun sirve como
+           referencia: son todas 1500 x 1500 a 10 m con el mismo origen.
+           Comprobado el 01/08/2026 sobre las cinco fuentes del TP5 -Sentinel-2,
+           Sentinel-1, SAOCOM, NISAR y PALSAR-2-: coinciden hasta la ultima
+           cifra util. Se usa la escena optica porque es la que define la malla. -->
+      <file>${referencia}</file>
+    </parameters>
+  </node>
+
+  <node id="Reproject">
+    <operator>Reproject</operator>
+    <sources>
+      <sourceProduct refid="Read"/>
+      <collocateWith refid="Read_referencia"/>
+    </sources>
+    <parameters>
+      <!-- Sin crs ni pixelSize: los toma de la referencia. Ver el encabezado. -->
+      <resampling>Nearest</resampling>
+      <orthorectify>false</orthorectify>
+      <noDataValue>NaN</noDataValue>
+      <includeTiePointGrids>false</includeTiePointGrids>
+      <addDeltaBands>false</addDeltaBands>
+    </parameters>
+  </node>
+
+  <node id="Write">
+    <operator>Write</operator>
+    <sources><sourceProduct refid="Reproject"/></sources>
+    <parameters>
+      <file>${salida}</file>
+      <formatName>GeoTIFF</formatName>
+    </parameters>
+  </node>
+
+</graph>

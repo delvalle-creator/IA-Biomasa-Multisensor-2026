@@ -1,0 +1,234 @@
+<!--
+ MULTILOOK, NOTA DEL 31/07/2026
+ =============================
+ Se agrego grSquarePixel de forma EXPLICITA. Antes no figuraba, de modo que el
+ comportamiento dependia del valor por omision del operador, que no esta escrito
+ en ningun lado del proyecto. Con grSquarePixel en true, SNAP deduce el numero de
+ vistas en acimut a partir del de rango para que el pixel salga cuadrado EN EL
+ TERRENO, y el nAzLooks escrito abajo pasa a ser indicativo.
+
+ Motivo: el producto interferometrico de Sentinel-1 tiene alrededor de 2,5 m en
+ rango inclinado contra unos 14 m en acimut. Con 2 vistas en rango y 1 en acimut
+ el pixel no queda cuadrado y el promediado no es isotropo.
+
+ ANTES DE LANZARLO SOBRE TODAS LAS ESCENAS: abrir el cuadro de dialogo del
+ operador Multilook con el producto cargado y anotar el tamano de pixel cuadrado
+ que informa. Ese numero depende del angulo de incidencia de cada escena, de modo
+ que lo tiene el producto y no el grafo. El grafo graph_saocom_tna_localizar.xml
+ ya usaba este parametro; los otros tres no.
+-->
+<graph id="S1_SLC_2frames_a_gamma0_TF_UTM19S">
+  <!-- IW SLC -> gamma0 con Terrain Flattening -> EPSG:32719 a 10 m.
+       El SLC original (fase compleja) queda intacto en descargas/ para
+       InSAR/PolSAR; esto es solo el subset radiometrico comun.
+       Cadena: orbita -> beta0 -> Deburst -> Subset(AOI+buffer) ->
+               Multilook -> Terrain-Flattening (gamma0) -> Terrain-Correction -->
+  <version>1.0</version>
+  <node id="Read">
+    <operator>Read</operator>
+    <sources/>
+    <parameters><file/></parameters>
+  </node>
+  <node id="Read2">
+    <operator>Read</operator>
+    <sources/>
+    <parameters><file/></parameters>
+  </node>
+  <node id="SliceAssembly">
+    <!-- Une dos frames CONTIGUOS de la misma orbita y la misma fecha. Hace
+         falta cuando un unico frame no cubre el AOI completo: los frames SLC
+         se solapan poco, y el borde de uno puede cortar el sitio de estudio.
+         El resultado es un producto continuo, sin costura. -->
+    <operator>SliceAssembly</operator>
+    <sources>
+      <sourceProduct refid="Read"/>
+      <sourceProduct.1 refid="Read2"/>
+    </sources>
+    <parameters>
+      <selectedPolarisations>VV,VH</selectedPolarisations>
+    </parameters>
+  </node>
+  <node id="Apply-Orbit-File">
+    <operator>Apply-Orbit-File</operator>
+    <sources><sourceProduct refid="SliceAssembly"/></sources>
+    <parameters>
+      <orbitType>Sentinel Precise (Auto Download)</orbitType>
+      <continueOnFail>true</continueOnFail>
+    
+      <polyDegree>3</polyDegree>
+    </parameters>
+  </node>
+  <!-- RUIDO TERMICO (agregado el 31/07/2026). El grafo del producto GRD ya lo
+       llevaba y los dos del SLC no. Importa en polarizacion cruzada sobre
+       blancos de retorno bajo (estepa y superficie quemada), donde el ruido es
+       una fraccion apreciable del valor medido, y ademas tiene patron
+       sistematico a lo largo del rango: no se promedia ni desaparece.
+       PROBAR SOBRE UNA SOLA ESCENA ANTES DE LANZARLO SOBRE TODAS y comparar la
+       banda VH contra la version anterior. Para volver atras, se borra este
+       nodo y se devuelve el refid de Calibration a Apply-Orbit-File. -->
+  <node id="ThermalNoiseRemoval">
+    <operator>ThermalNoiseRemoval</operator>
+    <sources><sourceProduct refid="Apply-Orbit-File"/></sources>
+    <parameters><removeThermalNoise>true</removeThermalNoise>
+      <selectedPolarisations/>
+      <reIntroduceThermalNoise>false</reIntroduceThermalNoise>
+    </parameters>
+  </node>
+  <node id="Calibration">
+    <operator>Calibration</operator>
+    <sources><sourceProduct refid="ThermalNoiseRemoval"/></sources>
+    <parameters>
+      <outputBetaBand>true</outputBetaBand>
+      <outputSigmaBand>false</outputSigmaBand>
+    
+      <sourceBands/>
+      <auxFile>Latest Auxiliary File</auxFile>
+      <externalAuxFile/>
+      <createGammaBand>false</createGammaBand>
+      <createBetaBand>false</createBetaBand>
+    
+      <outputImageInComplex>false</outputImageInComplex>
+      <outputImageScaleInDb>false</outputImageScaleInDb>
+    </parameters>
+  </node>
+  <node id="TOPSAR-Deburst">
+    <operator>TOPSAR-Deburst</operator>
+    <sources><sourceProduct refid="Calibration"/></sources>
+    <parameters/>
+  </node>
+  <node id="Subset">
+    <operator>Subset</operator>
+    <sources><sourceProduct refid="TOPSAR-Deburst"/></sources>
+    <parameters>
+      <geoRegion/>
+      <copyMetadata>true</copyMetadata>
+    
+      <sourceBands/>
+      <region>0,0,0,0</region>
+      <subSamplingX>1</subSamplingX>
+      <subSamplingY>1</subSamplingY>
+      <fullSwath>false</fullSwath>
+      <tiePointGridNames/>
+    </parameters>
+  </node>
+  <node id="Multilook">
+    <operator>Multilook</operator>
+    <sources><sourceProduct refid="Subset"/></sources>
+    <parameters>
+      <nRgLooks>2</nRgLooks>
+      <nAzLooks>1</nAzLooks>
+    
+      <sourceBands/>
+    
+      <outputIntensity>true</outputIntensity>
+      <grSquarePixel>true</grSquarePixel>
+    </parameters>
+  </node>
+  <node id="Terrain-Flattening">
+    <operator>Terrain-Flattening</operator>
+    <sources><sourceProduct refid="Multilook"/></sources>
+    <parameters>
+      <demName>Copernicus 30m Global DEM</demName>
+      <demResamplingMethod>BILINEAR_INTERPOLATION</demResamplingMethod>
+      <additionalOverlap>0.1</additionalOverlap>
+      <oversamplingMultiple>1.0</oversamplingMultiple>
+    
+      <externalDEMApplyEGM>true</externalDEMApplyEGM>
+      <outputSimulatedImage>false</outputSimulatedImage>
+    
+      <sourceBands/>
+      <externalDEMFile/>
+      <externalDEMNoDataValue>0.0</externalDEMNoDataValue>
+    </parameters>
+  </node>
+  <node id="Terrain-Correction">
+    <operator>Terrain-Correction</operator>
+    <sources><sourceProduct refid="Terrain-Flattening"/></sources>
+    <parameters>
+      <demName>Copernicus 30m Global DEM</demName>
+      <imgResamplingMethod>BILINEAR_INTERPOLATION</imgResamplingMethod>
+      <pixelSpacingInMeter>10.0</pixelSpacingInMeter>
+      <pixelSpacingInDegree>8.983152841195213e-05</pixelSpacingInDegree>
+      <mapProjection>EPSG:32719</mapProjection>
+      <nodataValueAtSea>false</nodataValueAtSea>
+      <alignToStandardGrid>true</alignToStandardGrid>
+      <!-- Origen desplazado medio pixel: SNAP alinea los CENTROS de pixel al
+           origen indicado. Con origen 0,0 los centros caerian en multiplos de
+           10 m y los BORDES quedarian desfasados 5 m respecto de la grilla del
+           AOI (cuyas esquinas son multiplos de 10). Con origen 5,5 los centros
+           caen en 5, 15, 25... y los bordes en 0, 10, 20...: la grilla coincide
+           exactamente con la del optico. -->
+      <standardGridOriginX>5.0</standardGridOriginX>
+      <standardGridOriginY>5.0</standardGridOriginY>
+      <saveLocalIncidenceAngle>true</saveLocalIncidenceAngle>
+    
+      <sourceBands/>
+      <externalDEMFile/>
+      <externalDEMNoDataValue>0.0</externalDEMNoDataValue>
+      <externalDEMApplyEGM>true</externalDEMApplyEGM>
+      <saveDEM>false</saveDEM>
+      <saveLatLon>false</saveLatLon>
+      <saveIncidenceAngleFromEllipsoid>false</saveIncidenceAngleFromEllipsoid>
+      <saveProjectedLocalIncidenceAngle>false</saveProjectedLocalIncidenceAngle>
+      <saveLayoverShadowMask>true</saveLayoverShadowMask>
+      <applyRadiometricNormalization>false</applyRadiometricNormalization>
+      <saveSigmaNought>false</saveSigmaNought>
+      <saveGammaNought>false</saveGammaNought>
+      <saveBetaNought>false</saveBetaNought>
+      <incidenceAngleForSigma0>Use projected local incidence angle from DEM</incidenceAngleForSigma0>
+      <incidenceAngleForGamma0>Use projected local incidence angle from DEM</incidenceAngleForGamma0>
+      <auxFile>Latest Auxiliary File</auxFile>
+      <externalAuxFile/>
+    
+      <demResamplingMethod>BILINEAR_INTERPOLATION</demResamplingMethod>
+      <saveSelectedSourceBand>true</saveSelectedSourceBand>
+    </parameters>
+  </node>
+  <node id="Write">
+    <operator>Write</operator>
+    <sources><sourceProduct refid="Terrain-Correction"/></sources>
+    <parameters>
+      <file/>
+      <!-- BEAM-DIMAP: formato nativo de SNAP. Conserva TODOS los metadatos, de
+           modo que el subset puede seguir procesandose en SNAP (polarimetria,
+           InSAR, filtros). El GeoTIFF los perderia. -->
+      <formatName>BEAM-DIMAP</formatName>
+    </parameters>
+  </node>
+  <applicationData id="Presentation">
+    <Description/>
+    <node id="Read">
+      <displayPosition x="15.0" y="20.0"/>
+    </node>
+    <node id="Read2">
+      <displayPosition x="220.0" y="20.0"/>
+    </node>
+    <node id="SliceAssembly">
+      <displayPosition x="425.0" y="20.0"/>
+    </node>
+    <node id="Apply-Orbit-File">
+      <displayPosition x="15.0" y="82.0"/>
+    </node>
+    <node id="Calibration">
+      <displayPosition x="220.0" y="82.0"/>
+    </node>
+    <node id="TOPSAR-Deburst">
+      <displayPosition x="425.0" y="82.0"/>
+    </node>
+    <node id="Subset">
+      <displayPosition x="15.0" y="144.0"/>
+    </node>
+    <node id="Multilook">
+      <displayPosition x="220.0" y="144.0"/>
+    </node>
+    <node id="Terrain-Flattening">
+      <displayPosition x="425.0" y="144.0"/>
+    </node>
+    <node id="Terrain-Correction">
+      <displayPosition x="15.0" y="206.0"/>
+    </node>
+    <node id="Write">
+      <displayPosition x="220.0" y="206.0"/>
+    </node>
+  </applicationData>
+</graph>

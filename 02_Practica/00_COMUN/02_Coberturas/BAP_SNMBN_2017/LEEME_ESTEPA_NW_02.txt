@@ -1,0 +1,47 @@
+RECORTE DE COBERTURAS BAP CHUBUT — ESTEPA_NW_02
+
+Contenido
+- BAP_ESTEPA_NW_02_recorte.shp: polígonos BAP recortados al AOI, con atributos originales, identificación de AOI, leyenda y métricas por fragmento.
+- BAP_ESTEPA_NW_02_resumen_N3.shp: coberturas disueltas por LEYENDA_N3, con superficie, perímetro, porcentaje del AOI y cantidad de polígonos.
+- ESTEPA_NW_02_AOI.shp: límite del KML con superficie y perímetro calculados.
+- BAP_ESTEPA_NW_02_resumen_N3.csv: tabla resumen en UTF-8.
+- QA_ESTEPA_NW_02.json: controles geométricos y de cobertura.
+- Los archivos .qml contienen la simbología categorizada suministrada con la capa BAP.
+
+Sistema de coordenadas de salida
+- WGS 84 / UTM zona 19S — EPSG:32719.
+- Unidades geométricas: metros.
+
+Campos métricos
+- AREA_M2: superficie en m².
+- AREA_HA: superficie en hectáreas.
+- AREA_KM2: superficie en km².
+- PERIM_M: perímetro en metros.
+- PERIM_KM: perímetro en km.
+- PCT_AOI: porcentaje de la superficie total del AOI.
+- N_POLIG: número de polígonos fuente distintos incluidos en cada cobertura resumida.
+- N_FRAG: número de fragmentos resultantes del recorte.
+
+Control general
+- Área AOI: 225.000000 km².
+- Cobertura espacial del AOI por BAP: 100.000000 %.
+- Polígonos fuente intersectados: 2209.
+- Fragmentos de salida: 2252.
+- Clases LEYENDA_N3 presentes: 21.
+- Geometrías inválidas en salida: detalle=0; resumen=0.
+
+Diez coberturas principales por superficie
+       LEYENDA_N3   AREA_KM2   PCT_AOI
+           Estepa 190.445397 84.642399
+            Erial   6.120932  2.720414
+        Ñire Bajo   5.372818  2.387919
+           Mallin   5.289294  2.350797
+            Lenga   4.601112  2.044939
+       Lenga Baja   2.910288  1.293461
+      Forestacion   2.523240  1.121440
+             Ñire   2.503388  1.112617
+Lenga Achaparrada   1.370194  0.608975
+  Arbustal Nativo   1.136500  0.505111
+
+Nota
+Se corrigió en la salida el problema de codificación observado en nombres con “Ñire”.
