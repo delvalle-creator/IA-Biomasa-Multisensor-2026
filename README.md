@@ -1,5 +1,7 @@
 # IA Multisensor para Estimar Biomasa en Bosques Andinos y su Ecotono Bosque–Estepa
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22135139.svg)](https://doi.org/10.5281/zenodo.22135139)
+
 Curso de posgrado — materiales completos: teoría, trabajos prácticos, scripts
 y guías de desarrollo con respuestas.
 
@@ -44,4 +46,5 @@ revisar a mano.
 ## Licencia y cita
 
 Material bajo licencia **CC BY-NC-SA 4.0** (ver `LICENSE.md`).
-Para citar este curso, ver `CITATION.cff` — versión archivada con DOI en Zenodo.
+Para citar este curso, ver `CITATION.cff`.
+Versión archivada en Zenodo: DOI [10.5281/zenodo.22135139](https://doi.org/10.5281/zenodo.22135139) (todas las versiones) · [10.5281/zenodo.22135140](https://doi.org/10.5281/zenodo.22135140) (v1.0.0).
