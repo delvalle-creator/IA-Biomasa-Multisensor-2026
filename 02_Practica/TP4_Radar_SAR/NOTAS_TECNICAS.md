@@ -32,9 +32,11 @@ Contraste bosque − estepa en la mediana de γ⁰, con datos casi simultáneos:
 |---|---|---|---|
 | Sentinel-1 (10/01/2026) | C | VV | 3,5 dB |
 | Sentinel-1 (10/01/2026) | C | VH | 4,2 dB |
-| NISAR (08/01/2026) | L | HH | 8,1 dB |
+| SAOCOM (10/01/2026) | L | HH | 8,1 dB |
+| SAOCOM (10/01/2026) | L | HV | **11,7 dB** |
+| NISAR (08/01/2026) | L | HH | 8,0 dB |
 | NISAR (08/01/2026) | L | HV | **9,9 dB** |
-| PALSAR-2 (2025) | L | HV | **11,7 dB** |
+| PALSAR-2 (2025) | L | HV | **11,6 dB** |
 
 **La banda L separa el bosque de la estepa con casi el triple de contraste que la
 banda C, y el máximo está en HV** — la polarización cruzada, que responde a la
@@ -74,39 +76,44 @@ R² del ajuste γ⁰ → altura del dosel según la ventana de promediado:
 
 | Fuente | 30 m | 90 m | **150 m** | 310 m |
 |---|---|---|---|---|
-| Sentinel-1 VH (C) | 0,011 | 0,023 | 0,026 | 0,025 |
-| NISAR HV (L) | 0,152 | 0,229 | **0,245** | 0,221 |
-| PALSAR-2 HV (L) | 0,104 | 0,143 | 0,153 | 0,159 |
+| Sentinel-1 VH (C), 10/01/2026 | 0,011 | 0,028 | 0,027 | 0,025 |
+| NISAR HV (L), 08/01/2026 | 0,166 | 0,253 | **0,273** | 0,269 |
+| PALSAR-2 HV (L), 2025 | 0,114 | 0,164 | 0,177 | 0,195 |
+| SAOCOM HV (L), 10/01/2026 | 0,092 | 0,120 | 0,141 | 0,161 |
 
-En banda L el promediado recupera casi diez puntos de R², con un óptimo alrededor
-de los 150 m; más allá, la ventana empieza a promediar bosque ajeno a la huella.
-En banda C no sube: **su problema no es el speckle, es que la señal no está.**
+En banda L el promediado recupera cerca de diez puntos de R². **Hay que destacar que
+el R² no cae al pasar de los 150 m:** en NISAR el máximo está en 210 m (0,275) y en
+PALSAR-2 y SAOCOM sigue subiendo hasta 310 m (0,195 y 0,161). El proyecto adopta igual
+la ventana de **150 m como compromiso**, porque es del orden de la huella de GEDI y
+porque más allá se promedia bosque que ya no pertenece a esa huella. Es una decisión
+declarada, no un óptimo de la naturaleza. En banda C no sube: **su problema no es el
+speckle, es que la señal no está.**
 
 ### La saturación: γ⁰ por franja de altura (ventana 150 m)
 
 | Altura rh95 | S1 VH (C) | NISAR HV (L) | PALSAR-2 HV (L) | SAOCOM HV (L) |
 |---|---|---|---|---|
-| 0–3 m | −16,19 | −14,32 | −13,65 | −18,56 |
-| 12–15 m | −15,78 | −12,17 | −11,87 | −16,96 |
-| 18–21 m | −16,00 | −12,22 | −11,84 | −16,87 |
-| 21–25 m | −15,63 | −11,73 | −11,41 | −16,44 |
-| 25–30 m | −15,76 | **−11,55** | −11,69 | −16,60 |
-| **Gana** | **0,53 dB** | **2,59 dB** | **2,16 dB** | **1,98 dB** |
+| 0–3 m | −15,65 | −13,24 | −13,00 | −18,06 |
+| 12–15 m | −15,24 | −11,59 | −11,45 | −16,75 |
+| 18–21 m | −15,47 | −11,47 | −11,33 | −16,56 |
+| 21–25 m | −15,12 | −11,08 | −10,90 | −16,12 |
+| 25–30 m | −15,13 | **−10,94** | −11,08 | −16,25 |
+| **Gana** | **0,52 dB** | **2,19 dB** | **2,09 dB** | **1,83 dB** |
 
-**El resultado del curso:** donde el NDVI del TP3 se aplanó (0,896 → 0,894 sobre
-los 21 m), la banda L todavía sigue subiendo (−12,22 → −11,73 → −11,55 dB). El
-óptico ya no ve; la banda L sí.
+**El resultado del curso:** donde el NDVI del TP3 se aplanó (0,888 a los 15–18 m, y
+después 0,879, 0,897 y 0,893), la banda L todavía sigue subiendo (−11,59 → −11,47 →
+−11,08 → −10,94 dB). El óptico ya no ve; la banda L sí.
 
 ### La conclusión honesta
 
 | Sensor | Banda o índice | R² | RMSE | TP |
 |---|---|---|---|---|
-| Sentinel-1 VH | radar, banda C | 0,03 | 7,6 m | TP4 |
-| Sentinel-2 | NDVI | 0,19 | 6,9 m | TP3 |
-| NISAR HV | radar, banda L | 0,25 | 7,1 m | TP4 |
-| Sentinel-2 | NDMI | 0,30 | 6,5 m | TP3 |
+| Sentinel-1 VH | radar, banda C | 0,029 | 7,42 m | TP4 |
+| Sentinel-2 | NDVI | 0,235 | 6,17 m | TP3 |
+| NISAR HV | radar, banda L | 0,273 | 6,42 m | TP4 |
+| Sentinel-2 | NDMI | 0,310 | 5,86 m | TP3 |
 
-La banda L es ocho veces mejor que la C, pero no le gana al NDMI del óptico. Y no
+La banda L es nueve veces mejor que la C, y queda apenas por debajo del NDMI del óptico. Y no
 contradice nada: GEDI mide **altura** y la banda L responde a **biomasa**; este
 bosque es bajo (la mitad de las huellas no llega a 9 m), y ahí el óptico todavía
 no satura; y el radar arrastra el relieve. **Ningún sensor solo alcanza: ése es el
@@ -120,16 +127,16 @@ argumento del TP5, construido con mediciones y no con citas.**
 | 2 | `01_Pre_procesamiento/correccion_geometrica/TP4_02_recortar_crudo.py` | sí | ya ejecutado (opcional) |
 | 3 | `01_Pre_procesamiento/TP4_03_recortar_nisar.py` | no | ya ejecutado |
 | 4 | `01_Pre_procesamiento/TP4_04_palsar2_mosaico.py` | no | ya ejecutado |
-| 5 | `04_Validacion/efecto_pendiente/TP4_05_mascara_validez.py` | no | ya ejecutado |
+| 5 | `04_Validacion/efecto_pendiente/TP4_05_mascara_validez.py` | no | **lo corre el alumno** (escribe una máscara por recinto) |
 | 6 | `02_Procesamiento/filtro_speckle/TP4_06_speckle.py` | no | **lo corre el alumno** |
 | 7 | `03_Analisis/contraste_bandas/TP4_07_contraste_C_vs_L.py` | no | **lo corre el alumno** |
 | 8 | `03_Analisis/saturacion/TP4_08_saturacion_radar.py` | no | **lo corre el alumno** |
 | 9 | `05_Exportacion/TP4_09_exportar_para_qgis.py` | no | **lo corre el alumno** |
-| 10 | `03_Analisis/indices_polarimetricos/TP4_10_indices_polarimetricos.py` | sí | **lo corre el alumno** |
+| 10 | `03_Analisis/indices_polarimetricos/TP4_10_indices_polarimetricos.py` | no | **lo corre el alumno** |
 | 11 | `01_Pre_procesamiento/TP4_11_inspeccionar_biomass_L2A.py` | no | pendiente: exige descomprimir un L2A |
 
 Los grafos de SNAP (`.xml`) están junto a los scripts que los usan.
-El TP4_06 necesita `scipy` (`conda install -c conda-forge scipy`).
+El TP4_06 usa `scipy`, que el entorno `aoi` ya trae.
 
 ## Guía y figuras
 
@@ -140,11 +147,11 @@ Las figuras se regeneran con `00_Guia_del_practico/figuras/generadores/`; cada u
 se guarda en PNG (para el Word) y SVG (editable). Las versiones editables en
 PowerPoint nativo están en `TP4_Radar_SAR/00_Guia_del_practico/figuras/editables_pptx/`.
 
-## Pendiente de datos
+## Pendiente de procesamiento
 
-Las 2 SAOCOM dual-pol S4 de bosque de la línea de base (27/10/2023 y 23/01/2024).
-No son imprescindibles: la serie quad-pol ya cubre la línea de base y la
-polarimetría completa. Ver `00_COMUN/08_Originales_crudos/01_base/SAOCOM/LEEME.md`.
+Las 2 SAOCOM dual-pol S4 de bosque de la línea de base (27/10/2023 y 23/01/2024) ya
+están descargadas y figuran en el inventario. Lo que falta es procesarlas a γ⁰. No son imprescindibles: la serie quad-pol ya cubre la línea de base y
+la polarimetría completa. Ver `00_COMUN/08_Originales_crudos/01_base/SAOCOM/LEEME.md`.
 
 ## Lo que queda para profundizar
 

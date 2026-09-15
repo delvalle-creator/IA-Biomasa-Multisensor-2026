@@ -1,8 +1,8 @@
 # TP4 — Orden de ejecución
 
-Los pasos 1 a 5 **ya fueron ejecutados**: sus resultados están en `02_Subsets_SNAP_QGIS`.
-Usted corre del 6 en adelante. El 6 necesita `scipy`
-(`conda install -c conda-forge scipy`).
+Los pasos 1 a 4 **ya fueron ejecutados**: sus resultados están en `02_Subsets_SNAP_QGIS`.
+Usted corre del 5 en adelante: el 5 escribe la máscara de validez de cada recinto
+(ver «Pendientes conocidos», más abajo). El 6 usa `scipy`, que el entorno `aoi` ya trae.
 
 | Paso | Script | Subcarpeta | Qué hace | ¿SNAP? |
 |---|---|---|---|---|
@@ -17,19 +17,25 @@ Usted corre del 6 en adelante. El 6 necesita `scipy`
 | 9 | `TP4_09_exportar_para_qgis.py` | `05_Exportacion` | Pasa a dB y deja los rásters listos | no |
 | 10 (último) | `TP4_10_indices_polarimetricos.py` | `03_Analisis/indices_polarimetricos` | RVI, RFDI y demás índices del SAOCOM cuadripolar | no |
 
-**Dos auxiliares**, en `01_Pre_procesamiento`. Ninguno es un paso de la cadena:
+**Tres auxiliares**, en `01_Pre_procesamiento`. Ninguno es un paso de la cadena:
 
 | Script | Cuándo |
 |---|---|
 | `TP4_03b_inspeccionar_gcov.py` | Para diagnosticar el producto NISAR |
+| `TP4_03c_nisar_post_y_fusion.py` | Recorta las dos escenas NISAR posteriores al incendio y arma con ellas la fusión de las órbitas ascendente y descendente. Explicado en `00_Guia_del_practico/ANEXO_NISAR_fusion_ASC_DES.md` |
 | `TP4_11_inspeccionar_biomass_L2A.py` | **Obligatorio antes de correr los grafos de BIOMASS.** Lista las bandas reales del producto e imprime la línea exacta que hay que pegar en el grafo |
 
 ## Los grafos de SNAP
 
-En `08_Grafos_SNAP` hay veintiséis archivos `.xml`: diecisiete grafos y sus
+En `08_Grafos_SNAP` hay veintisiete archivos `.xml`: dieciocho grafos y sus
 nueve gemelos `_cli`. Los grafos produjeron los insumos de los pasos 1 a 5. **Se leen, no se corren**: se abren en
 el Graph Builder para ver la cadena de operadores y los encabezados, que explican
 cada decisión.
+
+`Fusion_ASC_DES_NISAR.xml` es la excepción que sí se corre, y es opcional: colora
+las dos escenas NISAR posteriores al incendio y combina sus polarizaciones. Hace
+dentro de SNAP lo mismo que el auxiliar `TP4_03c_nisar_post_y_fusion.py`, para
+quien prefiera seguir la cadena con la interfaz a la vista.
 
 **Nueve tienen un gemelo terminado en `_cli`.** Ésos son para la línea de órdenes,
 los usa Python y no abren bien en la interfaz gráfica. Trabaje siempre con los que
@@ -73,7 +79,7 @@ grados de libertad de los que sugiere el número de píxeles.
 
 #### Por qué el resto del proyecto no necesita colocarse
 
-Comprobado el 01/08/2026, archivo por archivo: la escena de Sentinel-2, la de
+Comprobado archivo por archivo: la escena de Sentinel-2, la de
 Sentinel-1 GRD, la del SAOCOM, la de NISAR y el mosaico de PALSAR-2 son todas de
 1500 × 1500 píxeles de 10 m, en EPSG:32719 y con el mismo origen, 287200 / 5285200,
 coincidente hasta los 6 × 10⁻⁸ m. **La sinergia óptico-radar del TP5 ya está
@@ -100,9 +106,10 @@ El script intenta cada escena contra los dos AOI, y éstas no cubren los dos: va
 ver errores esperables de `gpt` en las combinaciones que no corresponden. **No es
 un error del script**: los cuenta como fallidos y sigue.
 
-**El paso 5 escribe `mascara_validez_<AOI>.tif`, una por recinto**, y en
-`02_Subsets_SNAP_QGIS/mascaras` hoy sólo está la versión anterior, sin sufijo. Conviene
-volver a correrlo para que el TP5 aplique la máscara correcta a cada sitio.
+**El paso 5 escribe `mascara_validez_<AOI>.tif`, una por recinto.** Si en
+`02_Subsets_SNAP_QGIS/mascaras` sólo aparece un archivo sin el sufijo del recinto,
+hay que volver a correrlo para que el TP5 aplique la máscara que corresponde a
+cada sitio.
 
 ## Nota sobre escalas
 

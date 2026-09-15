@@ -1,9 +1,6 @@
-> **Nota de esta carpeta (26/08/2026):** convertido a Markdown desde
-> `Guia_ALOS_PALSAR1_PolSAR_SNAP_Resultados.docx` (autor: Héctor) para el
-> registro de procedimientos; el documento original queda fuera del curso
-> por su tamaño. El proceso se hizo sobre la **imagen completa**, no sobre
-> los recintos: queda pendiente repetirlo por AOI para reducir el volumen
-> de trabajo.
+> **Nota de esta carpeta:** el proceso se hizo sobre la **imagen completa**,
+> no sobre los recintos. Queda pendiente repetirlo por AOI para reducir el
+> volumen de trabajo.
 
   -----------------------------------------------------------------------
 
@@ -37,8 +34,6 @@ ortorrectificación y variables candidatas para biomasa**
   ------------------------------------------------------------------------
 
 **Material docente · Teledetección por radar**
-
-Fecha de procesamiento y elaboración: 25 de agosto de 2026
 
 # Cómo usar esta guía
 

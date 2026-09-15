@@ -7,6 +7,17 @@ Héctor Francisco del Valle · CeReGeo (FCyT, UADER) · LEMIV (FI, UNPSJB)
 
 ---
 
+## Antes que nada: la fe de erratas
+
+`00_FE_DE_ERRATAS.md`, y el mismo texto en `00_FE_DE_ERRATAS.pdf`, es el primer
+documento que hay que leer. Dice qué se corrigió respecto de la entrega v1.0.0
+del repositorio, que es la que muchos ya descargaron, y qué diferencias quedan
+en los PDF que no se rehicieron. Son cuarenta y dos archivos corregidos.
+Ninguna corrección cambia las conclusiones del curso, pero varias cambian
+resultados que el estudiante entrega.
+
+---
+
 ## Qué es esta carpeta
 
 `C:\Temp\CURSO_BIOMASA_2026` es **todo el curso en un solo lugar**: los documentos
@@ -26,11 +37,13 @@ acuerde. Lo que falta convertir está anotado en `_fuente\QUE_FALTA_CONVERTIR.md
 
 ## Por dónde empezar
 
-La carpeta tiene ahora **dos documentos sueltos y nada más**. Todo lo demás vive
+La carpeta tiene ahora **tres documentos sueltos y nada más**. Todo lo demás vive
 dentro del práctico al que pertenece.
 
 ```
 CURSO_BIOMASA_2026\
+    00_FE_DE_ERRATAS.md            qué se corrigió respecto de la v1.0.0
+    00_FE_DE_ERRATAS.pdf           el mismo texto, en PDF
     00_LEEME_PRIMERO.md            este archivo
     00_INSTRUCTIVO_DE_EJECUCION    qué se ejecuta, en qué orden, y cómo saber
                                    que salió bien
@@ -120,7 +133,7 @@ memorizar. Al abrir cualquiera de ellos:
 
 ## Cómo llega el material, y sobre qué se trabaja
 
-Las descargas completas superan los **250 GB** y llegan en un disco. Usted ya las
+Las descargas completas suman unos **252 GB** (inventario.csv, 68 productos únicos) y llegan en un disco. Usted ya las
 tiene: no necesita bajarlas. La descarga **se practica igual**, sobre una escena o
 dos, porque saber pedirle a un catálogo exactamente lo que uno necesita es parte
 del oficio y no se aprende leyendo.
@@ -133,7 +146,7 @@ dudoso, se vuelve a él y se comprueba.
 ## Las cuentas, antes de empezar
 
 Varios catálogos no responden sin una cuenta, y ninguna de esas altas es
-inmediata. Están las seis en la Tabla 2 del instructivo, con su dirección
+inmediata. Están las siete en la Tabla 2 del instructivo, con su dirección
 verificada. Dos aclaraciones que ahorran tiempo: **NASA Earthdata y ASF son una
 sola cuenta**, no dos; y **ESA MAAP**, el de BIOMASS, es el único que además exige
 generar una ficha de acceso de noventa días.
@@ -182,7 +195,7 @@ Esa diferencia es contenido del curso, no una muleta.
 | `02_Coberturas` | La capa de cobertura del suelo usada para estratificar |
 | `03_Topografia` | Modelo de elevación, pendiente, orientación y sombreado |
 | `07_Diccionario_datos` | Qué significa cada columna de cada tabla |
-| `08_Originales_crudos` | **Los originales descargados: `.zip`, `.h5`, `.xemt`. 253 GB.** Están aquí y no en cada práctico porque una misma escena sirve a varios. No se tocan nunca |
+| `08_Originales_crudos` | **Los originales descargados: `.zip`, `.h5`, `.xemt`. 252 GB.** Están aquí y no en cada práctico porque una misma escena sirve a varios. No se tocan nunca |
 | `GLOSARIO.md` | Términos del curso |
 | `configuracion_comun.py` | Rutas, CRS y malla común. Lo importan todos los scripts |
 | `COMO_CAMBIAR_DE_AREA.md` | Qué tocar (y qué rehacer) para llevar este flujo de trabajo a otros recintos u otra región |
@@ -263,6 +276,23 @@ necesita. Si una no existe, es porque ese práctico no produce ese tipo de salid
 | `.dim` + `.data` | Producto de SNAP | SNAP. **El par nunca se separa** |
 | `.xml` | Grafo de procesamiento de SNAP | Graph Builder de SNAP |
 | `.qml` | Estilo de capa | QGIS lo toma solo si comparte nombre con el ráster |
+| `.md` | Documento de texto | Ver abajo |
+| `.pdf` | Documento para leer | Cualquier lector de PDF |
+
+### Los `.md` conviene leerlos formateados
+
+Casi toda la documentación del curso está en archivos `.md`. Son texto, y se
+abren con cualquier editor, pero escritos en un formato que marca los títulos
+con almohadillas, la negrita con asteriscos y las tablas con barras verticales.
+Abiertos en el Bloc de notas o en Word, esas marcas se ven crudas y estorban.
+
+Hay dos maneras cómodas de leerlos, y ninguna exige instalar nada nuevo:
+
+- **En el repositorio de GitHub**, haciendo clic en el archivo. Se ven
+  formateados, con las tablas armadas y los títulos en su tamaño.
+- **En Visual Studio Code**, abriendo el archivo y presionando
+  **`Ctrl` + `Shift` + `V`**: se abre una pestaña con el documento formateado.
+  Con `Ctrl` + `K` y después `V` queda al lado del texto, en dos columnas.
 
 ## 7. Tres advertencias
 

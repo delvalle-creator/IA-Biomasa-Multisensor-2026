@@ -42,12 +42,14 @@ TODO lo que sigue: duplicar el lado cuadruplica los datos.
 nombres de los sitios y las **esquinas** (xmin, ymin, xmax, ymax) van en
 la proyección de `EPSG`, **alineadas a múltiplos de `PIXEL`** (terminadas
 en 0 con píxel de 10 m): esa alineación es la que permite apilar los
-sensores sin remuestrear. Los nombres de las claves se propagan solos:
-los scripts recorren este diccionario, y las subcarpetas y archivos
-derivados (`dem_<SITIO>.tif`, `fabdem_<SITIO>_wgs84.tif`, las carpetas por
-sitio de `02_Subsets_SNAP_QGIS`…) toman su nombre de aquí. Puede haber
-dos sitios, uno o más de dos — pero el diseño experimental del curso
-(un sitio de interés y un **sitio control**) vale la pena conservarlo.
+sensores sin remuestrear. La mayoría de los programas recorre este
+diccionario, y las subcarpetas y archivos derivados (`dem_<SITIO>.tif`,
+`fabdem_<SITIO>_wgs84.tif`, las carpetas por sitio de
+`02_Subsets_SNAP_QGIS`…) toman su nombre de aquí. Nueve programas son la
+excepción y llevan los nombres escritos dentro: están listados en el
+apartado 4 bis, y hay que editarlos. Puede haber dos sitios, uno o más de
+dos — pero el diseño experimental del curso (un sitio de interés y un
+**sitio control**) vale la pena conservarlo.
 
 **d) `AOIS_WGS84` — los mismos recintos en grados.** Son los que se les
 pasan a los catálogos. Recalcúlelos a partir de las esquinas UTM (QGIS lo
@@ -105,11 +107,62 @@ local equivalente, o se omiten esos cruces declarándolo.
   con los propios datos de cada corrida, así que se recalculan solos para
   el área nueva.
 
+## 4 bis. Los nueve programas que nombran los recintos por escrito
+
+Estos programas no toman los nombres del diccionario: los tienen
+escritos. Al cambiar de área hay que reemplazar cada literal por el
+nombre nuevo, o mejor, por un recorrido de `AOIS_UTM`.
+
+| Programa | Dónde | Qué hace con el nombre |
+|---|---|---|
+| `TP2_09_cobertura_BAP.py` | líneas 76-77 | Arma la lista de sitios junto con sus carpetas `01_Bosque` y `02_Estepa` |
+| `TP2_13_cotejar_GEDI_ICESat2.py` | líneas 84-87 y 276 | Nombra las dos tablas de entrada y recorre los dos sitios |
+| `TP3_05_saturacion_y_modelo.py` | línea 138 | Recorre los dos sitios con su etiqueta para los informes |
+| `TP4_07_contraste_C_vs_L.py` | líneas 146-147 y 169 | Calcula la mediana de cada sitio para restarlas |
+| `TP4_08_saturacion_radar.py` | línea 126 | Fija el sitio de bosque, porque la estepa no tiene dosel que explicar |
+| `TP5_02_modelos.py` | línea 120 | Recorre los dos archivos de datos |
+| `TP5_03_validacion.py` | línea 92 | Ídem |
+| `TP5_04_biomasa_quemada.py` | líneas 101 y 181 | Ídem, y además deduce la etiqueta del sitio del prefijo del nombre |
+| `TP5_06_validacion_estricta.py` | líneas 215-216, 259-260 y 268 | Carga los dos archivos por su nombre, lleva los umbrales de cada sitio y toma el segundo como control |
+
+Los tres del TP5 saltean el archivo que no encuentran, de modo que con un
+nombre distinto no dan error: terminan sin datos. Los del TP2, TP3 y TP4
+se detienen o devuelven un resultado vacío.
+
+## 4 ter. Trabajar con un solo recinto
+
+Se puede, con dos advertencias.
+
+**Lo que hay que editar.** Además de dejar una sola clave en `AOIS_UTM` y
+en `AOIS_WGS84`, hay que corregir los nueve programas del apartado
+anterior para que trabajen sobre ese único sitio.
+
+**Lo que deja de poder hacerse.** Buena parte del curso está construida
+sobre la comparación entre un sitio y su control, y esa parte no tiene
+sustituto con un recinto solo:
+
+- el **contraste** por banda y polarización del TP4, que es la respuesta
+  a la pregunta del práctico, se calcula como la diferencia entre los dos
+  sitios;
+- el **ensayo nulo** del TP5 usa el sitio sin perturbar para medir cuánto
+  cambio detecta el método donde no hubo cambio;
+- la **media estratificada** del TP2 y la comparación de biomasa por
+  clase pierden el término de comparación;
+- el **cotejo con el CCI** y el control de terreno con FABDEM siguen
+  funcionando, porque no dependen del segundo sitio.
+
+Con un solo recinto el flujo produce igual sus productos y sus modelos,
+pero el informe no puede sostener que una diferencia medida se deba a la
+vegetación y no al método. Si el objetivo es aplicar el procedimiento a
+un sitio nuevo, conviene igualmente definir un segundo recinto cercano,
+de la misma extensión y sin la perturbación que se estudia.
+
 ## 5. El orden de trabajo y la comprobación
 
 1. Editar `configuracion_comun.py` (§ 2) y copiarlo a los cinco prácticos (§ 1).
 2. Rehacer los datos del lugar (§ 3): AOI, coberturas, FABDEM, geoides.
-3. Correr `00_COMUN\comprobar_entorno.py` — el entorno no cambia con el área.
+3. Correr `TP2_LiDAR_GEDI_ICESat2\03_Scripts\comprobar_entorno.py` — el entorno
+   no cambia con el área, pero conviene verificarlo antes de empezar.
 4. Correr el TP1 **empezando por los pasos 1 y 2**: verificar cobertura y
    bruma ANTES de descargar. La regla del TP1 es exactamente para esto: en
    un área nueva, nada garantiza que los productos existan, cubran y sirvan.

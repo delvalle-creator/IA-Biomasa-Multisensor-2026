@@ -25,11 +25,11 @@ al ruido). La mascara final es la INTERSECCION de los pixeles validos para
 TODOS los sensores y TODAS las fechas: el analisis multisensor debe restringirse
 a ella.
 
-SALIDA (en 04_Tablas_de_trabajo/<AOI>/):
-    mascara_validez.tif   1 = valido para todos los sensores, 0 = descartar
-                          (bandas adicionales: validez por sensor)
+SALIDA (una por recinto, en 02_Subsets_SNAP_QGIS/mascaras/):
+    mascara_validez_<AOI>.tif   1 = valido para todos los sensores, 0 = descartar
+                                (bandas adicionales: validez por sensor)
 
-USO:  python TP4_05_mascara_validez.py
+USO:  python TP4_05_mascara_validez.py [epoca]    (por defecto 02_pre)
 """
 import glob
 import os

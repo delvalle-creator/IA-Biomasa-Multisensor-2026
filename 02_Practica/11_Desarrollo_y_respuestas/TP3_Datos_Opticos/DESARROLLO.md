@@ -8,7 +8,7 @@ cada índice**, cruzándolo contra las huellas GEDI del TP2. Son seis pasos
 ## 1. La ejecución, paso a paso
 
     conda activate aoi
-    cd C:\Temp\CURSO_BIOMASA_2026\02_Practica\TP3_Datos_Opticos\03_Scripts
+    cd C:\Temp\CURSO_BIOMASA_2026\02_Practica
 
 **Pasos 1 y 2** recortan Sentinel-2 a la grilla común (SNAP) y descargan y
 recortan Landsat 9. **Paso 3** (`TP3_03_indices.py`): NDVI, EVI, NDMI y NBR
@@ -195,8 +195,8 @@ menor, el método estaría detectando «quemado» en terreno intacto — por
 diferencia de fechas fenológica, por desajuste geométrico o por umbral mal
 puesto — y entonces **las 18.009,2 ha del bosque serían indefendibles**,
 porque no habría manera de saber qué parte es fuego y qué parte es
-artefacto. Sin control no hay cifra creíble; con el control limpio, el
-80,2 % del bosque queda en pie como resultado.
+artefacto. Sin control no hay cifra creíble; con el control limpio, la cifra
+del **80,2 % del bosque quemado** queda en pie como resultado.
 
 ## 5. De dónde sale cada cifra
 

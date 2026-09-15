@@ -68,9 +68,9 @@ Los scripts están en `03_Scripts/`, repartidos por etapa: pre-procesamiento,
 procesamiento y exportación. El orden completo, con lo que produce cada uno,
 está en `03_Scripts/00_ORDEN_DE_EJECUCION.md`.
 
-**Se agregó el `TP2_01b_descargar_gedi_l4a.py`**, que baja el producto de biomasa
-L4A. Se numera 01b, y no 09, porque tiene que correr ANTES del 07: es el 07 el
-que lo necesita para entregar biomasa en Mg/ha en vez de altura de dosel.
+**`TP2_01b_descargar_gedi_l4a.py`** baja el producto de biomasa L4A. Se numera
+01b, y no 09, porque tiene que correr ANTES del 07: es el 07 el que lo necesita
+para entregar biomasa en Mg/ha en vez de altura de dosel.
 
 ## Las carpetas vacías, y por qué lo están
 

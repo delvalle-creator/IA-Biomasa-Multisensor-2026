@@ -91,10 +91,10 @@ SAS = "https://planetarycomputer.microsoft.com/api/sas/v1/token"
 CONSULTAS = [
     {"coleccion": "sentinel-2-l2a", "cuenta": "sentinel2l2a01", "contenedor": "sentinel2-l2",
      "banda": "B08", "calidad": "SCL", "periodo": "2026-01-01/2026-01-20",
-     "etiqueta": "Sentinel-2 L2A (pre-incendio)"},
+     "etiqueta": "Sentinel-2 L2A (1 al 20/01/2026)"},
     {"coleccion": "landsat-c2-l2", "cuenta": "landsateuwest", "contenedor": "landsat-c2",
      "banda": "nir08", "calidad": "qa_pixel", "periodo": "2026-01-01/2026-01-20",
-     "etiqueta": "Landsat 9 C2 L2 (pre-incendio)"},
+     "etiqueta": "Landsat 9 C2 L2 (1 al 20/01/2026)"},
 ]
 # clases de la banda SCL de Sentinel-2 que NO son dato util
 SCL_MALAS = (0, 1, 3, 8, 9, 10, 11)
@@ -158,9 +158,15 @@ for c in CONSULTAS:
             try:
                 q = leer_ventana(it["assets"][c["calidad"]]["href"], tok, aoi)
                 if c["coleccion"].startswith("sentinel"):
-                    nub = np.isin(q, SCL_MALAS)
-                    val = ~nub & (q > 0)
-                    nubes_aoi = 100.0 * nub.mean()
+                    # SCL = 0 es pixel SIN DATO (fuera de la franja), no nube:
+                    # se lo saca del numerador y del denominador. Si no, en una
+                    # escena que cubre el 15% del AOI el 85% restante se contaria
+                    # como nubosidad. Es el criterio de la rama Landsat: el sin
+                    # dato no cuenta. (Si no hay ningun pixel con dato, aqui da
+                    # NaN, que es lo honesto: no hay nubosidad que medir.)
+                    hay = q > 0
+                    nub = np.isin(q, SCL_MALAS) & hay
+                    nubes_aoi = 100.0 * nub[hay].mean() if hay.any() else float("nan")
                 else:
                     nub = ((q >> 3) & 1) | ((q >> 4) & 1)
                     v = q > 1
@@ -198,5 +204,7 @@ print("     tienen por que coincidir. Cuando difieren, manda el segundo.")
 print("  2. La nubosidad del catalogo es de la escena entera (110 x 110 km).")
 print("     La del AOI (15 x 15 km) puede ser muy distinta, para bien o para mal.")
 print()
-print("SIGUIENTE PASO:  python TP1_03_descargar_sentinel.py")
-print("(recien ahora, con la verificacion hecha, se descarga)")
+print("SIGUIENTE PASO:  python TP1_02_detectar_bruma.py")
+# 14/09/2026: el pie decia "recien ahora se descarga", que era cierto
+# cuando esta linea anunciaba el paso 3. El paso 2 no descarga: verifica.
+print("(la descarga es el paso 3: antes falta verificar la bruma)")

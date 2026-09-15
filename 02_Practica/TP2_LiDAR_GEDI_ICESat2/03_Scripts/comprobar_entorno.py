@@ -58,7 +58,9 @@ if faltan:
     print()
     print("   conda install -c conda-forge %s" % " ".join(faltan))
     print()
-    print("Cuando termine, vuelva a hacer doble clic en EJECUTAR_cadena_escenarioB.bat")
+    # 14/09/2026: nombraba EJECUTAR_cadena_escenarioB.bat, que es el atajo
+    # del TP5. Este comprobador se corre al empezar cualquier practico.
+    print("Cuando termine, vuelva a correr este comprobador y siga con el practico.")
     sys.exit(1)
 
 print("El entorno esta completo. Se puede correr la cadena.")

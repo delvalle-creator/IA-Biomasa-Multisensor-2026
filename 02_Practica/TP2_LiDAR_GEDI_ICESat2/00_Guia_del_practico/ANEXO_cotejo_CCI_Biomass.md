@@ -83,13 +83,13 @@ contra 135— parecía una contradicción; desagregado, era un acuerdo en el
 bosque alto y un artefacto en el matorral de ladera.
 
 *Datos: ESA CCI Biomass v7.0 (recortes 2005–2024 sobre los dos AOI, 100 m).
-Cotejo del 23/8/2026; tablas por huella y por franja en
+Tablas por huella y por franja en
 `05_Resultados\04_Tablas\`. Parcelas citadas: Bertolin et al. (2015); Peri et
 al.; Peri y Lasagno (2009, 2010).*
 
 ---
 
-**Actualización del 26/8/2026 — el cotejo, llevado al mapa.** El paso 17
+**El cotejo, llevado al mapa.** El paso 17
 (`TP2_17_mapa_biomasa_GEDI_CCI.py`) traslada este cotejo al espacio: agrega
 las huellas GEDI a celdas de 500 m (mediana, mínimo 3 huellas) y promedia el
 mapa CCI de 2024 a la misma grilla. Los GeoTIFF quedan en

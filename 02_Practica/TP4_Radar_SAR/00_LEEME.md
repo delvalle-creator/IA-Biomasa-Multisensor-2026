@@ -38,9 +38,11 @@ El práctico completo, con su fundamentación, está en la guía teórico-práct
 | 7 | `TP4_07_contraste_C_vs_L.py` — el contraste bosque − estepa | no |
 | 8 | `TP4_08_saturacion_radar.py` — cruza con GEDI. **El cierre del práctico** | no |
 | 9 | `TP4_09_exportar_para_qgis.py` — pasa a dB y deja los rásters listos | no |
+| 10 | `TP4_10_indices_polarimetricos.py` — RVI, RFDI y demás índices | no |
 
-Los 1 a 5 ya fueron ejecutados: sus resultados están en `02_Subsets_SNAP_QGIS`. Usted corre
-del 6 en adelante. El 6 necesita `scipy` (`conda install -c conda-forge scipy`).
+Los 1 a 4 ya fueron ejecutados: sus resultados están en `02_Subsets_SNAP_QGIS`. Usted corre
+del 5 en adelante: el 5 vuelve a escribir la máscara de validez de cada recinto
+(`mascaras/mascara_validez_<AOI>.tif`). El 6 usa `scipy`, que el entorno `aoi` ya trae.
 
 Los scripts 6 a 8 crean `05_Resultados/04_Tablas` y `05_Resultados/02_Rasters/filtrados`
 al ejecutarse. Si no las ve, todavía no los corrió.
@@ -58,9 +60,10 @@ al ejecutarse. Si no las ve, todavía no los corrió.
 
 **La saturación** (γ⁰ de 0–3 m a más de 21 m de dosel):
 
-- **Sentinel-1 (C): gana 0,53 dB.** Plano. No distingue un renoval de un bosque maduro.
-- **NISAR (L): gana 2,59 dB.** Y donde el NDVI del TP3 se aplanó (0,896 → 0,894 sobre
-  los 21 m), **la banda L sigue subiendo**: −12,22 → −11,73 → −11,55 dB.
+- **Sentinel-1 (C): gana 0,52 dB.** Plano. No distingue un renoval de un bosque maduro.
+- **NISAR (L): gana 2,19 dB.** Y donde el NDVI del TP3 se aplanó (0,888 a los 15–18 m,
+  y después 0,879, 0,897 y 0,893), **la banda L sigue subiendo**: −11,59 → −11,47 →
+  −11,08 → −10,94 dB.
 
 **El control cruzado:** NISAR y PALSAR-2, misiones de agencias distintas, dan −13,2 y
 −12,5 dB sobre el mismo bosque. Coinciden dentro de 1 dB sin haberse puesto de
@@ -92,14 +95,14 @@ entre los dos sensores desaparecen.
 - **No hay `04_Tablas_de_trabajo`**: el TP4 usa las huellas del TP2.
 - **La línea de base SAOCOM está completa** (7 productos), pero **sin procesar**:
   ninguno pasó todavía por `TP4_01_procesar_sar.py`. Las 2 dual-pol S4 que
-  faltaban (27/10/2023 y 23/01/2024) llegaron el 16/07/2026, con identificadores
-  distintos a los del pedido. **Son ASCENDENTES**, mientras que las 5 quad-pol son
+  faltaban (27/10/2023 y 23/01/2024) llegaron con identificadores distintos a los
+  del pedido. **Son ASCENDENTES**, mientras que las 5 quad-pol son
   descendentes: no se apilan ni se promedian juntas. Sirven como control de
   geometría —cuánto de γ⁰ depende de cómo mira el radar y no del bosque—, no como
   insumo. Se comparan contra la fecha descendente más próxima: 27/10 contra 29/11
   y 23/01 contra 16/01.
 - **La banda S de NISAR no está confirmada.** Se distribuye por Bhoonidhi (ISRO) y su
   producción diaria arrancó el 08/07/2026. Ver `01_Prompt_IA/04_Verificacion/`.
-- **El R² máximo es 0,25**, y no le gana al NDMI del óptico (0,30). No contradice
+- **El R² máximo es 0,276** (NISAR HH; el HV da 0,273), y casi empata con el NDMI del óptico (0,310). No contradice
   nada: GEDI mide altura y la banda L responde a biomasa; y este bosque es bajo, así
   que el experimento está sesgado en contra del radar. Está explicado en el informe.

@@ -51,8 +51,9 @@ El resultado, medido sobre nuestros datos:
 
 - De las 419 huellas que la NASA descarta en el recinto de bosque, **224 —más de
   la mitad— se descartan únicamente por la hoja caída.**
-- De las 162 huellas que cayeron sobre lenga, **104 se tomaron sin hojas.**
-- De las 220 huellas de noviembre de 2024, **199 son de hoja caída**: la lenga
+- De las 162 huellas que cayeron sobre lenga, **93 se tomaron sin hojas** (33 con
+  hoja presente y 36 sin bandera, por no tener biomasa del L4A).
+- De las 220 huellas del gránulo del 06/11/2024, **170 son de hoja caída**: la lenga
   todavía no había brotado.
 
 Traducido: la regla nos estaba dejando la clase más importante del recinto —la

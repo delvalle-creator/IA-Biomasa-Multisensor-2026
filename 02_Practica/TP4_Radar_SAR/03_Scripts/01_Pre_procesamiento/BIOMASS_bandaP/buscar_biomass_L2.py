@@ -102,6 +102,7 @@ SALIDA    TP4_Radar_SAR/05_Resultados/04_Tablas/BIOMASS_catalogo_consulta.csv
 USO (entorno conda 'aoi'):   python buscar_biomass_L2.py
 """
 import csv
+import io
 import json
 import os
 import sys

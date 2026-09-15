@@ -1,0 +1,26 @@
+INDICES POLARIMETRICOS DEL TP4 - BOSQUE_NW_02
+============================================================
+
+Formulas y autoria (NO son intercambiables; en el informe hay que
+decir cual se uso):
+
+  RVI quad-pol  8*HV/(HH+VV+2*HV)     Kim y van Zyl (2009),
+                                      reproducida en el SAR Handbook
+  RVI dual-pol  4*cruzada/(co+cruzada) Trudel, Charbonneau y
+                                      Serrar (2012)
+  RFDI          (HH-HV)/(HH+HV)       SAR Handbook, seccion 5.3
+
+Metodo: el gamma0 se promedia sobre la ventana de 150 m en escala
+LINEAL y el indice se forma DESPUES, con esos promedios. Promediar
+en decibeles sesgaria el resultado; promediar indices por pixel
+seria inestable.
+
+Advertencia (Mandal et al., 2020): los indices apoyados en la
+intensidad de la polarizacion cruzada pueden dar un valor alto
+aunque el dosel no este desarrollado. En la estepa, con 3,4 Mg/ha
+de mediana, ese riesgo es concreto. Si aparece, el camino es el
+DpRVI, que el GCOV de NISAR habilita sin trabajo extra.
+
+Techo de la banda C (SAR Handbook, Tabla 4.1): la sensibilidad a
+la altura del rodal se pierde por encima de UN METRO, contra diez
+metros en banda L. Un cociente limpia ruido, no crea sensibilidad.

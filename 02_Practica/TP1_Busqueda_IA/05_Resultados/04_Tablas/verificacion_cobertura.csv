@@ -1,0 +1,9 @@
+producto,aoi,fecha,cobertura_huella_catalogo_pct,pixeles_con_dato_en_AOI_pct,nubes_escena_catalogo_pct,nubes_reales_en_AOI_pct
+Sentinel-2 L2A (1 al 20/01/2026),BOSQUE_NW_02,2026-01-19,15.7,14.7,0,0.0
+Sentinel-2 L2A (1 al 20/01/2026),BOSQUE_NW_02,2026-01-19,100.0,100.0,0,0.0
+Sentinel-2 L2A (1 al 20/01/2026),ESTEPA_NW_02,2026-01-19,100.0,100.0,0,0.0
+Sentinel-2 L2A (1 al 20/01/2026),ESTEPA_NW_02,2026-01-19,0.8,0.4,0,0.0
+Landsat 9 C2 L2 (1 al 20/01/2026),BOSQUE_NW_02,2026-01-19,100.0,100.0,2,0.0
+Landsat 9 C2 L2 (1 al 20/01/2026),BOSQUE_NW_02,2026-01-19,99.0,100.0,7,0.1
+Landsat 9 C2 L2 (1 al 20/01/2026),ESTEPA_NW_02,2026-01-19,100.0,100.0,2,0.0
+Landsat 9 C2 L2 (1 al 20/01/2026),ESTEPA_NW_02,2026-01-19,47.3,48.8,7,0.0

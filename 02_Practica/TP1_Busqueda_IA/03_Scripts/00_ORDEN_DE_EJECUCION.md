@@ -13,7 +13,7 @@ importan los scripts.
 | 2 | TP1_02_detectar_bruma.py | 01_Consulta_catalogos | Detecta bruma/humo por la reflectancia del azul | 05_Resultados/04_Tablas/deteccion_bruma.csv |
 | 3 | TP1_03_descargar_sentinel.py | 01_Consulta_catalogos | Descarga Sentinel-1 y Sentinel-2 (Copernicus) | 00_COMUN/08_Originales_crudos/ |
 | 4 | TP1_04_descargar_landsat.py | 01_Consulta_catalogos | Descarga Landsat 9 C2 L2 recortado al AOI (Planetary Computer) | 00_COMUN/08_Originales_crudos/.../LANDSAT9/ |
-| 5 | TP1_05_descargar_gedi.py | 01_Consulta_catalogos | Descarga GEDI L2A y L2B (NASA Earthdata) | 00_COMUN/08_Originales_crudos/GEDI/ |
+| 5 | TP1_05_descargar_gedi.py | 01_Consulta_catalogos | Descarga GEDI L2A y L2B, e ICESat-2 ATL08 (una sola credencial de NASA Earthdata: GEDI lo entrega LP DAAC y ATL08, NSIDC) | 00_COMUN/08_Originales_crudos/02_pre/GEDI/ y 02_pre/ICESat2/ |
 | 6 | TP1_06_alos_nisar_informe.py | 02_Disponibilidad_imagenes | Informa y descarga ALOS-1 (quad-pol) y NISAR (ASF) | 00_COMUN/08_Originales_crudos/ |
 | 7 | TP1_07_descargar_nisar.py | 02_Disponibilidad_imagenes | Descarga NISAR GCOV con verificacion de integridad | 00_COMUN/08_Originales_crudos/.../NISAR/GCOV/ |
 | 8 | TP1_08_descargar_biomass.py | 02_Disponibilidad_imagenes | Descarga BIOMASS banda P (ESA MAAP, requiere token) | 00_COMUN/08_Originales_crudos/.../BIOMASS/ |
@@ -23,13 +23,15 @@ importan los scripts.
 Primero se VERIFICA (pasos 1-2), recien despues se DESCARGA (pasos 3-8), y al
 final se DOCUMENTA lo obtenido (pasos 9-10).
 
-## El septimo proveedor no tiene script: el SAOCOM
+## Los dos proveedores que no tienen script: la CONAE y la JAXA
 
-Los pasos 3 a 8 cubren seis de los siete proveedores del curso. Falta la CONAE,
-que distribuye el SAOCOM-1A y 1B. **No hay script y no es un olvido:** el
-catalogo de la CONAE (https://catalogos.conae.gov.ar/) no entrega los productos
-por descarga directa, sino que exige registro, solicitud y autorizacion previas,
-y la entrega llega despues por un enlace personal.
+Los pasos 3 a 8 cubren seis de los ocho proveedores del curso. Los otros dos se
+piden a mano, y en ninguno de los dos casos es un olvido.
+
+**La CONAE**, que distribuye el SAOCOM-1A y 1B. Su catalogo
+(https://catalogos.conae.gov.ar/) no entrega los productos por descarga directa,
+sino que exige registro, solicitud y autorizacion previas, y la entrega llega
+despues por un enlace personal.
 
 Ese tramite esta documentado en
 `00_COMUN/08_Originales_crudos/PEDIDO_SAOCOM_28jul2026.md`, que es el pedido real
@@ -41,3 +43,9 @@ automatica.
 Las escenas ya estan en el disco del curso, en
 `00_COMUN/08_Originales_crudos/01_base/SAOCOM`, `02_pre/SAOCOM` y
 `03_post/SAOCOM`, y se procesan en el Trabajo Practico 4.
+
+**La JAXA**, que publica el mosaico anual global de PALSAR-2. Se distribuye desde
+un sitio con registro gratuito y un mapa en el que se hace clic sobre el tile; no
+hay API que automatizar, y un solo tile de 1 x 1 grado cubre los dos recintos. Los
+pasos estan escritos en el encabezado de `TP4_04_palsar2_mosaico.py`, que es el
+programa que despues lo recorta a la grilla comun.

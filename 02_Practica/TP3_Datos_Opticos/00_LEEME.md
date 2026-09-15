@@ -43,8 +43,8 @@ al ejecutarse. Si no las ve, todavía no los corrió.
 
 **Que el óptico no alcanza.** Y está medido, no citado:
 
-- El **NDVI satura a los 21 m** de dosel: 0,896 en la franja 21–25 m y 0,894 en la
-  de 25–30 m. El EVI aguanta un poco más (0,557 → 0,569).
+- El **NDVI satura a partir de los 15–18 m** de dosel: llega a 0,888 y queda en
+  0,879, 0,897 y 0,893 en las franjas siguientes, hasta los 30 m. El EVI también se aplana (0,549 y 0,550).
 - **Ningún índice explica más de un tercio** de la altura en el bosque (el
   mejor ajuste llega a R² = 0,31 con un error de 5,86 m, sobre un bosque de
   5,07 m de altura mediana).
@@ -58,10 +58,10 @@ al ejecutarse. Si no las ve, todavía no los corrió.
 ## La decisión metodológica central
 
 **La escena pre-incendio NO es la más cercana al fuego.** La del 09/01/2026 está a
-un día del incendio, pero tiene bruma: azul 0,158 contra 0,024 normal, y la máscara
+un día del incendio, pero tiene humo de los incendios: azul 0,158 contra 0,024 normal, y la máscara
 del producto sólo marcó 7,4 % de cirros. Se usa la del 25/11/2025.
 
-Cambia poco el resultado (16.463 contra 18.009 ha) **porque el NBR no usa el rojo**.
+Cambia poco el resultado (16.502 contra 18.009 ha) **porque el NBR no usa el rojo**.
 Con NDVI habría sido inservible. Una escena no está mala en abstracto: está mala
 **para un índice determinado**.
 
@@ -72,8 +72,8 @@ Corra el script 6 y cargue:
     05_Resultados/02_Rasters/incendio/<AOI>/severidad_<AOI>.tif  + 02_Rasters/severidad.qml
     05_Resultados/03_Vectores/TP3_incendio.gpkg
 
-**Sin el `.qml` el ráster de severidad se ve como seis grises casi iguales**: sus
-valores 1 a 6 son códigos de clase, no cantidades.
+**Sin el `.qml` el ráster de severidad se ve como siete grises casi iguales**: sus
+valores 1 a 7 son códigos de clase, no cantidades.
 
 Y la verificación que importa: superponga las huellas GEDI del TP2
 (`TP2_LiDAR_GEDI_ICESat2/05_Resultados/03_Vectores/TP2_GEDI.gpkg`) y mire cuáles quedaron

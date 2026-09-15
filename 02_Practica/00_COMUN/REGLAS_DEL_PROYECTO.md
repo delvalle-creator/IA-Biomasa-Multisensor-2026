@@ -1,21 +1,21 @@
 # CURSO_BIOMASA_2026
 
-> ## Nombres de las carpetas de descargas — cambiados el 28/07/2026
+> ## Nombres de las carpetas de descargas
 >
-> Se acortaron para que ninguna ruta del proyecto pase de los 260 caracteres que
-> admite Windows. Equivalencias:
+> Son cortos a propósito, para que ninguna ruta del proyecto pase de los 260
+> caracteres que admite Windows:
 >
-> | Antes | Ahora |
+> | Carpeta | Qué guarda |
 > |---|---|
-> | `00_COMUN\08_Descargas_originales` | `00_COMUN\08_Originales_crudos` |
-> | `00_historico_ALOS` | `00_alos` |
-> | `01_linea_base_2023_24` | `01_base` |
-> | `02_pre_incendio_2025_26` | `02_pre` |
-> | `03_post_incendio_2026` | `03_post` |
+> | `00_COMUN\08_Originales_crudos` | los 253 GB de productos originales, sin modificar |
+> | `00_alos` | la serie histórica de ALOS-1 |
+> | `01_base` | la línea de base, 2023 y 2024 |
+> | `02_pre` | la época previa al incendio, 2025 y 2026 |
+> | `03_post` | la época posterior, 2026 |
 >
-> El contenido no cambió: son los mismos 253 GB de productos originales. Lo que se
-> quitó fueron las carpetas `.SAFE` descomprimidas, que estaban duplicadas al lado
-> de su `.zip` y ocupaban 150 GB.
+> Dentro de los originales van los `.zip` tal como llegan del proveedor, sin las
+> carpetas `.SAFE` descomprimidas al lado: duplicarlas cuesta 150 GB y no aporta
+> nada, porque los programas leen el `.zip`.
 
 
 Proyecto único del curso de posgrado: estimación de biomasa en el bosque
@@ -66,16 +66,16 @@ permite comparar explícitamente qué aporta cada fuente y qué aporta la fusió
     │   │   ├── GLOSARIO.md        ← el vocabulario del curso, en un solo lugar
     │   │   └── configuracion_comun.py  ← proyección, píxel, AOI y épocas: FUENTE ÚNICA
 
-    Las carpetas `04_Muestreo`, `05_Metadatos` y `06_Simbologia` estaban
-    declaradas pero nunca se usaron: se quitaron de esta lista. Si algún práctico
-    las necesita, se crean entonces y se anuncian acá.
+    No hay carpetas `04_Muestreo`, `05_Metadatos` ni `06_Simbologia`: ningún
+    práctico las usa. Si alguno llegara a necesitarlas, se crean entonces y se
+    anuncian acá.
     │   │
     │   ├── TP1_Busqueda_IA/
     │   ├── TP2_LiDAR_GEDI_ICESat2/
     │   ├── TP3_Datos_Opticos/
     │   ├── TP4_Radar_SAR/
     │   ├── TP5_Sinergia_Multisensor/
-    │   └── 09_ATAJOS/             los siete .bat
+    │   └── 09_ATAJOS/             los nueve .bat
     └── 99_PRIVADO_NO_DISTRIBUIR/  material del docente, no se distribuye
 
 Cada práctico repite la misma estructura: `00_Guia_del_practico`, `01_Prompt_IA`,

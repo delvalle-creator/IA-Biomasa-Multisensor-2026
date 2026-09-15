@@ -55,14 +55,18 @@ miles de dispersores y sus ondas se suman con fases distintas. **Dos píxeles de
 mismo bosque difieren varios dB por azar.** Un satélite diez veces mejor tendría el
 mismo speckle.
 
-Se combate promediando. En este proyecto el óptimo está en **150 m**.
+Se combate promediando. En este proyecto se adopta una ventana de **150 m**, del
+orden de la huella de GEDI. **Hay que destacar que no es el máximo de la curva:**
+con los datos actuales el R² sigue subiendo hasta los 210 m en NISAR y hasta los
+310 m en PALSAR-2 y SAOCOM. Se elige 150 m como compromiso declarado, porque más
+allá la ventana promedia bosque que ya no pertenece a la huella.
 
 ## Cifras medidas en este proyecto
 
 | | Contraste bosque − estepa (HV) | Gana de 0–3 m a >21 m |
 |---|---|---|
-| Sentinel-1 (C) | 4,2 dB | 0,53 dB |
-| NISAR (L) | 9,9 dB | 2,59 dB |
-| PALSAR-2 (L) | 11,6 dB | 2,16 dB |
-| SAOCOM (L) | 11,7 dB | 1,98 dB |
+| Sentinel-1 (C) | 4,2 dB | 0,52 dB |
+| NISAR (L) | 9,9 dB | 2,19 dB |
+| PALSAR-2 (L) | 11,6 dB | 2,09 dB |
+| SAOCOM (L) | 11,7 dB | 1,83 dB |
 | BIOMASS (P) | — | — |

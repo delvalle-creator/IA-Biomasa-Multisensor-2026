@@ -1,0 +1,166 @@
+<graph id="Fusion_NISAR_GCOV_ASC_DES">
+  <version>1.0</version>
+
+  <!--
+    Fusion de una pasada ascendente y una descendente de NISAR GCOV.
+
+    Los productos de entrada salen del complemento NISAR GCOV Reader
+    (formato BEAM-DIMAP, valores de gamma0 en potencia lineal, ya
+    geocodificados y corregidos por terreno: no hace falta Terrain-Correction).
+
+    Uso desde la linea de comandos de SNAP:
+
+      gpt Fusion_ASC_DES_NISAR.xml ^
+          -Pasc=C:\ruta\ASC_20260825_20m.dim ^
+          -Pdes=C:\ruta\DES_20260824_20m.dim ^
+          -Psalida=C:\ruta\FUSION_ASC_DES
+
+    Solo usa operadores genericos (Read, Collocate, BandMaths, Write), que no
+    exigen los metadatos SAR de los productos de Nivel 1. Si el producto los
+    tuviera, puede insertarse un nodo Speckle-Filter entre cada Read y el
+    Collocate; la version con filtro esta comentada al final.
+  -->
+
+  <node id="Leer_ASC">
+    <operator>Read</operator>
+    <sources/>
+    <parameters>
+      <file>${asc}</file>
+    </parameters>
+  </node>
+
+  <node id="Leer_DES">
+    <operator>Read</operator>
+    <sources/>
+    <parameters>
+      <file>${des}</file>
+    </parameters>
+  </node>
+
+  <!--
+    Collocate pone las dos escenas en la misma grilla. Las dos ya estan
+    geocodificadas en el mismo CRS y con el mismo tamano de celda, asi que el
+    remuestreo es practicamente identidad; se deja NEAREST_NEIGHBOUR para no
+    suavizar los valores.
+  -->
+  <node id="Collocate">
+    <operator>Collocate</operator>
+    <sources>
+      <sourceProduct refid="Leer_ASC"/>
+      <sourceProduct.1 refid="Leer_DES"/>
+    </sources>
+    <parameters>
+      <targetProductType>COLLOCATED</targetProductType>
+      <renameMasterComponents>true</renameMasterComponents>
+      <renameSlaveComponents>true</renameSlaveComponents>
+      <masterComponentPattern>${ORIGINAL_NAME}_ASC</masterComponentPattern>
+      <slaveComponentPattern>${ORIGINAL_NAME}_DES</slaveComponentPattern>
+      <resamplingType>NEAREST_NEIGHBOUR</resamplingType>
+    </parameters>
+  </node>
+
+  <!--
+    La fusion se hace en potencia lineal y recien despues se pasa a decibeles.
+    Promediar en dB seria incorrecto: el promedio de logaritmos no es el
+    logaritmo del promedio.
+  -->
+  <node id="Fusion">
+    <operator>BandMaths</operator>
+    <sources>
+      <sourceProduct refid="Collocate"/>
+    </sources>
+    <parameters>
+      <targetBands>
+
+        <targetBand>
+          <name>HV_asc_db</name>
+          <type>float32</type>
+          <expression>HVHV_ASC &gt; 0 ? 10 * log10(HVHV_ASC) : NaN</expression>
+          <noDataValue>NaN</noDataValue>
+          <unit>dB</unit>
+          <description>gamma0 HV, pasada ascendente</description>
+        </targetBand>
+
+        <targetBand>
+          <name>HV_des_db</name>
+          <type>float32</type>
+          <expression>HVHV_DES &gt; 0 ? 10 * log10(HVHV_DES) : NaN</expression>
+          <noDataValue>NaN</noDataValue>
+          <unit>dB</unit>
+          <description>gamma0 HV, pasada descendente</description>
+        </targetBand>
+
+        <targetBand>
+          <name>HV_fusion_db</name>
+          <type>float32</type>
+          <expression>(HVHV_ASC &gt; 0 and HVHV_DES &gt; 0) ? 10 * log10((HVHV_ASC + HVHV_DES) / 2.0) : (HVHV_ASC &gt; 0 ? 10 * log10(HVHV_ASC) : (HVHV_DES &gt; 0 ? 10 * log10(HVHV_DES) : NaN))</expression>
+          <noDataValue>NaN</noDataValue>
+          <unit>dB</unit>
+          <description>media de las dos geometrias en potencia lineal</description>
+        </targetBand>
+
+        <targetBand>
+          <name>HH_fusion_db</name>
+          <type>float32</type>
+          <expression>(HHHH_ASC &gt; 0 and HHHH_DES &gt; 0) ? 10 * log10((HHHH_ASC + HHHH_DES) / 2.0) : (HHHH_ASC &gt; 0 ? 10 * log10(HHHH_ASC) : (HHHH_DES &gt; 0 ? 10 * log10(HHHH_DES) : NaN))</expression>
+          <noDataValue>NaN</noDataValue>
+          <unit>dB</unit>
+          <description>media de las dos geometrias en potencia lineal</description>
+        </targetBand>
+
+        <targetBand>
+          <name>HV_asc_menos_des_db</name>
+          <type>float32</type>
+          <expression>(HVHV_ASC &gt; 0 and HVHV_DES &gt; 0) ? 10 * log10(HVHV_ASC / HVHV_DES) : NaN</expression>
+          <noDataValue>NaN</noDataValue>
+          <unit>dB</unit>
+          <description>diferencia entre geometrias: resalta laderas y efectos de mirada</description>
+        </targetBand>
+
+        <targetBand>
+          <name>RVI_dual</name>
+          <type>float32</type>
+          <expression>(HHHH_ASC &gt; 0 and HVHV_ASC &gt; 0 and HHHH_DES &gt; 0 and HVHV_DES &gt; 0) ? (4 * ((HVHV_ASC + HVHV_DES) / 2.0)) / (((HHHH_ASC + HHHH_DES) / 2.0) + ((HVHV_ASC + HVHV_DES) / 2.0)) : NaN</expression>
+          <noDataValue>NaN</noDataValue>
+          <unit>adimensional</unit>
+          <description>indice de vegetacion de radar dual-pol sobre la fusion</description>
+        </targetBand>
+
+      </targetBands>
+      <variables/>
+    </parameters>
+  </node>
+
+  <node id="Escribir">
+    <operator>Write</operator>
+    <sources>
+      <sourceProduct refid="Fusion"/>
+    </sources>
+    <parameters>
+      <file>${salida}</file>
+      <formatName>BEAM-DIMAP</formatName>
+    </parameters>
+  </node>
+
+  <!--
+    Variante con filtro de moteado. Si los productos llevaran metadatos SAR,
+    se insertan estos dos nodos y se cambian las fuentes del Collocate a
+    Filtro_ASC y Filtro_DES:
+
+    <node id="Filtro_ASC">
+      <operator>Speckle-Filter</operator>
+      <sources><sourceProduct refid="Leer_ASC"/></sources>
+      <parameters>
+        <sourceBands>HHHH,HVHV</sourceBands>
+        <filter>Refined Lee</filter>
+        <filterSizeX>7</filterSizeX>
+        <filterSizeY>7</filterSizeY>
+      </parameters>
+    </node>
+
+    Nota: el producto GCOV ya viene multi-mirado. Si ademas se genero con
+    submuestreo promediado en el complemento (por ejemplo a 20 m), el moteado
+    ya esta muy reducido y el filtro aporta poco.
+  -->
+
+</graph>

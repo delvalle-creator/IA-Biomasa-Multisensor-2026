@@ -34,49 +34,57 @@ R² del ajuste γ⁰ → altura del dosel según la ventana de promediado:
 
 | Fuente | 30 m | 90 m | **150 m** | 310 m |
 |---|---|---|---|---|
-| Sentinel-1 VH (C) | 0,011 | 0,023 | 0,026 | 0,025 |
-| NISAR HV (L) | 0,152 | 0,229 | **0,245** | 0,221 |
-| PALSAR-2 HV (L) | 0,104 | 0,143 | 0,153 | 0,159 |
+| Sentinel-1 VH (C), 10/01/2026 | 0,011 | 0,028 | 0,027 | 0,025 |
+| NISAR HV (L), 08/01/2026 | 0,166 | 0,253 | **0,273** | 0,269 |
+| PALSAR-2 HV (L), 2025 | 0,114 | 0,164 | 0,177 | 0,195 |
+| SAOCOM HV (L), 10/01/2026 | 0,092 | 0,120 | 0,141 | 0,161 |
 
-En banda L el promediado recupera casi diez puntos de R², con óptimo alrededor de
-los 150 m; más allá, la ventana empieza a promediar bosque ajeno a la huella.
+En banda L el promediado recupera cerca de diez puntos de R². **Conviene destacar que
+el R² sigue subiendo más allá de los 150 m:** el máximo de NISAR cae en los 210 m
+(0,275) y PALSAR-2 y SAOCOM siguen subiendo hasta los 310 m (0,195 y 0,161). La ventana
+de 150 m, que es del orden de la huella de GEDI, se adopta igual como compromiso: más
+allá se promedia bosque ajeno a la huella.
 
 **En banda C no sube.** Su problema no es el speckle: la señal no está.
 
-**La decisión que hay que declarar:** la ventana de 150 m se eligió porque maximiza
-el R². Es una decisión, tomada con un criterio explícito, no una propiedad de la
-naturaleza.
+**La decisión que hay que declarar:** la ventana de 150 m se eligió como compromiso
+entre recuperar R² y no salirse de la huella de GEDI. En la corrida actual el R²
+sigue subiendo hasta los 210 o 310 m en varias fuentes, de modo que **el óptimo
+numérico y el óptimo defendible no coinciden**, y eso hay que decirlo en la memoria
+en lugar de esconderlo: es una decisión con criterio explícito, no una propiedad de
+la naturaleza. Quien prefiera maximizar R² debe declarar la ventana mayor y asumir
+que está promediando bosque ajeno a la huella.
 
 ## 4. La saturación: dónde deja de ver cada sensor
 
 | Altura rh95 | S1 VH (C) | NISAR HV (L) |
 |---|---|---|
-| 0–3 m | −16,19 | −14,32 |
-| 18–21 m | −16,00 | −12,22 |
-| 21–25 m | −15,63 | −11,73 |
-| 25–30 m | −15,76 | **−11,55** |
-| **Gana** | **0,53 dB** | **2,59 dB** |
+| 0–3 m | −15,65 | −13,24 |
+| 18–21 m | −15,47 | −11,47 |
+| 21–25 m | −15,12 | −11,08 |
+| 25–30 m | −15,13 | **−10,94** |
+| **Gana** | **0,52 dB** | **2,19 dB** |
 
 **La banda C es plana**: medio decibel en veinticinco metros de árbol. No es
 cuestión de filtrar mejor.
 
-**Y el resultado del curso**: donde el NDVI del TP3 se aplanó (0,896 → 0,894 sobre
-los 21 m), la banda L **sigue subiendo** (−12,22 → −11,73 → −11,55 dB). El óptico
-ya no ve; la banda L sí.
+**Y el resultado del curso**: donde el NDVI del TP3 se aplanó (0,888 a los 15–18 m,
+y después 0,879, 0,897 y 0,893), la banda L **sigue subiendo** (−11,59 → −11,47 →
+−11,08 → −10,94 dB). El óptico ya no ve; la banda L sí.
 
-Los tres sensores de banda L arrancan en valores muy distintos (−14,3, −13,7 y
-−18,6 dB) y los tres ganan ~2 dB en el mismo tramo. **Tres instrumentos
+Los tres sensores de banda L arrancan en valores muy distintos (−13,2, −13,0 y
+−18,1 dB) y los tres ganan alrededor de 2 dB en el mismo tramo. **Tres instrumentos
 independientes describiendo el mismo fenómeno**: el fenómeno es real.
 
 ## 5. La conclusión incómoda, que también hay que declarar
 
 | Sensor | Banda o índice | R² | TP |
 |---|---|---|---|
-| Sentinel-1 VH | radar C | 0,03 | TP4 |
-| NISAR HV | radar L | 0,25 | TP4 |
-| Sentinel-2 | NDMI | **0,30** | TP3 |
+| Sentinel-1 VH | radar C | 0,029 | TP4 |
+| NISAR HV | radar L | 0,273 | TP4 |
+| Sentinel-2 | NDMI | **0,310** | TP3 |
 
-La banda L es **ocho veces mejor que la C**, pero **no le gana al NDMI del óptico**.
+La banda L es **nueve veces mejor que la C**, pero **no le gana al NDMI del óptico**.
 Tres razones, y ninguna es excusa:
 
 1. **GEDI mide altura; la banda L responde a biomasa.** No son la misma variable.

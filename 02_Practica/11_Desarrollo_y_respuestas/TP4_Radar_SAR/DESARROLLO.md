@@ -11,7 +11,7 @@ corre del 6 en adelante.
 ## 1. La ejecución, paso a paso
 
     conda activate aoi
-    cd C:\Temp\CURSO_BIOMASA_2026\02_Practica\TP4_Radar_SAR\03_Scripts
+    cd C:\Temp\CURSO_BIOMASA_2026\02_Practica
 
 **Pasos 1 a 5 (ya corridos).** γ⁰ con Terrain Flattening para Sentinel-1 y
 SAOCOM (los grafos de SNAP de `08_Grafos_SNAP\` — 26 xml: 17 grafos y 9
@@ -36,18 +36,28 @@ producto L2A.
 R² del ajuste de γ⁰ contra la altura del dosel, según la ventana de
 promediado:
 
-| Fuente | 30 m | 50 m | 90 m | 150 m | 210 m | 310 m |
+| Fuente (fecha) | 30 m | 50 m | 90 m | 150 m | 210 m | 310 m |
 |---|---|---|---|---|---|---|
-| Sentinel-1 VH (banda C) | 0,011 | 0,018 | 0,023 | 0,026 | 0,028 | 0,025 |
-| NISAR HV (banda L) | 0,152 | 0,200 | 0,229 | **0,245** | 0,237 | 0,221 |
-| PALSAR-2 HV (banda L) | 0,104 | 0,122 | 0,143 | 0,153 | 0,159 | 0,159 |
-| SAOCOM HV (banda L) | 0,078 | 0,083 | 0,098 | 0,111 | 0,114 | 0,111 |
+| Sentinel-1 VH (banda C), 10/01/2026 | 0,011 | 0,018 | 0,028 | 0,027 | 0,027 | 0,025 |
+| NISAR HV (banda L), 08/01/2026 | 0,166 | 0,220 | 0,253 | **0,273** | 0,275 | 0,269 |
+| PALSAR-2 HV (banda L), 2025 | 0,114 | 0,137 | 0,164 | 0,177 | 0,188 | 0,195 |
+| SAOCOM HV (banda L), 10/01/2026 | 0,092 | 0,103 | 0,120 | 0,141 | 0,153 | 0,161 |
 | BIOMASS HV (banda P) | — | — | — | — | — | — |
 
 Dos lecturas. Por filas: en NISAR, promediar de 30 a 150 m recupera casi
-diez puntos de R² (0,152 → 0,245) que el moteado se estaba llevando; más
-allá, la ventana empieza a mezclar bosque ajeno a la huella y el valor
-vuelve a bajar — **existe un óptimo, y ronda los 150 m**. Por la fila de la
+diez puntos de R² (0,166 → 0,273) que el moteado se estaba llevando.
+
+**Conviene destacarlo, porque es donde la medición y la decisión no
+coinciden:** el R² **no** cae apenas se pasa de los 150 m. En NISAR el
+máximo cae en los 210 m (0,275) y a los 310 m todavía vale 0,269; en
+PALSAR-2 y en SAOCOM sube hasta el final de la serie (0,195 y 0,161 a
+310 m). De modo que **no hay un óptimo numérico en 150 m**: la ventana de
+150 m se adopta como **compromiso**, porque es del orden de la huella de
+GEDI (25 m de diámetro, con error de geolocalización de unos 10 m) y
+porque más allá se promedia bosque que ya no pertenece a la huella que se
+está tratando de explicar. Es una decisión declarada, con criterio
+explícito, no una propiedad de la naturaleza: si el criterio fuera
+maximizar R², la ventana sería de 210 m o más. Por la fila de la
 banda C: por más que se promedie, Sentinel-1 no pasa de 0,03 — su problema
 no era el moteado. Los guiones de BIOMASS no son ceros: son ausencia (sus
 adquisiciones son posteriores al incendio; no existe banda P del bosque en
@@ -177,11 +187,16 @@ reforzándose o cancelándose al azar. Un radar «mejor» sigue siendo
 coherente, así que dos píxeles del mismo bosque seguirán difiriendo varios
 decibeles por puro azar de fases. Lo que sí lo reduce es **promediar
 miradas independientes** (multilooking espacial): la curva medida en la
-tabla de § 2.1 lo demuestra — NISAR HV pasa de R² 0,152 con ventana de
-30 m a 0,245 con 150 m, recuperando casi diez puntos que el moteado
-ocultaba — y también muestra el costo: más allá del óptimo (~150 m aquí),
-la ventana promedia bosque que ya no pertenece a la huella y el R² vuelve a
-caer. Se promedia con criterio medido, no por costumbre.
+tabla de § 2.1 lo demuestra — NISAR HV pasa de R² 0,166 con ventana de
+30 m a 0,273 con 150 m, recuperando casi diez puntos que el moteado
+ocultaba. **Y también muestra el costo, que no es el que uno esperaría:**
+en esta corrida el R² no cae al pasar de 150 m (en NISAR el máximo está en
+210 m, y en PALSAR-2 y SAOCOM sigue subiendo hasta 310 m). El límite no lo
+pone la curva sino la huella: con ventanas mayores se promedia bosque que
+ya no pertenece a la huella de GEDI que se quiere explicar, y el R² sube
+por una razón que no es la que interesa. Por eso se adopta 150 m como
+compromiso y **se declara la decisión**. Se promedia con criterio medido,
+no por costumbre.
 
 **P2. La banda C no supera un R² de 0,03 por más que se promedie. ¿Qué le
 falta a la banda C, y por qué la banda L sí lo consigue?**
@@ -260,6 +275,73 @@ banda. La biomasa L2 de banda P está calendarizada para 2027; cuando
 llegue, la fila de guiones de la tabla de § 2.1 deberá ser la de mayor
 contraste de todas, y este práctico deberá reescribirse.
 
+**P7. La combinación de las órbitas ascendente y descendente de NISAR
+agrega muy pocas celdas con dato y, sin embargo, revela una diferencia
+sistemática entre geometrías. Explique por qué ocurren ambas cosas,
+indique qué procedimiento permite distinguir esa diferencia del moteado, y
+por qué el promedio de las dos órbitas debe calcularse en potencia lineal
+y no en decibeles.**
+
+**Por qué aporta tan poca cobertura.** Un producto GCOV llega con la
+corrección radiométrica de terreno ya aplicada y con la máscara de la
+misión puesta, de modo que casi no deja huecos que rellenar: sobre el
+recinto de bosque cada órbita tiene dato en el 99,97 % de las celdas, y la
+fusión agrega **574 celdas de 2.250.000**, el 0,03 %; sobre la estepa,
+tres. La segunda geometría sólo rellena donde la primera quedó en sombra y
+ella mira desde el lado correcto, y eso aquí casi no ocurrió. Quien espere
+ver aparecer laderas enteras que una órbita no medía, no las va a
+encontrar en estos productos.
+
+**Por qué sí aparece una diferencia sistemática.** Son dos preguntas
+distintas: no cuántas celdas tienen dato, sino cuánto cambia el valor
+medido según desde dónde se mire. La retrodispersión depende del ángulo
+entre el haz y la superficie, y con relieve ese ángulo cambia con la
+órbita. La diferencia **crece con la pendiente** —de 2,06 dB de mediana
+entre 0 y 5° a 3,19 dB por encima de 30°, en el bosque— y **cambia de
+signo con la orientación de la ladera**: sobre pendientes de más de quince
+grados, las que miran al oeste las mide 1,54 dB más alto la ascendente, y
+las que miran al este, 0,75 dB más alto la descendente. Cada órbita lee
+mejor la ladera que le da la cara. Por eso el sesgo general también
+invierte el signo entre recintos: en el bosque la ascendente mide 0,36 dB
+por encima, y en la estepa la descendente mide 0,79 por encima.
+
+**Cómo se separa del moteado.** Promediando la diferencia en ventanas cada
+vez más grandes. El moteado baja con la raíz del número de celdas
+promediadas; lo que no baja de ese modo es estructura del terreno.
+
+| Ventana | Desviación típica medida | Si fuera sólo moteado |
+|---|---|---|
+| 10 m | 3,40 dB | 3,40 dB |
+| 30 m | 1,87 dB | 1,13 dB |
+| 100 m | 1,08 dB | 0,34 dB |
+| 300 m | **0,72 dB** | 0,11 dB |
+
+A diez metros la cifra no dice nada sobre la geometría: los 3,40 dB son
+del orden de los 2,79 que predice la estadística para las 4,8 vistas del
+producto. A trescientos metros, en cambio, el moteado ya debería haber
+caído a 0,11 dB y todavía quedan 0,72. Eso ya no es ruido: el 17,2 % de
+esas celdas se aparta más de un decibel en el bosque, y el 35,2 % en la
+estepa.
+
+**Por qué el promedio va en potencia lineal.** El decibel es un logaritmo,
+y promediar logaritmos equivale a la media geométrica de las potencias:
+tira el resultado hacia el valor más bajo y no corresponde a ninguna
+magnitud física. Se promedian las potencias y recién después se pasa a
+decibeles con 10·log₁₀. Donde una sola de las dos órbitas tiene dato, la
+fusión usa esa y no promedia nada.
+
+**Lo que la combinación no arregla.** Baja el moteado, porque son dos
+adquisiciones independientes —el HV pasa de 2,26 y 2,28 dB a 1,72 en el
+bosque, una razón de 0,76 contra el 0,71 que predice promediar dos
+escenas—, y deja legible el relieve abrupto, donde las dos órbitas
+discrepan hasta 8,55 dB. Pero no corrige la geometría: donde hubo layover
+los dos ecos llegaron ya sumados en la misma celda y ninguna media los
+separa, y el acortamiento sigue comprimiendo la ladera. La prueba está en
+las propias cifras: si el promedio corrigiera el problema, la diferencia
+residual a trescientos metros no seguiría creciendo con la pendiente. Para
+eso está la máscara de validez del paso 5, que no arregla nada pero dice
+dónde no hay que medir.
+
 ## 5. De dónde sale cada cifra
 
 Las tablas de los pasos 6 a 8 en `05_Resultados\04_Tablas\` (curva de
@@ -268,4 +350,9 @@ de validez y sus porcentajes, del paso 5 (`04_Validacion\`); el piso de
 ruido del SAOCOM, del análisis del paso 7 sobre la estepa; el estado de la
 colección BIOMASS, de `06_Control_calidad\CONSULTA_BIOMASS.log` del TP2 y
 del calendario oficial reproducido en la guía general (capítulo 6, Tablas
-26 a 30). Las cifras citadas coinciden con las de ese capítulo.
+26 a 30). Las cifras citadas coinciden con las de ese capítulo. Las de la
+combinación de órbitas de NISAR —cobertura agregada, diferencia por
+ventana, por pendiente y por orientación de ladera, y moteado— salen de
+la corrida de `TP4_03c_nisar_post_y_fusion.py` sobre los dos recortes de
+agosto de 2026, y están reunidas en
+`00_Guia_del_practico\ANEXO_NISAR_fusion_ASC_DES.md`.

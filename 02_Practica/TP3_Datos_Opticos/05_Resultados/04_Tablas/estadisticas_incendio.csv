@@ -1,0 +1,19 @@
+aoi,clase_severidad,rango_dNBR,pixeles,porcentaje,hectareas
+BOSQUE_NW_02,Regeneracion alta,< -0.250,828,0.04,8.3
+BOSQUE_NW_02,Regeneracion baja,-0.250 a -0.100,25696,1.14,257.0
+BOSQUE_NW_02,Sin cambio,-0.100 a 0.100,417070,18.58,4170.7
+BOSQUE_NW_02,Severidad baja,0.100 a 0.270,184285,8.21,1842.8
+BOSQUE_NW_02,Severidad moderada-baja,0.270 a 0.440,282562,12.59,2825.6
+BOSQUE_NW_02,Severidad moderada-alta,0.440 a 0.660,367202,16.36,3672.0
+BOSQUE_NW_02,Severidad alta,> 0.660,966866,43.08,9668.7
+BOSQUE_NW_02,TOTAL QUEMADO,dNBR >= 0.100,1800915,80.24,18009.2
+BOSQUE_NW_02,TOTAL QUEMADO (% del recinto),dNBR >= 0.100,1800915,80.04,18009.2
+ESTEPA_NW_02,Regeneracion alta,< -0.250,29,0.00,0.3
+ESTEPA_NW_02,Regeneracion baja,-0.250 a -0.100,37715,1.69,377.1
+ESTEPA_NW_02,Sin cambio,-0.100 a 0.100,2158375,96.47,21583.8
+ESTEPA_NW_02,Severidad baja,0.100 a 0.270,39697,1.77,397.0
+ESTEPA_NW_02,Severidad moderada-baja,0.270 a 0.440,1554,0.07,15.5
+ESTEPA_NW_02,Severidad moderada-alta,0.440 a 0.660,89,0.00,0.9
+ESTEPA_NW_02,Severidad alta,> 0.660,9,0.00,0.1
+ESTEPA_NW_02,TOTAL QUEMADO,dNBR >= 0.100,41349,1.85,413.5
+ESTEPA_NW_02,TOTAL QUEMADO (% del recinto),dNBR >= 0.100,41349,1.84,413.5

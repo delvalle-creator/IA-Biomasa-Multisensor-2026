@@ -21,5 +21,5 @@ Estimar biomasa con datos ópticos y **medir hasta dónde llega** esa estimació
 
 ## Advertencia metodológica
 Las capas categóricas (SCL, coberturas) se remuestrean **siempre** por vecino más
-cercano: interpolar etiquetas crea clases que no existen. Ver el anexo en
-`07_Preguntas_y_entrega/04_Anexos/`.
+cercano: interpolar etiquetas crea clases que no existen. Ver el anexo
+`00_Guia_del_practico/ANEXO_mapas_forestales_Chubut.md`.

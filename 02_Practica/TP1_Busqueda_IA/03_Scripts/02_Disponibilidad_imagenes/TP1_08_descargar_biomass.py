@@ -7,23 +7,27 @@ Descarga imagenes BIOMASS (ESA, radar banda P) recortadas por AOI desde el
 catalogo STAC de ESA MAAP. Es la contraparte de banda P del bloque de radar:
 Sentinel-1 (banda C), NISAR/ALOS (banda L) y aqui BIOMASS (banda P).
 
-A diferencia de los otros satelites, BIOMASS EXIGE un token de la ESA. El
-procedimiento completo (crear la cuenta "EO Sign In" y generar el token
-offline) esta en C:\\Temp\\BIOMASS\\04_Informe\\TUTORIAL_paso_a_paso.docx.
-Este script es la version integrada al TP1 del que vive en esa carpeta.
+A diferencia de los otros satelites, BIOMASS EXIGE un token de la ESA para
+DESCARGAR. El procedimiento (crear la cuenta "EO Sign In" en ESA MAAP y generar
+el token offline) se explica en la guia teorico-practica, capitulo 3. Para
+BUSCAR y listar no hace falta ningun token ni ninguna clave.
 
 Como pasar el token (una de las dos):
   - variable de entorno:   set BIOMASS_TOKEN=<tu_token_offline>
   - o exportarlo antes:  set BIOMASS_TOKEN=...   (NUNCA pegarlo en el codigo)
-Sin token, el script SOLO busca y lista (no descarga).
+Con el token hace falta ademas el client_secret de ESA MAAP: se toma de la
+variable BIOMASS_CLIENT_SECRET o el script lo pide al arrancar. Sin token, el
+script SOLO busca y lista (no descarga) y no pide nada.
 
-USO (entorno conda 'aoi', con pystac-client instalado):
-  pip install pystac-client requests shapely      (una sola vez)
+USO (entorno conda 'aoi', que ya trae pystac-client y requests):
   python TP1_08_descargar_biomass.py
 
 Cada producto se guarda en:
   08_Originales_crudos/<epoca>/BIOMASS/<AOI>/<coleccion>/
-Usar los productos 1S (traen la imagen SAR); los 1M son livianos sin imagen.
+Se descargan los productos 1S de nivel 1 (traen la imagen SAR); los 1M son
+livianos, sin imagen. Los de nivel 2A (FP_FH__L2A, altura; FP_GN__L2A) se CUENTAN
+y se informan, pero no se descargan desde aqui: para verlos en detalle esta
+buscar_biomass_L2.py (TP4, atajo EJECUTAR_consulta_BIOMASS.bat).
 Abrir las imagenes con ESA SNAP 13+ (Microwave Toolbox).
 
 SIGUIENTE PASO:  python TP1_09_inventario.py
@@ -36,7 +40,7 @@ try:
     import requests
     from pystac_client import Client
 except ImportError:
-    sys.exit("Falta requests o pystac-client. Ejecute: pip install pystac-client requests shapely")
+    sys.exit("Falta requests o pystac-client. Active el entorno conda 'aoi'.")
 
 AQUI = os.path.dirname(os.path.abspath(__file__))
 PROYECTO = os.path.abspath(os.path.join(AQUI, "..", "..", ".."))
@@ -59,8 +63,15 @@ from configuracion_comun import AOIS_WGS84, DESCARGAS_ORIGINALES, epoca_de  # no
 OFFLINE_TOKEN = os.environ.get("BIOMASS_TOKEN", "").strip()
 TOKEN_URL = "https://iam.maap.eo.esa.int/realms/esa-maap/protocol/openid-connect/token"
 CLIENT_ID = "offline-token"
-CLIENT_SECRET = (os.environ.get("BIOMASS_CLIENT_SECRET", "").strip()
-                 or getpass.getpass("client_secret de ESA MAAP: "))
+# El client_secret solo hace falta para canjear el token (es decir, para
+# descargar). Antes se pedia siempre, aun sin token, y el alumno se encontraba
+# con una pregunta sin explicacion. Corregido el 11/09/2026.
+CLIENT_SECRET = os.environ.get("BIOMASS_CLIENT_SECRET", "").strip()
+if OFFLINE_TOKEN and not CLIENT_SECRET:
+    print("Hay token de BIOMASS (variable BIOMASS_TOKEN): para descargar hace falta")
+    print("tambien el client_secret de ESA MAAP. Escribalo (no se muestra en pantalla)")
+    print("o deje vacio y pulse Enter para solo buscar y listar.")
+    CLIENT_SECRET = getpass.getpass("client_secret de ESA MAAP: ").strip()
 # Regla 8 del README: no se guardan secretos en 03_Scripts. Se toma de la
 # variable de entorno BIOMASS_CLIENT_SECRET o se pide al ejecutar.
 
@@ -73,7 +84,7 @@ MAX_POR_AOI = None
 
 
 def obtener_access_token():
-    if not OFFLINE_TOKEN:
+    if not OFFLINE_TOKEN or not CLIENT_SECRET:
         return ""
     r = requests.post(TOKEN_URL, data={
         "client_id": CLIENT_ID, "client_secret": CLIENT_SECRET,
@@ -137,6 +148,19 @@ def main():
                 s = catalogo.search(collections=[col], bbox=bbox,
                                     datetime=[FECHA_INICIO, FECHA_FIN], max_items=300)
                 items = list(s.items())
+                # El filtro 1S es para el NIVEL 1. Los de nivel 2A no son 1S
+                # (se llaman FP_FH__L2A, FP_GN__L2A): antes el filtro los
+                # descartaba todos y la pantalla decia "0 producto(s) 1S", que
+                # el alumno leia como "no hay nivel 2A". Ahora se cuentan y se
+                # informan, y no se descargan. Corregido el 11/09/2026.
+                if col.endswith("2a"):
+                    print("   %s: %d producto(s) de nivel 2A (se listan, no se descargan;"
+                          " detalle en buscar_biomass_L2.py)" % (col, len(items)))
+                    for it in items[:5]:
+                        print("      ", it.id)
+                    if len(items) > 5:
+                        print("       ... y %d mas" % (len(items) - 5))
+                    continue
                 if SOLO_1S:
                     items = [it for it in items if es_1S(it)]
                 print("   %s: %d producto(s) 1S" % (col, len(items)))

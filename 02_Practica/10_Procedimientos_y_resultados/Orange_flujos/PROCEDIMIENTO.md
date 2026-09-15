@@ -1,12 +1,17 @@
 # Flujos de Orange Data Mining (.ows) — construcción y validación
 
-**Proceso del 26/08/2026 · generados programáticamente y validados contra
-Orange 3.39.0 y 3.40.0**
+**Generados programáticamente y validados contra Orange 3.39.0 y 3.40.0**
 
 ## Qué se construyó
 
-Cuatro flujos con **parámetros fijados** (rutas relativas y variables
-preseleccionadas), para que calcular y graficar no exija armar nada:
+Cuatro flujos con **parámetros fijados** —rutas relativas, y las variables de
+cada gráfico preseleccionadas—, para que calcular y graficar no exija armar
+nada. La única excepción es el widget **Correlaciones**, que aparece en dos de
+los flujos y queda sin variable de referencia: hay que elegirla en pantalla,
+y el título del widget en el lienzo dice cuál. Tampoco quedan guardadas las
+opciones de dibujo de los gráficos (recta de ajuste, tamaño del punto,
+desplazamiento aleatorio, transparencia), que se encienden a mano. El LEEME de
+cada carpeta `09_Orange` lleva la tabla completa, widget por widget.
 
 | Flujo | Dónde vive | Qué muestra |
 |---|---|---|

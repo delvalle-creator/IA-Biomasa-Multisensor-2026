@@ -59,7 +59,7 @@ estaba sano; la imagen estaba sucia.
 
 | Escena pre | Píxeles válidos | Superficie quemada |
 |---|---|---|
-| 09/01/2026 (con humo del incendio) | 92,3 % | 16.463,1 ha (79,3 %) |
+| 09/01/2026 (con humo del incendio) | 92,3 % | 16.502 ha (79,4 %) |
 | 25/11/2025 (limpia) | 99,8 % | 18.009,2 ha (80,2 %) |
 
 Menos de un punto porcentual, porque el NBR usa las bandas que la bruma casi no

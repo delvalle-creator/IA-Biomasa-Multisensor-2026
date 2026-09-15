@@ -105,7 +105,7 @@ de casi el triple, no de un margen. Informe siempre las dos cifras juntas.
 Nótese además que la diferencia pareada (mediana de las diferencias celda a
 celda) y la diferencia de las medianas no coinciden: en el bosque dan 3,82 m y
 10,58 m. No es un error de cálculo, es que las diferencias por celda están muy
-dispersas, entre 0,07 y 16,7 m. **La cifra que corresponde informar es la
+dispersas, entre −11,40 y 16,70 m. **La cifra que corresponde informar es la
 pareada**, porque cada celda es una comparación sobre el mismo terreno.
 
 Una discrepancia de este tamaño obliga a una pregunta que el proyecto no puede

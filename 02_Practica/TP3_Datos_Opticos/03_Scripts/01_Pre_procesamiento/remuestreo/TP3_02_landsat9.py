@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-13_landsat9.py
+TP3_02_landsat9.py
 Descarga Landsat 9 (OLI-2) Coleccion 2 Nivel-2 -reflectancia de superficie ya
 corregida atmosfericamente, 30 m- y lo recorta a los dos AOI, en DOS versiones:
 
@@ -27,7 +27,7 @@ Se elige, en cada epoca, la escena Landsat 9 de MENOR nubosidad sobre el AOI.
 Landsat 9 se lanzo en septiembre de 2021, de modo que NO cubre la epoca
 historica 2007-2010.
 
-USO (entorno conda 'aoi'):   python 13_landsat9.py
+USO (entorno conda 'aoi'):   python TP3_02_landsat9.py
 """
 import json
 import os
@@ -80,6 +80,26 @@ EPOCAS = {
     "03_post": ("2026-02-27", "2026-04-20"),   # se apaga el 27/02
 }
 MAX_NUBES = 60        # % maximo de nubosidad de escena aceptable
+
+# Carpeta REAL de cada epoca en 02_Subsets_SNAP_QGIS/Landsat_8_9. Antes se usaba
+# la clave corta (01_base, 02_pre, 03_post) como nombre de carpeta: el script no
+# reconocia las escenas ya descargadas y las volvia a bajar en carpetas nuevas,
+# duplicadas. Corregido el 11/09/2026.
+CARPETA = {"01_base": "01_linea_base_2023_24",
+           "02_pre": "02_pre_incendio_2025_26",
+           "03_post": "03_post_incendio_2026"}
+
+
+def escena_existente(epoca, aoi):
+    """Devuelve el nombre de la escena Landsat 9 ya recortada, o None."""
+    d = os.path.join(PROCESADOS, "Landsat_8_9", CARPETA.get(epoca, epoca), aoi)
+    if not os.path.isdir(d):
+        return None
+    for f in sorted(os.listdir(d)):
+        if f.startswith("LC09_") and f.endswith(".tif") and "_QA" not in f \
+                and "nativo" not in f:
+            return f
+    return None
 
 
 def bbox_union():
@@ -159,7 +179,7 @@ def procesar_aoi(item, token, aoi, epoca):
     fecha = item["properties"]["datetime"][:10].replace("-", "")
     nubes = item["properties"].get("eo:cloud_cover", -1)
     corto = "LC09_%s" % fecha
-    outdir = os.path.join(PROCESADOS, "Landsat_8_9", epoca, aoi)
+    outdir = os.path.join(PROCESADOS, "Landsat_8_9", CARPETA.get(epoca, epoca), aoi)
     os.makedirs(outdir, exist_ok=True)
     nat = os.path.join(outdir, corto + "_nativo30m.tif")
     com = os.path.join(outdir, corto + ".tif")
@@ -199,19 +219,32 @@ def procesar_aoi(item, token, aoi, epoca):
 
 
 print(__doc__)
-token = requests.get(SAS, timeout=60).json()["token"]
-print("Token de acceso obtenido (Planetary Computer, sin credenciales).\n")
+token = None      # se pide recien cuando hay algo que descargar
 
 for epoca, (desde, hasta) in EPOCAS.items():
     print("=" * 72)
     print("%s   (busqueda %s a %s)" % (epoca, desde, hasta))
+    # Si los dos recintos ya tienen su escena, no se busca ni se descarga nada:
+    # asi el alumno no pisa ni duplica los recortes que vienen con el curso.
+    ya = {aoi: escena_existente(epoca, aoi) for aoi in AOIS_UTM}
+    if all(ya.values()):
+        for aoi, f in ya.items():
+            print("     %s: ya esta %s, se omite" % (aoi, f))
+        continue
+    if token is None:
+        token = requests.get(SAS, timeout=60).json()["token"]
+        print("Token de acceso obtenido (Planetary Computer, sin credenciales).\n")
     item = buscar_mejor_escena(desde, hasta)
     if not item:
         print("   sin escenas Landsat 9 con nubosidad < %d%% en esta ventana" % MAX_NUBES)
         continue
     for aoi in AOIS_UTM:
+        if ya[aoi]:
+            # ese recinto ya tiene su escena: no se le agrega otra
+            print("     %s: ya esta %s, se omite" % (aoi, ya[aoi]))
+            continue
         procesar_aoi(item, token, aoi, epoca)
-print("\nListo. Salida en 04_Tablas_de_trabajo/<epoca>/<AOI>/LANDSAT9/")
+print("\nListo. Salida en 02_Subsets_SNAP_QGIS/Landsat_8_9/<epoca>/<AOI>/")
 print("  LC09_<fecha>.tif            reflectancia, grilla comun 10 m (bilineal)")
 print("  LC09_<fecha>_nativo30m.tif  reflectancia, resolucion nativa 30 m")
 print("  ..._QA.tif                  banda de calidad QA_PIXEL (vecino mas cercano)")

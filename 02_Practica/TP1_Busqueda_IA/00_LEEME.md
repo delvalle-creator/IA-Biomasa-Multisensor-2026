@@ -18,7 +18,7 @@ a la IA hasta los resultados. Las únicas carpetas vacías son las que deben est
 | `03_Scripts/` | Los diez scripts, numerados en orden de ejecución, más configuración y funciones de apoyo | 17 |
 | `04_Tablas_de_trabajo/` | El TP1 no produce subconjuntos; ver su LEEME | 1 |
 | `05_Resultados/` | La matriz de datos y la línea de tiempo | 2 |
-| `06_Bibliografia/` | Artículos, manuales, fichas de los siete sensores y enlaces | 5 |
+| `06_Bibliografia/` | Artículos, manuales, fichas de los ocho sensores y enlaces | 5 |
 | `07_Preguntas_y_entrega/` | La tabla maestra de sensores. **Aquí deja el estudiante sus respuestas y su entrega** | 2 |
 | `08_Grafos_SNAP/` | Este práctico no usa grafos de SNAP | 0 |
 | | Los tres archivos de la raíz: presentación, notas técnicas y de dónde salen los insumos | 3 |
@@ -64,7 +64,7 @@ Las tres reglas están medidas, no supuestas:
 
 - 6 gránulos NISAR prometían 69–76 % de cobertura y tenían **15 %** real. **12 GB
   de descarga inútil** que se habrían evitado verificando primero.
-- La escena del 09/01/2026 declaraba 0,4 % de nubes y tenía el azul **6,7 veces**
+- La escena del 09/01/2026 declaraba 7,4 % de nubes y tenía el azul **6,7 veces**
   por encima de lo normal del sitio.
 - Landsat 9, cinco días antes, daba NDVI 0,78 donde Sentinel-2 daba 0,34. **Dos
   sensores independientes en desacuerdo: ahí hay que ir a mirar.**
@@ -74,7 +74,7 @@ Las tres reglas están medidas, no supuestas:
 - **No hay `04_Tablas_de_trabajo`**: el TP1 no produce subconjuntos, sólo busca y evalúa. Los
   recortes empiezan en el TP3.
 - **No hay rásters ni modelos**: este práctico produce decisiones y tablas.
-- **Banda S de NISAR: confirmada SIN cobertura sobre los AOI (23/07/2026).** Se
+- **Banda S de NISAR: confirmada SIN cobertura sobre los AOI.** Se
   distribuye por Bhoonidhi (ISRO), no por la NASA; su producción arrancó el
   08/07/2026. La búsqueda sobre BOSQUE y ESTEPA devuelve **0 escenas**: la banda S
   se adquiere sobre la India. NovaSAR-1 (banda S) tampoco cubre la zona y además es

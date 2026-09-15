@@ -25,4 +25,4 @@ Popescu, S. C., Nelson, R. F., Harding, D., Pederson, D., Klotz, B., & Sheridan,
 [Conjunto de datos]. Boulder, Colorado, EE. UU.: NASA National Snow and Ice Data
 Center Distributed Active Archive Center. https://doi.org/10.5067/ATLAS/ATL08.007
 
-*(Cita verificada el 21/08/2026 contra https://nsidc.org/data/atl08/versions/7)*
+*(Cita verificada contra https://nsidc.org/data/atl08/versions/7)*

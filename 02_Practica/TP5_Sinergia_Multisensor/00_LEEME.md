@@ -16,7 +16,7 @@
 | `03_Scripts/` | Los programas, numerados en orden de ejecución, y el archivo que fija ese orden | 13 |
 | `04_Tablas_de_trabajo/` | Las tablas `.csv` intermedias: muestras, entrenamiento y validación | 5 |
 | `05_Resultados/` | Lo que sale: rásteres, vectores, tablas y gráficos | 40 |
-| `06_Bibliografia/` | Artículos, manuales, fichas técnicas y enlaces | 5 |
+| `06_Bibliografia/` | Artículos y manuales (este práctico no lleva fichas de sensores ni enlaces propios) | 5 |
 | `07_Preguntas_y_entrega/` | **Aquí deja el estudiante sus respuestas y su entrega** | 3 |
 | `08_Grafos_SNAP/` | Este práctico no usa grafos de SNAP | 0 |
 | `09_Orange/` | El flujo de Orange Data Mining del dataset multisensor (ópticos y radar contra la biomasa GEDI), con su LEEME | 2 |
@@ -66,12 +66,12 @@ más que el primero. Mejorar el modelo de altura no mejoraría gran cosa el mapa
 
 | Sensor | Banda o índice | R² contra la altura del dosel | Dónde falla |
 |---|---|---|---|
-| Sentinel-1 VH | radar, banda C | 0,03 | No ve la biomasa: gana 0,53 dB en 25 m de árbol |
-| Sentinel-2 | NDVI | 0,19 | **Satura a los 21 m** |
-| Sentinel-2 | EVI | 0,20 | Satura un poco más tarde |
-| NISAR HV | radar, banda L | 0,25 | Moteado; y responde a biomasa, no a altura |
-| Sentinel-2 | NBR | 0,27 | Satura |
-| Sentinel-2 | **NDMI** | **0,30** | El mejor, y no llega a un tercio |
+| Sentinel-1 VH | radar, banda C | 0,029 | No ve la biomasa: gana 0,52 dB en 25 m de árbol |
+| Sentinel-2 | EVI | 0,215 | Se aplana con el dosel cerrado |
+| Sentinel-2 | NDVI | 0,235 | **Satura a partir de los 15–18 m** |
+| NISAR HV | radar, banda L | 0,273 | Moteado; y responde a biomasa, no a altura |
+| Sentinel-2 | NBR | 0,291 | Satura |
+| Sentinel-2 | **NDMI** | **0,310** | El mejor, y apenas llega a un tercio |
 
 **Ninguno alcanza solo**, y ése era el argumento para combinarlos. Lo que el
 práctico agrega es la medición de cuánto rinde efectivamente esa combinación, que
@@ -93,5 +93,5 @@ presentarse como una medición de biomasa.** Está dicho en el informe, no escon
   **Cuidado:** renombrar el archivo del script rompe
   `09_ATAJOS\EJECUTAR_TP5_desde_modelos.bat` y `00_ORDEN_DE_EJECUCION.md`; hay que cambiar los
   tres a la vez.
-- Volver a correr `TP4_05_mascara_validez.py`, que ahora escribe una máscara por
+- Volver a correr `TP4_05_mascara_validez.py`, que escribe una máscara por
   recinto, para que el paso 5 aplique la que corresponde a cada sitio.

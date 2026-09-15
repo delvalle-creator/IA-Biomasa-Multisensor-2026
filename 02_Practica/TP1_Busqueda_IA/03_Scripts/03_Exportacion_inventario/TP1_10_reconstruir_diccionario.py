@@ -51,6 +51,13 @@ def fecha_saocom(xemt):
     return "".join(m.groups()) if m else "00000000"
 
 
+def existe_producto(carpeta, corto):
+    """True si el producto procesado esta, como .dim de SNAP o como GeoTIFF.
+    Sentinel-2 queda recortado como .tif, no como .dim."""
+    return bool(carpeta) and any(os.path.exists(os.path.join(carpeta, corto + ext))
+                                 for ext in (".dim", ".tif"))
+
+
 def escribir(destino, filas, etiqueta):
     ruta = os.path.join(destino, nombres.CSV_DICCIONARIO)
     if not filas:
@@ -81,7 +88,7 @@ for epoca in EPOCAS:
             original = os.path.basename(z)[:-4]
             corto, fecha = nombres.corto_sentinel2(original)
             d = dir_procesado("S2_L2A", epoca, aoi)
-            if d and os.path.exists(os.path.join(d, corto + ".dim")):
+            if existe_producto(d, corto):
                 proc.append([corto, aoi, "S2_L2A", fecha, original,
                              os.path.basename(z)])
             else:
@@ -94,7 +101,7 @@ for epoca in EPOCAS:
                 original = os.path.basename(z)[:-4]
                 corto, fecha = nombres.corto_sentinel1(original)
                 d = dir_procesado(sensor, epoca, aoi)
-                if d and os.path.exists(os.path.join(d, corto + ".dim")):
+                if existe_producto(d, corto):
                     proc.append([corto, aoi, sensor, fecha, original,
                                  os.path.basename(z)])
                 else:
@@ -112,7 +119,7 @@ for epoca in EPOCAS:
         corto, fecha = nombres.corto_saocom(original, fecha_saocom(x))
         for aoi in AOIS_UTM:
             d = dir_procesado("SAOCOM_L1A", epoca, aoi)
-            if d and os.path.exists(os.path.join(d, corto + ".dim")):
+            if existe_producto(d, corto):
                 proc.append([corto, aoi, "SAOCOM_L1A", fecha, original,
                              os.path.basename(x)])
             else:

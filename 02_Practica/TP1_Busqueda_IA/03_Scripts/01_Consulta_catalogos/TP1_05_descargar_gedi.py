@@ -108,5 +108,8 @@ for aoi, bbox in AOIS.items():
 print("\nListo. Los .h5 quedaron en:")
 print("   " + os.path.join(DESCARGAS, EPOCA, "GEDI"))
 print("   " + os.path.join(DESCARGAS, EPOCA, "ICESat2"))
-print("Ejecutar despues TP1_06_alos_nisar_informe.py para extraer los disparos")
-print("(shots) que caen dentro de cada AOI.")
+# Corregido el 14/09/2026: este mensaje remitia a TP1_06_alos_nisar_informe.py,
+# que informa y descarga ALOS-1 y NISAR y no extrae ningun disparo. Los disparos
+# que caen dentro de cada AOI los extrae TP2_02_recortar_AOI.py, en el TP2.
+print("Ejecutar despues TP2_02_recortar_AOI.py, en el TP2, para extraer los")
+print("disparos (shots) que caen dentro de cada AOI.")

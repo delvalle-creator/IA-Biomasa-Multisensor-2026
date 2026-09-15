@@ -55,8 +55,8 @@ presentarse como una medición de biomasa.**
 ## Paso 6: la validación estricta
 
     conda activate aoi
-    cd C:\Temp\CURSO_BIOMASA_2026\02_Practica\TP5_Sinergia_Multisensor\03_Scripts\03_Analisis
-    python TP5_06_validacion_estricta.py
+    cd C:\Temp\CURSO_BIOMASA_2026\02_Practica
+    python TP5_Sinergia_Multisensor\03_Scripts\03_Analisis\TP5_06_validacion_estricta.py
 
 Produce cuatro tablas en `05_Resultados\04_Tablas`: la validación cruzada
 espacial anidada, el área de aplicabilidad, la propagación conjunta de la

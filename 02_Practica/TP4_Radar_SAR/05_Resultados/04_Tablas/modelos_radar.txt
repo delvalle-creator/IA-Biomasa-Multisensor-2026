@@ -1,0 +1,10 @@
+Ajustes gamma0 -> altura del dosel (rh95), bosque, ventana 150 m
+==========================================================================
+S1 VH: altura = 1.26 * gamma0_dB + 29.46 | R2 = 0.029 | RMSE = 7.42 m | n = 914
+S1 VV: altura = 1.99 * gamma0_dB + 29.03 | R2 = 0.064 | RMSE = 7.29 m | n = 914
+SAOCOM HV: altura = 1.51 * gamma0_dB + 36.66 | R2 = 0.141 | RMSE = 6.98 m | n = 914
+NISAR HH: altura = 2.46 * gamma0_dB + 28.20 | R2 = 0.276 | RMSE = 6.41 m | n = 914
+NISAR HV: altura = 2.15 * gamma0_dB + 37.46 | R2 = 0.273 | RMSE = 6.42 m | n = 914
+PALSAR2 HV: altura = 1.55 * gamma0_dB + 29.40 | R2 = 0.177 | RMSE = 6.83 m | n = 914
+
+GEDI mide ALTURA; la banda L responde a BIOMASA. No son la misma variable.

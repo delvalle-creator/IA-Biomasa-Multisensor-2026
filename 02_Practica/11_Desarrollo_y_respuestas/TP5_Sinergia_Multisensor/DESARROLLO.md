@@ -10,7 +10,7 @@ auxiliar de diagnóstico (`03_Scripts\00_ORDEN_DE_EJECUCION.md`).
 ## 1. La ejecución, paso a paso
 
     conda activate aoi
-    cd C:\Temp\CURSO_BIOMASA_2026\02_Practica\TP5_Sinergia_Multisensor\03_Scripts
+    cd C:\Temp\CURSO_BIOMASA_2026\02_Practica
 
 **Paso 1** (`TP5_01_dataset.py`) arma el dataset por huella y **hereda la
 partición del TP2** — no la rehace (véase la P5 del TP2). El registro de la

@@ -1,0 +1,4 @@
+producto,sensor,fecha,magnitud,fuente_formula,pendiente,R2,RMSE,n
+SAOCOM\03_post_incendio_2026\BOSQUE_NW_02\SAOCOM_L1A\SAO1B_L1A_20260227_14489260.dim,SAOCOM,20260227,RVI_dual_HH_HV,Trudel et al. (2012),0.00717,0.1608,0.1234,914
+Sentinel_1\03_post_incendio_2026\BOSQUE_NW_02\S1_GRD\S1A_IW_GRD_20260227_063411_R164_6569.dim,Sentinel_1,20260227,RVI_dual_VV_VH,Trudel et al. (2012),0.00897,0.1891,0.1400,914
+Sentinel_1\03_post_incendio_2026\BOSQUE_NW_02\S1_SLC\S1A_IW_SLC_20260227_063411_R164_93A9.dim,Sentinel_1,20260227,RVI_dual_VV_VH,Trudel et al. (2012),0.00632,0.0992,0.1434,914

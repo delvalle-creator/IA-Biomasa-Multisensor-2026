@@ -1,7 +1,8 @@
 # Un área grande para mostrar en clase
 
-**02/08/2026.** Escrito a partir de la pregunta: los productos se ven pixelados
-por el tamaño de nuestros recintos, ¿se puede tomar un área mucho más grande?
+Esta nota responde a una pregunta que aparece siempre en clase: los productos
+se ven pixelados por el tamaño de nuestros recintos, ¿se puede tomar un área
+mucho más grande?
 
 ## La respuesta corta: no hace falta bajar nada más
 

@@ -110,4 +110,19 @@
     </parameters>
   </node>
 
+  <applicationData id="Presentation">
+    <Description/>
+    <node id="Read">
+      <displayPosition x="15.0" y="20.0"/>
+    </node>
+    <node id="BandMaths">
+      <displayPosition x="220.0" y="20.0"/>
+    </node>
+    <node id="Reproject">
+      <displayPosition x="425.0" y="20.0"/>
+    </node>
+    <node id="Write">
+      <displayPosition x="630.0" y="20.0"/>
+    </node>
+  </applicationData>
 </graph>

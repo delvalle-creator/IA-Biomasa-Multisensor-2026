@@ -85,7 +85,7 @@ curso, no un fracaso.
 atmósfera. Va de 0 a 1. Es lo que este proyecto usa (productos L2A y L2).
 
 **NDVI** — `(NIR − ROJO) / (NIR + ROJO)`. El más conocido. **Satura pronto**: en
-estos sitios se aplana a los 21 m de dosel.
+estos sitios se aplana a partir de los 15 a 18 m de dosel.
 
 **EVI** — NDVI mejorado; corrige suelo de fondo y aerosol, y satura algo más tarde.
 

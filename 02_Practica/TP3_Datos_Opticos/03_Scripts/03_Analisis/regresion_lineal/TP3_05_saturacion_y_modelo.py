@@ -43,7 +43,7 @@ que el estudiante puede citar en su informe.
 Esa saturacion es la razon de ser del TP4: el radar de banda L penetra el dosel
 y llega a los troncos, de modo que sigue respondiendo cuando el optico ya no.
 
-ENTRADA   05_Resultados/02_Rasters/indices/02_pre/<AOI>/*.tif  (del TP3_03)
+ENTRADA   05_Resultados/02_Rasters/indices/02_pre_incendio_2025_26/<AOI>/indices_20251125.tif  (del TP3_03)
           ../TP2_LiDAR_GEDI_ICESat2/04_Tablas_de_trabajo/01_Bosque | 02_Estepa/*_validos*.csv
 SALIDA    05_Resultados/04_Tablas/cruce_gedi_indices.csv
           05_Resultados/04_Tablas/saturacion.csv
@@ -146,8 +146,19 @@ for sitio, aoi in (("Bosque", "BOSQUE_NW_02"), ("Estepa", "ESTEPA_NW_02")):
     if not tifs:
         print("   faltan los indices. Ejecute antes:  python TP3_03_indices.py")
         continue
-    cubo = Cubo(tifs[-1])              # la escena pre-incendio mas cercana al fuego
-    print("   indices: %s" % os.path.basename(tifs[-1]))
+    # La escena previa al incendio es la del 25/11/2025, NO la del 09/01/2026:
+    # esa esta mas cerca del fuego pero tiene humo, y su NDVI cae de 0,80 a
+    # 0,34 (ver TP3_04_dnbr_incendio.py y la guia, capitulo 5). Antes se tomaba
+    # tifs[-1], que por orden alfabetico es justamente la del 09/01/2026.
+    # Corregido el 11/09/2026.
+    PRE_LIMPIA = "20251125"
+    elegidas = [t for t in tifs if PRE_LIMPIA in os.path.basename(t)]
+    if not elegidas:
+        print("   falta indices_%s.tif. Ejecute antes:  python TP3_03_indices.py"
+              % PRE_LIMPIA)
+        continue
+    cubo = Cubo(elegidas[0])
+    print("   indices: %s" % os.path.basename(elegidas[0]))
     gedi = cargar_gedi(sitio)
     if not gedi:
         print("   faltan los footprints GEDI. Ejecute antes el TP2 completo.")
@@ -183,23 +194,42 @@ with open(os.path.join(RESULTADOS, "04_Tablas", "cruce_gedi_indices.csv"),
     w = csv.DictWriter(f, fieldnames=list(filas[0])); w.writeheader(); w.writerows(filas)
 
 # ------------------------- modelo: indice -> altura -------------------------
-print("=" * 72)
-print("MODELO SIMPLE: el indice explica la altura del dosel?")
-print("=" * 72)
-print("   %-6s %10s %10s %10s %8s" % ("indice", "pendiente", "R2", "RMSE (m)", "n"))
-lineas = []
-for k in INDICES:
-    r = ajustar([f[k] for f in filas], [f["rh95"] for f in filas])
-    if r:
-        a, b, r2, rmse, nn = r
-        print("   %-6s %10.2f %10.3f %10.2f %8d" % (k, a, r2, rmse, nn))
-        lineas.append("%s: altura = %.2f * %s + %.2f | R2 = %.3f | RMSE = %.2f m | n = %d"
-                      % (k, a, k, b, r2, rmse, nn))
+# El modelo que cuenta es el del BOSQUE (n = 690), el de la guia (Tabla 19).
+# El de los dos sitios juntos se informa aparte y rotulado: su R2 es mas alto
+# porque el ajuste aprende a separar bosque de estepa, no a medir la altura
+# (asi lo explica el DESARROLLO del TP3). Antes el script informaba SOLO el de
+# los dos sitios juntos. Corregido el 11/09/2026.
+def bloque_modelos(titulo, sub):
+    print("=" * 72)
+    print(titulo)
+    print("=" * 72)
+    print("   %-6s %10s %10s %10s %8s" % ("indice", "pendiente", "R2", "RMSE (m)", "n"))
+    out = []
+    for k in INDICES:
+        r = ajustar([f[k] for f in sub], [f["rh95"] for f in sub])
+        if r:
+            a, b, r2, rmse, nn = r
+            print("   %-6s %10.2f %10.3f %10.2f %8d" % (k, a, r2, rmse, nn))
+            out.append("%s: altura = %.2f * %s + %.2f | R2 = %.3f | RMSE = %.2f m | n = %d"
+                       % (k, a, k, b, r2, rmse, nn))
+    print()
+    return out
+
+del_bosque = [f for f in filas if f["sitio"] == "Bosque"]
+lin_b = bloque_modelos("MODELO SIMPLE EN EL BOSQUE: el indice explica la altura del dosel?",
+                       del_bosque)
+lin_t = bloque_modelos("REFERENCIA, BOSQUE Y ESTEPA JUNTOS (R2 inflado: separa sitios)",
+                       filas)
 with open(os.path.join(RESULTADOS, "04_Tablas", "modelo_altura.txt"), "w",
           encoding="utf-8") as f:
-    f.write("Modelos lineales indice -> altura del dosel (rh95), datos pre-incendio\n")
+    f.write("Modelos lineales indice -> altura del dosel (rh95), escena pre-incendio del 25/11/2025\n")
     f.write("=" * 70 + "\n")
-    for l in lineas:
+    f.write("SITIO DE BOSQUE (el que se interpreta; guia, Tabla 19)\n")
+    for l in lin_b:
+        f.write(l + "\n")
+    f.write("\nBOSQUE Y ESTEPA JUNTOS (solo como referencia: el R2 sale inflado porque\n"
+            "el ajuste aprende a separar los dos sitios, no a medir la altura)\n")
+    for l in lin_t:
         f.write(l + "\n")
 
 # ------------------------- saturacion -------------------------
@@ -233,8 +263,8 @@ if sat:
     print("COMO SE LEE ESTA TABLA:")
     print("   Baje por la columna del NDVI. Mientras los arboles son bajos, el")
     print("   NDVI sube. A partir de cierta altura DEJA DE SUBIR aunque los")
-    print("   arboles sigan creciendo: ahi satura. Compare con el EVI, que")
-    print("   deberia aguantar un poco mas.")
+    print("   arboles sigan creciendo: ahi satura. Compare con el EVI: en la")
+    print("   teoria aguanta un poco mas; en estos datos tambien se aplana.")
     print()
     print("   Ese techo es la limitacion del optico, y es la razon por la que")
     print("   el TP4 usa radar de banda L: penetra el dosel y llega a los troncos.")

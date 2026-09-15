@@ -39,7 +39,7 @@ dos cifras y la tasa entre ellas.
 
 | Sitio | rh95 mediana | Interpretación |
 |---|---|---|
-| Bosque | ~10 m (rango 2–38 m) | dosel real |
+| Bosque | 5,07 m (rango 1,98–35,57 m) | dosel real, pero bajo |
 | Estepa | bajo, sin cola alta | sin dosel |
 
 **Cómo se verificó.** Es el control del proyecto. Si la estepa tuviera huellas de

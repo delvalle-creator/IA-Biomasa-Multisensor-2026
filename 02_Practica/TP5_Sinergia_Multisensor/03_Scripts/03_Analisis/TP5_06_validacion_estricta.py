@@ -48,10 +48,24 @@ SEMILLA = 20260903
 rng = np.random.default_rng(SEMILLA)
 
 AQUI = os.path.dirname(os.path.abspath(__file__))
-SUB  = os.path.join(AQUI, "..", "04_Tablas_de_trabajo")
-SAL  = os.path.join(AQUI, "..", "05_Resultados", "04_Tablas")
-if not os.path.isdir(SUB): SUB = AQUI
-if not os.path.isdir(SAL): SAL = os.path.join(AQUI, "out")
+
+# Este script vive en 03_Scripts/03_Analisis, de modo que la raiz del practico
+# esta DOS niveles arriba y no uno. Con un solo "..", SUB apuntaba a
+# 03_Scripts/04_Tablas_de_trabajo, que no existe, y el respaldo (SUB = AQUI)
+# hacia que buscara los datasets AL LADO del script: FileNotFoundError, aun
+# corriendolo como dice el orden de ejecucion. Ahora se sube por el arbol
+# hasta encontrar la carpeta real. Corregido el 11/09/2026.
+def _subir_hasta(*partes):
+    d = AQUI
+    while d != os.path.dirname(d):
+        cand = os.path.join(d, *partes)
+        if os.path.isdir(cand):
+            return cand
+        d = os.path.dirname(d)
+    return None
+
+SUB = _subir_hasta("04_Tablas_de_trabajo") or AQUI
+SAL = _subir_hasta("05_Resultados", "04_Tablas") or os.path.join(AQUI, "out")
 os.makedirs(SAL, exist_ok=True)
 
 OPTICO = ["NDVI", "EVI", "NDMI", "NBR"]

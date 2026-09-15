@@ -9,11 +9,11 @@ auxiliares; el orden completo está en `03_Scripts\00_ORDEN_DE_EJECUCION.md`.
 ## 1. La ejecución, paso a paso
 
     conda activate aoi
-    cd C:\Temp\CURSO_BIOMASA_2026\02_Practica\TP2_LiDAR_GEDI_ICESat2\03_Scripts
+    cd C:\Temp\CURSO_BIOMASA_2026\02_Practica
 
 **Pasos 1 a 6 — de los gránulos a las huellas válidas.** Extracción de los
 disparos GEDI de los HDF5, recorte a los recintos, y el filtrado de calidad
-en cuatro etapas. La extracción deja **6.287 disparos en el bosque y 11.222
+en cuatro etapas. La extracción deja **6.288 disparos en el bosque y 11.222
 en la estepa**, con 27 columnas por disparo (registrado en
 `05_Resultados\06_Control_calidad\ULTIMA_EJECUCION.log`).
 
@@ -41,7 +41,7 @@ De la salida real de `TP2_07_biomasa_referencia.py` (en
 
 | Sitio | Disparos extraídos | Válidos con estructura | Conserva | Biomasa mediana | EE mediano |
 |---|---|---|---|---|---|
-| Bosque | 6.287 | 690 | **11,0 %** | 15,0 Mg/ha | 13,1 Mg/ha |
+| Bosque | 6.288 | 690 | **11,0 %** | 15,0 Mg/ha | 13,1 Mg/ha |
 | Estepa | 11.222 | 3.083 | **27,5 %** | 3,4 Mg/ha | 3,0 Mg/ha |
 
 Las tablas de detalle por filtro quedan en
@@ -152,7 +152,7 @@ nombre de columna mal escrito, un umbral leído como texto, una máscara
 vacía. La supervivencia del proyecto (11,0 % en el bosque, 27,5 % en la
 estepa) es la esperable para GEDI sobre relieve andino; y la comprobación
 no es numérica sino espacial: los descartes por pendiente deben caer en las
-laderas (véase `fig06_mapa_footprints.png` y el gpkg del paso 10).
+laderas (véase `fig06_mapa_footprints.png` y el gpkg del paso 8).
 
 **P2. El bosque conserva el 11,0 % de los disparos y la estepa el 27,5 %.
 Explique la diferencia a partir de la manera en que cada cubierta devuelve
@@ -215,8 +215,9 @@ huella del TP2 los índices del TP3 y el γ⁰ del TP4: si cada práctico
 rehiciera la partición al azar, una huella usada para entrenar en un paso
 aparecería como «independiente» en el siguiente, y los R² de validación
 quedarían inflados sin que nadie hubiera hecho trampa a propósito — fuga de
-información entre conjuntos. La partición se hace una sola vez (paso 8), se
-guarda en las tablas de trabajo, y los tres prácticos siguientes la leen.
+información entre conjuntos. La partición se hace una sola vez (paso 7, dentro de
+`TP2_07_biomasa_referencia.py`), se guarda en las tablas de trabajo, y los
+tres prácticos siguientes la leen.
 Es la misma razón por la que la validación estricta del TP5 (paso 6) separa
 además **por bloques espaciales**: las huellas vecinas se parecen, y
 repartirlas al azar entre entrenamiento y validación también filtra

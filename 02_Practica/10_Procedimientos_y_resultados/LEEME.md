@@ -11,12 +11,12 @@ de entrada y diagnóstico, flujo completo y orden de operadores, cada paso con
 sus "Parámetros usados en esta ejecución", resultados con interpretación y
 control de calidad al final. Todo procedimiento nuevo debería imitarla.
 
-| Subcarpeta | Proceso | Fecha |
-|---|---|---|
-| `TP2_control_terreno_FABDEM\` | Auditoría del terreno de ATL08 y GEDI contra FABDEM + geoides (pasos 15 y 16 del TP2) | 26/08/2026 |
-| `TP2_mapa_biomasa_GEDI_CCI\` | Mapa de biomasa GEDI a 500 m contra CCI 2024 (paso 17 del TP2) | 26/08/2026 |
-| `Orange_flujos\` | Los flujos .ows de Orange Data Mining (TP2 y TP5), su validación y el arreglo del error de versiones | 26/08/2026 |
-| `TP4_ALOS_PALSAR1_SLC\` | Procesamiento polarimétrico completo de una escena ALOS PALSAR-1 SLC en SNAP (imagen completa; **pendiente repetirlo por recinto/AOI** para reducir volumen) | 08/2026 |
+| Subcarpeta | Proceso |
+|---|---|
+| `TP2_control_terreno_FABDEM\` | Auditoría del terreno de ATL08 y GEDI contra FABDEM + geoides (pasos 15 y 16 del TP2) |
+| `TP2_mapa_biomasa_GEDI_CCI\` | Mapa de biomasa GEDI a 500 m contra CCI 2024 (paso 17 del TP2) |
+| `Orange_flujos\` | Los flujos .ows de Orange Data Mining (TP2 y TP5) y su validación |
+| `TP4_ALOS_PALSAR1_SLC\` | Procesamiento polarimétrico completo de una escena ALOS PALSAR-1 SLC en SNAP (imagen completa; **pendiente repetirlo por recinto/AOI** para reducir volumen) |
 
 Regla de la carpeta: acá no vive ningún dato de trabajo — solo `.md` y
 capturas `.png`. La autoridad de cada número sigue siendo el script que lo

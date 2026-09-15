@@ -2,6 +2,10 @@
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22135139.svg)](https://doi.org/10.5281/zenodo.22135139)
 
+> **Fe de erratas.** Antes de usar estos materiales lea
+> [`00_FE_DE_ERRATAS.md`](00_FE_DE_ERRATAS.md): qué se corrigió respecto de la
+> entrega v1.0.0 y qué diferencias quedan en los PDF que no se rehicieron.
+
 Curso de posgrado — materiales completos: teoría, trabajos prácticos, scripts
 y guías de desarrollo con respuestas.
 
@@ -13,9 +17,20 @@ ORCID: [0000-0002-3329-1057](https://orcid.org/0000-0002-3329-1057)
 
 ## Qué contiene
 
-- **01_Teoria** — 10 presentaciones (PDF, 2 diapositivas por página) y sus fuentes pptx: fundamentos, GEDI, ICESat-2 ATLAS, CCI Biomass, ópticos, radares (2 partes), sinergia multisensor y conclusiones.
+- **01_Teoria** — 10 presentaciones en PDF, a dos diapositivas por página: fundamentos, GEDI, ICESat-2 ATLAS, CCI Biomass, ópticos, radares (2 partes), sinergia multisensor y conclusiones.
 - **02_Practica** — cinco trabajos prácticos (TP1 Búsqueda IA, TP2 LiDAR GEDI/ICESat-2, TP3 Datos ópticos, TP4 Radar SAR, TP5 Sinergia multisensor), con scripts Python, guías paso a paso, procedimientos con resultados y la guía integral de desarrollo y respuestas (`11_Desarrollo_y_respuestas`).
+- **00_FE_DE_ERRATAS.md** y **00_FE_DE_ERRATAS.pdf** — qué se corrigió respecto de la entrega v1.0.0.
 - **00_INSTRUCTIVO_DE_EJECUCION.pdf** y **00_LEEME_PRIMERO.md** — por dónde empezar.
+
+## Qué no contiene, y por qué
+
+Este repositorio **no distribuye ningún archivo de Word ni de PowerPoint**. Todo lo que el
+estudiante lee viaja en PDF o en markdown. La regla vale también para las fuentes de las
+figuras y de las presentaciones, y está escrita en el `.gitignore` para que no dependa de
+acordarse.
+
+Tampoco viajan los datos crudos, los productos intermedios de SNAP ni los artículos de
+terceros: de estos últimos van la lista de referencias con sus DOI y el archivo `.ris`.
 
 ## Caso de estudio
 

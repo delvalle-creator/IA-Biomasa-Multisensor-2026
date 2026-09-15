@@ -10,13 +10,43 @@ _fuente/
 # Paquete de entrega a estudiantes (se genera con el bat)
 _ENTREGA_ESTUDIANTES/
 
-# Artículos con derechos de terceros
-**/06_Bibliografia/01_Articulos/
+# Artículos con derechos de terceros: no viajan los PDF, sí la lista de
+# referencias con sus DOI
+**/06_Bibliografia/01_Articulos/*.pdf
+
+# Manuales y tutoriales de terceros: se citan, no se redistribuyen
+01_Teoria/03_Lecturas/
+
+# Rásters y GeoPackage de resultados: 1.811 MB que los programas del curso
+# vuelven a generar a partir de los datos. Los insumos de 00_COMUN sí viajan.
+**/05_Resultados/02_Rasters/
+**/05_Resultados/03_Vectores/*.gpkg
+*.aux.xml
 
 # Productos intermedios pesados de SNAP/QGIS (archivos >100 MB)
 *.data/
 *.dim
 02_Subsets_SNAP_QGIS/
+
+# Regla del curso: el estudiante recibe PDF. Ningún Word ni PowerPoint se
+# publica, ni siquiera como fuente de una figura o de una presentación.
+*.pptx
+*.potx
+*.docx
+*.doc
+*.dotx
+
+# Material que no forma parte del curso
+Biomasa_Chubut/
+PRUEBAS/
+Claude outputs/
+
+# Restos de trabajo
+_originales/
+_ANTES_*/
+*.previo
+*.original_*
+*.antes_de_*
 
 # Temporales
 Thumbs.db

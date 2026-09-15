@@ -1,6 +1,6 @@
 # Control de terreno de ATL08 y GEDI contra FABDEM
 
-**Proceso del 26/08/2026 · scripts `TP2_15_control_terreno_FABDEM.py` y
+**Scripts `TP2_15_control_terreno_FABDEM.py` y
 `TP2_16_recotejar_tras_control.py` · entorno conda `aoi`**
 
 ## Por qué se hizo

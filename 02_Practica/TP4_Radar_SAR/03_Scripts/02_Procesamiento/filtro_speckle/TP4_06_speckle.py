@@ -219,7 +219,14 @@ print("=" * 78)
 filas = []
 for aoi in AOIS_UTM:
     for etq, pol, f, b in productos(aoi):
-        a = gdal.Open(f).GetRasterBand(b).ReadAsArray().astype("float64")
+        # OJO: no encadenar gdal.Open(f).GetRasterBand(b). En GDAL 3 el
+        # Dataset temporal se libera en cuanto termina la expresion y la banda
+        # queda colgando: ReadAsArray falla con "TypeError: in method
+        # 'Band_XSize_get'". Hay que guardar el Dataset en una variable.
+        # Corregido el 11/09/2026.
+        ds = gdal.Open(f)
+        a = ds.GetRasterBand(b).ReadAsArray().astype("float64")
+        ds = None
         e = enl(a)
         filas.append([aoi, etq, pol, "%.2f" % e])
         print("   %-14s %-18s %-5s ENL = %5.2f" % (aoi[:6], etq, pol, e))

@@ -1,6 +1,6 @@
 # BIOMASS nivel 2A sobre BOSQUE_NW_02: los ocho productos y sus enlaces
 
-**02/08/2026.** Obtenido del catálogo de ESA MAAP, colección `BiomassLevel2a`,
+Obtenidos del catálogo de ESA MAAP, colección `BiomassLevel2a`, sobre el
 recuadro del recinto de bosque. El catálogo informa `numberMatched: 8`, que
 coincide exactamente con lo que devolvió `buscar_biomass_L2.py`.
 
@@ -51,7 +51,7 @@ mismo nombre del producto en minúsculas y terminada en `_fh_th.jpg`,
 `_gn_th.jpg` o `_fhquality_th.jpg`. Mirarla es la aplicación directa de la regla
 del TP1: comprobar antes de descargar.
 
-Comprobadas el 02/08/2026 las dos de altura de dosel recomendadas: **las dos
+Comprobadas las dos de altura de dosel recomendadas: **las dos
 traen la franja completa, con relieve y estructura de bosque bien visibles.** No
 hay huecos ni bandas sin dato.
 

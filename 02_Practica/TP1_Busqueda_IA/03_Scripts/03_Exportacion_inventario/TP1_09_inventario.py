@@ -67,7 +67,11 @@ def hay(carpeta, fecha, sufijo="*.dim"):
     """Busca un producto de esa fecha en la carpeta real. Tolera que no exista."""
     if not carpeta or not fecha:
         return False
-    return bool(glob.glob(os.path.join(carpeta, "*%s%s" % (fecha, sufijo))))
+    # Sentinel-2 queda recortado como GeoTIFF (.tif), no como producto .dim de
+    # SNAP: por defecto se acepta cualquiera de los dos.
+    sufijos = ("*.dim", "*.tif") if sufijo == "*.dim" else (sufijo,)
+    return any(glob.glob(os.path.join(carpeta, "*%s%s" % (fecha, s)))
+               for s in sufijos)
 
 
 filas = []

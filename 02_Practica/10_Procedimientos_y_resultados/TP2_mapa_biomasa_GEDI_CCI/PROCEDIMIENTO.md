@@ -1,7 +1,6 @@
 # Mapa de biomasa: GEDI L4A contra CCI Biomass 2024
 
-**Proceso del 26/08/2026 · script `TP2_17_mapa_biomasa_GEDI_CCI.py` ·
-entorno conda `aoi`**
+**Script `TP2_17_mapa_biomasa_GEDI_CCI.py` · entorno conda `aoi`**
 
 ## Por qué se hizo
 

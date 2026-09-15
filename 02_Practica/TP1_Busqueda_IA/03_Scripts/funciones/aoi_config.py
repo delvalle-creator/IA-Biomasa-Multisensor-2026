@@ -88,6 +88,26 @@ UBICACION = {
 }
 
 
+# Las carpetas de los ORIGINALES llevan la clave corta de la epoca (01_base,
+# 02_pre, 03_post), pero las de los productos PROCESADOS conservan el nombre
+# largo (01_linea_base_2023_24, 02_pre_incendio_2025_26, 03_post_incendio_2026).
+# Sin esta traduccion, el inventario (TP1_09) y el diccionario (TP1_10) no
+# encuentran ningun producto procesado y los dan a todos por pendientes.
+EPOCA_PROCESADOS = {
+    "01_base": "01_linea_base_2023_24",
+    "02_pre":  "02_pre_incendio_2025_26",
+    "03_post": "03_post_incendio_2026",
+}
+
+
+def _carpeta_epoca(*partes_base, epoca):
+    """Devuelve la carpeta de la epoca que exista: primero el nombre largo de
+    los procesados y, si no esta, el nombre corto de los originales."""
+    largo = os.path.join(*(partes_base + (EPOCA_PROCESADOS.get(epoca, epoca),)))
+    corto = os.path.join(*(partes_base + (epoca,)))
+    return corto if (not os.path.isdir(largo) and os.path.isdir(corto)) else largo
+
+
 def dir_procesado(sensor, epoca, aoi):
     """Carpeta real de los productos ya procesados de <sensor>.
 
@@ -97,14 +117,15 @@ def dir_procesado(sensor, epoca, aoi):
     if sensor not in UBICACION:
         return None
     tp, grupo, con_sensor = UBICACION[sensor]
-    partes = [grupo, epoca, aoi] + ([sensor] if con_sensor else [])
-    return ruta_practico(tp, "02_Subsets_SNAP_QGIS", *partes)
+    base = _carpeta_epoca(ruta_practico(tp, "02_Subsets_SNAP_QGIS"), grupo, epoca=epoca)
+    return os.path.join(base, aoi, *([sensor] if con_sensor else []))
 
 
 def dir_crudo(sensor, epoca, aoi):
     """Carpeta real de los recortes crudos con fase. Solo SAR, y solo en TP4."""
-    return ruta_practico("TP4", "02_Subsets_SNAP_QGIS", "00_Recortes_crudos_fase",
-                         epoca, aoi, sensor)
+    base = _carpeta_epoca(ruta_practico("TP4", "02_Subsets_SNAP_QGIS",
+                                        "00_Recortes_crudos_fase"), epoca=epoca)
+    return os.path.join(base, aoi, sensor)
 
 
 def dir_gedi():

@@ -45,8 +45,8 @@ identifica.
 Se comprobo el efecto de usar una u otra escena:
 
    escena pre        NBR pre    area quemada
-   09/01/2026 (bruma)  0,528    16.463 ha (79,2%)
-   25/11/2025 (limpia) 0,513    17.959 ha (80,0%)
+   09/01/2026 (bruma)  0,528    16.502 ha (79,4%)
+   25/11/2025 (limpia) 0,513    18.009 ha (80,2%)
 
 La diferencia es menor a un punto porcentual, y la razon es instructiva: el NBR
 usa el infrarrojo cercano y el de onda corta, que son las bandas MENOS afectadas

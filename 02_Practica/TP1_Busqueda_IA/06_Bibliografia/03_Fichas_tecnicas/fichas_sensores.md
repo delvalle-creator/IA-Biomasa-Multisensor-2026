@@ -36,7 +36,7 @@ calendario**, y volver a mirarlo cada tanto: lo que hoy no se puede usar puede
 estar disponible en la próxima edición del curso.
 
 El caso testigo es **BIOMASS**, y conviene tenerlo presente porque es la misión que
-más promete para este tema. Verificado el 31/07/2026 contra el anuncio oficial:
+más promete para este tema. Lo que sigue se verificó contra el anuncio oficial:
 
 | Producto | Publicación | Estado a julio de 2026 |
 |---|---|---|
@@ -61,15 +61,15 @@ externo.
 
 El 09/01/2026 hay una escena Sentinel-2C sobre el bosque, catalogada como producto
 de reflectancia de superficie. **Su corrección atmosférica falló.** El visible
-quedó inflado entre cuatro y seis veces —azul 0,1528 contra 0,0235 de una escena
+quedó inflado entre cuatro y seis veces —azul 0,1577 contra 0,0235 de una escena
 sana— mientras el NIR y los SWIR quedaron iguales: la firma de la dispersión no
-removida. Consecuencias medidas: NDVI de 0,38 sobre bosque cerrado, y la banda de
+removida. Consecuencias medidas: NDVI de 0,34 sobre bosque cerrado, y la banda de
 clasificación etiquetando el 78 % del recinto como «suelo desnudo».
 
 Se detectó **cruzando sensores**: Landsat 9 del 04/01/2026, cinco días antes, da
-NDVI 0,85 sobre el mismo bosque no quemado, igual que las escenas sanas de
+NDVI 0,78 sobre el mismo bosque no quemado, igual que las escenas sanas de
 Sentinel-2B de noviembre y marzo. Dos sensores independientes separados por cinco
-días no difieren en 0,47 de NDVI.
+días no difieren en 0,44 de NDVI.
 
 De ahí el valor real de tener un segundo sensor óptico en el proyecto: **Landsat 9
 no está para aportar resolución —tiene 30 m contra 10— sino para arbitrar.** El

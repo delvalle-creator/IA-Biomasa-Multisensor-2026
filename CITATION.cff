@@ -8,10 +8,10 @@ authors:
     orcid: "https://orcid.org/0000-0002-3329-1057"
     affiliation: "CeReGeo–FCyT–UADER; LEMIV–FI–UNPSJB"
     email: "hfdelvalle@gmail.com"
-version: "1.0.0"
-date-released: "2026-08-28"
+version: "1.1.0"
+date-released: "2026-09-14"
 license: CC-BY-NC-SA-4.0
-doi: 10.5281/zenodo.22135140
+doi: 10.5281/zenodo.22135139
 repository-code: "https://github.com/delvalle-creator/IA-Biomasa-Multisensor-2026"
 keywords:
   - biomasa aérea

@@ -26,7 +26,7 @@ sobreajuste**.
 
 ## Los bloques tampoco se sortean: se estratifican por altura
 
-Corregido el 29 de julio de 2026. El bloque entero como unidad evita la
+El bloque entero como unidad evita la
 filtración espacial, pero no garantiza que las dos partes se parezcan. En el
 bosque los veintidós bloques tienen medianas de rh95 que van de 2,84 a 18,94 m,
 y el sorteo mandaba los más altos a validación:

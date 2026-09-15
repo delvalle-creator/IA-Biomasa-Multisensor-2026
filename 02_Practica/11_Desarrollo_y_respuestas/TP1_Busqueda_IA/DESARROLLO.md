@@ -9,7 +9,7 @@ con las tablas que deja cada uno.
 Los diez scripts se corren en orden, en el entorno conda `aoi`:
 
     conda activate aoi
-    cd C:\Temp\CURSO_BIOMASA_2026\02_Practica\TP1_Busqueda_IA\03_Scripts
+    cd C:\Temp\CURSO_BIOMASA_2026\02_Practica
 
 **Pasos 1 y 2 — verificar.** `TP1_01_verificar_cobertura.py` compara la
 huella que declara cada catálogo con los píxeles que de verdad contienen
@@ -33,12 +33,17 @@ cortos.
 
 ### 2.1 El inventario: qué quedó en el disco
 
-`inventario.csv` cierra con **75 productos y 275,9 GB**: 20 SAOCOM, 14
-Sentinel-2 L2A, 14 Sentinel-1 GRD, 14 Sentinel-1 SLC, 10 ALOS-1 quad-pol,
-2 gránulos GEDI (L2A y L2B) y 1 NISAR GCOV, repartidos en las cuatro épocas
-(línea de base, pre-incendio, post-incendio e histórica ALOS).
+`inventario.csv` cierra con **81 filas y 288,8 GB**, que son **68 productos
+únicos y 252,4 GB**: las filas del SAOCOM se repiten porque un mismo producto
+cubre los dos recintos y el inventario lo anota una vez por recinto. Los
+productos únicos son 14 Sentinel-2 L2A, 14 Sentinel-1 GRD, 14 Sentinel-1 SLC,
+13 SAOCOM L1A, 10 ALOS-1 quad-pol, 2 gránulos GEDI (L2A y L2B) y 1 NISAR GCOV,
+repartidos en las cuatro épocas (línea de base, pre-incendio, post-incendio e
+histórica ALOS). El inventario recorre `08_Originales_crudos`, de modo que no
+incluye Landsat 9 ni los mosaicos de PALSAR-2: esos llegaron ya recortados y
+no pasan por esa carpeta.
 
-### 2.2 La matriz de datos: quince fuentes, verificadas una por una
+### 2.2 La matriz de datos: catorce fuentes, verificadas una por una
 
 `05_Resultados\04_Tablas\matriz_datos.csv` es el producto de síntesis del
 práctico. Algunas filas que conviene mirar:
@@ -87,9 +92,11 @@ Porque la huella del catálogo describe el rectángulo de la adquisición, no
 los píxeles válidos: bordes de escena, sombra del relieve, máscaras de
 calidad y recortes de procesamiento comen superficie por dentro de ese
 rectángulo. El caso cuantificado del proyecto es **ALOS-1 quad-pol sobre la
-estepa: el catálogo la da por cubierta y la verificación del paso 1 deja
-93 % con dato** (bosque: 99–100 %); el desvío viene del borde del frame, que
-cruza el recinto (`matriz_datos.csv`, fila ALOS-1). Otro caso es NISAR: de 9
+estepa: el catálogo la da por cubierta y los píxeles con dato son el 93 %**
+(bosque: 99–100 %); el desvío viene del borde del frame, que cruza el recinto.
+La cifra está en `matriz_datos.csv`, fila ALOS-1, no en
+`verificacion_cobertura.csv`, que sólo guarda la verificación de las escenas
+ópticas del 19/1/2026. Otro caso es NISAR: de 9
 fechas listadas por el catálogo, solo **3 resultaron útiles** tras verificar
 contenido y cobertura.
 
@@ -114,7 +121,8 @@ Computer** y las 6 escenas quedaron en una fracción del volumen original.
 Conviene la escena completa cuando el procesamiento posterior necesita el
 contexto (la órbita completa para la corrección geométrica del SLC, la fase
 para polarimetría) o cuando el proveedor no recorta: los **SLC de Sentinel-1
-y del SAOCOM** se bajaron completos, y por eso el inventario pesa 275,9 GB.
+y del SAOCOM** se bajaron completos, y por eso el inventario pesa 252,4 GB en
+productos únicos (288,8 GB si se suman las filas repetidas por recinto).
 La regla práctica: el recorte del servidor ahorra transferencia y disco; la
 escena completa preserva opciones de procesamiento. Se decide por el uso,
 no por comodidad.
@@ -148,8 +156,8 @@ identificadores entregados difieren de los solicitados.
 
 ## 5. De dónde sale cada cifra
 
-`02_Subsets_SNAP_QGIS\03_Tablas\inventario.csv` (75 productos),
-`05_Resultados\04_Tablas\matriz_datos.csv` (las quince fuentes),
+`02_Subsets_SNAP_QGIS\03_Tablas\inventario.csv` (81 filas, 68 productos
+únicos), `05_Resultados\04_Tablas\matriz_datos.csv` (las catorce fuentes),
 `02_Subsets_SNAP_QGIS\03_Tablas\estadisticas_AQD_CONAE.csv` (área quemada
 oficial), `05_Resultados\04_Tablas\verificacion_cobertura.csv` y
 `deteccion_bruma.csv` (los dos controles previos a toda descarga).

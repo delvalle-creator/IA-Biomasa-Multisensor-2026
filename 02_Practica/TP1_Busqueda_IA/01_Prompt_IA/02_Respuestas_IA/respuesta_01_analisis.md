@@ -22,7 +22,7 @@ del sensor. Hace falta un segundo, independiente, que tenga que coincidir.
 la escena entera, aprovechando el formato COG— y se contaron los píxeles con dato.
 Ahí apareció el 15 % de cobertura real donde el catálogo prometía 76 %.
 
-**Y comparando.** La escena Sentinel-2 del 09/01/2026 tenía 0,4 % de nubes según
+**Y comparando.** La escena Sentinel-2 del 09/01/2026 tenía 7,4 % de nubes según
 la SCL y pasó todos los filtros. Recién al calcular índices se vio que el NDVI del
 bosque daba 0,34 cuando en todas las demás fechas daba 0,80. Landsat 9, del 4 de
 enero, daba 0,78 en ese mismo bosque. **Dos sensores independientes en desacuerdo:

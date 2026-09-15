@@ -17,6 +17,5 @@ El desarrollo completo, con la fundamentación de cada decisión, está en el
 capítulo 4 de la guía teórico-práctica:
 `02_Practica\00_Guia_teorica_practica\` (PDF).
 
-> La sintética del TP2 está actualizada al 26/8/2026 e incluye la rama
-> ICESat-2 completa con su control de terreno FABDEM (pasos 12 a 16) y el
-> mapa de biomasa contra el CCI (paso 17).
+> La sintética del TP2 incluye la rama ICESat-2 completa con su control de
+> terreno FABDEM (pasos 12 a 16) y el mapa de biomasa contra el CCI (paso 17).
