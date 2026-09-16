@@ -14,8 +14,12 @@ _ENTREGA_ESTUDIANTES/
 # referencias con sus DOI
 **/06_Bibliografia/01_Articulos/*.pdf
 
-# Manuales y tutoriales de terceros: se citan, no se redistribuyen
-01_Teoria/03_Lecturas/
+# Manuales y tutoriales de terceros: se citan con su enlace y no se
+# redistribuyen, salvo los que su licencia autoriza para uso educativo.
+# Viaja el listado 00_MATERIAL_DE_LECTURA.md y The SAR Handbook.
+01_Teoria/03_Lecturas/*
+!01_Teoria/03_Lecturas/00_MATERIAL_DE_LECTURA.md
+!01_Teoria/03_Lecturas/SARHB_FullRes.pdf
 
 # Rásters y GeoPackage de resultados: 1.811 MB que los programas del curso
 # vuelven a generar a partir de los datos. Los insumos de 00_COMUN sí viajan.

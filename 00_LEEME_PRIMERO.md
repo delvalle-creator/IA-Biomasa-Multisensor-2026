@@ -51,7 +51,8 @@ CURSO_BIOMASA_2026\
     01_Teoria\                     las clases teóricas
         01_Presentaciones_pdf\     lo que recibe el estudiante
         02_Fuentes_pptx\           los originales del docente
-        03_Lecturas\               artículos y fichas de apoyo
+        03_Lecturas\               material de lectura: The SAR Handbook y
+                                   el listado con los enlaces oficiales
     02_Practica\                   todo lo que se ejecuta
         00_Guia_teorica_practica\  la guía completa en PDF y su fuente
         00_COMUN\                  lo que comparten los cinco prácticos
