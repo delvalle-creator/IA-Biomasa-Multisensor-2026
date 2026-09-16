@@ -1,15 +1,15 @@
 cff-version: 1.2.0
 message: "Si usa este material, por favor cítelo como se indica."
 title: "IA Multisensor para Estimar Biomasa en Bosques Andinos y su Ecotono Bosque–Estepa: curso de posgrado con datos expuestos"
-type: dataset
+type: software
 authors:
   - family-names: "del Valle"
     given-names: "Héctor Francisco"
     orcid: "https://orcid.org/0000-0002-3329-1057"
     affiliation: "CeReGeo–FCyT–UADER; LEMIV–FI–UNPSJB"
     email: "hfdelvalle@gmail.com"
-version: "1.1.0"
-date-released: "2026-09-14"
+version: "1.1.1"
+date-released: "2026-09-16"
 license: CC-BY-NC-SA-4.0
 doi: 10.5281/zenodo.22135139
 repository-code: "https://github.com/delvalle-creator/IA-Biomasa-Multisensor-2026"

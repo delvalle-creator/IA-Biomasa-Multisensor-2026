@@ -63,6 +63,15 @@ revisar a mano.
 
 ## Licencia y cita
 
-Material bajo licencia **CC BY-NC-SA 4.0** (ver `LICENSE.md`).
-Para citar este curso, ver `CITATION.cff`.
-Versión archivada en Zenodo: DOI [10.5281/zenodo.22135139](https://doi.org/10.5281/zenodo.22135139) (todas las versiones) · [10.5281/zenodo.22135140](https://doi.org/10.5281/zenodo.22135140) (v1.0.0).
+Material bajo licencia **CC BY-NC-SA 4.0** (ver `LICENSE.md`). Las obras de
+terceros de `01_Teoria/03_Lecturas` conservan su propia licencia.
+
+Para citar este curso, ver `CITATION.cff`. El curso está archivado en Zenodo:
+
+| DOI | Qué identifica |
+|---|---|
+| [10.5281/zenodo.22135139](https://doi.org/10.5281/zenodo.22135139) | La obra, en todas sus versiones. Lleva siempre a la más reciente y es el que conviene usar para citar el curso. |
+| [10.5281/zenodo.22781888](https://doi.org/10.5281/zenodo.22781888) | Versión 1.1.0 |
+| [10.5281/zenodo.22135140](https://doi.org/10.5281/zenodo.22135140) | Versión 1.0.0 |
+
+Cada versión tiene su propio DOI, que figura en su página de Zenodo.
