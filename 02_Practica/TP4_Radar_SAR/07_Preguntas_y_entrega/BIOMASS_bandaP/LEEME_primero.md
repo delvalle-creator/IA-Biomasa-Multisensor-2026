@@ -7,7 +7,7 @@ sobre dos áreas de la Patagonia, separadas por AOI.
 👉 El procedimiento —cuentas, ficha de acceso y descarga— está en las
 **secciones 3.3 y 3.4 de la guía teórico-práctica**
 (`02_Practica\00_Guia_teorica_practica`). El tutorial original
-(`Informe/TUTORIAL_paso_a_paso.docx`) viene dentro de `BIOMASS.zip`, en esta
+(`Informe/TUTORIAL_paso_a_paso.pdf`) viene dentro de `BIOMASS.zip`, en esta
 misma carpeta.
 
 ## Contenido de `BIOMASS.zip`
@@ -21,11 +21,12 @@ misma carpeta.
   - `mapa_ubicacion_AOIs.png` — mapa de ubicación.
   - `BOSQUE_NW_02/`, `ESTEPA_NW_02/` — donde caen las descargas de cada zona.
 - **Informe/**
-  - `TUTORIAL_paso_a_paso.docx` — el tutorial original (el procedimiento vigente
+  - `TUTORIAL_paso_a_paso.pdf` — el tutorial original (el procedimiento vigente
     está en la guía teórico-práctica, secciones 3.3 y 3.4).
-  - `Informe_BIOMASS.docx` — informe técnico del sensor.
+  - `Informe_BIOMASS.pdf` — informe técnico del sensor.
+  - `Comparativa_SAOCOM_vs_BIOMASS.pdf` — tabla comparativa de los dos radares, SAOCOM (banda L) y BIOMASS (banda P).
 - **SNAP/**
-  - `Guia_SNAP_BIOMASS.docx` — cómo procesar el producto en ESA SNAP.
+  - `Guia_SNAP_BIOMASS.pdf` — cómo procesar el producto en ESA SNAP.
   - los dos grafos `.xml` listos para el Graph Builder, con su esquema.
 
 ## Resumen de resultados

@@ -35,7 +35,8 @@ despues por un enlace personal.
 
 Ese tramite esta documentado en
 `00_COMUN/08_Originales_crudos/PEDIDO_SAOCOM_28jul2026.md`, que es el pedido real
-con el que se obtuvieron las escenas del proyecto. Conviene leerlo: la habilidad
+con el que se obtuvieron las escenas del proyecto. Esta en el disco del curso y no
+viaja en el repositorio; conviene leerlo en clase: la habilidad
 que este practico ensena, la de pedirle a un catalogo exactamente lo que se
 necesita, se ve mejor en un tramite con persona del otro lado que en una descarga
 automatica.

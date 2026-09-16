@@ -148,7 +148,8 @@ dudoso, se vuelve a él y se comprueba.
 
 Lo que no viaja de esa carpeta son los productos de SNAP, los pares `.dim` +
 `.data`: se rehacen con los grafos de `08_Grafos_SNAP` a partir de las escenas
-originales, y ningún programa del curso los lee. Tampoco viajan los recortes con
+originales, y los programas del curso trabajan con los GeoTIFF, que traen las
+mismas bandas. Tampoco viajan los recortes con
 fase de `TP4_Radar_SAR\02_Subsets_SNAP_QGIS\00_Recortes_crudos_fase`, porque
 sus archivos superan los 100 MB que admite GitHub: los produce
 `TP4_02_recortar_crudo.py` desde la escena original, y en el aula están en el

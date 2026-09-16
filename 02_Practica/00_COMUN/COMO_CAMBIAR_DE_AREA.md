@@ -92,7 +92,8 @@ local equivalente, o se omiten esos cruces declarándolo.
   todas las fechas. En el área nueva, elija UN track y UNA dirección y
   quédese con ellos: mezclar geometrías arruina las series temporales.
 - **SAOCOM** exige un pedido nuevo a la CONAE (el trámite modelo está en
-  `00_COMUN\08_Originales_crudos\PEDIDO_SAOCOM_28jul2026.md`), y la
+  `00_COMUN\08_Originales_crudos\PEDIDO_SAOCOM_28jul2026.md`, en el disco del
+  curso), y la
   cobertura cuadripolar no está garantizada en cualquier sitio — aquí no
   cubría la estepa.
 - **Los estratos del GEDI L4A** (`predict_stratum`: DBT_SA, GSW_SA…)

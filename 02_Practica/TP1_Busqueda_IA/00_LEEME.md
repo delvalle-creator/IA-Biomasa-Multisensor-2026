@@ -52,8 +52,8 @@ Los diez scripts cubren seis de los siete proveedores. El séptimo es la CONAE,
 que distribuye el SAOCOM: su catálogo exige registro, solicitud y autorización
 previas, y entrega después por un enlace personal. Por eso no hay un
 `TP1_..._descargar_saocom.py`, y por eso el trámite está documentado como tal en
-`00_COMUN/08_Originales_crudos/PEDIDO_SAOCOM_28jul2026.md`. Las escenas están
-en el disco del curso, y sus recortes en γ⁰, en `TP4_Radar_SAR/02_Subsets_SNAP_QGIS/SAOCOM`.
+`00_COMUN/08_Originales_crudos/PEDIDO_SAOCOM_28jul2026.md`, que está en el disco
+del curso y no viaja en el repositorio. Las escenas también están en el disco del curso, y sus recortes en γ⁰, en `TP4_Radar_SAR/02_Subsets_SNAP_QGIS/SAOCOM`.
 
 ## Lo que este práctico enseña, en una línea
 

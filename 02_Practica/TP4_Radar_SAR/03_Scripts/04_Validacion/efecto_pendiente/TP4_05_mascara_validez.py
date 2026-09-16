@@ -70,19 +70,56 @@ def leer(img):
     return a
 
 
-def valido_producto(dim):
-    """Mascara booleana de validez geometrica de un producto."""
-    data = dim[:-4] + ".data"
-    ang = os.path.join(data, "localIncidenceAngle.img")
-    if not os.path.exists(ang):
+def valido_producto(ruta):
+    """Mascara booleana de validez geometrica de un producto.
+
+    Lee el producto de SNAP (.dim + .data) si esta en el disco, y si no, el
+    GeoTIFF del mismo nombre, que trae las mismas bandas (Gamma0_* y
+    localIncidenceAngle) identificadas por su descripcion.
+    16/09/2026: se agrego la lectura del GeoTIFF. El repositorio publica los
+    GeoTIFF y no los pares .dim + .data; sin esta lectura el paso contestaba
+    "sin productos SAR" y no escribia las mascaras. Verificado: con los GeoTIFF
+    las mascaras de los dos recintos salen iguales a las publicadas.
+    """
+    if ruta.lower().endswith(".dim"):
+        data = ruta[:-4] + ".data"
+        ang = os.path.join(data, "localIncidenceAngle.img")
+        if not os.path.exists(ang):
+            return None
+        a = leer(ang)
+        ok = (a > UMBRAL_MIN) & (a < UMBRAL_MAX) & np.isfinite(a)
+        # ademas, gamma0 debe existir y ser positivo en todas las polarizaciones
+        for g in glob.glob(os.path.join(data, "Gamma0_*.img")):
+            v = leer(g)
+            ok &= np.isfinite(v) & (v > 0)
+        return ok
+    ds = gdal.Open(ruta)
+    nombres = [(ds.GetRasterBand(i).GetDescription() or "").strip()
+               for i in range(1, ds.RasterCount + 1)]
+    if "localIncidenceAngle" not in nombres:
+        ds = None
         return None
-    a = leer(ang)
+    a = ds.GetRasterBand(nombres.index("localIncidenceAngle") + 1
+                         ).ReadAsArray().astype("float32")
     ok = (a > UMBRAL_MIN) & (a < UMBRAL_MAX) & np.isfinite(a)
     # ademas, gamma0 debe existir y ser positivo en todas las polarizaciones
-    for g in glob.glob(os.path.join(data, "Gamma0_*.img")):
-        v = leer(g)
-        ok &= np.isfinite(v) & (v > 0)
+    for i, nom in enumerate(nombres, 1):
+        if nom.startswith("Gamma0_"):
+            v = ds.GetRasterBand(i).ReadAsArray().astype("float32")
+            ok &= np.isfinite(v) & (v > 0)
+    ds = None
     return ok
+
+
+def productos(carpeta):
+    """Los .dim de la carpeta, y los GeoTIFF que no tienen un .dim al lado."""
+    if not carpeta:
+        return []
+    dims = sorted(glob.glob(os.path.join(carpeta, "*.dim")))
+    tifs = [t for t in sorted(glob.glob(os.path.join(carpeta, "*.tif")))
+            if not os.path.exists(t[:-4] + ".dim")
+            and "_mask" not in t and "_nativo" not in t]
+    return dims + tifs
 
 
 print(__doc__)
@@ -95,7 +132,7 @@ for aoi in AOIS_UTM:
     por_sensor, comun = {}, None
     for sensor in SENSORES:
         d = dir_procesado(sensor, EPOCA, aoi)
-        dims = sorted(glob.glob(os.path.join(d, "*.dim"))) if d else []
+        dims = productos(d)
         if not dims:
             continue
         acumulado = None

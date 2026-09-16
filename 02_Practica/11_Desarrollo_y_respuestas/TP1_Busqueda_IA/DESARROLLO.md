@@ -22,7 +22,8 @@ dato, y deja `05_Resultados\04_Tablas\verificacion_cobertura.csv`.
 NASA Earthdata (GEDI L2A y L2B), ASF (ALOS-1 y NISAR) y ESA MAAP (BIOMASS,
 con token). El séptimo proveedor, la CONAE, **no tiene script y no es un
 olvido**: el SAOCOM se obtiene por solicitud y autorización; el trámite real
-está documentado en `00_COMUN\08_Originales_crudos\PEDIDO_SAOCOM_28jul2026.md`.
+está documentado en `00_COMUN\08_Originales_crudos\PEDIDO_SAOCOM_28jul2026.md`,
+en el disco del curso.
 
 **Pasos 9 y 10 — documentar.** `TP1_09_inventario.py` recorre lo descargado
 y deja `02_Subsets_SNAP_QGIS\03_Tablas\inventario.csv`;
