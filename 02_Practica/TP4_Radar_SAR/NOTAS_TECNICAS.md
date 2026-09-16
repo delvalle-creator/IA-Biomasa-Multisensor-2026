@@ -7,8 +7,6 @@
 **Pregunta del práctico:** ¿por qué la banda L y no la C? Tercer eslabón:
 **radar solo**. Es el práctico con más carga conceptual del curso.
 
-## Estado: completo. Diez scripts, bandas C, L y P, y guía con figuras
-
 ## Qué hay (todo en la grilla común, γ⁰ LINEAL)
 
 | Fuente | Banda | Épocas | Polarización | Nº |
@@ -133,9 +131,9 @@ argumento del TP5, construido con mediciones y no con citas.**
 | 8 | `03_Analisis/saturacion/TP4_08_saturacion_radar.py` | no | **lo corre el alumno** |
 | 9 | `05_Exportacion/TP4_09_exportar_para_qgis.py` | no | **lo corre el alumno** |
 | 10 | `03_Analisis/indices_polarimetricos/TP4_10_indices_polarimetricos.py` | no | **lo corre el alumno** |
-| 11 | `01_Pre_procesamiento/TP4_11_inspeccionar_biomass_L2A.py` | no | pendiente: exige descomprimir un L2A |
+| 11 | `01_Pre_procesamiento/TP4_11_inspeccionar_biomass_L2A.py` | no | **lo corre el alumno** antes de los grafos de BIOMASS; exige descomprimir un L2A |
 
-Los grafos de SNAP (`.xml`) están junto a los scripts que los usan.
+Los grafos de SNAP (`.xml`) están en `08_Grafos_SNAP`, con su `LEEME_grafos.md`; los dos de BIOMASS, junto al programa que inspecciona el producto.
 El TP4_06 usa `scipy`, que el entorno `aoi` ya trae.
 
 ## Guía y figuras
@@ -144,14 +142,16 @@ El desarrollo del práctico, con sus tablas y referencias, está en el capítulo
 de la guía teórico-práctica (`02_Practica\00_Guia_teorica_practica`).
 
 Las figuras se regeneran con `00_Guia_del_practico/figuras/generadores/`; cada una
-se guarda en PNG (para el Word) y SVG (editable). Las versiones editables en
-PowerPoint nativo están en `TP4_Radar_SAR/00_Guia_del_practico/figuras/editables_pptx/`.
+se guarda en PNG y en SVG (editable).
 
-## Pendiente de procesamiento
+## La línea de base SAOCOM
 
-Las 2 SAOCOM dual-pol S4 de bosque de la línea de base (27/10/2023 y 23/01/2024) ya
-están descargadas y figuran en el inventario. Lo que falta es procesarlas a γ⁰. No son imprescindibles: la serie quad-pol ya cubre la línea de base y
-la polarimetría completa. Ver `00_COMUN/08_Originales_crudos/01_base/SAOCOM/LEEME.md`.
+Los siete productos SAOCOM de la línea de base (5 quad-pol descendentes y 2
+dual-pol S4 ascendentes, del 27/10/2023 y el 23/01/2024) están descargados y
+figuran en el inventario del TP1, sin procesar a γ⁰: por eso
+`02_Subsets_SNAP_QGIS/SAOCOM` tiene sólo las épocas pre y post. Las dual-pol no
+son imprescindibles: la serie quad-pol cubre la línea de base y la polarimetría
+completa. Cómo procesarlas está en `03_Scripts/00_ORDEN_DE_EJECUCION.md`.
 
 ## Lo que queda para profundizar
 

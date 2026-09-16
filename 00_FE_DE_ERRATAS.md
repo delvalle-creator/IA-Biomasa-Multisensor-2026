@@ -1,6 +1,6 @@
 # Fe de erratas del curso «IA multisensor para estimar biomasa en bosques andinos y pastizales del ecotono bosque-estepa»
 
-Esquel, Chubut, del 14 al 19 de septiembre de 2026. Documento del 14 de septiembre de 2026.
+Esquel, Chubut, del 14 al 19 de septiembre de 2026. Documento del 14 de septiembre de 2026, con la Parte G del 16 de septiembre.
 
 Este documento corrige la versión del curso que ustedes descargaron: el repositorio IA-Biomasa-Multisensor-2026, entrega v1.0.0. Los errores se encontraron haciendo el curso completo, paso a paso y como alumno, en los días previos al dictado, y revisando después todos los documentos contra los archivos de datos que producen los programas.
 
@@ -153,7 +153,7 @@ La guía teórico-práctica, las guías sintéticas de cada práctico, el instru
 
 Se mantiene la ventana de 150 m, pero como **compromiso declarado**, no como óptimo: es del orden de la huella de GEDI, y más allá la ventana promedia bosque que ya no pertenece a la huella que se quiere explicar. Y se destaca expresamente, en el desarrollo del TP4, en las notas técnicas, en la verificación del Prompt_IA y en la ficha de sensores SAR, que el R² sigue subiendo más allá de los 150 m: el óptimo numérico y el óptimo defendible no coinciden, y eso se declara en la memoria en lugar de esconderlo.
 
-**Los archivos de Word dentro de un ZIP: pendiente.** El material de BIOMASS banda P que se entrega en TP4_Radar_SAR\07_Preguntas_y_entrega\BIOMASS_bandaP\BIOMASS.zip contiene, según su propio LEEME, tres archivos .docx. La regla del curso excluye los Word de la entrega, pero el filtro por extensión no mira dentro de los ZIP. Hay que decidir si se rehace el ZIP sin esos tres archivos o si se acepta la excepción.
+**Los archivos de Word dentro de un ZIP: resuelto.** El material de BIOMASS banda P que se entrega en TP4_Radar_SAR\07_Preguntas_y_entrega\BIOMASS_bandaP\BIOMASS.zip traía tres archivos .docx, que el filtro por extensión no veía porque están dentro de un ZIP. El ZIP se rehizo con esos tres documentos en PDF (Informe_BIOMASS.pdf, TUTORIAL_paso_a_paso.pdf y Comparativa_SAOCOM_vs_BIOMASS.pdf), y no contiene ningún Word.
 
 ## Parte F. Correcciones del 14 de septiembre de 2026
 
@@ -179,8 +179,28 @@ De la noche:
 
 Los diez archivos afectados están en la carpeta de archivos corregidos, cada uno con su ruta exacta.
 
+## Parte G. Los recortes de trabajo que faltaban en el repositorio
+
+Ninguna de las tres versiones publicadas (v1.0.0, v1.1.0 y v1.1.1) incluía la carpeta 02_Subsets_SNAP_QGIS de los prácticos: el archivo .gitignore del repositorio la excluía desde la primera versión, y la documentación decía lo contrario. Sin esos recortes no se puede correr el TP2 (los CSV de GEDI y ATL08), el TP3 (los GeoTIFF de Sentinel-2 y Landsat 9), el TP4 (los GeoTIFF en γ⁰ de los cuatro radares y las máscaras) ni el TP5, que lee los de los anteriores. Los estudiantes lo advirtieron el 16 de septiembre, y tenían razón.
+
+Desde la versión 1.2.0 los recortes viajan en el repositorio, en la carpeta 02_Subsets_SNAP_QGIS de cada práctico, y son todos los insumos que leen los programas:
+
+| **Práctico** | **Qué viene** | **Archivos** | **Tamaño** |
+|---|---|---|---|
+| TP1 | El inventario de lo descargado y las listas de adquisiciones | 4 | 34 KB |
+| TP2 | GEDI L2A, L2B y L4A y los segmentos ATL08, en CSV, con su LEEME | 11 | 12,5 MB |
+| TP3 | 14 GeoTIFF de Sentinel-2 y 24 de Landsat 9, los tres mapas forestales de Chubut recortados y el LEEME de la escena pre-incendio | 45 | 1.167 MB |
+| TP4 | 28 GeoTIFF de Sentinel-1, 6 de SAOCOM, 22 de NISAR (máscaras incluidas) y 6 de PALSAR-2, las tres máscaras de validez, el diccionario de nombres y el material de BIOMASS | 70 | 1.188 MB |
+| 00_COMUN | Los dos recortes del CCI Biomass que lee el paso 17 del TP2 | 2 | 1,9 MB |
+
+Lo que sigue sin viajar, y por qué: los pares .dim + .data de SNAP, porque ningún programa del curso los lee y los grafos de 08_Grafos_SNAP los rehacen desde la escena original; los recortes con fase de TP4_Radar_SAR\02_Subsets_SNAP_QGIS\00_Recortes_crudos_fase, porque sus archivos superan los 100 MB que admite GitHub (en el aula están en el disco del curso, y sólo hacen falta para la polarimetría con matrices de covarianza); y los rásters de 05_Resultados\02_Rasters, que los programas vuelven a generar, salvo los seis mapas de biomasa del paso 17 del TP2, que sí viajan con su LEEME.
+
+En la misma versión se retiraron del repositorio restos de trabajo que no son material del curso: doce capturas de consola (salida_*.txt) de versiones anteriores de los programas del TP2, cuatro notas del paquete original de ICESat-2 en 05_Resultados\06_Control_calidad\ICESat2_ATL08, dos figuras viejas con sus generadores, en carpetas _ANTES_06ago2026 del TP3 y del TP4, una copia previa de TP5_06_diagnostico_del_piso.py y el archivo .dodsrc del TP1, que apuntaba a una carpeta de la máquina del docente. También se corrigieron, en los LEEME y notas técnicas de los cinco prácticos, los recuentos de archivos y las descripciones de carpetas para que digan lo que el repositorio contiene, y la tabla de GEDI de matriz_datos.csv del TP1, que atribuía las 690 y 3.083 huellas válidas a los filtros de calidad y pendiente cuando la tercera cifra sale después del filtro de estructura del paso 6 (tras calidad y pendiente son 690 y 3.084).
+
 ## Cómo comprobar que quedó aplicado
 
 Después de copiar los archivos, alcanza con correr el paso 1 del TP1 y mirar la columna de nubes: donde antes decía 85,3 % y 99,6 %, tiene que decir 0,0 %. Y el paso 5 del TP3, que debe informar indices_20251125.tif y una tabla de saturación en la que el NDVI llega a 0,888 y después se aplana.
+
+Para la Parte G: en TP3_Datos_Opticos\02_Subsets_SNAP_QGIS\Sentinel_2 tiene que haber 14 GeoTIFF, en TP4_Radar_SAR\02_Subsets_SNAP_QGIS\Sentinel_1 28, y el paso 3 del TP2 tiene que encontrar los CSV de GEDI_L2A y GEDI_L2B sin pedir ninguna descarga.
 
 Los programas corregidos llevan, en el lugar del cambio, un comentario que explica el motivo y la fecha. Nada quedó cambiado en silencio.

@@ -2,7 +2,7 @@
 
 Los pasos 1 a 4 **ya fueron ejecutados**: sus resultados están en `02_Subsets_SNAP_QGIS`.
 Usted corre del 5 en adelante: el 5 escribe la máscara de validez de cada recinto
-(ver «Pendientes conocidos», más abajo). El 6 usa `scipy`, que el entorno `aoi` ya trae.
+(ver «La línea de base SAOCOM», más abajo). El 6 usa `scipy`, que el entorno `aoi` ya trae.
 
 | Paso | Script | Subcarpeta | Qué hace | ¿SNAP? |
 |---|---|---|---|---|
@@ -94,11 +94,12 @@ las adquisiciones de nivel 2A son posteriores al incendio (10/01 al 27/02 de 202
 así que no hay par con el cual medir cambio. Se abre, se mira, se explica, y se
 declara por escrito que no intervino en ningún resultado.
 
-## Pendientes conocidos
+## La línea de base SAOCOM
 
-**La línea de base SAOCOM (`02_Subsets_SNAP_QGIS/SAOCOM/01_linea_base_2023_24`) está vacía.**
-Los productos están descargados pero sin procesar. Si el TP5 la va a usar, hay que
-correr antes:
+**`02_Subsets_SNAP_QGIS/SAOCOM` tiene sólo las épocas pre y post: no hay
+`01_linea_base_2023_24`.** Los siete productos de la línea de base están
+descargados en el disco del curso, sin procesar a γ⁰. Para procesarlos se corre,
+desde la escena original:
 
     python TP4_01_procesar_sar.py SAOCOM_L1A linea_base
 
@@ -106,10 +107,9 @@ El script intenta cada escena contra los dos AOI, y éstas no cubren los dos: va
 ver errores esperables de `gpt` en las combinaciones que no corresponden. **No es
 un error del script**: los cuenta como fallidos y sigue.
 
-**El paso 5 escribe `mascara_validez_<AOI>.tif`, una por recinto.** Si en
-`02_Subsets_SNAP_QGIS/mascaras` sólo aparece un archivo sin el sufijo del recinto,
-hay que volver a correrlo para que el TP5 aplique la máscara que corresponde a
-cada sitio.
+**El paso 5 escribe `mascara_validez_<AOI>.tif`, una por recinto.** En
+`02_Subsets_SNAP_QGIS/mascaras` vienen las dos, más `mascara_validez.tif`, que
+es la que lee el paso 5 del TP5.
 
 ## Nota sobre escalas
 

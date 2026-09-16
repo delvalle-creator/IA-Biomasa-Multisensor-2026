@@ -13,18 +13,19 @@ descuido; si algo falta, está dicho.
 
 | Carpeta | Qué hay | Archivos |
 |---|---|---|
-| `00_Guia_del_practico/` | **Empiece por acá:** la guía sintética en PDF, con su LEEME, más los objetivos, las figuras, las diapositivas, el flujo de trabajo y los dos anexos: las huellas sin hojas y el cotejo con el CCI Biomass (con su mapa del paso 17) | 29 |
+| `00_Guia_del_practico/` | **Empiece por acá:** la guía sintética en PDF, con su LEEME, más los objetivos, las figuras, las diapositivas, el flujo de trabajo y los dos anexos: las huellas sin hojas y el cotejo con el CCI Biomass (con su mapa del paso 17) | 23 |
 | `01_Prompt_IA/` | El prompt inicial, la respuesta de la IA, el prompt corregido y la verificación | 4 |
-| `02_Subsets_SNAP_QGIS/` | Los datos de entrada: GEDI L2A y L2B recortados al AOI (y el L4A de biomasa, cuando lo descargue), y los segmentos **ICESat-2 / ATL08** | 11 |
-| `03_Scripts/` | Los diecisiete pasos numerados, más el 1b, en orden de ejecución, y el archivo que fija ese orden | 42 |
+| `02_Subsets_SNAP_QGIS/` | Los datos de entrada, en CSV: GEDI L2A, L2B y L4A recortados a los dos recintos, y los segmentos **ICESat-2 / ATL08** con su LEEME. **Vienen en el repositorio** | 11 |
+| `03_Scripts/` | Los diecisiete pasos numerados, más el 1b, en orden de ejecución, y el archivo que fija ese orden | 30 |
 | `04_Tablas_de_trabajo/` | Huellas válidas y partición **por bloques espaciales estratificados por altura**. La crean los scripts 05 y 07. Los segmentos ATL08 proyectados los deja el 12, y su versión tras el control de terreno FABDEM, el 15 | 19 |
-| `05_Resultados/` | Vectores, rásteres (los mapas de biomasa GEDI y CCI del paso 17), tablas, gráficos y control de calidad, de las dos misiones, más el cotejo con el CCI Biomass y el control de terreno | 86 |
-| `06_Bibliografia/` | Artículos, manuales, fichas técnicas de GEDI y de ATL08, y enlaces | 6 |
+| `05_Resultados/` | Tablas, gráficos y control de calidad de las dos misiones, el cotejo con el CCI Biomass y el control de terreno; los mapas de biomasa GEDI y CCI del paso 17, y el GeoPackage de ATL08. Los GeoPackage de los pasos 8 y 14 los escriben esos pasos | 92 |
+| `06_Bibliografia/` | Referencias de los artículos, manuales, fichas técnicas de GEDI y de ATL08, y enlaces | 6 |
 | `07_Preguntas_y_entrega/` | Aquí deja el estudiante sus respuestas y su entrega | 1 |
-| `08_Grafos_SNAP/` | Este práctico no usa grafos de SNAP | 0 |
 | `09_Orange/` | Los tres flujos de Orange Data Mining (GEDI, ATLAS con su control de terreno, CCI), con variables preseleccionadas, y su LEEME | 4 |
 | | Los cuatro archivos de la raíz: presentación, las dos notas técnicas y de dónde salen los insumos | 4 |
-| | **TOTAL** | **206** |
+| | **TOTAL** | **194** |
+
+Este práctico no usa grafos de SNAP, por eso no tiene `08_Grafos_SNAP`.
 
 ## La rama ICESat-2 / ATL08
 
@@ -72,18 +73,14 @@ está en `03_Scripts/00_ORDEN_DE_EJECUCION.md`.
 01b, y no 09, porque tiene que correr ANTES del 07: es el 07 el que lo necesita
 para entregar biomasa en Mg/ha en vez de altura de dosel.
 
-## Las carpetas vacías, y por qué lo están
+## Las carpetas que escriben los scripts
 
-`08_Grafos_SNAP` está vacía porque este práctico no usa grafos: GEDI no pasa por
-SNAP. Las demás las crean los scripts al ejecutarse:
-
-- `04_Tablas_de_trabajo/01_Bosque` y `02_Estepa` — las crea el script 05.
-- `04_Tablas_de_trabajo/04_Entrenamiento` y `05_Validacion` — las crea el script 07.
-- `02_Subsets_SNAP_QGIS/GEDI_L4A` — créela usted si descarga el producto de biomasa. El
-  script 07 avisa si no está y calibra contra altura, diciéndolo.
-
-Si abre el práctico y no ve `04_Tablas_de_trabajo`, no falta nada: todavía no corrió los
-scripts.
+- `04_Tablas_de_trabajo/01_Bosque` y `02_Estepa` — las escribe el script 05.
+- `04_Tablas_de_trabajo/04_Entrenamiento` y `05_Validacion` — las escribe el script 07.
+- `02_Subsets_SNAP_QGIS/GEDI_L4A` — viene con los dos CSV del producto de biomasa.
+  Si faltaran, el script 07 lo avisa y calibra contra altura, diciéndolo.
+- `05_Resultados/03_Vectores/TP2_GEDI.gpkg` y `TP2_ICESat2_cotejo.gpkg` — los
+  escriben los pasos 8 y 14.
 
 ## Lo que NO está, y es información
 

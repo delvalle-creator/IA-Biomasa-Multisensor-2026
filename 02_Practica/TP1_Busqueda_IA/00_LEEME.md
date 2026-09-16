@@ -12,17 +12,18 @@ a la IA hasta los resultados. Las únicas carpetas vacías son las que deben est
 
 | Carpeta | Qué hay | Archivos |
 |---|---|---|
-| `00_Guia_del_practico/` | **Empiece por acá:** la guía sintética en PDF, con su LEEME, más los objetivos y las figuras (la fig15 del encadenamiento, con ICESat-2 y CCI Biomass, también en SVG y pptx editable). El desarrollo completo, en el capítulo 3 de la guía teórico-práctica | 14 |
+| `00_Guia_del_practico/` | **Empiece por acá:** la guía sintética en PDF, con su LEEME, más los objetivos y las figuras (la fig15 del encadenamiento, con ICESat-2 y CCI Biomass, también en SVG) y los programas que las generan. El desarrollo completo, en el capítulo 3 de la guía teórico-práctica | 12 |
 | `01_Prompt_IA/` | El prompt inicial con sus defectos, el análisis de la respuesta, el prompt maestro corregido y la verificación | 5 |
 | `02_Subsets_SNAP_QGIS/` | El inventario de datasets evaluados (los AOI se leen de `00_COMUN/01_AOI/`) | 4 |
 | `03_Scripts/` | Los diez scripts, numerados en orden de ejecución, más configuración y funciones de apoyo | 17 |
 | `04_Tablas_de_trabajo/` | El TP1 no produce subconjuntos; ver su LEEME | 1 |
-| `05_Resultados/` | La matriz de datos y la línea de tiempo | 2 |
-| `06_Bibliografia/` | Artículos, manuales, fichas de los ocho sensores y enlaces | 5 |
+| `05_Resultados/` | La matriz de datos, las tablas de control de los pasos 1 y 2, y la línea de tiempo | 4 |
+| `06_Bibliografia/` | Referencias de los artículos, manuales, fichas de los ocho sensores y enlaces | 5 |
 | `07_Preguntas_y_entrega/` | La tabla maestra de sensores. **Aquí deja el estudiante sus respuestas y su entrega** | 2 |
-| `08_Grafos_SNAP/` | Este práctico no usa grafos de SNAP | 0 |
 | | Los tres archivos de la raíz: presentación, notas técnicas y de dónde salen los insumos | 3 |
 | | **TOTAL** | **53** |
+
+Este práctico no usa grafos de SNAP, por eso no tiene `08_Grafos_SNAP`.
 
 El práctico completo, con su fundamentación, está en la guía teórico-práctica: `02_Practica\00_Guia_teorica_practica`.
 
@@ -51,8 +52,8 @@ Los diez scripts cubren seis de los siete proveedores. El séptimo es la CONAE,
 que distribuye el SAOCOM: su catálogo exige registro, solicitud y autorización
 previas, y entrega después por un enlace personal. Por eso no hay un
 `TP1_..._descargar_saocom.py`, y por eso el trámite está documentado como tal en
-`00_COMUN/08_Originales_crudos/PEDIDO_SAOCOM_28jul2026.md`. Las escenas ya están
-en el disco del curso.
+`00_COMUN/08_Originales_crudos/PEDIDO_SAOCOM_28jul2026.md`. Las escenas están
+en el disco del curso, y sus recortes en γ⁰, en `TP4_Radar_SAR/02_Subsets_SNAP_QGIS/SAOCOM`.
 
 ## Lo que este práctico enseña, en una línea
 

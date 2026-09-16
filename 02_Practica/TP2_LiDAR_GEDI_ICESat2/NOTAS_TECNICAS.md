@@ -7,15 +7,20 @@
 **Pregunta del práctico:** ¿qué nos dice el LiDAR espacial, por sí solo, sobre la
 estructura del bosque? Es el primer eslabón de la comparación: **LiDAR solo**.
 
-## Estado: completo. Insumos, cadena GEDI de once pasos numerados más el 1b, la rama ICESat-2 con su control de terreno FABDEM (pasos 12 a 16), el mapa contra el CCI (paso 17) y resultados; la rama tiene sus notas en `NOTAS_TECNICAS_ICESat2.md`
-
 ## Qué hay
+
+La cadena GEDI tiene once pasos numerados más el 1b; la rama ICESat-2, con su
+control de terreno FABDEM, son los pasos 12 a 16, y el mapa contra el CCI es el
+paso 17. La rama tiene sus notas en `NOTAS_TECNICAS_ICESat2.md`.
 
 - `02_Subsets_SNAP_QGIS/GEDI_L2A/` y `GEDI_L2B/` — los disparos GEDI ya recortados a los dos
   AOI, en CSV (coordenadas WGS84 y UTM 19S).
 - L2A: `rh25`, `rh50`, `rh75`, `rh95`, `rh98`, `elev_lowestmode`, `quality_flag`, `sensitivity`
 - L2B: `pai`, `fhd_normal`, `cover`, `l2b_quality_flag`
-- **6288 disparos válidos de 11222** en total.
+- **6.288 disparos en el bosque y 11.222 en la estepa**; tras los filtros de
+  calidad y de pendiente quedan 690 y 3.084, y tras el de estructura del paso 6,
+  690 y 3.083 (`05_Resultados/06_Control_calidad/filtrado_calidad.csv` y
+  `filtrado_pendiente.csv`).
 
 ## Dos advertencias que ya costaron caro
 
@@ -27,15 +32,16 @@ estructura del bosque? Es el primer eslabón de la comparación: **LiDAR solo**.
    se mudaron a la raíz del beam. Un script escrito para V002 devuelve columnas
    vacías **sin dar ningún error**.
 
-## Lo que falta hacer
+## Lo que hace la cadena
 
-1. Filtrado de calidad: `quality_flag == 1`, `sensitivity > 0.95`, y descartar
-   footprints en pendiente fuerte (usar el DEM de `00_COMUN/03_Topografia/`).
-2. **Conservar los footprints descartados y el motivo del descarte** (lo pide la
-   consigna): van a `05_Resultados/06_Control_calidad/`.
-3. Métricas de altura de dosel (rh95/rh98) y comparación bosque vs. ecotono.
-4. Biomasa GEDI de referencia (L4A si se incorpora, o modelo alométrico local).
-5. Partición entrenamiento / validación para los prácticos siguientes.
+1. Filtrado de calidad (paso 3): `quality_flag == 1` y `sensitivity` por encima
+   del umbral, que el programa fija en 0,90 (con la opción `--sensibilidad 0.95`).
+   Filtrado por pendiente (paso 5) con el DEM de `00_COMUN/03_Topografia/`.
+2. **Los footprints descartados se conservan con el motivo del descarte** (lo pide
+   la consigna): van a `05_Resultados/04_Tablas/` y `06_Control_calidad/`.
+3. Métricas de altura de dosel (rh95/rh98) y comparación bosque vs. ecotono (paso 6).
+4. Biomasa GEDI de referencia a partir del L4A (paso 7).
+5. Partición entrenamiento / validación para los prácticos siguientes (paso 7).
 
 ## Scripts
 

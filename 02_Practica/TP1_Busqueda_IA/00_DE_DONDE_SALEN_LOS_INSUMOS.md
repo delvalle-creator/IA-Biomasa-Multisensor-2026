@@ -4,7 +4,7 @@ Las tres carpetas se llaman como lo que contienen, y conviene no confundirlas.
 
 | Carpeta | Qué hay | Quién la escribe |
 |---|---|---|
-| `02_Subsets_SNAP_QGIS` | Los recortes de trabajo: pares `.dim` + `.data` y GeoTIFF, ya recortados a los dos recintos. **Es sobre esto que se trabaja en clase.** | Los programas del práctico |
+| `02_Subsets_SNAP_QGIS` | En este práctico, el inventario de lo descargado y las listas de adquisiciones (CSV y XLSX). **Vienen en el repositorio.** | Los programas del práctico |
 | `04_Tablas_de_trabajo` | Las tablas `.csv` intermedias: muestras, datos de entrenamiento y de validación | Los programas del práctico |
 | `05_Resultados` | Lo que sale: rásteres, vectores, tablas y gráficos | Los programas del práctico |
 
@@ -32,7 +32,8 @@ En este práctico se **consultan los catálogos y se practica la descarga** sobr
 una escena o dos. Lo demás ya está bajado: el práctico produce el inventario de
 lo que hay, no las descargas.
 
-Son 253 GB en total. Ningún estudiante se los lleva: se trabaja siempre sobre
-los recortes de `02_Subsets_SNAP_QGIS`, que pesan muy poco y permiten repetir
-una cadena entera en minutos. El original queda como respaldo y como prueba: si
-un recorte resulta dudoso, se vuelve a él y se comprueba.
+Son 252 GB en total y no viajan en el repositorio: en el aula están en el disco
+del curso. Se trabaja siempre sobre los recortes de `02_Subsets_SNAP_QGIS`, que
+sí viajan, pesan poco y permiten repetir una cadena entera en minutos. El
+original queda como respaldo y como prueba: si un recorte resulta dudoso, se
+vuelve a él y se comprueba.

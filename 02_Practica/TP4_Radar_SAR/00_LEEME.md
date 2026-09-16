@@ -11,17 +11,18 @@ El práctico está **resuelto de punta a punta**. Las únicas carpetas vacías s
 
 | Carpeta | Qué hay | Archivos |
 |---|---|---|
-| `00_Guia_del_practico/` | **Empiece por acá:** la guía sintética en PDF, con su LEEME, más los objetivos y las figuras con los generadores que las rehacen. El desarrollo completo, en el capítulo 6 de la guía teórico-práctica | 21 |
+| `00_Guia_del_practico/` | **Empiece por acá:** la guía sintética en PDF, con su LEEME, más los objetivos, las figuras con los generadores que las rehacen y el anexo de la fusión de órbitas de NISAR. El desarrollo completo, en el capítulo 6 de la guía teórico-práctica | 15 |
 | `01_Prompt_IA/` | El prompt inicial con sus defectos, el análisis, el prompt corregido y la verificación | 5 |
-| `02_Subsets_SNAP_QGIS/` | γ⁰ de los cuatro radares en la grilla común, los recortes con fase y las máscaras | 605 |
-| `03_Scripts/` | Los diez scripts, los grafos de SNAP y el orden de ejecución | 27 |
+| `02_Subsets_SNAP_QGIS/` | γ⁰ de los cuatro radares en la grilla común, en GeoTIFF (28 de Sentinel-1, 6 de SAOCOM, 22 de NISAR con sus máscaras de píxeles válidos y 6 de PALSAR-2), las máscaras de validez, el diccionario de nombres y el material de BIOMASS. **Vienen en el repositorio.** Los pares `.dim` + `.data` de SNAP y los recortes con fase no viajan (ver abajo) | 70 |
+| `03_Scripts/` | Los diez scripts, los auxiliares, la carpeta de BIOMASS banda P con sus dos grafos, y el orden de ejecución | 28 |
 | `04_Tablas_de_trabajo/` | El TP4 usa las huellas del TP2; ver su LEEME | 1 |
-| `05_Resultados/` | Rásters en dB listos para QGIS y los gráficos | 172 |
-| `06_Bibliografia/` | Artículos, manuales, fichas de los radares y enlaces | 6 |
+| `05_Resultados/` | Las tablas y los gráficos. Los rásters en dB y los filtrados los escriben los pasos 6 y 9 | 18 |
+| `06_Bibliografia/` | Referencias de los artículos, manuales, fichas de los radares y enlaces | 5 |
 | `07_Preguntas_y_entrega/` | El material de BIOMASS banda P. **Aquí deja el estudiante sus respuestas y su entrega** | 3 |
-| `08_Grafos_SNAP/` | Los grafos del Graph Builder | 27 |
+| `08_Grafos_SNAP/` | Los 27 grafos del Graph Builder, con su LEEME | 28 |
+| `09_Herramientas/` | El complemento NISAR GCOV Reader para QGIS | 9 |
 | | Los tres archivos de la raíz: presentación, notas técnicas y de dónde salen los insumos | 3 |
-| | **TOTAL** | **870** |
+| | **TOTAL** | **185** |
 
 El práctico completo, con su fundamentación, está en la guía teórico-práctica: `02_Practica\00_Guia_teorica_practica`.
 
@@ -40,12 +41,18 @@ El práctico completo, con su fundamentación, está en la guía teórico-práct
 | 9 | `TP4_09_exportar_para_qgis.py` — pasa a dB y deja los rásters listos | no |
 | 10 | `TP4_10_indices_polarimetricos.py` — RVI, RFDI y demás índices | no |
 
-Los 1 a 4 ya fueron ejecutados: sus resultados están en `02_Subsets_SNAP_QGIS`. Usted corre
-del 5 en adelante: el 5 vuelve a escribir la máscara de validez de cada recinto
-(`mascaras/mascara_validez_<AOI>.tif`). El 6 usa `scipy`, que el entorno `aoi` ya trae.
+Los 1 a 4 ya fueron ejecutados: sus resultados en GeoTIFF están en
+`02_Subsets_SNAP_QGIS`. Lo que no viaja en el repositorio son los pares `.dim` +
+`.data` de SNAP, que los grafos de `08_Grafos_SNAP` rehacen desde la escena
+original, y los recortes con fase del paso 2 (`00_Recortes_crudos_fase`), cuyos
+archivos superan los 100 MB que admite GitHub: en el aula están en el disco del
+curso, y sólo hacen falta para la polarimetría con matrices de covarianza. Usted
+corre del 5 en adelante: el 5 vuelve a escribir la máscara de validez de cada
+recinto (`mascaras/mascara_validez_<AOI>.tif`). El 6 usa `scipy`, que el entorno
+`aoi` ya trae.
 
-Los scripts 6 a 8 crean `05_Resultados/04_Tablas` y `05_Resultados/02_Rasters/filtrados`
-al ejecutarse. Si no las ve, todavía no los corrió.
+Los scripts 6 a 8 escriben sus tablas en `05_Resultados/04_Tablas`, y el 6 deja
+además los rásters filtrados en `05_Resultados/02_Rasters/filtrados`.
 
 ## Lo que este práctico demuestra, medido
 
@@ -92,15 +99,15 @@ entre los dos sensores desaparecen.
 
 ## Lo que NO está, y es información
 
-- **No hay `04_Tablas_de_trabajo`**: el TP4 usa las huellas del TP2.
-- **La línea de base SAOCOM está completa** (7 productos), pero **sin procesar**:
-  ninguno pasó todavía por `TP4_01_procesar_sar.py`. Las 2 dual-pol S4 que
-  faltaban (27/10/2023 y 23/01/2024) llegaron con identificadores distintos a los
-  del pedido. **Son ASCENDENTES**, mientras que las 5 quad-pol son
-  descendentes: no se apilan ni se promedian juntas. Sirven como control de
-  geometría —cuánto de γ⁰ depende de cómo mira el radar y no del bosque—, no como
-  insumo. Se comparan contra la fecha descendente más próxima: 27/10 contra 29/11
-  y 23/01 contra 16/01.
+- **`04_Tablas_de_trabajo` sólo tiene su LEEME**: el TP4 usa las huellas del TP2.
+- **La línea de base SAOCOM está descargada** (7 productos) y **sin procesar**:
+  ninguno pasó por `TP4_01_procesar_sar.py`, y por eso `02_Subsets_SNAP_QGIS/SAOCOM`
+  tiene sólo las épocas pre y post. Las 2 dual-pol S4 (27/10/2023 y 23/01/2024)
+  tienen identificadores distintos a los del pedido. **Son ASCENDENTES**, mientras
+  que las 5 quad-pol son descendentes: no se apilan ni se promedian juntas. Sirven
+  como control de geometría —cuánto de γ⁰ depende de cómo mira el radar y no del
+  bosque—, no como insumo. Se comparan contra la fecha descendente más próxima:
+  27/10 contra 29/11 y 23/01 contra 16/01.
 - **La banda S de NISAR no está confirmada.** Se distribuye por Bhoonidhi (ISRO) y su
   producción diaria arrancó el 08/07/2026. Ver `01_Prompt_IA/04_Verificacion/`.
 - **El R² máximo es 0,276** (NISAR HH; el HV da 0,273), y casi empata con el NDMI del óptico (0,310). No contradice

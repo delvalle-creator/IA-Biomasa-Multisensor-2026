@@ -12,7 +12,7 @@ Héctor Francisco del Valle · CeReGeo (FCyT, UADER) · LEMIV (FI, UNPSJB)
 `00_FE_DE_ERRATAS.md`, y el mismo texto en `00_FE_DE_ERRATAS.pdf`, es el primer
 documento que hay que leer. Dice qué se corrigió respecto de la entrega v1.0.0
 del repositorio, que es la que muchos ya descargaron, y qué diferencias quedan
-en los PDF que no se rehicieron. Son cuarenta y dos archivos corregidos.
+en los PDF que no se rehicieron. Son cuarenta y siete archivos corregidos.
 Ninguna corrección cambia las conclusiones del curso, pero varias cambian
 resultados que el estudiante entrega.
 
@@ -29,15 +29,14 @@ que vienen después son las de trabajo: la común y una por cada trabajo prácti
 
 ## Ningún Word llega al estudiante
 
-El estudiante recibe **PDF y `.md`**, nada más. Los originales en Word existen
-porque son la fuente editable, pero viven apartados: en `_fuente\` y en
-`99_PRIVADO_NO_DISTRIBUIR`. El atajo que arma la entrega excluye todo `.docx` y
-todo `.pptx` estén donde estén, de modo que la regla no depende de que alguien se
-acuerde. Lo que falta convertir está anotado en `_fuente\QUE_FALTA_CONVERTIR.md`.
+El estudiante recibe **PDF y `.md`**, nada más. Los originales en Word y en
+PowerPoint son la fuente editable del docente y no forman parte de esta entrega:
+el `.gitignore` del repositorio excluye todo `.docx` y todo `.pptx` estén donde
+estén, de modo que la regla no depende de que alguien se acuerde.
 
 ## Por dónde empezar
 
-La carpeta tiene ahora **tres documentos sueltos y nada más**. Todo lo demás vive
+La raíz tiene **los documentos de arranque y nada más**. Todo lo demás vive
 dentro del práctico al que pertenece.
 
 ```
@@ -47,10 +46,11 @@ CURSO_BIOMASA_2026\
     00_LEEME_PRIMERO.md            este archivo
     00_INSTRUCTIVO_DE_EJECUCION    qué se ejecuta, en qué orden, y cómo saber
                                    que salió bien
-    _fuente\                       los originales en Word. No se distribuyen
+    README.md                      la ficha del repositorio, con los DOI
+    CITATION.cff                   cómo citar el curso
+    LICENSE.md                     la licencia (CC BY-NC-SA 4.0)
     01_Teoria\                     las clases teóricas
-        01_Presentaciones_pdf\     lo que recibe el estudiante
-        02_Fuentes_pptx\           los originales del docente
+        01_Presentaciones_pdf\     las diez presentaciones, en PDF
         03_Lecturas\               material de lectura: The SAR Handbook y
                                    el listado con los enlaces oficiales
     02_Practica\                   todo lo que se ejecuta
@@ -64,7 +64,6 @@ CURSO_BIOMASA_2026\
         10_Procedimientos_y_resultados\  el registro de cómo se hizo cada proceso
         11_Desarrollo_y_respuestas\  el desarrollo resuelto de los cinco prácticos
         09_ATAJOS\                 los nueve .bat, para no escribir rutas a mano
-    99_PRIVADO_NO_DISTRIBUIR\      material del docente
 ```
 
 Los cinco prácticos y `00_COMUN` son carpetas hermanas dentro de `02_Practica`, y
@@ -134,15 +133,26 @@ memorizar. Al abrir cualquiera de ellos:
 
 ## Cómo llega el material, y sobre qué se trabaja
 
-Las descargas completas suman unos **252 GB** (inventario.csv, 68 productos únicos) y llegan en un disco. Usted ya las
-tiene: no necesita bajarlas. La descarga **se practica igual**, sobre una escena o
-dos, porque saber pedirle a un catálogo exactamente lo que uno necesita es parte
-del oficio y no se aprende leyendo.
+Las descargas completas suman unos **252 GB** (inventario.csv, 68 productos
+únicos). No viajan en el repositorio: en el aula están en el disco del curso. La
+descarga **se practica igual**, sobre una escena o dos, porque saber pedirle a un
+catálogo exactamente lo que uno necesita es parte del oficio y no se aprende
+leyendo.
 
-Del TP2 en adelante **se trabaja siempre sobre los recortes de los dos recintos**.
-Pesan muy poco, caben en cualquier equipo y permiten repetir una cadena entera en
+Del TP2 en adelante **se trabaja siempre sobre los recortes de los dos recintos**,
+y los recortes **vienen en el repositorio**, en la carpeta `02_Subsets_SNAP_QGIS`
+de cada práctico: son los GeoTIFF, los CSV y las máscaras que leen los programas,
+2,4 GB en total. Caben en cualquier equipo y permiten repetir una cadena entera en
 minutos. El original queda como respaldo y como prueba: si un recorte resulta
 dudoso, se vuelve a él y se comprueba.
+
+Lo que no viaja de esa carpeta son los productos de SNAP, los pares `.dim` +
+`.data`: se rehacen con los grafos de `08_Grafos_SNAP` a partir de las escenas
+originales, y ningún programa del curso los lee. Tampoco viajan los recortes con
+fase de `TP4_Radar_SAR\02_Subsets_SNAP_QGIS\00_Recortes_crudos_fase`, porque
+sus archivos superan los 100 MB que admite GitHub: los produce
+`TP4_02_recortar_crudo.py` desde la escena original, y en el aula están en el
+disco del curso.
 
 ## Las cuentas, antes de empezar
 
@@ -196,7 +206,7 @@ Esa diferencia es contenido del curso, no una muleta.
 | `02_Coberturas` | La capa de cobertura del suelo usada para estratificar |
 | `03_Topografia` | Modelo de elevación, pendiente, orientación y sombreado |
 | `07_Diccionario_datos` | Qué significa cada columna de cada tabla |
-| `08_Originales_crudos` | **Los originales descargados: `.zip`, `.h5`, `.xemt`. 252 GB.** Están aquí y no en cada práctico porque una misma escena sirve a varios. No se tocan nunca |
+| `08_Originales_crudos` | **Los originales descargados: `.zip`, `.h5`, `.xemt`. 252 GB.** No viajan en el repositorio (en el aula están en el disco del curso); de esta carpeta sólo viajan los dos recortes del CCI Biomass que lee el paso 17 del TP2. Están aquí y no en cada práctico porque una misma escena sirve a varios. No se tocan nunca |
 | `GLOSARIO.md` | Términos del curso |
 | `configuracion_comun.py` | Rutas, CRS y malla común. Lo importan todos los scripts |
 | `COMO_CAMBIAR_DE_AREA.md` | Qué tocar (y qué rehacer) para llevar este flujo de trabajo a otros recintos u otra región |
@@ -209,7 +219,7 @@ La estructura se repite en los cinco, lo que permite buscar sin memorizar.
 |---|---|
 | `00_Guia_del_practico` | **La guía sintética del práctico, en PDF** (empiece por ella), su LEEME, y los objetivos, figuras, diapositivas y anexos. El desarrollo completo está en su capítulo de la guía teórico-práctica (`02_Practica\00_Guia_teorica_practica`) |
 | `01_Prompt_IA` | Cuatro subcarpetas: prompt inicial, respuesta de la IA, prompt corregido y verificación |
-| `02_Subsets_SNAP_QGIS` | **Sobre esto se trabaja.** Los recortes: pares `.dim` + `.data` y GeoTIFF, ya ajustados a los dos recintos |
+| `02_Subsets_SNAP_QGIS` | **Sobre esto se trabaja.** Los recortes ya ajustados a los dos recintos: GeoTIFF, CSV y máscaras, que son lo que leen los programas. Vienen en el repositorio |
 | `03_Scripts` | Lo que se ejecuta, agrupado por etapa |
 | `04_Tablas_de_trabajo` | Las tablas `.csv` intermedias: muestras, entrenamiento y validación |
 | `05_Resultados` | Lo que sale: rásters, vectores, tablas y gráficos |
@@ -221,8 +231,7 @@ La estructura se repite en los cinco, lo que permite buscar sin memorizar.
 
 La estructura se repite en los cinco, aunque algunas subcarpetas queden
 vacías: el TP5, por ejemplo, no descarga ni pre-procesa nada y consume lo que
-dejaron los cuatro anteriores, de modo que su `02_Subsets_SNAP_QGIS` está vacía
-a propósito. El TP2 y el TP5 suman además `09_Orange\`, con los flujos de
+dejaron los cuatro anteriores, de modo que no tiene `02_Subsets_SNAP_QGIS`. El TP2 y el TP5 suman además `09_Orange\`, con los flujos de
 Orange Data Mining del curso, y `02_Practica\10_Procedimientos_y_resultados\`
 guarda el registro de cómo se hizo cada proceso, con sus capturas.
 `02_Practica\11_Desarrollo_y_respuestas\` contiene el desarrollo resuelto de
@@ -258,7 +267,7 @@ modo que también sirve como documentación.
 | Una tabla de resultado | `TPn_*\05_Resultados\04_Tablas\` |
 | Una figura | `TPn_*\05_Resultados\05_Graficos\` |
 | Un archivo de estilo para QGIS | Junto al ráster que estiliza, con extensión `.qml` |
-| La escena original sin procesar | `00_COMUN\08_Originales_crudos\<época>\<sitio>\` |
+| La escena original sin procesar | `00_COMUN\08_Originales_crudos\<época>\<sitio>\`, en el disco del curso (no viaja en el repositorio) |
 | Qué significa una columna | `00_COMUN\07_Diccionario_datos\` |
 | Un término que no entiendo | `00_COMUN\GLOSARIO.md` |
 | Cómo usar estos scripts en OTRA área de estudio | `00_COMUN\COMO_CAMBIAR_DE_AREA.md` |
@@ -274,7 +283,7 @@ necesita. Si una no existe, es porque ese práctico no produce ese tipo de salid
 | `.csv` | Tabla separada por comas | Planilla de cálculo, o Python con pandas |
 | `.gpkg` | Paquete de geometría | QGIS |
 | `.h5` | Gránulo jerárquico de GEDI | Sólo por script; no lo abra a mano |
-| `.dim` + `.data` | Producto de SNAP | SNAP. **El par nunca se separa** |
+| `.dim` + `.data` | Producto de SNAP. No viaja en el repositorio: se rehace con los grafos de `08_Grafos_SNAP` | SNAP. **El par nunca se separa** |
 | `.xml` | Grafo de procesamiento de SNAP | Graph Builder de SNAP |
 | `.qml` | Estilo de capa | QGIS lo toma solo si comparte nombre con el ráster |
 | `.md` | Documento de texto | Ver abajo |
@@ -303,7 +312,7 @@ corregida atmosféricamente. El motivo está escrito en la propia carpeta de
 insumos del TP3.
 
 **Los grafos de SNAP que terminan en `_cli` no son para usted.** De los
-veintiséis grafos del TP4, que ahora viven en `08_Grafos_SNAP`, nueve tienen un
+veintisiete grafos del TP4, que viven en `08_Grafos_SNAP`, nueve tienen un
 gemelo con ese sufijo: son para la
 línea de órdenes, los usa Python y no abren bien en la interfaz gráfica. Trabaje
 siempre con los que no lo llevan.

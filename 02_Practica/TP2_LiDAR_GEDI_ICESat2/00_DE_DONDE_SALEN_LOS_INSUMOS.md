@@ -4,7 +4,7 @@ Las tres carpetas se llaman como lo que contienen, y conviene no confundirlas.
 
 | Carpeta | Qué hay | Quién la escribe |
 |---|---|---|
-| `02_Subsets_SNAP_QGIS` | Los recortes de trabajo: pares `.dim` + `.data` y GeoTIFF, ya recortados a los dos recintos. **Es sobre esto que se trabaja en clase.** | Los programas del práctico |
+| `02_Subsets_SNAP_QGIS` | Los recortes de trabajo, en CSV: los disparos de GEDI L2A, L2B y L4A y los segmentos ATL08, ya recortados a los dos recintos. **Es sobre esto que se trabaja en clase, y vienen en el repositorio.** | Los programas del práctico |
 | `04_Tablas_de_trabajo` | Las tablas `.csv` intermedias: muestras, datos de entrenamiento y de validación | Los programas del práctico |
 | `05_Resultados` | Lo que sale: rásteres, vectores, tablas y gráficos | Los programas del práctico |
 
@@ -34,7 +34,9 @@ organizadas por época y por recinto:
 Le corresponden `02_pre\GEDI` (38 gránulos, 24,6 GB) y `02_pre\GEDI_L4A`
 (19 archivos, 2,6 GB).
 
-Son 253 GB en total. Ningún estudiante se los lleva: se trabaja siempre sobre
-los recortes de `02_Subsets_SNAP_QGIS`, que pesan muy poco y permiten repetir
-una cadena entera en minutos. El original queda como respaldo y como prueba: si
-un recorte resulta dudoso, se vuelve a él y se comprueba.
+Son 252 GB en total y no viajan en el repositorio, salvo los dos recortes del
+CCI Biomass (2 MB) que lee el paso 17: en el aula están en el disco del curso.
+Se trabaja siempre sobre los recortes de `02_Subsets_SNAP_QGIS`, que sí viajan,
+pesan poco y permiten repetir una cadena entera en minutos. El original queda
+como respaldo y como prueba: si un recorte resulta dudoso, se vuelve a él y se
+comprueba.

@@ -7,8 +7,6 @@
 **Pregunta del práctico:** ¿cuánta biomasa puede explicar el óptico por sí solo?
 Segundo eslabón de la comparación: **óptico solo**.
 
-## Estado: completo. Insumos verificados, índices, severidad, modelado e informe
-
 ## Qué hay (todo en la grilla común: EPSG:32719, 10 m, 1500 × 1500 px)
 
 | Fuente | Épocas | Resolución | Contenido |
@@ -71,13 +69,11 @@ andan, NDMI y NBR, son los que usan el infrarrojo de onda corta, es decir, la
 banda de mayor longitud de onda del sensor. La tendencia señala hacia dónde ir:
 a longitudes de onda más largas, o sea, al radar de banda L del TP4.
 
-## Estado
+## Las figuras
 
-Completo: seis scripts, guía del práctico con cinco figuras y bibliografía APA
-verificada, y figuras editables en `TP3_Datos_Opticos/00_Guia_del_practico/figuras/editables_pptx/`.
-
-Las figuras se regeneran con los scripts de `00_Guia_del_practico/figuras/generadores/`.
-Cada una se guarda en PNG (para el Word) y en SVG (editable en Inkscape o Illustrator).
+Las figuras de la guía se regeneran con los scripts de
+`00_Guia_del_practico/figuras/generadores/`. Cada una se guarda en PNG y en SVG
+(editable en Inkscape o Illustrator).
 3. Texturas.
 4. Modelos contra la referencia GEDI de TP2: regresión lineal y random forest.
 5. Importancia de variables, validación cruzada y análisis de residuos.

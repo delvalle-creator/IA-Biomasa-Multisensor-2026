@@ -7,7 +7,7 @@
 >
 > | Carpeta | Qué guarda |
 > |---|---|
-> | `00_COMUN\08_Originales_crudos` | los 253 GB de productos originales, sin modificar |
+> | `00_COMUN\08_Originales_crudos` | los 252 GB de productos originales, sin modificar (en el disco del curso; en el repositorio sólo viajan los dos recortes del CCI Biomass) |
 > | `00_alos` | la serie histórica de ALOS-1 |
 > | `01_base` | la línea de base, 2023 y 2024 |
 > | `02_pre` | la época previa al incendio, 2025 y 2026 |
@@ -62,7 +62,7 @@ permite comparar explícitamente qué aporta cada fuente y qué aporta la fusió
     │   │   ├── 03_Topografia/     DEM, pendiente, orientación, sombreado
     │   │   │                      ← la LLENA el script TP2_04, no viene con el proyecto
     │   │   ├── 07_Diccionario_datos/  qué significa cada archivo y cada banda
-    │   │   ├── 08_Originales_crudos/  ← LOS DATOS CRUDOS, SIN MODIFICAR (253 GB)
+    │   │   ├── 08_Originales_crudos/  ← LOS DATOS CRUDOS, SIN MODIFICAR (252 GB, en el disco del curso)
     │   │   ├── GLOSARIO.md        ← el vocabulario del curso, en un solo lugar
     │   │   └── configuracion_comun.py  ← proyección, píxel, AOI y épocas: FUENTE ÚNICA
 

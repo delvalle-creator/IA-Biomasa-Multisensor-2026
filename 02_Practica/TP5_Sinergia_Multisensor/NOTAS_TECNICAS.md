@@ -8,14 +8,12 @@
 compara **óptico solo**, **radar solo**, **óptico+radar** y **óptico+radar+LiDAR**
 contra el control de **sólo LiDAR**, y estima la **biomasa quemada**.
 
-## Estado: completo. Los cinco modelos, el ensayo nulo, el mapa final y el informe
-
 ## De dónde vienen sus insumos
 
 Este práctico **no descarga nada**. Sus insumos son los productos ya procesados:
 
-El `02_Subsets_SNAP_QGIS` de este práctico está **vacío a propósito**: el
-TP5_01 lee directamente lo que dejaron los otros prácticos, sin copiarlo:
+Este práctico **no tiene `02_Subsets_SNAP_QGIS`**: el TP5_01 lee directamente lo
+que dejaron los otros prácticos, sin copiarlo:
 
 | Insumo | Lo lee de |
 |---|---|

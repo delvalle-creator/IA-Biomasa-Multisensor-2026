@@ -1,5 +1,8 @@
-# Datos crudos originales (~260 GB) — se obtienen de los proveedores
-08_Originales_crudos/
+# Datos crudos originales (~253 GB) — se obtienen de los proveedores con los
+# scripts de descarga del TP1. La única excepción son los dos recortes del
+# CCI Biomass (2 MB), que el paso 17 del TP2 lee sin descomprimir.
+**/08_Originales_crudos/*
+!**/08_Originales_crudos/CCI_BIOMASS/
 
 # Material privado del docente
 99_PRIVADO_NO_DISTRIBUIR/
@@ -21,16 +24,28 @@ _ENTREGA_ESTUDIANTES/
 !01_Teoria/03_Lecturas/00_MATERIAL_DE_LECTURA.md
 !01_Teoria/03_Lecturas/SARHB_FullRes.pdf
 
-# Rásters y GeoPackage de resultados: 1.811 MB que los programas del curso
-# vuelven a generar a partir de los datos. Los insumos de 00_COMUN sí viajan.
-**/05_Resultados/02_Rasters/
-**/05_Resultados/03_Vectores/*.gpkg
-*.aux.xml
-
-# Productos intermedios pesados de SNAP/QGIS (archivos >100 MB)
+# Recortes de trabajo (02_Subsets_SNAP_QGIS): VIAJAN. Son los insumos de los
+# prácticos: GeoTIFF, CSV y máscaras. Lo único que no viaja de esa carpeta son
+# los productos de SNAP (pares .dim + .data), que se rehacen con los grafos de
+# 08_Grafos_SNAP, y los recortes con fase de 00_Recortes_crudos_fase, cuyos
+# archivos superan los 100 MB que admite GitHub.
 *.data/
 *.dim
-02_Subsets_SNAP_QGIS/
+**/02_Subsets_SNAP_QGIS/00_Recortes_crudos_fase/
+
+# Resultados que los programas del curso vuelven a generar a partir de los
+# recortes: rásters de 05_Resultados/02_Rasters y GeoPackage de 03_Vectores.
+# Excepciones: los mapas de biomasa GEDI/CCI del TP2 (paso 17, 15 KB, con su
+# LEEME) y el GeoPackage de ATL08 del TP2, que no lo produce ningún script.
+**/05_Resultados/02_Rasters/
+!**/TP2_LiDAR_GEDI_ICESat2/05_Resultados/02_Rasters/
+**/05_Resultados/03_Vectores/*.gpkg
+!**/TP2_LiDAR_GEDI_ICESat2/05_Resultados/03_Vectores/TP2_ICESat2_ATL08.gpkg
+*.aux.xml
+
+# Productos polarimétricos de SNAP del TP4 (05_Resultados/*.dim + .data):
+# archivos de más de 100 MB. Se rehacen con los grafos de 08_Grafos_SNAP.
+# (cubiertos por *.data/ y *.dim)
 
 # Regla del curso: el estudiante recibe PDF. Ningún Word ni PowerPoint se
 # publica, ni siquiera como fuente de una figura o de una presentación.
@@ -51,6 +66,17 @@ _ANTES_*/
 *.previo
 *.original_*
 *.antes_de_*
+**/03_Scripts/salida_*.txt
+**/03_Scripts/**/salida_*.txt
+**/05_Resultados/06_Control_calidad/ICESat2_ATL08/deck-content.txt
+**/05_Resultados/06_Control_calidad/ICESat2_ATL08/design-notes.txt
+**/05_Resultados/06_Control_calidad/ICESat2_ATL08/source-notes.txt
+**/05_Resultados/06_Control_calidad/ICESat2_ATL08/LEEME_del_paquete_original.txt
+
+# Credenciales y configuración local
+.dodsrc
+.netrc
+_netrc
 
 # Temporales
 Thumbs.db

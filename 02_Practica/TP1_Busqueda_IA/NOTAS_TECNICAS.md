@@ -10,8 +10,6 @@ sitios, cuáles sirven de verdad, y cómo se justifica cada elección?
 Este práctico es el fundamento de los otros cuatro: acá no se procesa nada, se
 **busca, se audita y se decide**. El producto central es la matriz de datos.
 
-## Estado: completo. Queda pendiente el SAOCOM de la línea de base 2023-24
-
 ## Qué hay
 
 - `05_Resultados/04_Tablas/matriz_datos.csv` — **el producto central**: 15
@@ -49,7 +47,10 @@ leyendo metadatos.
                                           TP1_08_descargar_biomass.py
     03_Scripts/03_Exportacion_inventario/  TP1_09_inventario.py, TP1_10_reconstruir_diccionario.py
 
-## Pendiente
+## El SAOCOM de la línea de base 2023-24
 
-- Los 7 productos SAOCOM de línea de base 2023-24, solicitados a CONAE y en
-  espera de autorización (5 quad-pol + 2 dual-pol). Ver `matriz_datos.csv`.
+Los 7 productos SAOCOM de la línea de base (5 quad-pol descendentes y 2 dual-pol
+S4 ascendentes) están descargados y figuran en `inventario.csv`; no están
+procesados a γ⁰, y por eso `TP4_Radar_SAR/02_Subsets_SNAP_QGIS/SAOCOM` tiene sólo
+las épocas pre y post. Cómo procesarlos está dicho en el orden de ejecución del
+TP4.

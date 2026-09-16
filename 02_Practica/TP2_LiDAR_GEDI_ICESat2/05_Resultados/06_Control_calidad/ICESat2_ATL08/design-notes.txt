@@ -1,6 +1,0 @@
-Trabajo de comunicación: al finalizar, una audiencia de posgrado debe comprender qué mide ATL08, qué evidencia respalda una diferencia de altura entre las AOI Bosque y Estepa, y por qué la conclusión depende del mecanismo de selección de calidad.
-
-Narrativa: pregunta → métrica y alcance → cobertura espacial y retención → estrategia de inferencia → evidencia operacional → robustez → sesgo del filtro conservador → factores de adquisición → síntesis y limitaciones.
-
-Sistema visual: fondo marfil, verde bosque oscuro, ocre estepa, tipografía Aptos/Arial, sin sombras, bordes finos, títulos de conclusión, gráficos nativos editables y una figura central por diapositiva.
-

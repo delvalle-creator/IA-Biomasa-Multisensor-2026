@@ -1,14 +1,16 @@
-# Los grafos de SNAP del TP4 — qué hay, cómo se abren y qué falta
+# Los grafos de SNAP del TP4 — qué hay, cómo se abren y qué alcance tienen
 
-Los veintiséis grafos del TP4 viven **en esta carpeta**, `08_Grafos_SNAP`; los
+Los veintisiete grafos del TP4 viven **en esta carpeta**, `08_Grafos_SNAP`; los
 dos de BIOMASS banda P están aparte, en
 `03_Scripts\01_Pre_procesamiento\BIOMASS_bandaP`, junto al programa que
 inspecciona el producto. El TP3 tiene el suyo en su propia carpeta
 `08_Grafos_SNAP`.
 
-De los veintiséis, **diecisiete son grafos y nueve son sus gemelos `_cli`**. Los
+De los veintisiete, **dieciocho son grafos y nueve son sus gemelos `_cli`**. Los
 `_cli` los usa Python desde la línea de órdenes y no abren bien en la interfaz
-gráfica: trabaje siempre con los que no llevan ese sufijo.
+gráfica: trabaje siempre con los que no llevan ese sufijo. De los dieciocho,
+`Fusion_ASC_DES_NISAR.xml` es el único que se corre en clase, y es opcional: el
+resto se lee, porque sus productos ya están en `02_Subsets_SNAP_QGIS`.
 
 ## Antes de abrir uno: qué está vacío a propósito y qué hay que completar
 
@@ -31,8 +33,9 @@ abrir el grafo: SNAP no avisa que la ruta no existe hasta que se ejecuta.
 por omisión del Graph Builder. Conviene cambiarlo antes de ejecutarlo, o la
 corrida siguiente pisa la anterior.
 
-Los veintinueve grafos están bien formados y abren en el Graph Builder con las
-cajas separadas y la cadena a la vista.
+Los treinta grafos —los veintisiete de esta carpeta, los dos de BIOMASS y el del
+TP3— están bien formados y abren en el Graph Builder con las cajas separadas y
+la cadena a la vista.
 
 ## Los que existen y están completos
 
@@ -211,25 +214,26 @@ el recinto BOSQUE_NW_02 con 7,7 a 8,6 km de margen, y la banda `elevation` va de
 **no-data = 0**: el 28,6 % de ceros es el rectángulo que sobra fuera de la franja
 rotada y ensucia histogramas y estadísticas zonales.
 
-## Lo que falta, en orden de importancia
+## El alcance de estos grafos, en orden de importancia
 
 **1. No hay grafo polarimétrico para ALOS-1.**
-Las escenas quad-pol de ALOS-1 no tienen cadena a C3/T3 ni a descomposiciones. Es
-la misma estructura que `graph_saocom_quad_polarimetria.xml` y se puede calcar,
-pero hay que escribirlo.
+Las escenas quad-pol de ALOS-1 no tienen cadena a C3/T3 ni a descomposiciones. La
+estructura sería la de `graph_saocom_quad_polarimetria.xml`. El procedimiento
+completo sobre la imagen entera, hecho en la interfaz de SNAP, está en
+`02_Practica\10_Procedimientos_y_resultados\TP4_ALOS_PALSAR1_SLC`.
 
 **2. No hay grafo para ALOS-1 PALSAR nivel 1.1.**
-Está todo descargado (2007–2009, quad-pol) y sin cadena de procesamiento.
+Las escenas (2007–2009, quad-pol) están descargadas en el disco del curso, sin
+cadena de procesamiento por grafo.
 
-**3. Los cuatro grafos quad-pol son plantillas sin probar.**
+**3. Los cuatro grafos quad-pol son plantillas.**
 `graph_saocom_quad_indices.xml`, `graph_saocom_quad_polarimetria.xml` y los dos
-del TNA se escribieron pero todavía no se corrieron sobre todos los productos del
-proyecto. Conviene probar cada uno sobre **una** escena antes de usarlo en serie.
+del TNA no se corrieron sobre todos los productos del proyecto. Antes de usarlos
+en serie, pruebe cada uno sobre **una** escena.
 
 **4. `graph_saocom_tc.xml` no lleva `Apply-Orbit-File`.**
-Los de Sentinel-1 sí. Es probable que sea deliberado, porque SNAP no distribuye
-órbitas precisas de SAOCOM, pero no está dicho en ningún lado. Conviene anotarlo
-en el propio grafo para que no parezca un olvido.
+Los de Sentinel-1 sí. SNAP no distribuye órbitas precisas de SAOCOM, y el grafo
+no lo anota.
 
 **5. Landsat 8/9 se procesa con GDAL, no con SNAP.**
 No es un error —el producto ya viene ortorrectificado— pero rompe la simetría con
@@ -245,5 +249,7 @@ como control congelado del experimento del Terrain Flattening.
 Los índices RVI y RFDI son cocientes de **intensidad** γ⁰ y no necesitan fase:
 salen de los productos geocodificados. En cambio la matriz de covarianza, las
 descomposiciones y el DpRVI necesitan los productos **con fase**, es decir los
-SLC de `02_Subsets_SNAP_QGIS/00_Recortes_crudos_fase/`. Son dos niveles distintos y no
-conviene confundirlos.
+SLC de `02_Subsets_SNAP_QGIS/00_Recortes_crudos_fase/`, que no viajan en el
+repositorio porque sus archivos superan los 100 MB que admite GitHub: los produce
+`TP4_02_recortar_crudo.py` desde la escena original, y en el aula están en el
+disco del curso. Son dos niveles distintos y no conviene confundirlos.

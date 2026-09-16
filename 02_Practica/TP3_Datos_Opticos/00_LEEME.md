@@ -11,17 +11,17 @@ El práctico está **resuelto de punta a punta**. Las únicas carpetas vacías s
 
 | Carpeta | Qué hay | Archivos |
 |---|---|---|
-| `00_Guia_del_practico/` | **Empiece por acá:** la guía sintética en PDF, con su LEEME, más los objetivos, las figuras con sus generadores, las diapositivas, el flujo de trabajo y el anexo de mapas forestales de Chubut. El desarrollo completo, en el capítulo 5 de la guía teórico-práctica | 26 |
+| `00_Guia_del_practico/` | **Empiece por acá:** la guía sintética en PDF, con su LEEME, más los objetivos, las figuras con sus generadores, las diapositivas, el flujo de trabajo y el anexo de mapas forestales de Chubut. El desarrollo completo, en el capítulo 5 de la guía teórico-práctica | 19 |
 | `01_Prompt_IA/` | El prompt inicial con sus defectos, el análisis de la respuesta, el prompt corregido y la verificación | 4 |
-| `02_Subsets_SNAP_QGIS/` | Sentinel-2 y Landsat 9 recortados a la grilla común, por época y sitio | 4941 |
-| `03_Scripts/` | Los seis scripts, numerados en orden de ejecución, y el orden de ejecución | 11 |
+| `02_Subsets_SNAP_QGIS/` | Sentinel-2 (14 GeoTIFF) y Landsat 9 (24 GeoTIFF) recortados a la grilla común, por época y sitio, más los tres mapas forestales de Chubut recortados y el LEEME de la escena pre-incendio. **Vienen en el repositorio** | 45 |
+| `03_Scripts/` | Los seis scripts, numerados en orden de ejecución, más configuración y funciones de apoyo, y el orden de ejecución | 11 |
 | `04_Tablas_de_trabajo/` | El TP3 usa las huellas del TP2; ver su LEEME | 1 |
-| `05_Resultados/` | Los gráficos. El resto lo crean los scripts al correr | 5 |
-| `06_Bibliografia/` | Artículos, manuales, fichas de los sensores y enlaces | 5 |
-| `07_Preguntas_y_entrega/` | Vacía a propósito: **aquí deja el estudiante sus respuestas y su entrega** | 1 |
-| `08_Grafos_SNAP/` | Los grafos del Graph Builder | 1 |
+| `05_Resultados/` | Las tablas y los gráficos. Los rásters y el GeoPackage los escriben los scripts al correr | 10 |
+| `06_Bibliografia/` | Referencias de los artículos, manuales, fichas de los sensores y enlaces | 5 |
+| `07_Preguntas_y_entrega/` | Sólo el LEEME: **aquí deja el estudiante sus respuestas y su entrega** | 1 |
+| `08_Grafos_SNAP/` | El grafo del Graph Builder que recorta Sentinel-2 | 1 |
 | | Los tres archivos de la raíz: presentación, notas técnicas y de dónde salen los insumos | 3 |
-| | **TOTAL** | **4998** |
+| | **TOTAL** | **100** |
 
 El práctico completo, con su fundamentación, está en la guía teórico-práctica: `02_Practica\00_Guia_teorica_practica`.
 
@@ -36,8 +36,10 @@ El práctico completo, con su fundamentación, está en la guía teórico-práct
 | 5 | `TP3_05_saturacion_y_modelo.py` | Cruza con GEDI y **mide dónde satura cada índice** |
 | 6 | `TP3_06_exportar_para_gis.py` | Estilos `.qml` y área quemada vectorizada, para QGIS |
 
-Los scripts 3 a 6 crean `05_Resultados/02_Rasters`, `03_Vectores` y `04_Tablas`
-al ejecutarse. Si no las ve, todavía no los corrió.
+Los scripts 3 a 6 escriben `05_Resultados/02_Rasters` y `03_Vectores` al
+ejecutarse, y el 5 y el 6 dejan sus tablas en `04_Tablas`. Los productos de SNAP
+del paso 1 (pares `.dim` + `.data`) no viajan en el repositorio: los programas
+leen los GeoTIFF.
 
 ## Lo que este práctico demuestra
 
@@ -81,7 +83,7 @@ dentro del área quemada. Ese cruce es el que hace el script 5 con números.
 
 ## Lo que NO está, y es información
 
-- **No hay `04_Tablas_de_trabajo`**: el TP3 usa las huellas del TP2, no produce subconjuntos
+- **`04_Tablas_de_trabajo` sólo tiene su LEEME**: el TP3 usa las huellas del TP2, no produce subconjuntos
   propios.
 - **Los umbrales de severidad son importados** (Key y Benson, 2006, calibrados en
   Norteamérica). Las hectáreas totales son firmes; el reparto por clases, menos.

@@ -12,24 +12,19 @@
 |---|---|---|
 | `00_Guia_del_practico/` | **Empiece por acá:** la guía sintética en PDF, con su LEEME, más los objetivos y las figuras. El desarrollo completo, en el capítulo 7 de la guía teórico-práctica | 11 |
 | `01_Prompt_IA/` | El prompt inicial con sus defectos, el análisis de la respuesta, el prompt corregido y la verificación | 4 |
-| `02_Subsets_SNAP_QGIS/` | Vacía a propósito: este práctico no descarga ni pre-procesa nada | 0 |
-| `03_Scripts/` | Los programas, numerados en orden de ejecución, y el archivo que fija ese orden | 13 |
-| `04_Tablas_de_trabajo/` | Las tablas `.csv` intermedias: muestras, entrenamiento y validación | 5 |
-| `05_Resultados/` | Lo que sale: rásteres, vectores, tablas y gráficos | 40 |
-| `06_Bibliografia/` | Artículos y manuales (este práctico no lleva fichas de sensores ni enlaces propios) | 5 |
-| `07_Preguntas_y_entrega/` | **Aquí deja el estudiante sus respuestas y su entrega** | 3 |
-| `08_Grafos_SNAP/` | Este práctico no usa grafos de SNAP | 0 |
+| `03_Scripts/` | Los programas, numerados en orden de ejecución, y el archivo que fija ese orden | 12 |
+| `04_Tablas_de_trabajo/` | Las tablas `.csv` del dataset multisensor: muestras, entrenamiento y validación | 5 |
+| `05_Resultados/` | Las tablas. Los rásters del paso 5 los escribe ese paso | 16 |
+| `06_Bibliografia/` | Referencias de los artículos y manuales (este práctico no lleva fichas de sensores ni enlaces propios) | 3 |
+| `07_Preguntas_y_entrega/` | Las dos figuras de las áreas quemadas (por departamento y el incendio). **Aquí deja el estudiante sus respuestas y su entrega** | 3 |
 | `09_Orange/` | El flujo de Orange Data Mining del dataset multisensor (ópticos y radar contra la biomasa GEDI), con su LEEME | 2 |
 | | Los tres archivos de la raíz: presentación, notas técnicas y de dónde salen los insumos | 3 |
-| | **TOTAL** | **86** |
+| | **TOTAL** | **59** |
+
+Este práctico no descarga ni pre-procesa nada y no usa grafos de SNAP: por eso
+no tiene `02_Subsets_SNAP_QGIS` ni `08_Grafos_SNAP`.
 
 El práctico completo, con su fundamentación, está en la guía teórico-práctica: `02_Practica\00_Guia_teorica_practica`.
-
-## Estado: construido y ejecutado
-
-Los cinco scripts existen, corrieron de punta a punta y dejaron sus tablas y sus
-rásters. Lo que queda pendiente son ajustes, no construcción, y están anotados al
-final.
 
 ## Qué hace este práctico
 
@@ -85,13 +80,11 @@ estimación satelital. Cualquier modelo de este práctico está calibrado contra
 estimación, no contra una medición terrestre. **Ninguna conclusión puede
 presentarse como una medición de biomasa.** Está dicho en el informe, no escondido.
 
-## Pendientes
+## Dos precisiones de lectura
 
-- Adoptar el juego de predictores **sin EVI + radar**, que es el que baja el piso de
-  ruido a −0,48, y rehacer con él los pasos 2 a 5.
-- Renombrar «biomasa quemada» como «cambio aparente de AGBD asociado al incendio».
-  **Cuidado:** renombrar el archivo del script rompe
-  `09_ATAJOS\EJECUTAR_TP5_desde_modelos.bat` y `00_ORDEN_DE_EJECUCION.md`; hay que cambiar los
-  tres a la vez.
-- Volver a correr `TP4_05_mascara_validez.py`, que escribe una máscara por
-  recinto, para que el paso 5 aplique la que corresponde a cada sitio.
+- El juego de predictores **sin EVI + radar** es el que baja el piso de ruido a
+  −0,48 Mg/ha; los pasos 2 a 5 corren con el juego completo, y el ensayo nulo
+  mide la diferencia.
+- «Biomasa quemada», en las tablas y en el nombre de `TP5_04_biomasa_quemada.py`,
+  significa **cambio aparente de AGBD asociado al incendio**: la estimación se
+  apoya en GEDI, que es otra estimación, y no en una medición de campo.
