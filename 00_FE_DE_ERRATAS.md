@@ -1,6 +1,6 @@
 # Fe de erratas del curso «IA multisensor para estimar biomasa en bosques andinos y pastizales del ecotono bosque-estepa»
 
-Esquel, Chubut, del 14 al 19 de septiembre de 2026. Documento del 14 de septiembre de 2026, con la Parte G del 16 de septiembre.
+Esquel, Chubut, del 14 al 19 de septiembre de 2026. Documento del 14 de septiembre de 2026, con la Parte G del 16 de septiembre y la Parte H del 17.
 
 Este documento corrige la versión del curso que ustedes descargaron: el repositorio IA-Biomasa-Multisensor-2026, entrega v1.0.0. Los errores se encontraron haciendo el curso completo, paso a paso y como alumno, en los días previos al dictado, y revisando después todos los documentos contra los archivos de datos que producen los programas.
 
@@ -198,6 +198,18 @@ Lo que sigue sin viajar, y por qué: los pares .dim + .data de SNAP, porque los 
 En la misma versión se retiraron del repositorio restos de trabajo que no son material del curso: doce capturas de consola (salida_*.txt) de versiones anteriores de los programas del TP2, cuatro notas del paquete original de ICESat-2 en 05_Resultados\06_Control_calidad\ICESat2_ATL08, dos figuras viejas con sus generadores, en carpetas _ANTES_06ago2026 del TP3 y del TP4, una copia previa de TP5_06_diagnostico_del_piso.py y el archivo .dodsrc del TP1, que apuntaba a una carpeta de la máquina del docente. También se corrigieron, en los LEEME y notas técnicas de los cinco prácticos, los recuentos de archivos y las descripciones de carpetas para que digan lo que el repositorio contiene, y la tabla de GEDI de matriz_datos.csv del TP1, que atribuía las 690 y 3.083 huellas válidas a los filtros de calidad y pendiente cuando la tercera cifra sale después del filtro de estructura del paso 6 (tras calidad y pendiente son 690 y 3.084).
 
 Al preparar esta versión se corrigieron además dos cosas. El paso 5 del TP4, TP4_Radar_SAR\03_Scripts\04_Validacion\efecto_pendiente\TP4_05_mascara_validez.py, leía el ángulo de incidencia local sólo de los productos de SNAP (.dim + .data): sin ellos contestaba «sin productos SAR» y no escribía las máscaras. Ahora lee las mismas bandas del GeoTIFF, y las máscaras de los dos recintos salen idénticas a las que vienen en el repositorio (se descarta el 4,4 % del bosque y el 3,5 % de la estepa). Y el LEEME de TP4_Radar_SAR\07_Preguntas_y_entrega\BIOMASS_bandaP, junto con los textos de BIOMASS.zip, nombraban el tutorial, el informe y la guía de SNAP como archivos .docx, cuando el paquete trae los PDF; ahora dicen .pdf.
+
+## Parte H. Correcciones del 17 de septiembre de 2026, versión 1.2.1
+
+Se encontraron ejecutando los prácticos 3, 4 y 5 de punta a punta sobre la versión 1.2.0, en la notebook del curso, con la salida de cada programa guardada en un archivo.
+
+**H1. TP5, auxiliar de diagnóstico del piso: se corta con UnicodeEncodeError cuando la salida se manda a un archivo.** Archivo: TP5_Sinergia_Multisensor\03_Scripts\03_Analisis\incendio\TP5_06_diagnostico_del_piso.py.
+
+El programa imprime el símbolo Δ en el encabezado de su tabla. En pantalla funciona, pero si la salida se redirige a un archivo (python TP5_06_diagnostico_del_piso.py > salida.txt), Windows la codifica en cp1252, que no tiene ese carácter, y el programa se detiene con «UnicodeEncodeError: 'charmap' codec can't encode character '\u0394'» antes de escribir ninguna tabla. Corregido: al arrancar, el programa fuerza la salida en UTF-8, de modo que corre igual en pantalla y redirigido. No cambia ningún cálculo. Quien tenga la versión 1.2.0 puede escribir set PYTHONUTF8=1 en la consola antes de ejecutarlo, con el mismo efecto.
+
+**H2. Una precisión de lectura sobre el piso de ruido del TP5, que no es un error de programa.** El paso 4 (TP5_04_biomasa_quemada.py) informa un piso de −10,25 Mg/ha sobre la clase «Sin cambio» del bosque, y el auxiliar de diagnóstico informa −5,01 Mg/ha para el mismo juego de predictores (óptico + SAR). Los dos son correctos: el paso 4 usa la media del cambio de biomasa sobre las 87 huellas de esa clase y el auxiliar usa la mediana, y como la distribución es asimétrica los dos estadísticos difieren. Lo que se compara entre ambos es el cociente señal/piso, que da 1,5 en los dos, y la conclusión, que es la misma: sin el EVI el cociente sube a 15,3. El 00_LEEME.md del TP5 cita el −10,25 del paso 4 y el −0,48 del auxiliar, que salen de programas distintos; esta nota lo deja dicho.
+
+**H3. Lo que queda sin corregir en un PDF.** En 00_GUIA_TP3_sintetica.pdf, la Tabla 3.3 nombra 02_Insumos como carpeta de salida de los pasos 1 y 2. Es el nombre anterior de la carpeta que desde la versión 1.2.0 se llama 02_Subsets_SNAP_QGIS; se trata de la misma ubicación. El PDF se rehace con la próxima revisión de las guías.
 
 ## Cómo comprobar que quedó aplicado
 

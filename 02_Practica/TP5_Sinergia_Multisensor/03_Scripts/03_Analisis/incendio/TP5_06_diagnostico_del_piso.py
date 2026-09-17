@@ -60,6 +60,13 @@ import glob
 import os
 import sys
 
+# La tabla imprime el simbolo delta. Si la salida va a un archivo, Windows la
+# codifica en cp1252, que no lo tiene, y el programa se corta con
+# UnicodeEncodeError. Se fuerza UTF-8 en la salida para que corra igual en
+# pantalla y redirigida.
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+
 import numpy as np
 import rasterio
 

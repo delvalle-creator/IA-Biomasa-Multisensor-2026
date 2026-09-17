@@ -82,6 +82,7 @@ Para citar este curso, ver `CITATION.cff`. El curso está archivado en Zenodo:
 | DOI | Qué identifica |
 |---|---|
 | [10.5281/zenodo.22135139](https://doi.org/10.5281/zenodo.22135139) | La obra, en todas sus versiones. Lleva siempre a la más reciente y es el que conviene usar para citar el curso. |
+| Versión 1.2.1 | El DOI figura en su página de Zenodo (Zenodo lo asigna al publicar el release) |
 | [10.5281/zenodo.22803357](https://doi.org/10.5281/zenodo.22803357) | Versión 1.2.0 |
 | [10.5281/zenodo.22792401](https://doi.org/10.5281/zenodo.22792401) | Versión 1.1.1 |
 | [10.5281/zenodo.22781888](https://doi.org/10.5281/zenodo.22781888) | Versión 1.1.0 |
