@@ -28,5 +28,11 @@
       "resource_type": "lesson",
       "scheme": "url"
     }
+  ],
+  "contributors": [
+    {
+      "name": "Laboratorio de Ecología, Meteorología y Gestión de Fuegos de Vegetación (LEMIV), Facultad de Ingeniería, Universidad Nacional de la Patagonia San Juan Bosco (UNPSJB)",
+      "type": "HostingInstitution"
+    }
   ]
 }
