@@ -24,7 +24,7 @@ keywords:
   - Patagonia
 preferred-citation:
   type: generic
-  medium: "Material de curso"
+  medium: "Materiales del Curso de Posgrado dictado del 14 al 19 de septiembre de 2026"
   title: "IA Multisensor para Estimar Biomasa en Bosques Andinos y su Ecotono Bosque–Estepa: curso de posgrado con datos expuestos"
   authors:
     - family-names: "del Valle"
@@ -33,6 +33,8 @@ preferred-citation:
       affiliation: "CeReGeo–FCyT–UADER; LEMIV–FI–UNPSJB"
   version: "1.2.1"
   year: 2026
+  month: 9
+  date-published: 2026-09-17
   publisher:
     name: "Zenodo"
   doi: 10.5281/zenodo.22805401
