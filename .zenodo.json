@@ -1,0 +1,32 @@
+{
+  "upload_type": "lesson",
+  "title": "IA Multisensor para Estimar Biomasa en Bosques Andinos y su Ecotono Bosque–Estepa: curso de posgrado con datos expuestos",
+  "creators": [
+    {
+      "name": "del Valle, Héctor Francisco",
+      "affiliation": "CeReGeo–FCyT–UADER; LEMIV–FI–UNPSJB",
+      "orcid": "0000-0002-3329-1057"
+    }
+  ],
+  "license": "cc-by-nc-sa-4.0",
+  "access_right": "open",
+  "language": "spa",
+  "keywords": [
+    "biomasa aérea",
+    "GEDI",
+    "ICESat-2",
+    "CCI Biomass",
+    "SAR",
+    "SAOCOM",
+    "teledetección multisensor",
+    "Patagonia"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "https://github.com/delvalle-creator/IA-Biomasa-Multisensor-2026",
+      "relation": "isSupplementTo",
+      "resource_type": "lesson",
+      "scheme": "url"
+    }
+  ]
+}

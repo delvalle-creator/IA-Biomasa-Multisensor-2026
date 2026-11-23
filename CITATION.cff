@@ -22,3 +22,19 @@ keywords:
   - SAOCOM
   - teledetección multisensor
   - Patagonia
+preferred-citation:
+  type: generic
+  medium: "Material de curso"
+  title: "IA Multisensor para Estimar Biomasa en Bosques Andinos y su Ecotono Bosque–Estepa: curso de posgrado con datos expuestos"
+  authors:
+    - family-names: "del Valle"
+      given-names: "Héctor Francisco"
+      orcid: "https://orcid.org/0000-0002-3329-1057"
+      affiliation: "CeReGeo–FCyT–UADER; LEMIV–FI–UNPSJB"
+  version: "1.2.1"
+  year: 2026
+  publisher:
+    name: "Zenodo"
+  doi: 10.5281/zenodo.22805401
+  url: "https://doi.org/10.5281/zenodo.22805401"
+  license: CC-BY-NC-SA-4.0
