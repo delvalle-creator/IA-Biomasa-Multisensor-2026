@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 message: "Si usa este material, por favor cítelo como se indica."
-title: "IA Multisensor para Estimar Biomasa en Bosques Andinos y su Ecotono Bosque–Estepa: curso de posgrado con datos expuestos"
+title: "IA Multisensor para Estimar Biomasa en Bosques Andinos y su Ecotono Bosque–Estepa: curso de posgrado con datos expuestos. Esquel (Chubut), Argentina, 2026"
 type: software
 authors:
   - family-names: "del Valle"
@@ -25,7 +25,7 @@ keywords:
 preferred-citation:
   type: generic
   medium: "Materiales del Curso de Posgrado dictado del 14 al 19 de septiembre de 2026"
-  title: "IA Multisensor para Estimar Biomasa en Bosques Andinos y su Ecotono Bosque–Estepa: curso de posgrado con datos expuestos"
+  title: "IA Multisensor para Estimar Biomasa en Bosques Andinos y su Ecotono Bosque–Estepa: curso de posgrado con datos expuestos. Esquel (Chubut), Argentina, 2026"
   authors:
     - family-names: "del Valle"
       given-names: "Héctor Francisco"
